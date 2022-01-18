@@ -1,0 +1,59 @@
+@import "@styles/glob.scss";
+
+$color-background: rgb(25, 25, 25);
+$font: "Montserrat", Helvetica, Arial, sans-serif;
+$color-focus: rgb(167, 167, 167);
+
+.header {
+  width: 100%;
+  background-color: $color-background;
+  padding-left: $size-padding;
+  padding-right: $size-padding;
+  box-sizing: border-box;
+
+  background-image: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.1) 25%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    linear-gradient(90deg, #222222, #383838, #222222);
+
+  background-size: 8px 8px, 100%;
+
+  &__wrapper {
+    min-height: 70px;
+    max-width: $max-wraper;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__download {
+    color: #555;
+    font-size: 24px;
+  }
+
+  &__download:hover,
+  &__download:focus {
+    color: rgb(107, 107, 107);
+  }
+
+  &__download:focus {
+    outline: 2px solid $color-focus;
+    outline-offset: 4px;
+  }
+}
+
+.octicon {
+  fill: #bb5525;
+}
+
+.octicon:hover {
+  transition: 0.1s ease-in-out;
+  filter: drop-shadow(0 0 2px #bb5525);
+}

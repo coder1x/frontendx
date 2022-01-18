@@ -1,0 +1,36 @@
+@import "@styles/glob.scss";
+
+$background-slider: #fcfcfc;
+
+.index-content {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.blog-description {
+  width: 100%;
+
+  padding: 40px 20px 40px 20px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+  min-height: 100px;
+  background-color: $background-slider;
+
+  &__wrap {
+    margin: 0 auto;
+    width: 100%;
+    max-width: $max-wraper;
+  }
+
+  &__header {
+    text-align: center;
+    color: rgb(37, 37, 37);
+  }
+
+  &__text {
+    line-height: 1.5;
+    font-size: 0.875rem;
+    font-family: Verdana;
+    color: rgb(37, 37, 37);
+  }
+}

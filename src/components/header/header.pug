@@ -1,0 +1,12 @@
+mixin header(options)
+  -
+    let modify = options.modify ?? ''
+    let addClass = options.class ?? ''
+    let classComp = 'header'
+    let className = classComp
+    if(modify){
+    className += ' '+classComp+'_'+modify}
+    if(addClass){
+    className += ' '+addClass}
+  header(class=className)
+    div(class=classComp+'__wrapper')
