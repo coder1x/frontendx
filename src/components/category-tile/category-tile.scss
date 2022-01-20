@@ -1,0 +1,65 @@
+@import "../../assets/styles/glob.scss";
+
+.category-tile {
+  width: 100%;
+  max-width: 250px;
+  background-color: #edeef0;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    text-align: center;
+    @include font-rem(19);
+    line-height: 23px;
+    margin-bottom: 10px;
+  }
+
+  &__link {
+    color: rgb(37, 37, 37);
+  }
+
+  &__link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__link:hover,
+  &__link:focus {
+    color: inherit;
+  }
+
+  &__link:focus {
+    outline: 2px solid rgb(37, 37, 37);
+    outline-offset: 5px;
+  }
+
+  &__wrap-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__picture {
+    max-height: 150px;
+  }
+
+  &__text {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: 18px;
+    font-family: Verdana;
+    color: rgb(37, 37, 37);
+  }
+
+  &__text-number {
+    margin-top: auto;
+    font-family: monospace;
+  }
+}
