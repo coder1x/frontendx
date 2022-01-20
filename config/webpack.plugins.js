@@ -18,9 +18,10 @@ fs.readdirSync(PAGES_DIR).forEach((file) => {
 });
 
 
-const description = 'Узнайте, как использовать Range Slider Fox' +
-  ' на нескольких практических демонстрациях';
-const keywords = 'range slider, diapason, interval, price range, price slider';
+const description = 'Разбираем как использовать различные паттерны и подходы ' +
+  ' в frontend разработке';
+const keywords = 'webDev, frontend, веб разработка,' +
+  'плагины, компоненты, Java Script, Type Script, WebPack, CSS, SCSS, PUG';
 
 
 let pluginsM = [];
@@ -77,20 +78,19 @@ if (!DP.isPlugin)
         },
         'twitter-title': {
           'name': 'twitter:title',
-          'content': 'Range Slider Fox'
+          'content': 'Frontend для прагматиков'
         },
         'twitter-description': {
           'name': 'twitter:description',
-          'content': 'Узнайте, как использовать Range Slider Fox' +
-            ' на нескольких практических демонстрациях'
+          'content': description
         },
         'twitter-site': {
           'name': 'twitter:site',
-          'content': 'https://plugins.su/'
+          'content': 'https://frontendx.ru/'
         },
         'twitter-image': {
           'name': 'twitter:image',
-          'content': 'https://plugins.su/social.webp'
+          'content': 'https://frontendx.ru/social.webp'
         },
         'og-type': {
           'property': 'og:type',
@@ -98,16 +98,15 @@ if (!DP.isPlugin)
         },
         'og-title': {
           'property': 'og:title',
-          'content': 'Range Slider Fox'
+          'content': 'Frontend для прагматиков'
         },
         'og-description': {
           'property': 'og:description',
-          'content': 'Узнайте, как использовать Range Slider Fox' +
-            ' на нескольких практических демонстрациях'
+          'content': description
         },
         'og-image': {
           'property': 'og:image',
-          'content': 'https://plugins.su/social.webp'
+          'content': 'https://frontendx.ru/social.webp'
         }
       },
     })),
@@ -129,10 +128,9 @@ pluginsM.push(
     //'https://plugins.su/
     urlIcon: 'assets/favicons/',
     devMode: DP.isPlugin ? true : DP.isDev,
-    appName: 'Plugin Range Slider Fox',
-    appShortName: 'Range Slider Fox',
-    appDescription: 'Узнайте, как использовать Range Slider Fox' +
-      ' на нескольких практических демонстрациях',
+    appName: 'Frontend для прагматиков',
+    appShortName: 'Frontend для прагматиков',
+    appDescription: description,
     developerName: 'coder1',
     developerURL: 'https://github.com/coder1x/',
     icons: {
