@@ -33,27 +33,31 @@ $color-focus: rgb(167, 167, 167);
     justify-content: space-between;
   }
 
-  &__download {
-    color: #555;
-    font-size: 24px;
+  &__logo {
+    max-width: 70px;
+    margin-top: 4px;
   }
 
-  &__download:hover,
-  &__download:focus {
-    color: rgb(107, 107, 107);
+  &__menu-list {
+    display: flex;
+    flex-direction: row;
   }
 
-  &__download:focus {
-    outline: 2px solid $color-focus;
-    outline-offset: 4px;
+  &__menu-item {
+    margin-left: 30px;
   }
-}
 
-.octicon {
-  fill: #bb5525;
-}
+  &__item-link {
+    color: #ddd;
+  }
 
-.octicon:hover {
-  transition: 0.1s ease-in-out;
-  filter: drop-shadow(0 0 2px #bb5525);
+  &__item-link:hover,
+  &__item-link:focus {
+    color: inherit;
+  }
+
+  &__item-link:focus {
+    outline: 2px solid rgb(37, 37, 37);
+    outline-offset: 5px;
+  }
 }

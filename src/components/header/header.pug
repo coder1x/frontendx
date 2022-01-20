@@ -10,3 +10,13 @@ mixin header(options)
     className += ' '+addClass}
   header(class=className)
     div(class=classComp+'__wrapper')
+      a(class=classComp+'__link-logo' href='#')
+        img(class=classComp+'__logo' src=require('@com/header/img/logo.webp').default alt='FrontEnd X')
+      nav(class=classComp+'__menu-wrap')
+        ul(class=classComp+'__menu-list' role='navigation')
+          li(class=classComp+'__menu-item')
+            a(class=classComp+'__item-link' href='https://test/test') Записи
+          li(class=classComp+'__menu-item')
+            a(class=classComp+'__item-link' href='https://test/test') Плагины
+          li(class=classComp+'__menu-item')
+            a(class=classComp+'__item-link' href='https://test/test') Компоненты
