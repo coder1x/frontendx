@@ -33,9 +33,25 @@ $color-focus: rgb(167, 167, 167);
     justify-content: space-between;
   }
 
-  &__logo {
-    max-width: 70px;
-    margin-top: 4px;
+  &__link-logo {
+    width: 230px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #ddd;
+    font-size: 22px;
+  }
+
+  &__link-logo svg {
+    width: 70px;
+    fill: rgb(70, 70, 70);
+  }
+
+  &__link-logo:hover svg {
+    transition: 0.3s ease-in-out;
+    fill: rgb(39, 109, 100);
   }
 
   &__menu-list {
