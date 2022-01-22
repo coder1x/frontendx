@@ -93,6 +93,7 @@
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
+    "npx": "^10.2.2",
     "pug-html-loader": "^1.1.5",
     "puppeteer": "^11.0.0",
     "ts-node": "^10.4.0",

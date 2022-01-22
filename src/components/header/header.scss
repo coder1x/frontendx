@@ -34,7 +34,8 @@ $color-focus: rgb(167, 167, 167);
   }
 
   &__link-logo {
-    width: 230px;
+    width: 100%;
+    max-width: 210px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -45,7 +46,7 @@ $color-focus: rgb(167, 167, 167);
   }
 
   &__link-logo svg {
-    width: 70px;
+    width: 55px;
     fill: rgb(70, 70, 70);
   }
 
@@ -65,11 +66,19 @@ $color-focus: rgb(167, 167, 167);
 
   &__item-link {
     color: #ddd;
+    display: flex;
+    align-items: center;
+  }
+
+  &__item-link svg {
+    width: 20px;
+    margin-right: 5px;
+    fill: rgb(39, 109, 100);
   }
 
   &__item-link:hover,
   &__item-link:focus {
-    color: inherit;
+    opacity: 0.5;
   }
 
   &__item-link:focus {
