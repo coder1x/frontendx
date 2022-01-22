@@ -1,8 +1,11 @@
 @import "@styles/glob.scss";
 
 $color-background: rgb(25, 25, 25);
-$font: "Montserrat", Helvetica, Arial, sans-serif;
-$color-focus: rgb(167, 167, 167);
+$font: Verdana, Arial, sans-serif;
+$color-focus: rgb(37, 37, 37);
+$color-icon-link: rgb(39, 109, 100);
+$color-item-link: #ddd;
+$color-link-logo: rgb(70, 70, 70);
 
 .header {
   width: 100%;
@@ -41,18 +44,18 @@ $color-focus: rgb(167, 167, 167);
     justify-content: space-between;
     align-items: center;
 
-    color: #ddd;
+    color: $color-item-link;
     font-size: 22px;
   }
 
   &__link-logo svg {
     width: 55px;
-    fill: rgb(70, 70, 70);
+    fill: $color-link-logo;
   }
 
   &__link-logo:hover svg {
     transition: 0.3s ease-in-out;
-    fill: rgb(39, 109, 100);
+    fill: $color-icon-link;
   }
 
   &__menu-list {
@@ -65,7 +68,7 @@ $color-focus: rgb(167, 167, 167);
   }
 
   &__item-link {
-    color: #ddd;
+    color: $color-item-link;
     display: flex;
     align-items: center;
   }
@@ -73,7 +76,7 @@ $color-focus: rgb(167, 167, 167);
   &__item-link svg {
     width: 20px;
     margin-right: 5px;
-    fill: rgb(39, 109, 100);
+    fill: $color-icon-link;
   }
 
   &__item-link:hover,
@@ -82,7 +85,7 @@ $color-focus: rgb(167, 167, 167);
   }
 
   &__item-link:focus {
-    outline: 2px solid rgb(37, 37, 37);
+    outline: 2px solid $color-focus;
     outline-offset: 5px;
   }
 }

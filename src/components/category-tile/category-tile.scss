@@ -1,9 +1,14 @@
 @import "../../assets/styles/glob.scss";
 
+$font: Verdana, Arial, sans-serif;
+$font-number: monospace, consolas;
+$color-text: rgb(37, 37, 37);
+$category-background: #edeef0;
+
 .category-tile {
   width: 100%;
   max-width: 250px;
-  background-color: #edeef0;
+  background-color: $category-background;
   padding: 10px;
   position: relative;
   display: flex;
@@ -17,7 +22,7 @@
   }
 
   &__link {
-    color: rgb(37, 37, 37);
+    color: $color-text;
   }
 
   &__link::after {
@@ -35,7 +40,7 @@
   }
 
   &__link:focus {
-    outline: 2px solid rgb(37, 37, 37);
+    outline: 2px solid $color-text;
     outline-offset: 5px;
   }
 
@@ -53,13 +58,13 @@
     margin-top: 5px;
     margin-bottom: 10px;
     line-height: 1.5;
-    font-size: 18px;
-    font-family: Verdana;
-    color: rgb(37, 37, 37);
+    font-size: 16px;
+    font-family: $font;
+    color: $color-text;
   }
 
   &__text-number {
     margin-top: auto;
-    font-family: monospace;
+    font-family: $font-number;
   }
 }

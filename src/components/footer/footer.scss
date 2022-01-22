@@ -1,8 +1,6 @@
 @import "@styles/glob.scss";
 
-$font: Arial, sans-serif;
-
-$color-background: rgb(25, 25, 25);
+$font: Verdana, Arial, sans-serif;
 
 .footer {
   width: 100%;
@@ -19,6 +17,11 @@ $color-background: rgb(25, 25, 25);
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__copuright {
+    font-family: $font;
+    @include font-rem(14);
   }
 
   &__github-wrap {

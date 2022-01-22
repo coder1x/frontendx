@@ -1,6 +1,7 @@
 @import "@styles/glob.scss";
 
 $font: Verdana, Arial, sans-serif;
+$font-h: "arial black", "britannic bold", "impact";
 $color-background: #edeef0;
 $color-body: #555;
 $color-h: #555;
@@ -23,6 +24,7 @@ body {
   width: 100%; /* растягиваем тело сайта на весь экран */
   background: $color-background;
   color: $color-body;
+  text-rendering: optimizeSpeed;
 }
 
 //---------------------------------- Главные блоки контентной части
@@ -30,9 +32,9 @@ body {
 h1,
 h2,
 h3 {
-  font-family: $font;
-  font-weight: bold;
+  font-family: "arial black";
   color: $color-h;
+  font-weight: normal;
 }
 
 h1 {
