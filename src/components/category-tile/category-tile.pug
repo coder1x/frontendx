@@ -2,10 +2,8 @@ mixin category-tile(options)
   -
     let header = options.header ?? ''
     let text = options.text ?? ''
-    let link = options.link ?? ''
+    let link = options.link ?? 'http://www.coderr.ru'
     let number = options.number ?? ''
-    let img = options.img ?? ''
-    let type = options.type ?? ''
     let modify = options.modify ?? []
     let addClass = options.class ?? ''
     let classComp = 'category-tile'
@@ -16,17 +14,18 @@ mixin category-tile(options)
     }
     if(addClass){
     className += ' '+addClass}
-  case type
-    when 'category'
-      article(class=className)
-        h3(class=classComp+'__header')
-          a(class=classComp+'__link' href=link)= header
-        div(class=classComp+'__wrap-picture')
-          img(class=classComp+'__picture' src=require('@com/category-tile/img/'+img+'.svg').default width='200px' height='200px' alt='')
-        p(class=classComp+'__text')= text
-        p(class=classComp+'__text-number') записей:
-          span(class=classComp+'__number')= number
-    when 'component'
-      article(class=className)
-    when 'plugin'
-      article(class=className)
+  article(class=className)
+    div(class=className+'__blind')
+      div(class=className+'__lid')
+        div(class=className+'__lid-text')
+          span records 
+          span=number
+        div(class=className+'__window')
+    div(class=className+'__cover')
+      h3(class=className+'__header')
+        a(class=className+'__link' href=link)=header
+      p(class=className+'__text')
+        em=text 
+    div(class=className+'__cub-left')
+    div(class=className+'__cub-right')
+
