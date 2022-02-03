@@ -94,6 +94,7 @@ $category-background: #edeef0;
     box-sizing: border-box;
     text-transform: uppercase;
     font-family: $font-number;
+    text-shadow: 1px 1px 2px white, 0 0 1em #ffffff;
   }
 
   &__window {
@@ -153,12 +154,12 @@ $category-background: #edeef0;
 
   &__link:hover,
   &__link:focus {
-    color: #3f3f3f;
+    color: #6d6d6d;
   }
 
   &__link:focus {
-    outline: 2px solid rgb(37, 37, 37);
-    outline-offset: 1px;
+    outline: 4px solid rgb(37, 37, 37);
+    outline-offset: 2px;
   }
 
   &__text {
