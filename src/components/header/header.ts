@@ -1,4 +1,5 @@
 import './header.scss';
+import Throttle from '../throttle/throttle';
 
 interface Props {
   selector: string,
@@ -15,12 +16,19 @@ class Scroll {
   private className: string;
   private classes: string[];
   private nameAnimation: string;
+  private headerShow: boolean;
 
   constructor(props: Props) {
     this.init(props);
   }
 
+  get isFixed() {
+    return this.header.classList.contains(this.className + '_fixed');
+  }
+
   private init(props: Props) {
+
+    this.headerShow = true;
     this.action();
     this.className = props.selector.replace('.', '');
     this.classes = [
@@ -31,78 +39,82 @@ class Scroll {
   }
 
   // функция вызывается при скролле получая координаты Y
-  private doSomething(scrollY: number) {
-    console.log('doSomething');
-
+  private doSomething = () => {
+    const scrollY = window.scrollY;
     this.direction = this.prevY < scrollY ? 'bottom' : 'top';
     this.prevY = scrollY;
-    this.moveHeader();
+
+    const moveF = this.direction != this.prevDirection;
+
+    if (moveF)
+      this.moveHeader();
+
+    this.prevDirection = this.direction;
   }
 
   // показать или отключить анимацию появления шапки
   private toggleHeader(classes: string[], callback?: Function) {
-    if (!callback)
-      callback = () => { };
+    callback = callback ?? (() => { });
 
     const CL = this.header.classList;
     this.header.addEventListener('animationend', (event: AnimationEvent) => {
-      if (event.animationName !== this.nameAnimation) {
-        return;
+      if (event.animationName !== this.nameAnimation) return;
+
+      if (!this.headerShow) {
+        CL.remove(...classes);
+        callback();
+        this.headerShow = true;
       }
-      CL.remove(...classes);
-      callback();
+
     }, { once: true });
-    CL.add(...classes);
+
+    if (this.headerShow) {
+      CL.add(...classes);
+      this.headerShow = false;
+    }
   }
 
-  // направление скрола вверх или в низ.
+  private getBodyElem() {
+    return document.querySelector('body');
+  }
+
+  // направление скролла вверх или в низ.
   private moveHeader() {
-    const moveF = this.direction != this.prevDirection;
+
     const fixedC = this.className + '_fixed';
     const CL = this.header.classList;
 
-    if (this.direction == 'top' && moveF) {
+    if (this.direction == 'top' && !this.isFixed) {
+
       const height = this.header.offsetHeight;
-      const body = document.querySelector('body');
-      body.style.paddingTop = height + 'px';
+      this.getBodyElem().style.paddingTop = height + 'px';
       CL.add(fixedC);
       this.toggleHeader([
         ...this.classes,
         this.className + '_fixed-show',
       ]);
     }
-    else if (this.direction == 'bottom' && moveF) {
-
+    else if (this.direction == 'bottom' && this.isFixed) {
 
       this.toggleHeader([
         ...this.classes,
         this.className + '_fixed-hide',
       ],
         () => {
-          const body = document.querySelector('body');
-          body.style.paddingTop = '0px';
+          this.getBodyElem().style.paddingTop = '0px';
           CL.remove(fixedC);
         }
       );
-
-
     }
-    this.prevDirection = this.direction;
+
   }
 
   // подписываемся на событие скролла 
   private action() {
-    window.addEventListener('scroll', () => {
-      if (!this.ticking) {
-        window.requestAnimationFrame(() => {
-          this.doSomething(window.scrollY);
-          this.ticking = false;
-        });
-        this.ticking = true;
-      }
-    });
+    new Throttle('scroll', this.doSomething, 10);
   }
 }
+
 
 new Scroll({
   selector: '.header',
