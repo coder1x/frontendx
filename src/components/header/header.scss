@@ -13,6 +13,8 @@ $color-link-logo: rgb(70, 70, 70);
   padding-left: $size-padding;
   padding-right: $size-padding;
   box-sizing: border-box;
+  z-index: 3;
+  position: relative;
 
   background-image: linear-gradient(
       135deg,
@@ -46,6 +48,10 @@ $color-link-logo: rgb(70, 70, 70);
 
     color: $color-item-link;
     font-size: 22px;
+
+    @include media-breakpoint-down($xs2) {
+      max-width: 56px;
+    }
   }
 
   &__link-logo svg {
@@ -58,19 +64,90 @@ $color-link-logo: rgb(70, 70, 70);
     fill: $color-icon-link;
   }
 
+  &__text-logo {
+    @include media-breakpoint-down($xs2) {
+      display: none;
+    }
+  }
+
+  &__toggle-menu {
+    display: none;
+    width: 57px;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+
+    svg {
+      transition: 0.3s ease-in-out;
+      fill: #242424;
+      filter: drop-shadow(0 0 1px #888);
+    }
+
+    &_active {
+      svg {
+        transition: 0.3s ease-in-out;
+        fill: rgb(39, 109, 100);
+        filter: drop-shadow(0 0 1px #111);
+      }
+    }
+
+    @include media-breakpoint-down($lg2) {
+      display: block;
+    }
+  }
+
+  &__menu-wrap {
+    @include media-breakpoint-down($lg2) {
+      display: none;
+    }
+
+    &_visible {
+      display: block;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-image: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.2) 0%,
+          rgba(0, 0, 0, 0.1) 25%,
+          rgba(0, 0, 0, 0.2) 50%,
+          rgba(0, 0, 0, 0.1) 75%,
+          rgba(0, 0, 0, 0.2) 100%
+        ),
+        linear-gradient(90deg, #222222, #383838, #222222);
+      background-size: 8px 8px, 100%;
+      box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.05);
+    }
+  }
+
   &__menu-list {
     display: flex;
     flex-direction: row;
+
+    @include media-breakpoint-down($lg2) {
+      flex-direction: column;
+      padding-bottom: 20px;
+    }
   }
 
   &__menu-item {
     margin-left: 30px;
+
+    @include media-breakpoint-down($lg2) {
+      margin-right: auto;
+      margin-top: 20px;
+    }
   }
 
   &__item-link {
     color: $color-item-link;
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down($lg2) {
+      @include font-rem(28);
+    }
   }
 
   &__item-link svg {

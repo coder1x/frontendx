@@ -6,9 +6,8 @@ interface Props {
   nameAnimation: string
 }
 
-class Scroll {
+class ScrollH {
 
-  private ticking = false;
   private prevY = 0;
   private direction = 'bottom';
   private prevDirection = 'top';
@@ -17,6 +16,8 @@ class Scroll {
   private classes: string[];
   private nameAnimation: string;
   private headerShow: boolean;
+  private button: HTMLButtonElement;
+  private menu: HTMLElement;
 
   constructor(props: Props) {
     this.init(props);
@@ -29,13 +30,20 @@ class Scroll {
   private init(props: Props) {
 
     this.headerShow = true;
-    this.action();
     this.className = props.selector.replace('.', '');
     this.classes = [
       this.className + '_animating'
     ];
     this.nameAnimation = props.nameAnimation;
     this.header = document.querySelector(this.className);
+
+    this.setDom(props.selector);
+    this.action();
+  }
+
+  private setDom(className: string) {
+    this.menu = this.header.querySelector(className + '__menu-wrap');
+    this.button = this.header.querySelector(className + '__toggle-menu');
   }
 
   // функция вызывается при скролле получая координаты Y
@@ -112,11 +120,33 @@ class Scroll {
   // подписываемся на событие скролла 
   private action() {
     new Throttle('scroll', this.doSomething, 10);
+
+
+    const showMenuFocus = (e: KeyboardEvent) => {
+      if (e.key == ' ') {
+        e.preventDefault();
+      } else {
+        if (e.key == 'Escape') {
+          this.button.classList.remove(this.className + '__toggle-menu_active');
+          this.menu.classList.remove(this.className + '__menu-wrap_visible');
+        }
+      }
+    };
+
+    this.button.addEventListener('keydown', showMenuFocus);
+
+    this.button.addEventListener('click', () => {
+
+      this.button.classList.toggle(this.className + '__toggle-menu_active');
+      this.menu.classList.toggle(this.className + '__menu-wrap_visible');
+
+    });
+
   }
 }
 
 
-new Scroll({
+new ScrollH({
   selector: '.header',
   nameAnimation: 'fixedHeaderAnimation'
 });
