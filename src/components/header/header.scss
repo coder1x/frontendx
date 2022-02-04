@@ -1,31 +1,39 @@
 @import "@styles/glob.scss";
 
-$color-background: rgb(25, 25, 25);
-$font: Verdana, Arial, sans-serif;
-$color-focus: rgb(37, 37, 37);
-$color-icon-link: rgb(39, 109, 100);
+$color-focus-link: #fff;
+$color-icon-link: #276d64;
 $color-item-link: #ddd;
 $color-link-logo: rgb(70, 70, 70);
+$color-link-logo-focus: rgba(255, 255, 255, 0.5);
+$color-background-header: rgb(25, 25, 25);
+$background-header: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 25%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.1) 75%,
+    rgba(0, 0, 0, 0.2) 100%
+  ),
+  linear-gradient(90deg, #222222, #383838, #222222);
+$button-menu-fill: #242424;
+$button-menu-filter: drop-shadow(0 0 1px #888);
+$button-menu-active-fill: #276d64;
+$button-menu-active-filter: drop-shadow(0 0 1px #111);
+$button-menu-focus: rgba(255, 255, 255, 0.5);
+$menu-visible-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
+$menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
+//--------------------------------------------
 
 .header {
   width: 100%;
-  background-color: $color-background;
+  background-color: $color-background-header;
   padding-left: $size-padding;
   padding-right: $size-padding;
   box-sizing: border-box;
   z-index: 3;
   position: relative;
 
-  background-image: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.2) 0%,
-      rgba(0, 0, 0, 0.1) 25%,
-      rgba(0, 0, 0, 0.2) 50%,
-      rgba(0, 0, 0, 0.1) 75%,
-      rgba(0, 0, 0, 0.2) 100%
-    ),
-    linear-gradient(90deg, #222222, #383838, #222222);
-
+  background-image: $background-header;
   background-size: 8px 8px, 100%;
 
   &__wrapper {
@@ -59,9 +67,15 @@ $color-link-logo: rgb(70, 70, 70);
     fill: $color-link-logo;
   }
 
-  &__link-logo:hover svg {
+  &__link-logo:hover svg,
+  &__link-logo:focus svg {
     transition: 0.3s ease-in-out;
     fill: $color-icon-link;
+  }
+
+  &__link-logo:focus {
+    outline: 2px solid $color-link-logo-focus;
+    outline-offset: 5px;
   }
 
   &__text-logo {
@@ -79,21 +93,26 @@ $color-link-logo: rgb(70, 70, 70);
 
     svg {
       transition: 0.3s ease-in-out;
-      fill: #242424;
-      filter: drop-shadow(0 0 1px #888);
+      fill: $button-menu-fill;
+      filter: $button-menu-filter;
     }
 
     &_active {
       svg {
         transition: 0.3s ease-in-out;
-        fill: rgb(39, 109, 100);
-        filter: drop-shadow(0 0 1px #111);
+        fill: $button-menu-active-fill;
+        filter: $button-menu-active-filter;
       }
     }
 
     @include media-breakpoint-down($lg2) {
       display: block;
     }
+  }
+
+  &__toggle-menu:focus {
+    outline: 2px solid $button-menu-focus;
+    outline-offset: 5px;
   }
 
   &__menu-wrap {
@@ -107,17 +126,9 @@ $color-link-logo: rgb(70, 70, 70);
       top: 70px;
       left: 0;
       width: 100%;
-      background-image: linear-gradient(
-          135deg,
-          rgba(0, 0, 0, 0.2) 0%,
-          rgba(0, 0, 0, 0.1) 25%,
-          rgba(0, 0, 0, 0.2) 50%,
-          rgba(0, 0, 0, 0.1) 75%,
-          rgba(0, 0, 0, 0.2) 100%
-        ),
-        linear-gradient(90deg, #222222, #383838, #222222);
+      background-image: $background-header;
       background-size: 8px 8px, 100%;
-      box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.05);
+      box-shadow: $menu-visible-shadow;
     }
   }
 
@@ -162,7 +173,7 @@ $color-link-logo: rgb(70, 70, 70);
   }
 
   &__item-link:focus {
-    outline: 2px solid $color-focus;
+    outline: 2px solid $color-focus-link;
     outline-offset: 5px;
   }
 
@@ -173,11 +184,15 @@ $color-link-logo: rgb(70, 70, 70);
     animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
   }
 
+  transition: box-shadow 0.2s ease-in-out;
+
   &_fixed {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    box-shadow: $menu-fixed-shadow;
+    transition: box-shadow 0.2s ease-in-out;
   }
 
   &_fixed-show {

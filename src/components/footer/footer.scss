@@ -1,6 +1,6 @@
 @import "@styles/glob.scss";
 
-$font: Verdana, Arial, sans-serif;
+//--------------------------------------------
 
 .footer {
   width: 100%;
@@ -26,6 +26,7 @@ $font: Verdana, Arial, sans-serif;
 
   &__github-wrap {
     padding-left: 50px;
+    padding-right: 20px;
     display: flex;
   }
 

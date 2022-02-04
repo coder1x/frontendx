@@ -49,6 +49,13 @@ class ScrollH {
   // функция вызывается при скролле получая координаты Y
   private doSomething = () => {
     const scrollY = window.scrollY;
+
+    if (scrollY == 0) {
+      this.header.classList.remove(this.className + '_fixed');
+      this.getBodyElem().style.paddingTop = '0px';
+      return;
+    }
+
     this.direction = this.prevY < scrollY ? 'bottom' : 'top';
     this.prevY = scrollY;
 
@@ -117,28 +124,31 @@ class ScrollH {
 
   }
 
-  // подписываемся на событие скролла 
-  private action() {
-    new Throttle('scroll', this.doSomething, 10);
 
+  private action() {
+
+    new Throttle('scroll', this.doSomething, 10); // подписываемся на событие скролла 
+
+    const buttonCL = this.button.classList;
+    const menuCL = this.menu.classList;
+    const buttonActive = this.className + '__toggle-menu_active';
+    const menuVisible = this.className + '__menu-wrap_visible';
 
     const showMenuFocus = (e: KeyboardEvent) => {
-      if (e.key == ' ') {
-        e.preventDefault();
-      } else {
-        if (e.key == 'Escape') {
-          this.button.classList.remove(this.className + '__toggle-menu_active');
-          this.menu.classList.remove(this.className + '__menu-wrap_visible');
-        }
+
+      if (e.key == 'Escape' || e.key == 'Space') {
+        buttonCL.remove(buttonActive);
+        menuCL.remove(menuVisible);
       }
+
     };
 
     this.button.addEventListener('keydown', showMenuFocus);
 
     this.button.addEventListener('click', () => {
 
-      this.button.classList.toggle(this.className + '__toggle-menu_active');
-      this.menu.classList.toggle(this.className + '__menu-wrap_visible');
+      buttonCL.toggle(buttonActive);
+      menuCL.toggle(menuVisible);
 
     });
 
