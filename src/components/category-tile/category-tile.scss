@@ -30,7 +30,7 @@ $lid-background-gradient: linear-gradient(
   rgba(230, 230, 230, 1) 41%,
   rgba(106, 106, 106, 1) 100%
 );
-$lid-text-color: #000;
+$lid-text-color: #363636;
 $lid-text-shadow: 1px 1px 2px #fff, 0 0 1em #fff;
 $cover-border-top: #353535;
 $cover-border-left: #353535;
@@ -44,6 +44,8 @@ $link-color: #252525;
 $link-focus-color: #6d6d6d;
 $link-outline: 4px solid rgb(37, 37, 37);
 $text-color: #252525;
+$window-disk-background: #fcfcfc;
+$disk-background: #2c2c2c;
 //--------------------------------------------
 
 .category-tile {
@@ -114,6 +116,14 @@ $text-color: #252525;
     justify-content: flex-end;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+
+    transform: translateX(-2px);
+    transition: transform 0.2s ease-in-out;
+
+    &_open {
+      transform: translateX(-42px);
+      transition: transform 0.4s ease-in-out;
+    }
   }
 
   &__lid-text {
@@ -136,6 +146,34 @@ $text-color: #252525;
     width: 40px;
     height: 78px;
     margin-right: 23px;
+    overflow: hidden;
+  }
+
+  &__window-disk {
+    background: $window-disk-background;
+    width: 40px;
+    height: 78px;
+    position: relative;
+    overflow: hidden;
+
+    transform: translateX(-41px);
+    transition: transform 0.2s ease-in-out;
+
+    &_open {
+      transform: translateX(0px);
+      transition: transform 0.4s ease-in-out;
+    }
+  }
+
+  &__disk {
+    position: absolute;
+    bottom: 0px;
+    left: -59px;
+    width: 157px;
+    height: 71px;
+    background-color: $disk-background;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
   }
 
   &__cover {
