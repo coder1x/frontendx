@@ -1,16 +1,56 @@
 @import "../../assets/styles/glob.scss";
 
-$font-number: monospace, consolas;
-$color-text: rgb(37, 37, 37);
-$category-background: #edeef0;
+$font-number: consolas, monospace;
 
+$tile-background: #adadad;
+$tile-background-gradient: linear-gradient(
+  165deg,
+  rgba(173, 173, 173, 1) 7%,
+  rgba(63, 63, 63, 1) 44%,
+  rgba(57, 57, 57, 1) 99%
+);
+$tile-border-bottom: #2a2a2a;
+$tile-border-left: #2a2a2a;
+$tile-border-right: #2a2a2a;
+$tile-border-top: #c3c3c3;
+$cub-left-background: #3a3a3a;
+$cub-left-border: #000;
+$cub-left-shadow: #222222;
+$cub-right-background: #edeef0;
+$cub-right-border: #000;
+$cub-right-shadow: #222222;
+$blind-border-left: #000;
+$blind-border-right: #000;
+$blind-border-bottom: #000;
+$blind-shadow: #222222;
+$lid-background: rgb(173, 173, 173);
+$lid-background-gradient: linear-gradient(
+  165deg,
+  rgba(173, 173, 173, 1) 0%,
+  rgba(230, 230, 230, 1) 41%,
+  rgba(106, 106, 106, 1) 100%
+);
+$lid-text-color: #000;
+$lid-text-shadow: 1px 1px 2px #fff, 0 0 1em #fff;
+$cover-border-top: #353535;
+$cover-border-left: #353535;
+$cover-border-right: #353535;
+$cover-border-bottom: #353535;
+$cover-background: #edeef0;
+$cover-background-gradient: linear-gradient(to top, #b9b9b9 1px, transparent 0px);
+$cover-shadow: #222222;
+$window-background: #656565;
+$link-color: #252525;
+$link-focus-color: #6d6d6d;
+$link-outline: 4px solid rgb(37, 37, 37);
+$text-color: #252525;
 //--------------------------------------------
 
 .category-tile {
   width: 285px;
   height: 295px;
-  background: rgb(173, 173, 173);
-  background: linear-gradient(165deg, rgba(173, 173, 173, 1) 7%, rgba(63, 63, 63, 1) 44%, rgba(57, 57, 57, 1) 99%);
+  background: $tile-background;
+  background: $tile-background-gradient;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -20,47 +60,44 @@ $category-background: #edeef0;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 
-  border-bottom: 2px solid #2a2a2a;
-  border-left: 2px solid #2a2a2a;
-  border-right: 1px solid #2a2a2a;
-  border-top: 1px solid #c3c3c3;
+  border-bottom: 2px solid $tile-border-bottom;
+  border-left: 2px solid $tile-border-left;
+  border-right: 1px solid $tile-border-right;
+  border-top: 1px solid $tile-border-top;
   box-sizing: border-box;
 
   &__cub-left {
     position: absolute;
     width: 14px;
     height: 12px;
-    background-color: #3a3a3a;
+    background-color: $cub-left-background;
     bottom: 10px;
     left: 5px;
-    border: 1px solid #000;
-    box-shadow: inset 1px 1px 2px 0px #222222;
+    border: 1px solid $cub-left-border;
+    box-shadow: inset 1px 1px 2px 0px $cub-left-shadow;
   }
 
   &__cub-right {
     position: absolute;
     width: 14px;
     height: 12px;
-    background-color: #edeef0;
-    border: 1px solid #000;
+    background-color: $cub-right-background;
+    border: 1px solid $cub-right-border;
     bottom: 10px;
     right: 5px;
-    box-shadow: inset 1px 1px 2px 0px #222222;
+    box-shadow: inset 1px 1px 2px 0px $cub-right-shadow;
   }
 
   &__blind {
     position: relative;
     width: 195px;
     height: 98px;
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-
-    box-shadow: inset 1px -1px 3px 0px #222222;
-
+    border-left: 1px solid $blind-border-left;
+    border-right: 1px solid $blind-border-right;
+    border-bottom: 1px solid $blind-border-bottom;
+    box-shadow: inset 1px -1px 3px 0px $blind-shadow;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-
     margin-left: 27px;
   }
 
@@ -68,13 +105,8 @@ $category-background: #edeef0;
     position: absolute;
     width: 150px;
     height: 98px;
-    background: rgb(173, 173, 173);
-    background: linear-gradient(
-      165deg,
-      rgba(173, 173, 173, 1) 0%,
-      rgba(230, 230, 230, 1) 41%,
-      rgba(106, 106, 106, 1) 100%
-    );
+    background: $lid-background;
+    background: $lid-background-gradient;
     right: 0;
     top: -3px;
     display: flex;
@@ -89,18 +121,18 @@ $category-background: #edeef0;
     flex-direction: column;
     align-items: center;
     padding: 5px;
-    color: #000;
+    color: $lid-text-color;
     height: 100%;
     @include font-rem(16);
     box-sizing: border-box;
     text-transform: uppercase;
     font-family: $font-number;
-    text-shadow: 1px 1px 2px white, 0 0 1em #ffffff;
+    text-shadow: $lid-text-shadow;
   }
 
   &__window {
     border-radius: 2px;
-    background: #656565;
+    background: $window-background;
     width: 40px;
     height: 78px;
     margin-right: 23px;
@@ -111,21 +143,17 @@ $category-background: #edeef0;
     margin-left: 27px;
     width: 230px;
     height: 170px;
-    border-top: 2px solid #353535;
-    border-left: 2px solid #353535;
-    border-right: 2px solid #353535;
-    border-bottom: 6px solid #353535;
-
+    border-top: 2px solid $cover-border-top;
+    border-left: 2px solid $cover-border-left;
+    border-right: 2px solid $cover-border-right;
+    border-bottom: 6px solid $cover-border-bottom;
     padding: 5px;
     box-sizing: border-box;
-
-    background-color: #edeef0;
-    background-image: linear-gradient(to top, #b9b9b9 1px, transparent 0px);
+    background-color: $cover-background;
+    background-image: $cover-background-gradient;
     background-position: 0 28px;
     background-size: 100% 22px;
-
-    box-shadow: inset 0px 2px 7px -1px #222222;
-
+    box-shadow: inset 0px 2px 7px -1px $cover-shadow;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
@@ -141,7 +169,7 @@ $category-background: #edeef0;
   }
 
   &__link {
-    color: #252525;
+    color: $link-color;
   }
 
   &__link::before {
@@ -155,17 +183,17 @@ $category-background: #edeef0;
 
   &__link:hover,
   &__link:focus {
-    color: #6d6d6d;
+    color: $link-focus-color;
   }
 
   &__link:focus {
-    outline: 4px solid rgb(37, 37, 37);
+    outline: $link-outline;
     outline-offset: 2px;
   }
 
   &__text {
     @include font-rem(16);
-    color: #252525;
+    color: $text-color;
     line-height: 1.4;
     font-family: $font;
     display: -webkit-box;

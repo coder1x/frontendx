@@ -1,5 +1,8 @@
 @import "@styles/glob.scss";
 
+$github-fill: #333;
+$github-fill-focus: rgb(114, 114, 114);
+$github-fill-outline: 2px solid #333;
 //--------------------------------------------
 
 .footer {
@@ -13,13 +16,13 @@
     padding-right: 50px;
   }
 
-  &__copuright-wrap {
+  &__copyright-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  &__copuright {
+  &__copyright {
     font-family: $font;
     @include font-rem(14);
   }
@@ -36,16 +39,16 @@
   }
 
   &__github svg {
-    fill: #333;
+    fill: $github-fill;
   }
 
   &__github:hover svg,
   &__github:focus svg {
-    fill: rgb(114, 114, 114);
+    fill: $github-fill-focus;
   }
 
   &__github:focus {
-    outline: 2px solid #333;
+    outline: $github-fill-outline;
     outline-offset: 2px;
   }
 }
