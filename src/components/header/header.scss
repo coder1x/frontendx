@@ -123,12 +123,18 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
     &_visible {
       display: block;
       position: absolute;
+      z-index: 9;
       top: 70px;
       left: 0;
       width: 100%;
       background-image: $background-header;
       background-size: 8px 8px, 100%;
       box-shadow: $menu-visible-shadow;
+
+      animation-name: HeaderMenuAnimation;
+      animation-duration: 0.3s;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
     }
   }
 
@@ -209,5 +215,12 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
 @keyframes fixedHeaderAnimation {
   from {
     transform: translateY(-100%);
+  }
+}
+
+@keyframes HeaderMenuAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-45%);
   }
 }

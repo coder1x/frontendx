@@ -8,7 +8,7 @@ const { merge } = require('webpack-merge');
 const devServ = require('./webpack.devServer.js');
 let confE = null;
 
-let pluginM = ['@plugins/java-import.ts'];
+// let pluginM = ['@plugins/java-import.ts'];
 let demoM = [];
 
 if (DP.isProd) {
@@ -20,12 +20,12 @@ if (DP.isProd) {
 
 if (DP.isPlugin) {
   confE = {
-    plugin: pluginM
+    // plugin: pluginM
   };
 } else {
   confE = {
-    plugin: pluginM,
-    demo: demoM,
+    // plugin: pluginM,
+    script: demoM,
   };
 }
 
@@ -35,8 +35,6 @@ if (DP.isAbsPath) pubPath = PATHS.public;
 module.exports = merge(devServ, {
 
 
-
-  // target: DP.isDev ? 'web' : 'browserslist',
   target: 'web',
   //devtool: DP.isDev ? 'eval-cheap-module-source-map' : 'source-map', //  (карта для браузеров) 
   devtool: DP.isDev ? false : false,
