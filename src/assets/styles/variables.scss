@@ -1,0 +1,31 @@
+$min-wraper: 319px;
+$max-wraper: 1160px;
+
+$xxs: 320px;
+$xs2: 419px;
+$xs: 575px;
+$sm2: 612px;
+$sm: 767px;
+$md2: 867px;
+$md: 991px;
+$lg2: 1099px;
+$lg: 1199px;
+$xl2: 1299px;
+$xl: 1440px;
+$xxl: 1920px;
+
+//----------- COLOR -------------
+$background-section: #fcfcfc;
+$section-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+//------------- FONT ------------
+
+$font: Verdana, Arial, sans-serif;
+
+// @include media-breakpoint-down($xxs) {}
+
+$size-padding: 20px;
+$min-size-padding: 10px;
+
+//-------------------------------
+//-------------------------------
+$font-size: 16;

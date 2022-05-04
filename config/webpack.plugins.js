@@ -1,51 +1,49 @@
-const HTMLWebpackPlugin = require('html-webpack-plugin'); // упрощает создаение HTML файлов, добавления хеша в имена файлов
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // удаляет все ненужные файлы при перестройке проекта
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // Он создает файл CSS для каждого файла JS, который содержит CSS
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 
 const FoxFavicon = require('fox-favicon');
 const FoxUrlConvertor = require('fox-url-convertor');
 
-const DP = require('./isDev');
+const path = require('path');
+const env = require('./isDev');
 const FL = require('./filename');
-const PATHS = require('./paths');
-const PAGES_DIR = `${PATHS.src}\\pages\\`; // каталог где располагаються PUG  файлы
+const paths = require('./paths');
+
+const pagesDir = path.join(paths.src, '/pages/');
 
 const pages = [];
-fs.readdirSync(PAGES_DIR).forEach((file) => {
+fs.readdirSync(pagesDir).forEach((file) => {
   pages.push(file.split('/', 2));
 });
-
 
 const description = 'Разбираем как использовать различные паттерны и подходы ' +
   ' в frontend разработке';
 const keywords = 'webDev, frontend, веб разработка,' +
   'плагины, компоненты, Java Script, Type Script, WebPack, CSS, SCSS, PUG';
 
+const plugins = [];
 
-let pluginsM = [];
+if (env.isDev) {
+  plugins.push(
+    new ESLintPlugin({
+      extensions: ['js', 'ts'],
+    }));
+}
 
-pluginsM.push(
-  new CleanWebpackPlugin(),   // очищаем от лишних файлов в папке дист
+plugins.push(
+  new CleanWebpackPlugin()
 );
 
-if (!DP.isPlugin)
-  pluginsM.push(
-    ...pages.map(fileName => new HTMLWebpackPlugin({
-      getData: () => {
-        try {
-          return JSON.parse(fs.readFileSync(
-            `./pages/${fileName}/data.json`, 'utf8'
-          ));
-        } catch (e) {
-          console.warn(
-            `data.json was not provided for page ${fileName}`
-          );
-          return {};
-        }
-      },
-      filename: `${fileName}.html`,
+if (!env.isPlugin) {
+  plugins.push(
+    ...pages.map((fileName) => new HTMLWebpackPlugin({
+      filename: `./${fileName}.html`,
       template: `./pages/${fileName}/${fileName}.pug`,
       alwaysWriteToDisk: true,
       inject: 'body',
@@ -111,39 +109,42 @@ if (!DP.isPlugin)
       },
     })),
   );
+}
 
-if (!DP.isPlugin)
-  pluginsM.push(
+if (!env.isPlugin) {
+  plugins.push(
     new FoxUrlConvertor({
       URLchange: '%5C',
       URLto: '/',
     }),
   );
+}
 
-pluginsM.push(
+plugins.push(
   new FoxFavicon({
-    src: `${PATHS.src}${PATHS.assets}images/icon/favicon.png`,
+    src: path.join(paths.src, paths.assets, 'images/icon/favicon.png'),
     path: 'assets/favicons/',
-    //pathManifest: '/assets/favicons/',
-    //'https://plugins.su/
+    // pathManifest: '/assets/favicons/',
+    // 'https://plugins.su/
     urlIcon: 'assets/favicons/',
-    devMode: DP.isPlugin ? true : DP.isDev,
+    devMode: env.isPlugin ? true : env.isDev,
     appName: 'Frontend для прагматиков',
     appShortName: 'Frontend для прагматиков',
-    appDescription: description,
+    appDescription: 'Узнайте, как использовать Range Slider Fox'
+      + ' на нескольких практических демонстрациях',
     developerName: 'coder1',
     developerURL: 'https://github.com/coder1x/',
     icons: {
-      'android': [
+      android: [
         'android-chrome-36x36.png',
         'android-chrome-48x48.png',
         'android-chrome-72x72.png',
         'android-chrome-96x96.png',
         'android-chrome-144x144.png',
         'android-chrome-192x192.png',
-        'android-chrome-256x256.png'
+        'android-chrome-256x256.png',
       ],
-      'appleIcon': [
+      appleIcon: [
         'apple-touch-icon-114x114.png',
         'apple-touch-icon-120x120.png',
         'apple-touch-icon-167x167.png',
@@ -152,44 +153,41 @@ pluginsM.push(
         'apple-touch-icon-72x72.png',
         'apple-touch-icon-76x76.png',
         'apple-touch-icon-precomposed.png',
-        'apple-touch-icon.png'
+        'apple-touch-icon.png',
       ],
-      'appleStartup': [
-        'apple-touch-startup-image-640x1136.png'
+      appleStartup: [
+        'apple-touch-startup-image-640x1136.png',
       ],
-      'coast': true,                // Create Opera Coast icon. `boolean`
-      'favicons': true,             // Create regular favicons. `boolean`
-      'firefox': [
+      coast: true, // Create Opera Coast icon. `boolean`
+      favicons: true, // Create regular favicons. `boolean`
+      firefox: [
         'firefox_app_60x60.png',
         'firefox_app_128x128.png',
       ],
-      'opengraph': true,            // Create Facebook OpenGraph image. `boolean`
-      'twitter': true,              // Create Twitter Summary Card image. `boolean`
-      'windows': true,              // Create Windows 8 tile icons. `boolean`
-      'yandex': true                // Create Yandex browser icon. `boolean`
-    }
+      opengraph: true, // Create Facebook OpenGraph image. `boolean`
+      twitter: true, // Create Twitter Summary Card image. `boolean`
+      windows: true, // Create Windows 8 tile icons. `boolean`
+      yandex: true, // Create Yandex browser icon. `boolean`
+    },
   }),
 );
 
-pluginsM.push(
+plugins.push(
   new MiniCssExtractPlugin({
-    filename: FL.filename('css')
+    filename: FL.filename('css'),
   }),
 );
 
-if (!DP.isPlugin)
-  pluginsM.push(
-    new webpack.ProvidePlugin({  // подключаем jquery плагином, самый нормальный способ ..
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    }),
-  );
-
-pluginsM.push(
-  new webpack.HotModuleReplacementPlugin({ multiStep: true }),
-);
+// if (!env.isPlugin) {
+//   plugins.push(
+//     new webpack.ProvidePlugin({
+//       $: 'jquery',
+//       jQuery: 'jquery',
+//       'window.jQuery': 'jquery',
+//     }),
+//   );
+// }
 
 module.exports = {
-  plugins: pluginsM,
+  plugins: plugins,
 };

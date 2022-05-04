@@ -1,31 +1,20 @@
-
-
-// в зависемости от типа файла CSS или JS ложим в соответсвующий каталог в деректории dist/assets/ 
-const DP = require('./isDev');
-const PATHS = require('./paths');
+const path = require('path');
+const env = require('./isDev');
+const paths = require('./paths');
 
 module.exports = {
-  filename: function (ext) {
-
+  filename(ext) {
     let dir = '';
 
     if (ext === 'css') {
-      dir = `${PATHS.assets}css/`;
-    } else
-      if (ext === 'js') {
-        dir = `${PATHS.assets}js/`;
-      }
-    dir = dir.replace(/\//g, '\\');
+      dir = path.join('.', paths.assets, 'css/');
+    } else if (ext === 'js') {
+      dir = path.join('.', paths.assets, 'js/');
+    }
 
-    if (DP.isMulti)
-      dir = dir.replace(/^\\/, '');
-
-    if (DP.isDev || DP.isPlugin) {
+    if (env.isDev || env.isPlugin) {
       return `${dir}[name].${ext}`;
     }
-    else {
-      return `${dir}[name].[hash].${ext}`;
-    }
-
-  }
+    return `${dir}[name].[hash].${ext}`;
+  },
 };

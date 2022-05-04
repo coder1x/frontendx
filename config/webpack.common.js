@@ -1,70 +1,65 @@
-
-const PATHS = require('./paths');
-const FL = require('./filename');
-const DP = require('./isDev');
-const OPT = require('./optimization');
+const path = require('path');
 
 const { merge } = require('webpack-merge');
-const devServ = require('./webpack.devServer.js');
-let confE = null;
+const paths = require('./paths');
+const FL = require('./filename');
+const env = require('./isDev');
+const optimization = require('./optimization');
 
-// let pluginM = ['@plugins/java-import.ts'];
-let demoM = [];
+const devServer = require('./webpack.devServer.js');
 
-if (DP.isProd) {
-  demoM.push('./index.ts');
+let config = null;
+
+const pluginM = ['@plugins/java-import.ts'];
+const points = [];
+
+if (env.isProd) {
+  points.push('./index.ts');
 } else {
-  demoM.push('webpack/hot/dev-server');
-  demoM.push('./index.ts');
+  points.push('webpack/hot/dev-server');
+  points.push('./index.ts');
 }
 
-if (DP.isPlugin) {
-  confE = {
-    // plugin: pluginM
+if (env.isPlugin) {
+  config = {
+    plugin: pluginM,
   };
 } else {
-  confE = {
-    // plugin: pluginM,
-    script: demoM,
+  config = {
+    plugin: pluginM,
+    demo: points,
   };
 }
 
-let pubPath;
-if (DP.isAbsPath) pubPath = PATHS.public;
+module.exports = merge(devServer, {
 
-module.exports = merge(devServ, {
-
-
+  // target: DP.isDev ? 'web' : 'browserslist',
   target: 'web',
-  //devtool: DP.isDev ? 'eval-cheap-module-source-map' : 'source-map', //  (карта для браузеров) 
-  devtool: DP.isDev ? false : false,
+  // devtool: DP.isDev ? 'eval-cheap-module-source-map' : 'source-map', //  (карта для браузеров)
+  devtool: false,
 
-  entry: confE,
-
-  context: PATHS.src, // корень исходников
-  mode: DP.isDev ? 'development' : 'production',   // собираем проект в режиме разработки
+  entry: config,
+  context: paths.src, // корень исходников
+  mode: env.isDev ? 'development' : 'production',
   output: {
     filename: FL.filename('js'),
-    path: PATHS.dist, // каталог в который будет выгружаться сборка.
-    publicPath: pubPath,
+    path: paths.dist, // каталог в который будет выгружаться сборка.
+    publicPath: 'auto',
   },
-
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],  // когда мы прописываем тут расширения то при импуте в index.js их можно не прописывать 
+    extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
     alias: {
-      '@plugins': `${PATHS.src}\\plugins`,
-      '@styles': `${PATHS.src}${PATHS.assets}styles`,
-      '@typescript': `${PATHS.src}${PATHS.assets}ts`,
-      '@img': `${PATHS.src}${PATHS.assets}images`,
-      '@pag': `${PATHS.src}\\pages`,
-      '@com': `${PATHS.src}\\components`,
-      '@': PATHS.src,
-      comp: PATHS.components,
-    }
+      '@plugins': path.join(paths.src, 'plugins'),
+      '@styles': path.join(paths.src, paths.assets, 'styles'),
+      '@typescript': path.join(paths.src, paths.assets, 'ts'),
+      '@img': path.join(paths.src, 'images'),
+      '@pag': path.join(paths.src, 'pages'),
+      '@com': path.join(paths.src, 'components'),
+      '@': paths.src,
+      comp: paths.components,
+    },
   },
 
-
-  optimization: OPT.optimization(), // минификация и оптимизация файлов на выходе  (если это Продакшен)
-
+  optimization: optimization.optimization(),
 });

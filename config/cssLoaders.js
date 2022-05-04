@@ -1,15 +1,16 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // Он создает файл CSS для каждого файла JS, который содержит CSS
-// работа с файлами стилей
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const paths = require('./paths');
 
 module.exports = {
-  cssLoaders: extra => {
+  cssLoaders: (extra) => {
     const loaders = [
       MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
           sourceMap: false,
-        }
+        },
       },
       {
         loader: 'postcss-loader',
@@ -17,11 +18,7 @@ module.exports = {
           postcssOptions: {
             plugins: [
               [
-                "autoprefixer",
-                {
-                  // Options
-                },
-                'css-mqpacker',
+                'autoprefixer',
                 {
                   // Options
                 },
@@ -31,22 +28,30 @@ module.exports = {
                     'default', {
                       discardComments: {
                         removeAll: true,
-                      }
-                    }
-                  ]
-                }
+                      },
+                    },
+                  ],
+                },
               ],
             ],
-          }
-        }
-      }
+          },
+        },
+      },
     ];
 
     if (extra) {
       loaders.push(extra);
+      loaders.push({
+        loader: 'sass-resources-loader',
+        options: {
+          resources: [
+            path.join(paths.src, 'assets/styles/variables.scss'),
+            path.join(paths.src, 'assets/styles/mixins.scss'),
+          ]
+        },
+      });
     }
 
     return loaders;
-  }
-
+  },
 };
