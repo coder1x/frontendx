@@ -20,7 +20,7 @@ class Diskette {
   init() {
     if (!this.categoryTile) return false;
 
-    this.blind = this.categoryTile.querySelector(`${this.className}__lid`);
+    this.blind = this.categoryTile.querySelector(`${this.className}__blind`);
     this.link = this.categoryTile.querySelector(`${this.className}__link`);
     this.window = this.categoryTile.querySelector(`${this.className}__window-disk`);
     this.bindEvent();
@@ -32,10 +32,10 @@ class Diskette {
     const name = this.className.replace('.', '');
     if (!this.blind || !this.window) return false;
     if (isOpen) {
-      this.blind.classList.add(`${name}__lid_open`);
+      this.blind.classList.add(`${name}__blind_open`);
       this.window.classList.add(`${name}__window-disk_open`);
     } else {
-      this.blind.classList.remove(`${name}__lid_open`);
+      this.blind.classList.remove(`${name}__blind_open`);
       this.window.classList.remove(`${name}__window-disk_open`);
     }
     return true;

@@ -21,15 +21,15 @@ $blind-border-left: #000;
 $blind-border-right: #000;
 $blind-border-bottom: #000;
 $blind-shadow: #222222;
-$lid-background: rgb(173, 173, 173);
-$lid-background-gradient: linear-gradient(
+$blind-background: rgb(173, 173, 173);
+$blind-background-gradient: linear-gradient(
   165deg,
   rgba(173, 173, 173, 1) 0%,
   rgba(230, 230, 230, 1) 41%,
   rgba(106, 106, 106, 1) 100%
 );
-$lid-text-color: #363636;
-$lid-text-shadow: 1px 1px 2px #fff, 0 0 1em #fff;
+$blind-text-color: #363636;
+$blind-text-shadow: 1px 1px 2px #fff, 0 0 1em #fff;
 $cover-border-top: #353535;
 $cover-border-left: #353535;
 $cover-border-right: #353535;
@@ -88,7 +88,7 @@ $disk-background: #2c2c2c;
     box-shadow: inset 1px 1px 2px 0px $cub-right-shadow;
   }
 
-  &__blind {
+  &__blind-wrap {
     position: relative;
     width: 195px;
     height: 98px;
@@ -101,12 +101,12 @@ $disk-background: #2c2c2c;
     margin-left: 27px;
   }
 
-  &__lid {
+  &__blind {
     position: absolute;
     width: 150px;
     height: 98px;
-    background: $lid-background;
-    background: $lid-background-gradient;
+    background: $blind-background;
+    background: $blind-background-gradient;
     right: 0;
     top: -3px;
     display: flex;
@@ -124,18 +124,18 @@ $disk-background: #2c2c2c;
     }
   }
 
-  &__lid-text {
+  &__blind-text {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 5px;
-    color: $lid-text-color;
+    color: $blind-text-color;
     height: 100%;
     @include font-rem(16);
     box-sizing: border-box;
     text-transform: uppercase;
     font-family: $font-number;
-    text-shadow: $lid-text-shadow;
+    text-shadow: $blind-text-shadow;
   }
 
   &__window {
