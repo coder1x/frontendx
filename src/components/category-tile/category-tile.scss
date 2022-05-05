@@ -196,7 +196,6 @@ $disk-background: #2c2c2c;
 
   &__header {
     text-align: center;
-    @include font-rem(19);
     line-height: 23px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -228,7 +227,7 @@ $disk-background: #2c2c2c;
   }
 
   &__text {
-    @include font-rem(16);
+    @include font-rem(15);
     color: $text-color;
     line-height: 1.4;
     font-family: $font;

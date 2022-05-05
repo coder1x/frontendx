@@ -46,8 +46,13 @@ $color-header-text: rgb(37, 37, 37);
   min-height: 100px;
   background-color: $background-section;
 
+  &__header{
+    text-align: center;
+    color: $color-header-h1;
+  }
+
   &__wrap {
-    margin: 0 auto;
+    margin: 30px auto 0px auto;
     width: 100%;
     max-width: $max-wraper;
   }

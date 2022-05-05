@@ -8,7 +8,8 @@ block content
 
   -
     const {
-      categoryTile
+      categories,
+      tiles
     } = require('./index.json');
 
   main.index-content
@@ -18,11 +19,11 @@ block content
         h1(class="blog-description__header") Frontend для прагматиков
         p(class="blog-description__text") Сборник авторских компонентов, плагинов а так же статей с разбором кода. 
 
-    section.tiles
-      h2(class='visually-hidden') категории записей
-      div(class="tiles__wrap")
-        ul(class="tiles-list")
-          each item in categoryTile
-            li(class="tiles-list__item")
-              +category-tile(item)
-
+    each category in categories
+      section.tiles
+        h2(class='tiles__header')=category
+        div(class="tiles__wrap")
+          ul(class="tiles-list")
+            each tile in tiles
+              li(class="tiles-list__item")
+                +category-tile(tile)
