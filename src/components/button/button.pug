@@ -1,0 +1,9 @@
+mixin button(options = {})
+  -
+    const {
+      text = 'Читать',
+      link = 'http://www.frontendx.ru',
+    } = options
+
+    const className = 'button'
+  a(class = className href = link)= text

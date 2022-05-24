@@ -1,0 +1,9 @@
+.bread-crumbs {
+  box-shadow: $section-shadow;
+  background-color: $background-section;
+  font-weight: bolder;
+  &__item {
+    font-weight: normal;
+    display: inline;
+  }
+}

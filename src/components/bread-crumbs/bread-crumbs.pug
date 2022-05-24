@@ -1,0 +1,13 @@
+
+mixin bread-crumbs()
+  -
+    const className = 'bread-crumbs'
+
+  ul(class = className) >
+    -let n = 0
+      while n < 7
+        li(class = `${className}__item`)
+          a(class = `${className}__link` href = 'http://www.frontendx.ru')= `длинное имя ссылки ${n++}/`
+
+
+

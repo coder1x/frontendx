@@ -1,38 +1,33 @@
 .article-card {
-  * {
-    box-sizing: border-box;
-  }
-
-  border: 1px solid red;
+  background-color: $background-section;
+  box-shadow: $section-shadow;
+  box-sizing: border-box;
   width: 100%;
-  max-width: calc($min-wraper + 160px);
+  min-width: calc($min-wraper - ($min-size-padding * 2));
   height: $min-wraper;
-
-  &__wrapper {
-    border: 1px solid pink;
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-    height: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
 
   &__header {
-    border: 1px solid blue;
-    margin-bottom: 10px;
+    height: 50px;
+    padding-top: 10px;
 
     @include max-row(2);
   }
   &__text {
-    @include max-row(11);
-    //  margin-bottom: 10px;
-    text-align: justify;
+    padding-top: 10px;
+
+    @include max-row(10);
     text-indent: 15px;
     justify-self: flex-start;
-    border: 1px solid orange;
   }
   &__footer {
-    border: 1px solid blue;
     min-height: 15%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     flex-grow: 1;
+    padding-bottom: 10px;
   }
 }

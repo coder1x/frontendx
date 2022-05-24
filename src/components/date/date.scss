@@ -1,0 +1,12 @@
+.date {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  font-family: Consolas;
+
+  svg {
+    box-sizing: border-box;
+    height: 30px;
+    padding: 5px;
+  }
+}
