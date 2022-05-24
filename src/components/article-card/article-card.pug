@@ -1,0 +1,17 @@
+mixin article-card(options = {})
+  -
+    const {
+      header = '',
+      text = '',
+      link = 'http://www.frontendx.ru',
+    } = options
+
+    const className = 'article-card'
+
+  article(class = className)
+    a(class = `${className}__wrapper` href = link)
+      h2(class = `${className}__header`)= header
+      div(class = `${className}__text`)
+        each paragraph in text 
+          p(class = ``)= paragraph
+      div(class = `${className}__footer`)
