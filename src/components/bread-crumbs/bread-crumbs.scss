@@ -1,9 +1,21 @@
 .bread-crumbs {
   box-shadow: $section-shadow;
   background-color: $background-section;
+  padding: 5px;
   font-weight: bolder;
+
   &__item {
+    font-size: 0.8rem;
     font-weight: normal;
     display: inline;
+    &:first-child {
+      margin-left: 5px;
+    }
+  }
+  &__link {
+    color: $color-grey;
+    &:hover {
+      color: $color-grey-hover;
+    }
   }
 }

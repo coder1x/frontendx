@@ -1,12 +1,14 @@
 .date {
   display: inline-flex;
   flex-direction: row-reverse;
-  align-items: center;
+  align-items: flex-end;
   font-family: Consolas;
+  color: $color-grey;
+  font-size: 0.9rem;
 
   svg {
     box-sizing: border-box;
-    height: 30px;
-    padding: 5px;
+    height: 20px;
+    padding: 0 5px;
   }
 }

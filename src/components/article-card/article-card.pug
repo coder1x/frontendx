@@ -12,11 +12,9 @@ mixin article-card(options = {})
     const className = 'article-card'
 
   article(class = className)
-    a(class = `${className}__header-wrapper` href = link)
-      h2(class = `${className}__header`)= header
-    div(class = `${className}__text`)
-      each paragraph in text 
-        p(class = ``)= paragraph
+    h2(class = `${className}__header`)
+      a(class = `${className}__header-link` href = link)= header
+    p(class = `${className}__text`)= text
     div(class = `${className}__footer`)
       +date({date:'24.05.2022' })
       +button()

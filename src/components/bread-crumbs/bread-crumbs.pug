@@ -8,6 +8,8 @@ mixin bread-crumbs()
       while n < 7
         li(class = `${className}__item`)
           a(class = `${className}__link` href = 'http://www.frontendx.ru')= `длинное имя ссылки ${n++}/`
+    li(class = `${className}__item`)
+      span(class = `${className}__link ${className}__link_last`)= `последняя ссылка`
 
 
 
