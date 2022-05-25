@@ -1,0 +1,56 @@
+@mixin marker($path, $size) {
+  content: url($path);
+  position: absolute;
+  width: $size;
+  height: $size;
+  left: calc($size / 2 * -1);
+}
+
+@mixin list-item-style {
+  padding: 5px 0 5px 10px;
+  position: relative;
+}
+
+$item-padding: 5px 0 5px 10px;
+
+.archive {
+  @include font-rem(19);
+  padding: 10px;
+  font-weight: bolder;
+  &__year {
+    border: 1px solid blue;
+    cursor: pointer;
+    @include font-rem(19);
+    @include list-item-style;
+    &::before {
+      @include marker("./img/circle-grey.svg", 10px);
+    }
+  }
+
+  &__months {
+    &_visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+  }
+
+  &__month {
+    display: flex;
+    @include font-rem(16);
+    @include list-item-style;
+    &::before {
+      @include marker("./img/circle.svg", 10px);
+    }
+  }
+
+  &__articles-link {
+    width: 100%;
+  }
+  &__text-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}

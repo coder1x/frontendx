@@ -1,0 +1,23 @@
+mixin archive(options = {})
+  -
+    const {
+      years
+    } = options
+
+    const link = 'http://www.frontendx.ru'
+
+    const className = 'archive'
+  ul(class = className) Архивы
+    each year, index in years
+      li(class = `${className}__year`)
+        span(class = `${className}__text-wrapper`)
+          span(class = `${className}__text-name`)= index
+          span(class = `${className}__text-amount`)= year.total
+        ul(class = `${className}__months ${className}__months_visually-hidden`)
+          each month, index in year
+            if index !='total'
+              li(class = `${className}__month`)
+                a(class = `${className}__articles-link` href = link)
+                  span(class = `${className}__text-wrapper`)
+                    span(class = `${className}__text-name`)= index
+                    span(class = `${className}__text-amount`)= month
