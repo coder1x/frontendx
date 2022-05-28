@@ -1,8 +1,6 @@
-@mixin marker($path, $size) {
-  content: url($path);
+@mixin marker($symbol, $size) {
+  content: $symbol;
   position: absolute;
-  width: $size;
-  height: $size;
   left: calc($size / 2 * -1);
 }
 
@@ -18,16 +16,23 @@ $item-padding: 5px 0 5px 10px;
   padding: 10px;
   font-weight: bolder;
   &__year {
-    border: 1px solid blue;
+    // display: flex;
+    // justify-content: space-between;
+    margin-left: 5px;
+    //border: 1px solid blue;
     cursor: pointer;
-    @include font-rem(19);
+    @include font-rem(16);
     @include list-item-style;
     &::before {
-      @include marker("./img/circle-grey.svg", 10px);
+      @include marker("●", 10px);
+    }
+    &:focus {
+      outline-offset: 5px;
     }
   }
 
   &__months {
+    margin-left: 5px;
     &_visually-hidden {
       position: absolute;
       width: 1px;
@@ -38,19 +43,34 @@ $item-padding: 5px 0 5px 10px;
   }
 
   &__month {
+    font-weight: normal;
+    border-bottom: 1px solid $color-grey-light;
     display: flex;
     @include font-rem(16);
     @include list-item-style;
     &::before {
-      @include marker("./img/circle.svg", 10px);
+      @include marker("○", 10px);
     }
   }
 
   &__articles-link {
     width: 100%;
-  }
-  &__text-wrapper {
     display: flex;
     justify-content: space-between;
+    &:hover {
+      color: $color-grey-hover;
+    }
+  }
+  &__text {
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+    &-name {
+      width: 80%;
+    }
+    &-amount {
+      flex-grow: 1;
+    }
   }
 }

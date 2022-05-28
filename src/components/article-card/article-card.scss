@@ -11,6 +11,12 @@
   &__header {
     height: 50px;
     padding-top: 10px;
+    &:focus {
+      outline-offset: 5px;
+    }
+    &-link:hover {
+      color: $color-grey-hover;
+    }
 
     @include max-row(2);
   }

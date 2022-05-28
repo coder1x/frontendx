@@ -11,6 +11,9 @@
   color: $background-section;
   font-weight: bolder;
   &:hover {
-    background-color: $button-background-hover;
+    background-color: $color-grey-hover;
+  }
+  &:focus {
+    outline-offset: 5px;
   }
 }

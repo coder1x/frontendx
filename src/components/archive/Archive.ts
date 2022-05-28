@@ -33,8 +33,8 @@ class Archive {
 
   bindEvent() {
     if (!this.year) return false;
-    this.year.addEventListener('focus', this.blindToggle);
-    this.year.addEventListener('blur', this.blindToggle);
+    // this.year.addEventListener('focus', this.blindToggle);
+    // this.year.addEventListener('blur', this.blindToggle);
     this.year.addEventListener('click', this.blindToggle);
     return true;
   }

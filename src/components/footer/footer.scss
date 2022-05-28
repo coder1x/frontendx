@@ -42,7 +42,7 @@ $github-fill-outline: 2px solid #333;
 
   &__github:hover svg,
   &__github:focus svg {
-    fill: $github-fill-focus;
+    fill: $color-grey-hover;
   }
 
   &__github:focus {

@@ -1,7 +1,7 @@
 .bread-crumbs {
   box-shadow: $section-shadow;
   background-color: $background-section;
-  padding: 5px;
+  padding: 2px 5px 5px;
   font-weight: bolder;
 
   &__item {
@@ -13,8 +13,11 @@
     }
   }
   &__link {
-    color: $color-grey;
+    color: $color-grey-hover;
     &:hover {
+      color: $color-grey;
+    }
+    &_last:hover {
       color: $color-grey-hover;
     }
   }
