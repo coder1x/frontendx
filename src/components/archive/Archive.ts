@@ -20,22 +20,48 @@ class Archive {
     return true;
   }
 
+  static handleMonthsMouseDown(e: MouseEvent) {
+    e.preventDefault();
+  }
+
+  @boundMethod
+  handleMonthsClick() {
+    this.toggleList();
+  }
+
+  @boundMethod
+  handleMonthsKeyDown(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      this.closeList();
+    }
+
+    const target = e.target as HTMLElement;
+    const condition = !target.classList.contains('archive__articles-link')
+      && (e.code === 'Enter' || e.code === 'Space');
+
+    if (condition) {
+      e.preventDefault();
+      this.toggleList();
+    }
+  }
+
   toggleList() {
     if (!this.months) return false;
     this.months.classList.toggle('archive__months_visually-hidden');
     return true;
   }
 
-  @boundMethod
-  blindToggle() {
-    this.toggleList();
+  closeList() {
+    if (!this.months) return false;
+    this.months.classList.add('archive__months_visually-hidden');
+    return true;
   }
 
   bindEvent() {
     if (!this.year) return false;
-    // this.year.addEventListener('focus', this.blindToggle);
-    // this.year.addEventListener('blur', this.blindToggle);
-    this.year.addEventListener('click', this.blindToggle);
+    this.year.addEventListener('mousedown', Archive.handleMonthsMouseDown);
+    this.year.addEventListener('click', this.handleMonthsClick);
+    this.year.addEventListener('keydown', this.handleMonthsKeyDown);
     return true;
   }
 }
