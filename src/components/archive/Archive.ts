@@ -12,13 +12,16 @@ class Archive {
 
   constructor(className: string, elem: Element) {
     this.year = elem as HTMLElement;
+    this.className = className.replace('.archive__year', 'archive');
+    console.log('this.className>>>', this.className);
+
     this.init();
   }
 
   init() {
     if (!this.year) return false;
-    this.months = this.year.querySelector('.archive__months');
-    this.links = this.year.querySelectorAll('.archive__articles-link');
+    this.months = this.year.querySelector(`.${this.className}__months`);
+    this.links = this.year.querySelectorAll(`.${this.className}__articles-link`);
     this.bindEvent();
 
     return true;
@@ -43,7 +46,7 @@ class Archive {
     }
 
     const target = e.target as HTMLElement;
-    const isLink = target.classList.contains('archive__articles-link');
+    const isLink = target.classList.contains(`${this.className}__articles-link`);
     const condition = !isLink && (e.code === 'Enter' || e.code === 'Space');
 
     if (condition) {
@@ -59,19 +62,19 @@ class Archive {
 
   toggleList() {
     if (!this.months) return false;
-    this.months.classList.toggle('archive__months_visually-hidden');
+    this.months.classList.toggle(`${this.className}__months_visually-hidden`);
     return true;
   }
 
   closeList() {
     if (!this.months) return false;
-    this.months.classList.add('archive__months_visually-hidden');
+    this.months.classList.add(`${this.className}__months_visually-hidden`);
     return true;
   }
 
   toggleLinksAvailability() {
     if (this.months && this.links) {
-      if (this.months.classList.contains('archive__months_visually-hidden')) {
+      if (this.months.classList.contains(`${this.className}__months_visually-hidden`)) {
         this.links.forEach((link) => link.setAttribute('tabindex', '-1'));
       } else {
         this.links.forEach((link) => link.removeAttribute('tabindex'));
