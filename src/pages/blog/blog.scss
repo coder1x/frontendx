@@ -42,12 +42,16 @@ $gap: 12px;
   }
 
   &__search-panel-wrapper {
+    position: relative;
+    //  border: 1px solid red;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    display: flex;
-    justify-content: flex-end;
+    // display: flex;
+    // justify-content: flex-end;
+    //position: fixed;
+    //  height: auto;
 
     @include media-breakpoint-down($lg2) {
       //visually-hidden
