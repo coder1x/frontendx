@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable max-len */
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-unused-vars */
@@ -23,11 +24,9 @@ class SearchPanel {
 
   scroll: number = 0;
 
-  test: boolean = false;
-
   delta: number = 0;
 
-  height: number = 0;
+  headerHeight: number = 0;
 
   constructor(className: string, elem: Element) {
     this.panelWrapper = elem as HTMLElement;
@@ -37,61 +36,45 @@ class SearchPanel {
 
   init() {
     this.blog = document.querySelector('.blog') as HTMLElement;
-    if (!this.panelWrapper) return false;
+    this.header = document.querySelector('.header') as HTMLElement;
+    if (!this.panelWrapper || !this.header) return false;
     this.panel = this.panelWrapper.querySelector('.search-panel') as HTMLElement;
-    if (this.panel) {
-      this.height = this.panel.offsetHeight;
-    }
-
-    // this.header = this.card.querySelector(`${this.className}__header`);
-    // this.link = this.card.querySelector(`${this.className}__header-link`);
-    // if (!this.link) return false;
-    // this.href = this.link.getAttribute('href');
+    this.headerHeight = this.header.offsetHeight;
     this.bindEvent();
 
     return true;
   }
 
   @boundMethod
-  handleHeaderKeyDown(e: KeyboardEvent) {
-    if (e.code === 'Space' || e.code === 'Enter') {
-      e.preventDefault();
-      if (this.href) {
-        document.location.href = this.href;
-      }
-    }
-  }
-
-  @boundMethod
   handleWindowScroll(e: Event) {
-    if (!this.blog) return false;
-
-    // const wrapperRight = this.blog.getBoundingClientRect().right - document.documentElement.clientWidth + 20;
-    if (this.panelWrapper && this.panel) {
-      if (window.pageYOffset > this.scroll) { // крутим вниз
-        this.panel.style.position = 'static';
-        // this.panel.style.bottom = 'auto';
-      } else { // крутим вверх
-        if (this.panel.getBoundingClientRect().bottom < 0) { // панель не видна (первая прокрутка вниз)
-          console.log('1');
-          const bottom = `${document.documentElement.clientHeight - 100}px`;
-          this.panel.style.position = 'absolute';
-          this.panel.style.top = 'auto';
-          this.panel.style.bottom = bottom; // панель появилась из-под шапки
-          return false;
-        }
-        console.log('2');
-        console.log(this.panel.getBoundingClientRect().top);
-
-        if (this.panel.getBoundingClientRect().top > 70) {
-          this.panel.style.position = 'sticky';
-          this.panel.style.top = '70px';
-          this.panel.style.bottom = 'auto';
-        }
+    const setStyle = (position: string = 'static', top: string = 'auto', bottom: string = 'auto') => {
+      if (this.panel) {
+        const style = this.panel.style;
+        style.position = position;
+        style.top = top;
+        style.bottom = bottom;
       }
-      //  this.delta = window.pageYOffset - this.scroll;
-      this.scroll = window.pageYOffset;
+    };
+
+    if (!this.blog || !this.panelWrapper || !this.panel) return false;
+
+    if (window.pageYOffset > this.scroll) { // крутим вниз
+      setStyle();
+    } else { // крутим вверх
+      const spaceToPageBottom = document.documentElement.clientHeight - this.panelWrapper.getBoundingClientRect().bottom;
+      if (this.panel.getBoundingClientRect().bottom < 0) { // панель еще не видна (первая прокрутка вниз)
+        const delta = document.documentElement.clientHeight - spaceToPageBottom;
+        const bottom = delta >= 0 ? `${delta}px` : '0px';
+        setStyle('absolute', 'auto', bottom); // панель появилась из-под шапки
+        return true;
+      }
+
+      if (this.panel.getBoundingClientRect().top > this.headerHeight) { // панель продолжает выезжать из-под шапки
+        setStyle('sticky', `${this.headerHeight}px`);
+      }
     }
+    this.scroll = window.pageYOffset;
+
     return true;
   }
 
