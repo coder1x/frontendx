@@ -20,7 +20,7 @@ class SearchPanel {
 
   panel: HTMLElement | null = null;
 
-  blog: HTMLElement | null = null;
+  //  blog: HTMLElement | null = null;
 
   scroll: number = 0;
 
@@ -35,7 +35,7 @@ class SearchPanel {
   }
 
   init() {
-    this.blog = document.querySelector('.blog') as HTMLElement;
+    // this.blog = document.querySelector('.blog') as HTMLElement;
     this.header = document.querySelector('.header') as HTMLElement;
     if (!this.panelWrapper || !this.header) return false;
     this.panel = this.panelWrapper.querySelector('.search-panel') as HTMLElement;
@@ -56,7 +56,7 @@ class SearchPanel {
       }
     };
 
-    if (!this.blog || !this.panelWrapper || !this.panel) return false;
+    if (!this.panelWrapper || !this.panel) return false;
 
     if (window.pageYOffset > this.scroll) { // крутим вниз
       setStyle();
