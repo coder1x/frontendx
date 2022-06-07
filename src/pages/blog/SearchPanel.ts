@@ -45,6 +45,23 @@ class SearchPanel {
     return true;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  handlePanelWrapperClick(e: MouseEvent) {
+    const panel = e.currentTarget as HTMLElement;
+    const target = e.target as HTMLElement;
+    const list = target.closest('.archive__year') as HTMLElement;
+    const listHeight = list.offsetHeight;
+    // list.style.borderColor = 'red';
+    // list.style.borderWidth = '1px';
+    // list.style.borderStyle = 'solid';
+    console.log('listHeight>>>', listHeight);
+    // console.log(list);
+    const bottom = parseFloat(panel.style.bottom);
+    // const bottom = panel.style.bottom;
+    console.log('bottom>>>', bottom);
+    panel.style.bottom = `${bottom - listHeight}px`;
+  }
+
   @boundMethod
   handleWindowScroll(e: Event) {
     const setStyle = (position: string = 'static', top: string = 'auto', bottom: string = 'auto') => {
@@ -79,7 +96,10 @@ class SearchPanel {
   }
 
   bindEvent() {
+    if (!this.panel) return false;
     window.addEventListener('scroll', this.handleWindowScroll);
+    this.panel.addEventListener('click', this.handlePanelWrapperClick);
+    return true;
   }
 }
 
