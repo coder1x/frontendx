@@ -1,8 +1,3 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable max-len */
-/* eslint-disable no-constant-condition */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import { boundMethod } from 'autobind-decorator';
 
 class SearchPanel {
@@ -20,8 +15,6 @@ class SearchPanel {
 
   panel: HTMLElement | null = null;
 
-  //  blog: HTMLElement | null = null;
-
   scroll: number = 0;
 
   delta: number = 0;
@@ -35,38 +28,46 @@ class SearchPanel {
   }
 
   init() {
-    // this.blog = document.querySelector('.blog') as HTMLElement;
     this.header = document.querySelector('.header') as HTMLElement;
+
     if (!this.panelWrapper || !this.header) return false;
+
     this.panel = this.panelWrapper.querySelector('.search-panel') as HTMLElement;
     this.headerHeight = this.header.offsetHeight;
     this.bindEvent();
-
     return true;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  handlePanelWrapperClick(e: MouseEvent) {
+  static handlePanelClick(e: MouseEvent) {
     const panel = e.currentTarget as HTMLElement;
-    const target = e.target as HTMLElement;
-    const list = target.closest('.archive__year') as HTMLElement;
-    const listHeight = list.offsetHeight;
-    // list.style.borderColor = 'red';
-    // list.style.borderWidth = '1px';
-    // list.style.borderStyle = 'solid';
-    console.log('listHeight>>>', listHeight);
-    // console.log(list);
-    const bottom = parseFloat(panel.style.bottom);
-    // const bottom = panel.style.bottom;
-    console.log('bottom>>>', bottom);
-    panel.style.bottom = `${bottom - listHeight}px`;
+    const month = e.target as HTMLElement;
+    const year = month.closest('.archive__year') as HTMLElement;
+    const monthList = year.querySelector('.archive__months') as HTMLElement;
+    const monthListHeight = monthList.offsetHeight;
+    const dataHeightAttribute = monthList.getAttribute('data-height');
+    const { style } = panel;
+    const bottom = parseFloat(style.bottom);
+    // НЕ первый клик по этому месяцу => на нем уже есть атрибут с высотой => берем высоту из атрибута
+    if (dataHeightAttribute) {
+      if (!monthList.classList.contains('archive__months_visually-hidden')) {
+        style.bottom = `${bottom - parseFloat(dataHeightAttribute)}px`;
+      } else { style.bottom = `${bottom + parseFloat(dataHeightAttribute)}px`; }
+      // первый клик по этому месяцу => на нем еще нет атрибута с высотой => берем высоту из listHeight и вешаем атрибут с высотой
+    } else {
+      style.bottom = `${bottom - monthListHeight}px`;
+      monthList.setAttribute('data-height', String(monthListHeight));
+    }
   }
 
   @boundMethod
-  handleWindowScroll(e: Event) {
-    const setStyle = (position: string = 'static', top: string = 'auto', bottom: string = 'auto') => {
+  handleWindowScroll() {
+    const setStyle = (
+      position: string = 'static',
+      top: string = 'auto',
+      bottom: string = 'auto',
+    ) => {
       if (this.panel) {
-        const style = this.panel.style;
+        const { style } = this.panel;
         style.position = position;
         style.top = top;
         style.bottom = bottom;
@@ -78,7 +79,8 @@ class SearchPanel {
     if (window.pageYOffset > this.scroll) { // крутим вниз
       setStyle();
     } else { // крутим вверх
-      const spaceToPageBottom = document.documentElement.clientHeight - this.panelWrapper.getBoundingClientRect().bottom;
+      const spaceToPageBottom = document.documentElement.clientHeight
+        - this.panelWrapper.getBoundingClientRect().bottom;
       if (this.panel.getBoundingClientRect().bottom < 0) { // панель еще не видна (первая прокрутка вниз)
         const delta = document.documentElement.clientHeight - spaceToPageBottom;
         const bottom = delta >= 0 ? `${delta}px` : '0px';
@@ -98,7 +100,7 @@ class SearchPanel {
   bindEvent() {
     if (!this.panel) return false;
     window.addEventListener('scroll', this.handleWindowScroll);
-    this.panel.addEventListener('click', this.handlePanelWrapperClick);
+    this.panel.addEventListener('click', SearchPanel.handlePanelClick);
     return true;
   }
 }
