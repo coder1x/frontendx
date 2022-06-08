@@ -1,0 +1,13 @@
+mixin tags(options = {})
+  -
+
+    const className = 'tags'
+  div(class = `${className}-wrapper`)
+    span(class = `${className}-header`) Теги
+    ul(class = className) 
+      -let n = 1
+      while n < 20
+        li(class = `${className}__item`)
+          a(class = `${className}__item-link` href = 'http://www.frontendx.ru')= `Тег#${n++}`
+
+

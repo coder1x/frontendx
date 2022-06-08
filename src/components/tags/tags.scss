@@ -1,0 +1,26 @@
+.tags {
+  &-wrapper {
+    padding: 10px 10px 30px 10px;
+  }
+  &-header {
+    @include font-rem(19);
+    font-weight: bolder;
+  }
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+
+  &__item-link {
+    font-weight: normal;
+
+    cursor: pointer;
+    @include font-rem(16);
+    &:focus {
+      outline-offset: 5px;
+    }
+    &:hover {
+      color: $color-grey-hover;
+    }
+  }
+}

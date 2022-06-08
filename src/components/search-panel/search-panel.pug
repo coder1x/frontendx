@@ -1,6 +1,7 @@
 
 include ../archive/archive.pug
 include ../categories/categories.pug
+include ../tags/tags.pug
 
 mixin search-panel()
   -
@@ -42,6 +43,6 @@ mixin search-panel()
             'total': '135',
             'январь': '5',
             'март': '1144',
-          },
-      }})
+          }}})
+        +tags()
 
