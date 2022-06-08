@@ -8,4 +8,4 @@ function renderSearchPanel(className: string) {
   return components;
 }
 
-renderSearchPanel('.blog__search-panel-wrapper');
+renderSearchPanel('.search-panel-wrapper');
