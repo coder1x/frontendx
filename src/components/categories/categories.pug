@@ -1,0 +1,16 @@
+mixin categories(options = {})
+  -
+
+    const className = 'categories'
+
+  ul(class = className) Категории
+    -let n = 1
+    while n < 6
+      li(class = `${className}__item`)
+        a(class = `${className}__item-link` href = 'http://www.frontendx.ru')= `Категория #${n++}`
+        ul(class = `${className}__sub-items`)
+          li(class = `${className}__sub-item`)
+            a(class = `${className}__sub-item-link` href = 'http://www.frontendx.ru') Подкатегория #1
+          li(class = `${className}__sub-item`)
+            a(class = `${className}__sub-item-link` href = 'http://www.frontendx.ru') Подкатегория #2
+

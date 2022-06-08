@@ -11,15 +11,17 @@
 
 $item-padding: 5px 0 5px 10px;
 
-.archive {
+.categories {
   border-bottom: 2px solid $color-grey-light;
   @include font-rem(19);
   padding: 10px 10px 30px 10px;
   font-weight: bolder;
-  &__year {
+  &__item {
     &:first-child {
       margin-top: 10px;
     }
+  }
+  &__item-link {
     margin-left: 5px;
     cursor: pointer;
     @include font-rem(16);
@@ -30,53 +32,22 @@ $item-padding: 5px 0 5px 10px;
     &:focus {
       outline-offset: 5px;
     }
-  }
-
-  &__months {
-    margin-left: 5px;
-    &_visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      border: 0;
-      padding: 0;
-      white-space: nowrap;
-      clip-path: inset(100%);
-      clip: rect(0 0 0 0);
-      overflow: hidden;
-    }
-  }
-
-  &__month {
-    font-weight: normal;
-    border-bottom: 1px solid $color-grey-light;
-    display: flex;
-    @include font-rem(16);
-    @include list-item-style;
-    &::before {
-      @include marker("○", 10px);
-    }
-  }
-
-  &__articles-link {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
     &:hover {
       color: $color-grey-hover;
     }
   }
-  &__text {
-    &-wrapper {
-      display: flex;
-      justify-content: space-between;
+
+  &__sub-item-link {
+    font-weight: normal;
+    border-bottom: 1px solid $color-grey-light;
+    display: flex;
+    @include font-rem(16);
+    padding: 5px 0 5px 30px;
+    &::before {
+      @include marker("○", -50px);
     }
-    &-name {
-      width: 80%;
-    }
-    &-amount {
-      flex-grow: 1;
+    &:hover {
+      color: $color-grey-hover;
     }
   }
 }
