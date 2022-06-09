@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
+/* eslint-disable brace-style */
 import { boundMethod } from 'autobind-decorator';
 
 class SearchPanel {
@@ -21,6 +24,8 @@ class SearchPanel {
 
   headerHeight: number = 0;
 
+  panelTop: number = 0;
+
   constructor(className: string, elem: Element) {
     this.panelWrapper = elem as HTMLElement;
     this.className = className;
@@ -34,6 +39,7 @@ class SearchPanel {
 
     this.panel = this.panelWrapper.querySelector('.search-panel') as HTMLElement;
     this.headerHeight = this.header.offsetHeight;
+    this.panelTop = this.panel.getBoundingClientRect().top;
     this.bindEvent();
     return true;
   }
@@ -77,10 +83,14 @@ class SearchPanel {
     if (!this.panelWrapper || !this.panel) return false;
 
     if (window.pageYOffset > this.scroll) { // крутим вниз
-      setStyle();
+      if (this.panel.style.position === 'sticky') {
+        const top = `${this.panel.getBoundingClientRect().top + window.pageYOffset - this.panelTop}px`;
+        setStyle('absolute', top);
+      }
     } else { // крутим вверх
       const spaceToPageBottom = document.documentElement.clientHeight
         - this.panelWrapper.getBoundingClientRect().bottom;
+
       if (this.panel.getBoundingClientRect().bottom < 0) { // панель еще не видна (первая прокрутка вниз)
         const delta = document.documentElement.clientHeight - spaceToPageBottom;
         const bottom = delta >= 0 ? `${delta}px` : '0px';
