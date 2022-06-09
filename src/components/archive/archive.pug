@@ -9,8 +9,8 @@ mixin archive(options = {})
     const className = 'archive'
   ul(class = className) Архивы
     each year, index in years
-      li(class = `${className}__year` tabindex = 0)
-        span(class = `${className}__text-wrapper`)
+      li(class = `${className}__year` tabindex = -1)
+        span(class = `${className}__text-wrapper` tabindex = 0)
           span(class = `${className}__text-name`)= index
           span(class = `${className}__text-amount`)= year.total
         ul(class = `${className}__months ${className}__months_visually-hidden`)
