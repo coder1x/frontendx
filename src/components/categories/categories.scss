@@ -16,12 +16,10 @@ $item-padding: 5px 0 5px 10px;
   @include font-rem(19);
   padding: 10px 10px 30px 10px;
   font-weight: bolder;
-  &__item {
+  &__year {
     &:first-child {
       margin-top: 10px;
     }
-  }
-  &__item-link {
     margin-left: 5px;
     cursor: pointer;
     @include font-rem(16);
@@ -32,22 +30,41 @@ $item-padding: 5px 0 5px 10px;
     &:focus {
       outline-offset: 5px;
     }
-    &:hover {
-      color: $color-grey-hover;
-    }
   }
 
-  &__sub-item-link {
+  &__months {
+    margin-left: 5px;
+  }
+
+  &__month {
     font-weight: normal;
     border-bottom: 1px solid $color-grey-light;
     display: flex;
     @include font-rem(16);
-    padding: 5px 0 5px 30px;
+    @include list-item-style;
     &::before {
-      @include marker("○", -50px);
+      @include marker("○", 10px);
     }
+  }
+
+  &__articles-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     &:hover {
       color: $color-grey-hover;
+    }
+  }
+  &__text {
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+    &-name {
+      width: 80%;
+    }
+    &-amount {
+      flex-grow: 1;
     }
   }
 }

@@ -1,16 +1,23 @@
 mixin categories(options = {})
   -
+    const {
+      years
+    } = options
+
+    const link = 'http://www.frontendx.ru'
 
     const className = 'categories'
-
   ul(class = className) Категории
-    -let n = 1
-    while n < 6
-      li(class = `${className}__item`)
-        a(class = `${className}__item-link` href = 'http://www.frontendx.ru')= `Категория #${n++}`
-        ul(class = `${className}__sub-items`)
-          li(class = `${className}__sub-item`)
-            a(class = `${className}__sub-item-link` href = 'http://www.frontendx.ru') Подкатегория #1
-          li(class = `${className}__sub-item`)
-            a(class = `${className}__sub-item-link` href = 'http://www.frontendx.ru') Подкатегория #2
+    each year, index in years
+      li(class = `${className}__year`)
+        a(class = `${className}__articles-link` href = link tabindex = '0')
+          span(class = `${className}__text-name`)= index
+          span(class = `${className}__text-amount`)= year.total
+        ul(class = `${className}__months`)
+          each month, index in year
+            if index !='total'
+              li(class = `${className}__month`)
+                a(class = `${className}__articles-link` href = link tabindex = '0')
+                  span(class = `${className}__text-name`)= index
+                  span(class = `${className}__text-amount`)= month
 
