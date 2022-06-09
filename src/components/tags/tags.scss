@@ -1,7 +1,56 @@
 .tags {
+  // overflow: scroll;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
   &-wrapper {
     padding: 10px 10px 30px 10px;
+    position: relative;
   }
+
+  &-list {
+    max-height: 200px;
+    overflow: hidden;
+  }
+
+  &__scrollbar {
+    position: absolute;
+    width: 15px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    &-track {
+      background-color: red;
+      box-sizing: border-box;
+      position: absolute;
+      // border: 1px solid black;
+      top: 15px;
+      bottom: 15px;
+      right: 0;
+      width: 100%;
+    }
+    &-thumb {
+      position: absolute;
+      box-sizing: border-box;
+      height: 15px;
+      width: 15px;
+      background-color: black;
+      cursor: pointer;
+    }
+
+    &-button {
+      height: 15px;
+      background-color: blue;
+      cursor: pointer;
+
+      &_down {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+    }
+  }
+
   &-header {
     @include font-rem(19);
     font-weight: bolder;

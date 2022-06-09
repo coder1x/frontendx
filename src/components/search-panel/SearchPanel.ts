@@ -36,7 +36,7 @@ class SearchPanel {
 
     this.panel = this.panelWrapper.querySelector('.search-panel') as HTMLElement;
     this.headerHeight = this.header.offsetHeight;
-    this.panelTop = this.panel.getBoundingClientRect().top;
+    this.panelTop = this.panel.getBoundingClientRect().top + window.pageYOffset;
     this.bindEvent();
     return true;
   }
