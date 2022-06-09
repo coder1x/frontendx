@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable brace-style */
 import { boundMethod } from 'autobind-decorator';
 
 class SearchPanel {
@@ -84,7 +81,8 @@ class SearchPanel {
 
     if (window.pageYOffset > this.scroll) { // крутим вниз
       if (this.panel.style.position === 'sticky') {
-        const top = `${this.panel.getBoundingClientRect().top + window.pageYOffset - this.panelTop}px`;
+        const top = `${this.panel.getBoundingClientRect().top
+          + window.pageYOffset - this.panelTop}px`;
         setStyle('absolute', top);
       }
     } else { // крутим вверх
@@ -98,7 +96,8 @@ class SearchPanel {
         return true;
       }
 
-      if (this.panel.getBoundingClientRect().top > this.headerHeight) { // панель продолжает выезжать из-под шапки
+      if (this.panel.getBoundingClientRect().top > this.headerHeight
+        && this.panel.style.position === 'absolute') { // панель продолжает выезжать из-под шапки
         setStyle('sticky', `${this.headerHeight}px`);
       }
     }
