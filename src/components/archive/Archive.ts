@@ -13,8 +13,6 @@ class Archive {
   constructor(className: string, elem: Element) {
     this.year = elem as HTMLElement;
     this.className = className.replace('.archive__year', 'archive');
-    console.log('this.className>>>', this.className);
-
     this.init();
   }
 

@@ -44,7 +44,8 @@ class SearchPanel {
   static handlePanelClick(e: MouseEvent) {
     const panel = e.currentTarget as HTMLElement;
     const month = e.target as HTMLElement;
-    const year = month.closest('.archive__year') as HTMLElement;
+    const year = month.closest('.archive__year');
+    if (!year || !panel || !month) return false;
     const monthList = year.querySelector('.archive__months') as HTMLElement;
     const monthListHeight = monthList.offsetHeight;
     const dataHeightAttribute = monthList.getAttribute('data-height');
@@ -60,6 +61,7 @@ class SearchPanel {
       style.bottom = `${bottom - monthListHeight}px`;
       monthList.setAttribute('data-height', String(monthListHeight));
     }
+    return true;
   }
 
   @boundMethod
