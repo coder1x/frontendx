@@ -2,8 +2,8 @@ import SearchPanel from './SearchPanel';
 
 function renderSearchPanel(className: string) {
   const components: SearchPanel[] = [];
-  document.querySelectorAll(className).forEach((elem) => {
-    components.push(new SearchPanel(className, elem));
+  document.querySelectorAll(className).forEach((element) => {
+    components.push(new SearchPanel(element));
   });
   return components;
 }

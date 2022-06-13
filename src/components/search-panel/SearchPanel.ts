@@ -1,35 +1,27 @@
+/* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class SearchPanel {
-  className: string = '';
+  private header: HTMLElement | null = null;
 
-  card: HTMLElement | null = null;
+  private panelWrapper: HTMLElement | null = null;
 
-  header: HTMLElement | null = null;
+  private panel: HTMLElement | null = null;
 
-  link: HTMLElement | null = null;
+  private scroll: number = 0;
 
-  href: string | null = '';
+  private headerHeight: number = 0;
 
-  panelWrapper: HTMLElement | null = null;
+  private panelTop: number = 0;
 
-  panel: HTMLElement | null = null;
+  private archive = 'archive'
 
-  scroll: number = 0;
-
-  delta: number = 0;
-
-  headerHeight: number = 0;
-
-  panelTop: number = 0;
-
-  constructor(className: string, elem: Element) {
-    this.panelWrapper = elem as HTMLElement;
-    this.className = className;
+  constructor(element: Element) {
+    this.panelWrapper = element as HTMLElement;
     this.init();
   }
 
-  init() {
+  private init() {
     this.header = document.querySelector('.header') as HTMLElement;
 
     if (!this.panelWrapper || !this.header) return false;
@@ -41,35 +33,39 @@ class SearchPanel {
     return true;
   }
 
-  static handlePanelClick(e: MouseEvent) {
-    const panel = e.currentTarget as HTMLElement;
-    const month = e.target as HTMLElement;
-    const year = month.closest('.archive__year');
-    if (!year || !panel || !month) return false;
-    const monthList = year.querySelector('.archive__months') as HTMLElement;
+  @boundMethod
+  private handleSearchPanelClick(event: MouseEvent) {
+    const month = event.target as HTMLElement;
+    const year = month.closest(`.${this.archive}__year`);
+    if (!year || !month) return false;
+
+    const monthList = (year.querySelector(`.${this.archive}__months`) as HTMLElement);
     const monthListHeight = monthList.offsetHeight;
-    const dataHeightAttribute = monthList.getAttribute('data-height');
-    const { style } = panel;
-    const bottom = parseFloat(style.bottom);
+    const isListHidden = monthList.classList.contains(`${this.archive}__months_visually-hidden`);
+    const dataHeightAttribute = parseFloat(monthList.getAttribute('data-height') ?? '');
+
+    if (!this.panel) return false;
+    const { style } = this.panel;
+    const distanceToBottom = parseFloat(style.bottom);
+
     // НЕ первый клик по этому месяцу => на нем уже есть атрибут с высотой => берем высоту из атрибута
     if (dataHeightAttribute) {
-      if (!monthList.classList.contains('archive__months_visually-hidden')) {
-        style.bottom = `${bottom - parseFloat(dataHeightAttribute)}px`;
-      } else { style.bottom = `${bottom + parseFloat(dataHeightAttribute)}px`; }
-      // первый клик по этому месяцу => на нем еще нет атрибута с высотой => берем высоту из listHeight и вешаем атрибут с высотой
-    } else {
-      style.bottom = `${bottom - monthListHeight}px`;
-      monthList.setAttribute('data-height', String(monthListHeight));
+      style.bottom = isListHidden ? `${distanceToBottom + dataHeightAttribute}px`
+        : `${distanceToBottom - dataHeightAttribute}px`;
+      return true;
     }
+    // первый клик по этому месяцу => на нем еще нет атрибута с высотой => берем высоту из listHeight и вешаем атрибут с высотой
+    style.bottom = `${distanceToBottom - monthListHeight}px`;
+    monthList.setAttribute('data-height', String(monthListHeight));
     return true;
   }
 
   @boundMethod
-  handleWindowScroll() {
+  private handleWindowScroll() {
     const setStyle = (
-      position: string = 'static',
-      top: string = 'auto',
-      bottom: string = 'auto',
+      position = 'static',
+      top = 'auto',
+      bottom = 'auto',
     ) => {
       if (this.panel) {
         const { style } = this.panel;
@@ -88,11 +84,12 @@ class SearchPanel {
         setStyle('absolute', top);
       }
     } else { // крутим вверх
-      const spaceToPageBottom = document.documentElement.clientHeight
+      const documentHeight = document.documentElement.clientHeight;
+      const spaceToPageBottom = documentHeight
         - this.panelWrapper.getBoundingClientRect().bottom;
 
       if (this.panel.getBoundingClientRect().bottom < 0) { // панель еще не видна (первая прокрутка вниз)
-        const delta = document.documentElement.clientHeight - spaceToPageBottom;
+        const delta = documentHeight - spaceToPageBottom;
         const bottom = delta >= 0 ? `${delta}px` : '0px';
         setStyle('absolute', 'auto', bottom); // панель появилась из-под шапки
         return true;
@@ -108,10 +105,10 @@ class SearchPanel {
     return true;
   }
 
-  bindEvent() {
+  private bindEvent() {
     if (!this.panel) return false;
     window.addEventListener('scroll', this.handleWindowScroll);
-    this.panel.addEventListener('click', SearchPanel.handlePanelClick);
+    this.panel.addEventListener('click', this.handleSearchPanelClick);
     return true;
   }
 }
