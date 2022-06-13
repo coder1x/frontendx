@@ -2,13 +2,13 @@
 import { boundMethod } from 'autobind-decorator';
 
 class Archive {
-  className: string = '';
+  private className: string = '';
 
-  year: HTMLElement | null = null;
+  private year: HTMLElement | null = null;
 
-  months: HTMLElement | null = null;
+  private months: HTMLElement | null = null;
 
-  links: NodeListOf<Element> | null = null;
+  private links: NodeListOf<Element> | null = null;
 
   constructor(className: string, elem: Element) {
     this.year = elem as HTMLElement;
@@ -16,7 +16,7 @@ class Archive {
     this.init();
   }
 
-  init() {
+  private init() {
     if (!this.year) return false;
     this.months = this.year.querySelector(`.${this.className}__months`);
     this.links = this.year.querySelectorAll(`.${this.className}__articles-link`);
@@ -25,62 +25,63 @@ class Archive {
     return true;
   }
 
-  static handleMonthsMouseDown(e: MouseEvent) {
-    e.preventDefault();
+  private static handleMonthsMouseDown(event: MouseEvent) {
+    event.preventDefault();
   }
 
   @boundMethod
-  handleMonthsClick() {
+  private handleMonthsClick() {
     this.toggleList();
   }
 
   @boundMethod
-  handleMonthsKeyDown(e: KeyboardEvent) {
-    const currentTarget = e.currentTarget as HTMLElement;
-    if (e.code === 'Escape') {
+  private handleMonthsKeyDown(event: KeyboardEvent) {
+    const currentTarget = event.currentTarget as HTMLElement;
+    if (event.code === 'Escape') {
       this.closeList();
       this.toggleLinksAvailability();
-      currentTarget.focus();
+      const month = currentTarget.querySelector(`.${this.className}__text-wrapper`) as HTMLElement;
+      month.focus();
     }
 
-    const target = e.target as HTMLElement;
+    const target = event.target as HTMLElement;
     const isLink = target.classList.contains(`${this.className}__articles-link`);
-    const condition = !isLink && (e.code === 'Enter' || e.code === 'Space');
+    const condition = !isLink && (event.code === 'Enter' || event.code === 'Space');
 
     if (condition) {
-      e.preventDefault();
+      event.preventDefault();
       this.toggleList();
       this.toggleLinksAvailability();
     }
 
-    if (isLink && e.code === 'Space') {
-      e.preventDefault();
+    if (isLink && event.code === 'Space') {
+      event.preventDefault();
     }
   }
 
-  toggleList() {
+  private toggleList() {
     if (!this.months) return false;
     this.months.classList.toggle(`${this.className}__months_visually-hidden`);
     return true;
   }
 
-  closeList() {
+  private closeList() {
     if (!this.months) return false;
     this.months.classList.add(`${this.className}__months_visually-hidden`);
     return true;
   }
 
-  toggleLinksAvailability() {
-    if (this.months && this.links) {
-      if (this.months.classList.contains(`${this.className}__months_visually-hidden`)) {
-        this.links.forEach((link) => link.setAttribute('tabindex', '-1'));
-      } else {
-        this.links.forEach((link) => link.removeAttribute('tabindex'));
-      }
+  private toggleLinksAvailability() {
+    if (!this.months || !this.links) return false;
+    if (this.months.classList.contains(`${this.className}__months_visually-hidden`)) {
+      this.links.forEach((link) => link.setAttribute('tabindex', '-1'));
+    } else {
+      this.links.forEach((link) => link.removeAttribute('tabindex'));
     }
+    return true;
   }
 
-  bindEvent() {
+  private bindEvent() {
     if (!this.year) return false;
     this.year.addEventListener('mousedown', Archive.handleMonthsMouseDown);
     this.year.addEventListener('click', this.handleMonthsClick);
