@@ -58,7 +58,6 @@ class Tags {
 
   bindEvent() {
     if (!this.track) return false;
-
     this.track.addEventListener('click', this.handleScrollbarTrackClick);
     return true;
   }
