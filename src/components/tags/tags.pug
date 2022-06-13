@@ -9,10 +9,10 @@ mixin tags(options = {})
         div(class = `${className}__scrollbar-thumb`)
       div(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
     span(class = `${className}-header`) Теги
-    div(class = `${className}-list`) 
+    div(class = `${className}-frame`) 
       ul(class = className) 
         -let n = 1
-        while n < 60
+        while n < 1160
           li(class = `${className}__item`)
             a(class = `${className}__item-link` href = 'http://www.frontendx.ru')= `Тег#${n++}`
 
