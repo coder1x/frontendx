@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class SearchPanel {
