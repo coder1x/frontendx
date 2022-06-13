@@ -1,9 +1,8 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
+  test: boolean = false;
+
   className: string = '';
 
   wrapper: HTMLElement | null = null;
@@ -18,6 +17,14 @@ class Tags {
 
   thumb: HTMLElement | null = null;
 
+  buttonDown: HTMLElement | null = null;
+
+  shiftY: number = 0;
+
+  trackHeight: number = 0;
+
+  thumbHeight: number = 0;
+
   constructor(className: string, elem: Element) {
     this.wrapper = elem as HTMLElement;
     this.className = className.replace('.tags-wrapper', 'tags');
@@ -31,35 +38,89 @@ class Tags {
     this.tags = this.wrapper.querySelector(`.${this.className}`);
     this.frame = this.wrapper.querySelector(`.${this.className}-frame`);
     this.thumb = this.wrapper.querySelector(`.${this.className}__scrollbar-thumb`);
-    this.bindEvent();
+    this.buttonDown = this.wrapper.querySelector(`.${this.className}__scrollbar-button_down`);
+    this.dragControlMouse();
 
     return true;
   }
 
   renderThumb() {
-    if (!this.track || !this.tags || !this.frame || !this.thumb) return false;
-    const trackHeight = this.track.offsetHeight;
+    if (!this.track || !this.tags || !this.frame || !this.thumb || !this.buttonDown) return false;
+    this.trackHeight = this.track.offsetHeight;
     const tagsHeight = this.tags.offsetHeight;
     const frameHeight = this.frame.offsetHeight;
     /* высота элемента tags относится к высоте frame так же, как track к thumb => вычислим высоту thumb (ползунка) */
-    const thumbHeight = (frameHeight * trackHeight) / tagsHeight;
-    this.thumb.style.height = thumbHeight > 20 ? `${thumbHeight}px` : '20px';
+    const thumbHeight = (frameHeight * this.trackHeight) / tagsHeight;
+    if (thumbHeight <= 20) {
+      this.test = true;
+    }
+
+    this.thumbHeight = thumbHeight > 20 ? thumbHeight : 20;
+    this.thumb.style.height = `${this.thumbHeight}px`;
+
     return true;
   }
 
+  // Вешаем обработчики события нажатия мышью на ползунке (захвата ползунка) и перемещения ползунка
   @boundMethod
-  handleScrollbarTrackClick(e: MouseEvent) {
-    const currentTarget = e.currentTarget as HTMLElement;
-    if (!this.tags) return false;
-    console.log(this.tags.offsetHeight);
-    this.tags.style.transform = 'translateY(-150px)';
-    return true;
-  }
+  private dragControlMouse() {
+    const handlePointerStart = (event: PointerEvent) => {
+      event.preventDefault();
+      const { target } = event;// as HTMLElement;
+      if (!(target instanceof HTMLElement)) {
+        throw new Error('Cannot handle move outside of DOM');
+      }
+      if (target.classList.contains(`${this.className}__scrollbar-thumb`)) {
+        target.classList.add(`${this.className}__scrollbar-thumb_grabbing`);
+      }
+      if (this.thumb) {
+        this.shiftY = event.clientY - this.thumb.getBoundingClientRect().top;
+      }
+      if (target.classList.contains(`${this.className}__scrollbar-thumb`)) {
+        const handlePointerMove = (innerEvent: PointerEvent) => {
+          if (this.thumb && this.track) {
+            const pointerTopPosition = innerEvent.clientY
+              - this.track.getBoundingClientRect().top - this.shiftY;
+            const trackAreaHeight = this.trackHeight - this.thumbHeight;
 
-  bindEvent() {
-    if (!this.track) return false;
-    this.track.addEventListener('click', this.handleScrollbarTrackClick);
-    return true;
+            if (pointerTopPosition < 0) {
+              this.thumb.style.top = '0px';
+              return true;
+            }
+
+            if (pointerTopPosition > trackAreaHeight) {
+              this.thumb.style.top = `${trackAreaHeight}px`;
+              return true;
+            }
+
+            this.thumb.style.top = `${pointerTopPosition}px`;
+            return true;
+          }
+          return true;
+        };
+
+        const handlePointerUp = () => {
+          target.classList.remove(`${this.className}__scrollbar-thumb_grabbing`);
+          target
+            .removeEventListener('pointermove', handlePointerMove);
+          target
+            .removeEventListener('pointerup', handlePointerUp);
+        };
+        /* elem.setPointerCapture(pointerId) – привязывает события с данным pointerId к elem.
+        После такого вызова все события указателя с таким pointerId будут иметь elem в
+        качестве целевого элемента (как будто произошли над elem), вне зависимости от того,
+        где в документе они произошли. */
+        target.setPointerCapture(event.pointerId);
+        target.addEventListener('pointermove', handlePointerMove);
+        target.addEventListener('pointerup', handlePointerUp);
+      }
+    };
+    const handleDragSelectStart = () => false;
+    if (this.thumb) {
+      this.thumb.addEventListener('pointerdown', handlePointerStart);
+      this.thumb.addEventListener('dragstart', handleDragSelectStart);
+      this.thumb.addEventListener('selectstart', handleDragSelectStart);
+    }
   }
 }
 
