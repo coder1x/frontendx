@@ -3,13 +3,14 @@ mixin tags(options = {})
 
     const className = 'tags'
   div(class = `${className}-wrapper`)
-    div(class = `${className}__scrollbar`)
-      div(class = `${className}__scrollbar-button ${className}__scrollbar-button_up`)
-      div(class = `${className}__scrollbar-track`)
-        div(class = `${className}__scrollbar-thumb`)
-      div(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
+
     span(class = `${className}-header`) Теги
     div(class = `${className}-frame`) 
+      div(class = `${className}__scrollbar`)
+        div(class = `${className}__scrollbar-button ${className}__scrollbar-button_up`)
+        div(class = `${className}__scrollbar-track`)
+          div(class = `${className}__scrollbar-thumb`)
+        div(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
       ul(class = className) 
         -let n = 1
         while n < 1160

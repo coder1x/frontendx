@@ -1,35 +1,37 @@
 .tags {
-  // overflow: scroll;
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
+  position: relative;
+  z-index: 1;
+  background-color: salmon;
 
   &-wrapper {
     padding: 10px 10px 30px 10px;
-    position: relative;
   }
 
   &-frame {
+    position: relative;
     background-color: lightgreen;
     max-height: 250px;
     overflow: hidden;
   }
 
   &__scrollbar {
+    z-index: 10;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 15px;
     top: 0;
     bottom: 0;
     right: 0;
     &-track {
       background-color: red;
-      box-sizing: border-box;
-      position: absolute;
-      // border: 1px solid black;
-      top: 15px;
-      bottom: 15px;
-      right: 0;
-      width: 100%;
+      flex-grow: 1;
+      // box-sizing: border-box;
+      position: relative;
+      // top: 15px;
+      // bottom: 15px;
+      // right: 0;
+      // width: 100%;
     }
     &-thumb {
       position: absolute;
@@ -38,6 +40,9 @@
       width: 15px;
       background-color: black;
       cursor: pointer;
+      &_grabbing {
+        cursor: grabbing;
+      }
     }
 
     &-button {
@@ -46,9 +51,10 @@
       cursor: pointer;
 
       &_down {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+        background-color: green;
+        // position: absolute;
+        // bottom: 0;
+        // width: 100%;
       }
     }
   }

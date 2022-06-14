@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
@@ -25,6 +26,12 @@ class Tags {
 
   thumbHeight: number = 0;
 
+  tagsHeight: number = 0;
+
+  frameHeight: number = 0;
+
+  trackAreaHeight: number = 0;
+
   constructor(className: string, elem: Element) {
     this.wrapper = elem as HTMLElement;
     this.className = className.replace('.tags-wrapper', 'tags');
@@ -47,17 +54,16 @@ class Tags {
   renderThumb() {
     if (!this.track || !this.tags || !this.frame || !this.thumb || !this.buttonDown) return false;
     this.trackHeight = this.track.offsetHeight;
-    const tagsHeight = this.tags.offsetHeight;
-    const frameHeight = this.frame.offsetHeight;
+    this.tagsHeight = this.tags.offsetHeight;
+    console.log('this.tagsHeight>>>', this.tagsHeight);
+
+    this.frameHeight = this.frame.offsetHeight;
+
     /* высота элемента tags относится к высоте frame так же, как track к thumb => вычислим высоту thumb (ползунка) */
-    const thumbHeight = (frameHeight * this.trackHeight) / tagsHeight;
-    if (thumbHeight <= 20) {
-      this.test = true;
-    }
-
-    this.thumbHeight = thumbHeight > 20 ? thumbHeight : 20;
+    const thumbHeightCalc = (this.frameHeight * this.trackHeight) / this.tagsHeight;
+    this.thumbHeight = thumbHeightCalc > 20 ? thumbHeightCalc : 20;
     this.thumb.style.height = `${this.thumbHeight}px`;
-
+    this.trackAreaHeight = this.trackHeight - this.thumbHeight;
     return true;
   }
 
@@ -70,50 +76,58 @@ class Tags {
       if (!(target instanceof HTMLElement)) {
         throw new Error('Cannot handle move outside of DOM');
       }
-      if (target.classList.contains(`${this.className}__scrollbar-thumb`)) {
-        target.classList.add(`${this.className}__scrollbar-thumb_grabbing`);
-      }
+      target.classList.add(`${this.className}__scrollbar-thumb_grabbing`);
+
       if (this.thumb) {
         this.shiftY = event.clientY - this.thumb.getBoundingClientRect().top;
       }
-      if (target.classList.contains(`${this.className}__scrollbar-thumb`)) {
-        const handlePointerMove = (innerEvent: PointerEvent) => {
-          if (this.thumb && this.track) {
-            const pointerTopPosition = innerEvent.clientY
-              - this.track.getBoundingClientRect().top - this.shiftY;
-            const trackAreaHeight = this.trackHeight - this.thumbHeight;
+      const handlePointerMove = (innerEvent: PointerEvent) => {
+        if (this.thumb && this.track) {
+          const pointerTopPosition = innerEvent.clientY
+            - this.track.getBoundingClientRect().top - this.shiftY;
 
-            if (pointerTopPosition < 0) {
-              this.thumb.style.top = '0px';
-              return true;
+          if (pointerTopPosition < 0) {
+            this.thumb.style.top = '0px';
+            if (this.tags) {
+              this.tags.style.transform = 'translateY(0)';
             }
-
-            if (pointerTopPosition > trackAreaHeight) {
-              this.thumb.style.top = `${trackAreaHeight}px`;
-              return true;
-            }
-
-            this.thumb.style.top = `${pointerTopPosition}px`;
             return true;
           }
-          return true;
-        };
+          if (pointerTopPosition > this.trackAreaHeight) {
+            this.thumb.style.top = `${this.trackAreaHeight}px`;
+            if (this.tags) {
+              this.tags.style.transform = 'translateY(100%)';
+            }
+            return true;
+          }
+          this.thumb.style.top = `${pointerTopPosition}px`;
+          const scrollDistance = (pointerTopPosition * 100) / this.trackAreaHeight;
+          if (this.tags) {
+            this.tags.style.transform = `translateY(-${scrollDistance}%)`;
+          }
 
-        const handlePointerUp = () => {
-          target.classList.remove(`${this.className}__scrollbar-thumb_grabbing`);
-          target
-            .removeEventListener('pointermove', handlePointerMove);
-          target
-            .removeEventListener('pointerup', handlePointerUp);
-        };
-        /* elem.setPointerCapture(pointerId) – привязывает события с данным pointerId к elem.
-        После такого вызова все события указателя с таким pointerId будут иметь elem в
-        качестве целевого элемента (как будто произошли над elem), вне зависимости от того,
-        где в документе они произошли. */
-        target.setPointerCapture(event.pointerId);
-        target.addEventListener('pointermove', handlePointerMove);
-        target.addEventListener('pointerup', handlePointerUp);
-      }
+          return true;
+        }
+        return true;
+      };
+
+      const handlePointerUp = () => {
+        console.log('handlePointerUp');
+
+        target.classList.remove(`${this.className}__scrollbar-thumb_grabbing`);
+        target
+          .removeEventListener('pointermove', handlePointerMove);
+        target
+          .removeEventListener('pointerup', handlePointerUp);
+      };
+
+      /* elem.setPointerCapture(pointerId) – привязывает события с данным pointerId к elem.
+  После такого вызова все события указателя с таким pointerId будут иметь elem в
+  качестве целевого элемента (как будто произошли над elem), вне зависимости от того,
+  где в документе они произошли. */
+      target.setPointerCapture(event.pointerId);
+      target.addEventListener('pointermove', handlePointerMove);
+      target.addEventListener('pointerup', handlePointerUp);
     };
     const handleDragSelectStart = () => false;
     if (this.thumb) {
