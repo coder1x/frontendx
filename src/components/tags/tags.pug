@@ -2,16 +2,16 @@ mixin tags(options = {})
   -
 
     const className = 'tags'
-  div(class = `${className}-wrapper`)
+  div(class = `${className}`)
 
-    span(class = `${className}-header`) Теги
-    div(class = `${className}-frame`) 
+    span(class = `${className}__header`) Теги
+    div(class = `${className}__frame`) 
       div(class = `${className}__scrollbar`)
         div(class = `${className}__scrollbar-button ${className}__scrollbar-button_up`)
         div(class = `${className}__scrollbar-track`)
           div(class = `${className}__scrollbar-thumb`)
         div(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
-      ul(class = className) 
+      ul(class = `${className}__list`) 
         -let n = 1
         while n < 1160
           li(class = `${className}__item`)

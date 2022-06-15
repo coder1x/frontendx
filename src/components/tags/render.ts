@@ -8,4 +8,4 @@ function renderCheckboxList(className: string) {
   return components;
 }
 
-renderCheckboxList('.tags-wrapper');
+renderCheckboxList('.tags');

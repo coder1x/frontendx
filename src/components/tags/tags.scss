@@ -1,17 +1,26 @@
 .tags {
-  position: relative;
-  z-index: 1;
-  background-color: salmon;
+  padding: 10px 10px 30px 10px;
 
-  &-wrapper {
-    padding: 10px 10px 30px 10px;
+  &__header {
+    @include font-rem(19);
+    font-weight: bolder;
   }
 
-  &-frame {
+  &__frame {
+    margin-top: 10px;
     position: relative;
     background-color: lightgreen;
     max-height: 250px;
     overflow: hidden;
+  }
+  &__list {
+    position: relative;
+    z-index: 1;
+    background-color: salmon;
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
   }
 
   &__scrollbar {
@@ -23,15 +32,11 @@
     top: 0;
     bottom: 0;
     right: 0;
+    touch-action: none;
     &-track {
       background-color: red;
       flex-grow: 1;
-      // box-sizing: border-box;
       position: relative;
-      // top: 15px;
-      // bottom: 15px;
-      // right: 0;
-      // width: 100%;
     }
     &-thumb {
       position: absolute;
@@ -40,9 +45,6 @@
       width: 15px;
       background-color: black;
       cursor: pointer;
-      &_grabbing {
-        cursor: grabbing;
-      }
     }
 
     &-button {
@@ -58,15 +60,6 @@
       }
     }
   }
-
-  &-header {
-    @include font-rem(19);
-    font-weight: bolder;
-  }
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  gap: 10px;
 
   &__item-link {
     font-weight: normal;
