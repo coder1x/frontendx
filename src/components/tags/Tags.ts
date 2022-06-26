@@ -109,6 +109,8 @@ class Tags {
     const yEnd = e.touches[0].clientY;
     const yDelta = this.yStart - yEnd;
     const delta = yDelta - this.yDeltaPrevious;
+    const deltaPercent = (delta * 100) / this.tagsHeight;
+    console.log('this.tagsScrollLimit', this.tagsScrollLimit);
     this.yDeltaPrevious = yDelta;
     if (yDelta > 0 && this.tags) {
       const transformValue = this.tags.style.transform;
@@ -116,15 +118,16 @@ class Tags {
       if (!transformValue) {
         console.log('yDelta > 0, тянем вверх');
         // установим transform = translateY
-        this.tags.style.transform = `translateY(-${yDelta}px)`;
+        this.tags.style.transform = 'translateY(0%)';
       } else {
         /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует (мы его устанавливаем двумя строками выше) */
         const currentShift = transformValue.match(/(?<=translateY\()[0-9-.]+/) as Array<any>[0];
-        const isLimitReached = Math.abs(parseFloat(currentShift) - delta)
-          >= this.tagsHeight - this.frameHeight;
+        const isLimitReached = Math.abs(parseFloat(currentShift) - deltaPercent)
+          >= this.tagsScrollLimit;
         if (delta > 0 && !isLimitReached) {
-          const test = parseFloat(currentShift) - delta;
-          this.tags.style.transform = `translateY(${parseFloat(currentShift) - delta}px)`;
+          const test = parseFloat(currentShift) - deltaPercent;
+          console.log('test', test);
+          this.tags.style.transform = `translateY(${parseFloat(currentShift) - deltaPercent}%)`;
         }
       }
     } else if (yDelta <= 0 && this.tags) {
@@ -133,7 +136,7 @@ class Tags {
       /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует (мы его устанавливаем, ) */
       const currentShift = transformValue.match(/(?<=translateY\()[0-9-.]+/) as Array<any>[0];
       if (delta < 0 && parseFloat(currentShift) < 0) {
-        this.tags.style.transform = `translateY(${parseFloat(currentShift) - delta}px)`;
+        this.tags.style.transform = `translateY(${parseFloat(currentShift) - deltaPercent}%)`;
       }
     }
   }
