@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
@@ -30,6 +32,10 @@ class Tags {
   private trackAreaHeight: number = 0;
 
   private tagsScrollLimit: number = 0;
+
+  private yStart: number | null = null;
+
+  private yDeltaPrevious: number = 0;
 
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
@@ -70,6 +76,75 @@ class Tags {
     if (this.thumb) {
       this.thumb.addEventListener('pointerdown', this.handleThumbPointerDown);
     }
+
+    if (this.tags) {
+      /* элемент с overflow:hidden не может сгенерировать onscroll */
+      this.tags.addEventListener('wheel', this.handleTagsScroll);
+
+      this.tags
+        .addEventListener('touchstart', this.handleTouchStart);
+      this.tags
+        .addEventListener('touchmove', this.handleTouchMove);
+      this.tags
+        .addEventListener('touchend', this.handleTouchEnd);
+    }
+  }
+
+  @boundMethod
+  private handleTouchStart(e: TouchEvent) {
+    this.yStart = e.touches[0].clientY;
+  }
+
+  @boundMethod
+  private handleTouchEnd(event: TouchEvent) {
+    console.log('<<<-----------------TouchEnd----------------->>>');
+  }
+
+  @boundMethod
+  private handleTouchMove(e: TouchEvent) {
+    e.preventDefault();
+    if (!this.yStart) {
+      return;
+    }
+    const yEnd = e.touches[0].clientY;
+    const yDelta = this.yStart - yEnd;
+    const delta = yDelta - this.yDeltaPrevious;
+    this.yDeltaPrevious = yDelta;
+    if (yDelta > 0 && this.tags) {
+      const transformValue = this.tags.style.transform;
+      // transform у элемента отсутствует при самом первом скролле
+      if (!transformValue) {
+        console.log('yDelta > 0, тянем вверх');
+        // установим transform = translateY
+        this.tags.style.transform = `translateY(-${yDelta}px)`;
+      } else {
+        /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует (мы его устанавливаем двумя строками выше) */
+        const currentShift = transformValue.match(/(?<=translateY\()[0-9-.]+/) as Array<any>[0];
+        const isLimitReached = Math.abs(parseFloat(currentShift) - delta)
+          >= this.tagsHeight - this.frameHeight;
+        if (delta > 0 && !isLimitReached) {
+          const test = parseFloat(currentShift) - delta;
+          this.tags.style.transform = `translateY(${parseFloat(currentShift) - delta}px)`;
+        }
+      }
+    } else if (yDelta <= 0 && this.tags) {
+      console.log('yDelta <= 0, тянем вниз');
+      const transformValue = this.tags.style.transform;
+      /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует (мы его устанавливаем, ) */
+      const currentShift = transformValue.match(/(?<=translateY\()[0-9-.]+/) as Array<any>[0];
+      if (delta < 0 && parseFloat(currentShift) < 0) {
+        this.tags.style.transform = `translateY(${parseFloat(currentShift) - delta}px)`;
+      }
+    }
+  }
+
+  @boundMethod
+  private handleTagsScroll(event: Event) {
+    event.preventDefault();
+  }
+
+  @boundMethod
+  private handleTagsPointerMove(event: PointerEvent) {
   }
 
   @boundMethod
@@ -99,7 +174,7 @@ class Tags {
 
   @boundMethod
   private moveThumb(coordinateY: number) {
-    const setStyle = (thumbTop = '0px', tagsTransform = 'translateY(0)') => {
+    const setStyle = (thumbTop = '0px', tagsTransform = 'translateY(0%)') => {
       if (!this.thumb || !this.tags) return false;
       this.thumb.style.top = thumbTop;
       this.tags.style.transform = tagsTransform;
