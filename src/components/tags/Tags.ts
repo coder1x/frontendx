@@ -129,6 +129,9 @@ class Tags {
           console.log('test', test);
           this.tags.style.transform = `translateY(${parseFloat(currentShift) - deltaPercent}%)`;
         }
+        if (this.thumb) {
+          this.thumb.style.top = `${Math.abs(parseFloat(currentShift) - deltaPercent)}%`;
+        }
       }
     } else if (yDelta <= 0 && this.tags) {
       console.log('yDelta <= 0, тянем вниз');
@@ -137,6 +140,9 @@ class Tags {
       const currentShift = transformValue.match(/(?<=translateY\()[0-9-.]+/) as Array<any>[0];
       if (delta < 0 && parseFloat(currentShift) < 0) {
         this.tags.style.transform = `translateY(${parseFloat(currentShift) - deltaPercent}%)`;
+      }
+      if (this.thumb) {
+        this.thumb.style.top = `${Math.abs(parseFloat(currentShift) - deltaPercent)}%`;
       }
     }
   }
