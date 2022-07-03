@@ -1,11 +1,12 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
-  private className: string = '';
+  private className: string;
 
-  private wrapper: HTMLElement | null = null;
+  private wrapper: HTMLElement | null;
 
   private track: HTMLElement | null = null;
 
@@ -32,6 +33,8 @@ class Tags {
   private yStart: number | null = null;
 
   private yDeltaPrevious: number = 0;
+
+  private isMouseOnFrame: boolean = false;
 
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
@@ -75,12 +78,13 @@ class Tags {
     if (this.tags) {
       /* элемент с overflow:hidden не может сгенерировать событие scroll, поэтому используем событие wheel */
       this.tags.addEventListener('wheel', this.handleTagsWheel);
-
-      this.tags
-        .addEventListener('touchstart', this.handleTagsTouchStart);
-      this.tags
-        .addEventListener('touchmove', this.handleTagsTouchMove);
+      this.tags.addEventListener('touchstart', this.handleTagsTouchStart);
+      this.tags.addEventListener('touchmove', this.handleTagsTouchMove);
     }
+
+    window.addEventListener('mouseover', this.handleWindowMouseOver);
+    const body = document.querySelector('body') as HTMLElement;
+    window.addEventListener('wheel', this.handleWindowWheel, { passive: false });
   }
 
   @boundMethod
@@ -115,9 +119,38 @@ class Tags {
   }
 
   @boundMethod
-  private handleTagsWheel(event: Event) {
-    event.preventDefault();
-    console.log(event);
+  private handleWindowWheel(event: Event) {
+    if (this.isMouseOnFrame) {
+      event.preventDefault();
+    }
+  }
+
+  @boundMethod
+  private handleWindowMouseOver(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
+    this.isMouseOnFrame = !!target.closest(`.${this.className}__frame`);
+  }
+
+  @boundMethod
+  private handleTagsWheel(event: WheelEvent) {
+    if (!this.tags) {
+      return;
+    }
+    const yDelta = event.deltaY;
+    const deltaPercent = (yDelta * 100) / this.tagsHeight;
+    const transformValue = this.tags.style.transform ? this.tags.style.transform : 'translateY(0%)';
+
+    if (yDelta > 0) { // скроллим вверх
+      // transform у элемента отсутствует при самом первом скролле, установим его
+      if (!transformValue) {
+        this.tags.style.transform = 'translateY(0%)';
+      }
+      console.log('deltaPercent>>>', deltaPercent);
+      this.moveTagsList(transformValue, deltaPercent);
+    } else { // скроллим вниз
+      this.moveTagsList(transformValue, deltaPercent, false);
+    }
   }
 
   @boundMethod
@@ -180,11 +213,18 @@ class Tags {
       ? Math.abs(parseFloat(currentShift) - delta)
       >= this.tagsScrollLimit : parseFloat(currentShift) > 0;
 
+    console.log('currentShift>>>', currentShift);
+    console.log('delta>>>', delta);
+    console.log('Math.abs(parseFloat(currentShift) - delta)>>>', Math.abs(parseFloat(currentShift) - delta));
+    console.log('this.tagsScrollLimit>>>', this.tagsScrollLimit);
+
     if (!isLimitReached) {
       const shiftCalculated = parseFloat(currentShift) - delta;
       const shift = shiftCalculated > -0.05 ? 0 : shiftCalculated;
 
       this.setStyle(`${Math.abs(shift)}%`, `translateY(${shift}%)`);
+    } else if (isMovingUp) {
+      this.setStyle(`${Math.abs(this.tagsScrollLimit)}%`, `translateY(-${this.tagsScrollLimit}%)`);
     }
   }
 
