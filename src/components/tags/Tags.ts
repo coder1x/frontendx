@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
@@ -30,11 +29,15 @@ class Tags {
 
   private tagsScrollLimit: number = 0;
 
-  private yStart: number | null = null;
+  private startY: number | null = null;
 
-  private yDeltaPrevious: number = 0;
+  private deltaPrevious: number = 0;
 
   private isMouseOnFrame: boolean = false;
+
+  private isMovementUp: boolean = false;
+
+  private maxPercentage: number = 0;
 
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
@@ -64,6 +67,8 @@ class Tags {
 
     /* высота элемента tags относится к высоте frame так же, как track к thumb => вычислим высоту thumb (ползунка) */
     const thumbHeightCalc = (this.frameHeight * this.trackHeight) / this.tagsHeight;
+    this.maxPercentage = 100 - (this.frameHeight * 100) / this.tagsHeight;
+
     this.thumbHeight = thumbHeightCalc > 20 ? thumbHeightCalc : 20;
     this.thumb.style.height = `${this.thumbHeight}px`;
     this.trackAreaHeight = this.trackHeight - this.thumbHeight;
@@ -76,7 +81,6 @@ class Tags {
     }
 
     if (this.tags) {
-      /* элемент с overflow:hidden не может сгенерировать событие scroll, поэтому используем событие wheel */
       this.tags.addEventListener('wheel', this.handleTagsWheel);
       this.tags.addEventListener('touchstart', this.handleTagsTouchStart);
       this.tags.addEventListener('touchmove', this.handleTagsTouchMove);
@@ -89,27 +93,34 @@ class Tags {
 
   @boundMethod
   private handleTagsTouchStart(event: TouchEvent) {
-    this.yStart = event.touches[0].clientY;
+    this.startY = event.touches[0].clientY;
   }
 
   @boundMethod
   private handleTagsTouchMove(event: TouchEvent) {
     event.preventDefault();
-    if (!this.yStart || !this.tags) {
+    if (!this.startY || !this.tags) {
       return;
     }
-    const yEnd = event.touches[0].clientY;
-    const yDelta = this.yStart - yEnd;
-    const deltaCurrent = yDelta - this.yDeltaPrevious;
+    const endY = event.touches[0].clientY;
+    const deltaY = this.startY - endY;
+
+    const isUp = deltaY > 0;
+
+    const deltaCurrent = deltaY - this.deltaPrevious;
     const deltaCurrentPercent = (deltaCurrent * 100) / this.tagsHeight;
-    this.yDeltaPrevious = yDelta;
+    this.deltaPrevious = deltaY;
     const transformValue = this.tags.style.transform;
 
-    if (yDelta > 0) { // скроллим вверх
-      // transform у элемента отсутствует при самом первом скролле, установим его
-      if (!transformValue) {
-        this.tags.style.transform = 'translateY(0%)';
-      }
+    /* При изменении направления движения (вверх / вниз) значение deltaCurrent может стать очень большим
+    (в зависимости от того, насколько далеко провели пальцем при последнем скролле),
+     что ведет к неправильному расчету. Поэтому делаем return при первом срабатывании после изменения направления */
+    if (this.isMovementUp !== isUp) {
+      this.isMovementUp = isUp;
+      return;
+    }
+
+    if (deltaY > 0) { // скроллим вверх
       if (deltaCurrent > 0) {
         this.moveTagsList(transformValue, deltaCurrentPercent);
       }
@@ -128,7 +139,6 @@ class Tags {
   @boundMethod
   private handleWindowMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
-
     this.isMouseOnFrame = !!target.closest(`.${this.className}__frame`);
   }
 
@@ -137,16 +147,11 @@ class Tags {
     if (!this.tags) {
       return;
     }
-    const yDelta = event.deltaY;
-    const deltaPercent = (yDelta * 100) / this.tagsHeight;
-    const transformValue = this.tags.style.transform ? this.tags.style.transform : 'translateY(0%)';
+    const { deltaY } = event;
+    const deltaPercent = (deltaY * 100) / this.tagsHeight;
+    const transformValue = this.tags.style.transform;
 
-    if (yDelta > 0) { // скроллим вверх
-      // transform у элемента отсутствует при самом первом скролле, установим его
-      if (!transformValue) {
-        this.tags.style.transform = 'translateY(0%)';
-      }
-      console.log('deltaPercent>>>', deltaPercent);
+    if (deltaY > 0) { // скроллим вверх
       this.moveTagsList(transformValue, deltaPercent);
     } else { // скроллим вниз
       this.moveTagsList(transformValue, deltaPercent, false);
@@ -183,7 +188,6 @@ class Tags {
 
     const pointerTopPosition = coordinateY
       - this.track.getBoundingClientRect().top - this.shiftY;
-
     if (pointerTopPosition < 0) {
       this.setStyle();
       return true;
@@ -194,7 +198,9 @@ class Tags {
       return true;
     }
 
-    const scrollDistanceFull = (pointerTopPosition * 100) / this.trackAreaHeight; // длина прокрутки
+    const scrollDistanceFull = (pointerTopPosition * 100)
+      / (this.trackAreaHeight + this.thumbHeight); // длина прокрутки
+
     // проверим, что мы не прокрутили лишнего (не начало появляться пустое пространство под списком тегов)
     const scrollDistance = scrollDistanceFull > this.tagsScrollLimit
       ? this.tagsScrollLimit : scrollDistanceFull;
@@ -205,26 +211,23 @@ class Tags {
   moveTagsList(transform: string, delta: number, isMovingUp = true) {
     if (!this.thumb || !this.tags) return;
 
-    /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует (мы его устанавливаем, если его нет) */
+    /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует */
     const currentShift = (transform.match(/(?<=translateY\()[0-9-.]+/) as Array<any>)[0];
+    const newShift = parseFloat(currentShift) - delta;
 
     /* в зависимости от направления движения, проверим, что мы не перешли верхнюю / нижнюю границу */
-    const isLimitReached = isMovingUp === true
-      ? Math.abs(parseFloat(currentShift) - delta)
-      >= this.tagsScrollLimit : parseFloat(currentShift) > 0;
+    const isLimitReached = isMovingUp ? Math.abs(newShift) > this.tagsScrollLimit
+      : parseFloat(currentShift) > 0;
 
-    console.log('currentShift>>>', currentShift);
-    console.log('delta>>>', delta);
-    console.log('Math.abs(parseFloat(currentShift) - delta)>>>', Math.abs(parseFloat(currentShift) - delta));
-    console.log('this.tagsScrollLimit>>>', this.tagsScrollLimit);
+    const shiftCalculated = newShift;
+    const shift = shiftCalculated > -0.001 ? 0 : shiftCalculated;
+    const pointerTopPosition = Math.abs(((Math.abs(shift)) * this.trackAreaHeight)
+      / this.maxPercentage);
 
     if (!isLimitReached) {
-      const shiftCalculated = parseFloat(currentShift) - delta;
-      const shift = shiftCalculated > -0.05 ? 0 : shiftCalculated;
-
-      this.setStyle(`${Math.abs(shift)}%`, `translateY(${shift}%)`);
+      this.setStyle(`${Math.abs(pointerTopPosition)}px`, `translateY(${shift}%)`);
     } else if (isMovingUp) {
-      this.setStyle(`${Math.abs(this.tagsScrollLimit)}%`, `translateY(-${this.tagsScrollLimit}%)`);
+      this.setStyle(`${this.trackAreaHeight}px`, `translateY(-${this.tagsScrollLimit}%)`);
     }
   }
 
