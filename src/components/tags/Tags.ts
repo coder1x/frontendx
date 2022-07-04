@@ -43,7 +43,7 @@ class Tags {
     this.wrapper = element as HTMLElement;
     this.className = className.replace(/^./, '');
     this.init();
-    this.getDimentions();
+    this.getSetDimentions();
   }
 
   private init() {
@@ -57,11 +57,16 @@ class Tags {
     return true;
   }
 
-  private getDimentions() {
-    if (!this.track || !this.tags || !this.frame || !this.thumb) return false;
+  private getSetDimentions() {
+    if (!this.track || !this.frame) return false;
     this.trackHeight = this.track.offsetHeight;
-    this.tagsHeight = this.tags.offsetHeight;
+    this.frame.style.paddingRight = `${this.track.offsetWidth + 10}px`;
     this.frameHeight = this.frame.offsetHeight;
+
+    if (!this.tags || !this.thumb) return false;
+    /* установить this.tagsHeight нужно после того, как установили стиль this.frame.style.paddingRight  */
+    this.tagsHeight = this.tags.offsetHeight;
+
     //  this.tagsScrollLimit - значение, до которого можно прокручивать теги без появления пустого пространства (максимальный процент )
     this.tagsScrollLimit = 100 - ((this.frameHeight * 100) / this.tagsHeight);
 
@@ -70,8 +75,10 @@ class Tags {
     this.maxPercentage = 100 - (this.frameHeight * 100) / this.tagsHeight;
 
     this.thumbHeight = thumbHeightCalc > 20 ? thumbHeightCalc : 20;
+
     this.thumb.style.height = `${this.thumbHeight}px`;
     this.trackAreaHeight = this.trackHeight - this.thumbHeight;
+
     return true;
   }
 
@@ -221,6 +228,7 @@ class Tags {
 
     const shiftCalculated = newShift;
     const shift = shiftCalculated > -0.001 ? 0 : shiftCalculated;
+
     const pointerTopPosition = Math.abs(((Math.abs(shift)) * this.trackAreaHeight)
       / this.maxPercentage);
 
