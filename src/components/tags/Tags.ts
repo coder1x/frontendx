@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
@@ -29,7 +27,7 @@ class Tags {
 
   private tagsScrollLimit: number = 0;
 
-  private startY: number | null = null;
+  private tagsStartY: number | null = null;
 
   private deltaPrevious: number = 0;
 
@@ -43,7 +41,6 @@ class Tags {
     this.wrapper = element as HTMLElement;
     this.className = className.replace(/^./, '');
     this.init();
-    this.getSetDimentions();
   }
 
   private init() {
@@ -54,10 +51,11 @@ class Tags {
     this.thumb = this.wrapper.querySelector(`.${this.className}__scrollbar-thumb`);
     this.bindEvent();
 
+    this.setDimensions();
     return true;
   }
 
-  private getSetDimentions() {
+  private setDimensions() {
     if (!this.track || !this.frame) return false;
     this.trackHeight = this.track.offsetHeight;
     this.frame.style.paddingRight = `${this.track.offsetWidth + 10}px`;
@@ -94,25 +92,27 @@ class Tags {
     }
 
     window.addEventListener('mouseover', this.handleWindowMouseOver);
-    const body = document.querySelector('body') as HTMLElement;
     window.addEventListener('wheel', this.handleWindowWheel, { passive: false });
   }
 
   @boundMethod
   private handleTagsTouchStart(event: TouchEvent) {
-    this.startY = event.touches[0].clientY;
+    this.tagsStartY = event.touches[0].clientY;
   }
 
   @boundMethod
   private handleTagsTouchMove(event: TouchEvent) {
     event.preventDefault();
-    if (!this.startY || !this.tags) {
-      return;
-    }
-    const endY = event.touches[0].clientY;
-    const deltaY = this.startY - endY;
+    if (!this.tagsStartY || !this.tags) return;
+
+    const tagsEndY = event.touches[0].clientY;
+    const deltaY = this.tagsStartY - tagsEndY;
 
     const isUp = deltaY > 0;
+
+    if (deltaY === 0) {
+      return;
+    }
 
     const deltaCurrent = deltaY - this.deltaPrevious;
     const deltaCurrentPercent = (deltaCurrent * 100) / this.tagsHeight;
@@ -151,9 +151,8 @@ class Tags {
 
   @boundMethod
   private handleTagsWheel(event: WheelEvent) {
-    if (!this.tags) {
-      return;
-    }
+    if (!this.tags) return;
+
     const { deltaY } = event;
     const deltaPercent = (deltaY * 100) / this.tagsHeight;
     const transformValue = this.tags.style.transform;
@@ -215,7 +214,7 @@ class Tags {
     return true;
   }
 
-  moveTagsList(transform: string, delta: number, isMovingUp = true) {
+  private moveTagsList(transform: string, delta: number, isMovingUp = true) {
     if (!this.thumb || !this.tags) return;
 
     /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует */
@@ -239,7 +238,7 @@ class Tags {
     }
   }
 
-  setStyle(thumbTop = '0px', tagsTransform = 'translateY(0%)') {
+  private setStyle(thumbTop = '0px', tagsTransform = 'translateY(0%)') {
     if (!this.thumb || !this.tags) return false;
     this.thumb.style.top = thumbTop;
     this.tags.style.transform = tagsTransform;
