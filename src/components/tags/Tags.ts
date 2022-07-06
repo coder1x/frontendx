@@ -211,14 +211,11 @@ class Tags {
   private moveTagsList(delta: number, isMovingUp = true) {
     if (!this.thumb || !this.tags) return;
 
-    const newShift = this.tagsTranslateY - delta;
+    const shift = this.tagsTranslateY - delta;
 
     /* в зависимости от направления движения, проверим, что мы не перешли верхнюю / нижнюю границу */
-    const isLimitReached = isMovingUp ? Math.abs(newShift) > this.tagsScrollLimit
+    const isLimitReached = isMovingUp ? Math.abs(shift) > this.tagsScrollLimit
       : this.tagsTranslateY > 0;
-
-    const shiftCalculated = newShift;
-    const shift = shiftCalculated > -0.001 ? 0 : shiftCalculated;
 
     const pointerTopPosition = Math.abs(((Math.abs(shift)) * this.trackAreaHeight)
       / this.tagsScrollLimit);
