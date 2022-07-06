@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
@@ -85,6 +87,10 @@ class Tags {
   }
 
   private bindEvent() {
+    if (this.track) {
+      this.track.addEventListener('pointerdown', this.handleTrackPointerdown);
+    }
+
     if (this.thumb) {
       this.thumb.addEventListener('pointerdown', this.handleThumbPointerDown);
     }
@@ -97,6 +103,13 @@ class Tags {
 
     window.addEventListener('mouseover', this.handleWindowMouseOver);
     window.addEventListener('wheel', this.handleWindowWheel, { passive: false });
+  }
+
+  @boundMethod
+  private handleTrackPointerdown(event: PointerEvent) {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains(`${this.className}__scrollbar-thumb`)) return;
+    this.moveThumb(event.clientY - this.thumbHeight / 2);
   }
 
   @boundMethod
