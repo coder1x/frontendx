@@ -47,14 +47,19 @@ class Tags {
 
   private init() {
     if (!this.wrapper) return false;
-    this.track = this.wrapper.querySelector(`.${this.className}__scrollbar-track`);
-    this.tags = this.wrapper.querySelector(`.${this.className}__list`);
-    this.frame = this.wrapper.querySelector(`.${this.className}__frame`);
-    this.thumb = this.wrapper.querySelector(`.${this.className}__scrollbar-thumb`);
+    this.track = this.getElement('scrollbar-track');
+    this.tags = this.getElement('list');
+    this.frame = this.getElement('frame');
+    this.thumb = this.getElement('scrollbar-thumb');
     this.bindEvent();
 
     this.setDimensions();
     return true;
+  }
+
+  private getElement(selector: string) {
+    if (!this.wrapper) return null;
+    return this.wrapper.querySelector(`.${this.className}__${selector}`) as HTMLElement;
   }
 
   private setDimensions() {
