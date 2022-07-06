@@ -233,15 +233,18 @@ class Tags {
 
     /* в зависимости от направления движения, проверим, что мы не перешли верхнюю / нижнюю границу */
     const isLimitReached = isMovingUp ? Math.abs(shift) > this.tagsScrollLimit
-      : this.tagsTranslateY > 0;
+      : this.tagsTranslateY >= 0;
 
     const pointerTopPosition = Math.abs(((Math.abs(shift)) * this.trackAreaHeight)
       / this.tagsScrollLimit);
 
     if (!isLimitReached) {
-      this.tagsTranslateY = shift;
-      this.thumbTop = pointerTopPosition;
-    } else if (isMovingUp) {
+      this.tagsTranslateY = shift <= 0 ? shift : 0;
+      this.thumbTop = shift <= 0 ? pointerTopPosition : 0;
+      this.setStyle();
+      return;
+    }
+    if (isMovingUp) {
       this.tagsTranslateY = this.tagsScrollLimit * -1;
       this.thumbTop = this.trackAreaHeight;
     }
