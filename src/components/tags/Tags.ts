@@ -37,6 +37,8 @@ class Tags {
 
   private tagsTranslateY: number = 0;
 
+  private thumbTop: number = 0;
+
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
     this.className = className.replace(/^./, '');
@@ -183,13 +185,15 @@ class Tags {
       - this.track.getBoundingClientRect().top - this.shiftY;
     if (pointerTopPosition < 0) {
       this.tagsTranslateY = 0;
+      this.thumbTop = 0;
       this.setStyle();
       return true;
     }
 
     if (pointerTopPosition > this.trackAreaHeight) {
       this.tagsTranslateY = this.tagsScrollLimit * -1;
-      this.setStyle(this.trackAreaHeight);
+      this.thumbTop = this.trackAreaHeight;
+      this.setStyle();
       return true;
     }
 
@@ -199,7 +203,8 @@ class Tags {
     const scrollDistance = scrollDistanceFull > this.tagsScrollLimit
       ? this.tagsScrollLimit : scrollDistanceFull;
     this.tagsTranslateY = scrollDistance * -1;
-    this.setStyle(pointerTopPosition);
+    this.thumbTop = pointerTopPosition;
+    this.setStyle();
     return true;
   }
 
@@ -220,16 +225,17 @@ class Tags {
 
     if (!isLimitReached) {
       this.tagsTranslateY = shift;
-      this.setStyle(Math.abs(pointerTopPosition));
+      this.thumbTop = pointerTopPosition;
     } else if (isMovingUp) {
       this.tagsTranslateY = this.tagsScrollLimit * -1;
-      this.setStyle(this.trackAreaHeight);
+      this.thumbTop = this.trackAreaHeight;
     }
+    this.setStyle();
   }
 
-  private setStyle(thumbTop = 0) {
+  private setStyle() {
     if (!this.thumb || !this.tags) return false;
-    this.thumb.style.top = `${thumbTop}px`;
+    this.thumb.style.top = `${this.thumbTop}px`;
     this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
     return true;
   }
