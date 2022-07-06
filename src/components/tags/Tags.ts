@@ -122,13 +122,10 @@ class Tags {
       return;
     }
 
-    if (deltaY > 0) { // скроллим вверх
-      if (deltaCurrent > 0) {
-        this.moveTagsList(deltaCurrentPercent);
-      }
-    } else if (deltaCurrent < 0) { // скроллим вниз
-      this.moveTagsList(deltaCurrentPercent, false);
-    }
+    const isMovingUp = deltaY > 0 && deltaCurrent > 0;
+    const isMovingDown = deltaY < 0 && deltaCurrent < 0;
+
+    if (isMovingUp || isMovingDown) this.moveTagsList(deltaCurrentPercent, isMovingUp);
   }
 
   @boundMethod
@@ -151,11 +148,7 @@ class Tags {
     const { deltaY } = event;
     const deltaPercent = (deltaY * 100) / this.tagsHeight;
 
-    if (deltaY > 0) { // скроллим вверх
-      this.moveTagsList(deltaPercent);
-    } else { // скроллим вниз
-      this.moveTagsList(deltaPercent, false);
-    }
+    this.moveTagsList(deltaPercent, deltaY > 0);
   }
 
   @boundMethod
