@@ -33,9 +33,7 @@ class Tags {
 
   private isMouseOnFrame: boolean = false;
 
-  private isMovementUp: boolean = false;
-
-  private maxPercentage: number = 0;
+  private isDraggingUp: boolean = false;
 
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
@@ -58,7 +56,6 @@ class Tags {
   private setDimensions() {
     if (!this.track || !this.frame) return false;
     this.trackHeight = this.track.offsetHeight;
-    this.frame.style.paddingRight = `${this.track.offsetWidth + 10}px`;
     this.frameHeight = this.frame.offsetHeight;
 
     if (!this.tags || !this.thumb) return false;
@@ -66,11 +63,10 @@ class Tags {
     this.tagsHeight = this.tags.offsetHeight;
 
     //  this.tagsScrollLimit - значение, до которого можно прокручивать теги без появления пустого пространства (максимальный процент )
-    this.tagsScrollLimit = 100 - ((this.frameHeight * 100) / this.tagsHeight);
+    this.tagsScrollLimit = 100 - (this.frameHeight * 100) / this.tagsHeight;
 
     /* высота элемента tags относится к высоте frame так же, как track к thumb => вычислим высоту thumb (ползунка) */
     const thumbHeightCalc = (this.frameHeight * this.trackHeight) / this.tagsHeight;
-    this.maxPercentage = 100 - (this.frameHeight * 100) / this.tagsHeight;
 
     this.thumbHeight = thumbHeightCalc > 20 ? thumbHeightCalc : 20;
 
@@ -103,16 +99,12 @@ class Tags {
   @boundMethod
   private handleTagsTouchMove(event: TouchEvent) {
     event.preventDefault();
-    if (!this.tagsStartY || !this.tags) return;
 
+    if (this.tagsStartY === null || !this.tags) return;
     const tagsEndY = event.touches[0].clientY;
     const deltaY = this.tagsStartY - tagsEndY;
-
     const isUp = deltaY > 0;
-
-    if (deltaY === 0) {
-      return;
-    }
+    if (deltaY === 0) return;
 
     const deltaCurrent = deltaY - this.deltaPrevious;
     const deltaCurrentPercent = (deltaCurrent * 100) / this.tagsHeight;
@@ -122,8 +114,11 @@ class Tags {
     /* При изменении направления движения (вверх / вниз) значение deltaCurrent может стать очень большим
     (в зависимости от того, насколько далеко провели пальцем при последнем скролле),
      что ведет к неправильному расчету. Поэтому делаем return при первом срабатывании после изменения направления */
-    if (this.isMovementUp !== isUp) {
-      this.isMovementUp = isUp;
+    if (this.isDraggingUp !== isUp) {
+      console.log('this.isDraggingUp>>>', this.isDraggingUp);
+      console.log('isUp>>>', isUp);
+
+      this.isDraggingUp = isUp;
       return;
     }
 
@@ -146,7 +141,7 @@ class Tags {
   @boundMethod
   private handleWindowMouseOver(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    this.isMouseOnFrame = !!target.closest(`.${this.className}__frame`);
+    this.isMouseOnFrame = Boolean(target.closest(`.${this.className}__frame`));
   }
 
   @boundMethod
@@ -204,8 +199,7 @@ class Tags {
       return true;
     }
 
-    const scrollDistanceFull = (pointerTopPosition * 100)
-      / (this.trackAreaHeight + this.thumbHeight); // длина прокрутки
+    const scrollDistanceFull = (pointerTopPosition * 100) / this.trackHeight; // длина прокрутки
 
     // проверим, что мы не прокрутили лишнего (не начало появляться пустое пространство под списком тегов)
     const scrollDistance = scrollDistanceFull > this.tagsScrollLimit
@@ -229,7 +223,7 @@ class Tags {
     const shift = shiftCalculated > -0.001 ? 0 : shiftCalculated;
 
     const pointerTopPosition = Math.abs(((Math.abs(shift)) * this.trackAreaHeight)
-      / this.maxPercentage);
+      / this.tagsScrollLimit);
 
     if (!isLimitReached) {
       this.setStyle(`${Math.abs(pointerTopPosition)}px`, `translateY(${shift}%)`);
