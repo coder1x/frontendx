@@ -35,6 +35,8 @@ class Tags {
 
   private isDraggingUp: boolean = false;
 
+  private tagsTranslateY: number = 0;
+
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
     this.className = className.replace(/^./, '');
@@ -59,7 +61,6 @@ class Tags {
     this.frameHeight = this.frame.offsetHeight;
 
     if (!this.tags || !this.thumb) return false;
-    /* установить this.tagsHeight нужно после того, как установили стиль this.frame.style.paddingRight  */
     this.tagsHeight = this.tags.offsetHeight;
 
     //  this.tagsScrollLimit - значение, до которого можно прокручивать теги без появления пустого пространства (максимальный процент )
@@ -109,7 +110,6 @@ class Tags {
     const deltaCurrent = deltaY - this.deltaPrevious;
     const deltaCurrentPercent = (deltaCurrent * 100) / this.tagsHeight;
     this.deltaPrevious = deltaY;
-    const transformValue = this.tags.style.transform;
 
     /* При изменении направления движения (вверх / вниз) значение deltaCurrent может стать очень большим
     (в зависимости от того, насколько далеко провели пальцем при последнем скролле),
@@ -124,10 +124,10 @@ class Tags {
 
     if (deltaY > 0) { // скроллим вверх
       if (deltaCurrent > 0) {
-        this.moveTagsList(transformValue, deltaCurrentPercent);
+        this.moveTagsList(deltaCurrentPercent);
       }
     } else if (deltaCurrent < 0) { // скроллим вниз
-      this.moveTagsList(transformValue, deltaCurrentPercent, false);
+      this.moveTagsList(deltaCurrentPercent, false);
     }
   }
 
@@ -150,12 +150,11 @@ class Tags {
 
     const { deltaY } = event;
     const deltaPercent = (deltaY * 100) / this.tagsHeight;
-    const transformValue = this.tags.style.transform;
 
     if (deltaY > 0) { // скроллим вверх
-      this.moveTagsList(transformValue, deltaPercent);
+      this.moveTagsList(deltaPercent);
     } else { // скроллим вниз
-      this.moveTagsList(transformValue, deltaPercent, false);
+      this.moveTagsList(deltaPercent, false);
     }
   }
 
@@ -190,12 +189,14 @@ class Tags {
     const pointerTopPosition = coordinateY
       - this.track.getBoundingClientRect().top - this.shiftY;
     if (pointerTopPosition < 0) {
+      this.tagsTranslateY = 0;
       this.setStyle();
       return true;
     }
 
     if (pointerTopPosition > this.trackAreaHeight) {
-      this.setStyle(`${this.trackAreaHeight}px`, `translateY(-${this.tagsScrollLimit}%)`);
+      this.tagsTranslateY = this.tagsScrollLimit * -1;
+      this.setStyle(this.trackAreaHeight);
       return true;
     }
 
@@ -204,20 +205,19 @@ class Tags {
     // проверим, что мы не прокрутили лишнего (не начало появляться пустое пространство под списком тегов)
     const scrollDistance = scrollDistanceFull > this.tagsScrollLimit
       ? this.tagsScrollLimit : scrollDistanceFull;
-    this.setStyle(`${pointerTopPosition}px`, `translateY(-${scrollDistance}%)`);
+    this.tagsTranslateY = scrollDistance * -1;
+    this.setStyle(pointerTopPosition);
     return true;
   }
 
-  private moveTagsList(transform: string, delta: number, isMovingUp = true) {
+  private moveTagsList(delta: number, isMovingUp = true) {
     if (!this.thumb || !this.tags) return;
 
-    /* здесь используем утверждение as, т.к. знаем, что свойство transform = translateY существует */
-    const currentShift = (transform.match(/(?<=translateY\()[0-9-.]+/) as Array<any>)[0];
-    const newShift = parseFloat(currentShift) - delta;
+    const newShift = this.tagsTranslateY - delta;
 
     /* в зависимости от направления движения, проверим, что мы не перешли верхнюю / нижнюю границу */
     const isLimitReached = isMovingUp ? Math.abs(newShift) > this.tagsScrollLimit
-      : parseFloat(currentShift) > 0;
+      : this.tagsTranslateY > 0;
 
     const shiftCalculated = newShift;
     const shift = shiftCalculated > -0.001 ? 0 : shiftCalculated;
@@ -226,16 +226,18 @@ class Tags {
       / this.tagsScrollLimit);
 
     if (!isLimitReached) {
-      this.setStyle(`${Math.abs(pointerTopPosition)}px`, `translateY(${shift}%)`);
+      this.tagsTranslateY = shift;
+      this.setStyle(Math.abs(pointerTopPosition));
     } else if (isMovingUp) {
-      this.setStyle(`${this.trackAreaHeight}px`, `translateY(-${this.tagsScrollLimit}%)`);
+      this.tagsTranslateY = this.tagsScrollLimit * -1;
+      this.setStyle(this.trackAreaHeight);
     }
   }
 
-  private setStyle(thumbTop = '0px', tagsTransform = 'translateY(0%)') {
+  private setStyle(thumbTop = 0) {
     if (!this.thumb || !this.tags) return false;
-    this.thumb.style.top = thumbTop;
-    this.tags.style.transform = tagsTransform;
+    this.thumb.style.top = `${thumbTop}px`;
+    this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
     return true;
   }
 }
