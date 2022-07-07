@@ -7,10 +7,10 @@ mixin tags(options = {})
     span(class = `${className}__header`) Теги
     div(class = `${className}__frame`) 
       div(class = `${className}__scrollbar`)
-        button(class = `${className}__scrollbar-button ${className}__scrollbar-button_up`)
+        div(class = `${className}__scrollbar-button ${className}__scrollbar-button_up`)
         div(class = `${className}__scrollbar-track`)
           div(class = `${className}__scrollbar-thumb`)
-        button(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
+        div(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
       ul(class = `${className}__list` style = 'transform: translateY(0%)') 
         -let n = 1
         while n <= 100

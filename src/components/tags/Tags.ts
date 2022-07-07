@@ -41,6 +41,15 @@ class Tags {
 
   private thumbTop: number = 0;
 
+  // eslint-disable-next-line no-undef
+  private movementOnMouseHold: NodeJS.Timer | null = null;
+
+  // eslint-disable-next-line no-undef
+  private startMovementOnMouseHold: NodeJS.Timeout | null = null;
+
+  // eslint-disable-next-line no-undef
+  private buttons: NodeListOf<HTMLElement> | null = null;
+
   constructor(className: string, element: Element) {
     this.wrapper = element as HTMLElement;
     this.className = className.replace(/^./, '');
@@ -53,6 +62,11 @@ class Tags {
     this.tags = this.getElement('list');
     this.frame = this.getElement('frame');
     this.thumb = this.getElement('scrollbar-thumb');
+    this.buttons = this.wrapper.querySelectorAll(
+      `.${this.className}__scrollbar-button`,
+      // eslint-disable-next-line no-undef
+    ) as NodeListOf<HTMLElement>;
+
     this.bindEvent();
 
     this.setDimensions();
@@ -87,6 +101,12 @@ class Tags {
   }
 
   private bindEvent() {
+    if (this.buttons) {
+      this.buttons.forEach((button) => {
+        button.addEventListener('pointerdown', this.handleButtonPointerdown);
+        window.addEventListener('pointerup', this.handleButtonPointerup);
+      });
+    }
     if (this.track) {
       this.track.addEventListener('pointerdown', this.handleTrackPointerdown);
     }
@@ -103,6 +123,45 @@ class Tags {
 
     window.addEventListener('mouseover', this.handleWindowMouseOver);
     window.addEventListener('wheel', this.handleWindowWheel, { passive: false });
+  }
+
+  @boundMethod
+  private handleButtonPointerup() {
+    if (this.movementOnMouseHold) {
+      clearInterval(this.movementOnMouseHold);
+    }
+    if (this.startMovementOnMouseHold) {
+      clearTimeout(this.startMovementOnMouseHold);
+    }
+  }
+
+  @boundMethod
+  private handleButtonPointerdown(event: PointerEvent) {
+    const SHIFT_ON_BUTTON_PRESS = 20;
+    const TIME_DELAY = 500;
+    const TIME_INTERVAL = 100;
+
+    if (!this.thumb) return;
+
+    const target = event.target as HTMLElement;
+    let shift = (SHIFT_ON_BUTTON_PRESS * 100) / this.tagsHeight;
+    let direction = true;
+    if (target.closest(`.${this.className}__scrollbar-button_up`)) {
+      shift *= -1;
+      direction = false;
+    }
+
+    this.moveTagsList(shift, direction);
+
+    this.startMovementOnMouseHold = setTimeout(
+      () => {
+        this.movementOnMouseHold = setInterval(
+          () => this.moveTagsList(shift, direction),
+          TIME_INTERVAL,
+        );
+      },
+      TIME_DELAY,
+    );
   }
 
   @boundMethod
@@ -207,6 +266,8 @@ class Tags {
   }
 
   private moveThumb(coordinateY: number) {
+    console.log(coordinateY);
+
     if (!this.track) return false;
 
     const pointerTopPosition = coordinateY
