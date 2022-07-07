@@ -114,18 +114,32 @@ class Tags {
 
   @boundMethod
   private handleTagsTouchStart(event: TouchEvent) {
+    this.deltaPrevious = 0;
     this.tagsStartY = event.touches[0].clientY;
+  }
+
+  private defineDirection(deltaY: number) {
+    if (deltaY === 0) return false;
+
+    let signDirection = '';
+
+    if (this.deltaPrevious < deltaY) signDirection = 'up';
+    if (this.deltaPrevious > deltaY) signDirection = 'down';
+
+    if (signDirection === '') return false;
+
+    return signDirection;
   }
 
   @boundMethod
   private handleTagsTouchMove(event: TouchEvent) {
     event.preventDefault();
-
     if (this.tagsStartY === null || !this.tags) return;
     const tagsEndY = event.touches[0].clientY;
     const deltaY = this.tagsStartY - tagsEndY;
     const isUp = deltaY > 0;
-    if (deltaY === 0) return;
+
+    if (!this.defineDirection(deltaY)) return;
 
     const deltaCurrent = deltaY - this.deltaPrevious;
     const deltaCurrentPercent = (deltaCurrent * 100) / this.tagsHeight;
@@ -135,9 +149,6 @@ class Tags {
     (в зависимости от того, насколько далеко провели пальцем при последнем скролле),
      что ведет к неправильному расчету. Поэтому делаем return при первом срабатывании после изменения направления */
     if (this.isDraggingUp !== isUp) {
-      console.log('this.isDraggingUp>>>', this.isDraggingUp);
-      console.log('isUp>>>', isUp);
-
       this.isDraggingUp = isUp;
       return;
     }
@@ -164,7 +175,6 @@ class Tags {
   @boundMethod
   private handleTagsWheel(event: WheelEvent) {
     if (!this.tags) return;
-
     const { deltaY } = event;
     const deltaPercent = (deltaY * 100) / this.tagsHeight;
 
@@ -253,8 +263,10 @@ class Tags {
 
   private setStyle() {
     if (!this.thumb || !this.tags) return false;
+
     this.thumb.style.top = `${this.thumbTop}px`;
     this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
+
     return true;
   }
 }
