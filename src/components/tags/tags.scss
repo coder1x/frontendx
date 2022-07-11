@@ -19,6 +19,7 @@ $barWidth: 8px;
   }
 
   &__frame {
+    border: 1px solid red;
     padding-right: calc($barWidth + 10px);
     margin-top: 10px;
     position: relative;
@@ -35,6 +36,7 @@ $barWidth: 8px;
   }
 
   &__scrollbar {
+    border: 1px solid blue;
     cursor: pointer;
     z-index: 10;
     position: absolute;

@@ -13,7 +13,7 @@ mixin tags(options = {})
         div(class = `${className}__scrollbar-button ${className}__scrollbar-button_down`)
       ul(class = `${className}__list` style = 'transform: translateY(0%)') 
         -let n = 1
-        while n <= 100
+        while n <= 1000
           li(class = `${className}__item`)
             a(class = `${className}__item-link` href = 'http://www.frontendx.ru')= `Тег#${n++}`
 

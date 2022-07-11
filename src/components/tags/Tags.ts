@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
@@ -116,6 +115,8 @@ class Tags {
     }
 
     if (this.tags) {
+      this.tags.addEventListener('keyup', this.handleTagsKeydown);
+      this.tags.addEventListener('focusin', this.handleTagsFocusin);
       this.tags.addEventListener('wheel', this.handleTagsWheel);
       this.tags.addEventListener('touchstart', this.handleTagsTouchStart);
       this.tags.addEventListener('touchmove', this.handleTagsTouchMove);
@@ -123,6 +124,23 @@ class Tags {
 
     window.addEventListener('mouseover', this.handleWindowMouseOver);
     window.addEventListener('wheel', this.handleWindowWheel, { passive: false });
+  }
+
+  @boundMethod
+  private handleTagsKeydown(event: Event) {
+    event.preventDefault();
+  }
+
+  @boundMethod
+  // eslint-disable-next-line no-unused-vars
+  private handleTagsFocusin(event: FocusEvent) {
+    event.preventDefault();
+    if (!this.tags || !this.frame) return;
+    if (this.tags.getBoundingClientRect().top !== this.frame.getBoundingClientRect().top) {
+      this.tagsTranslateY = this.tagsScrollLimit * -1;
+      this.thumbTop = this.trackAreaHeight;
+      this.setStyle();
+    }
   }
 
   @boundMethod
@@ -168,6 +186,7 @@ class Tags {
   private handleTrackPointerdown(event: PointerEvent) {
     const target = event.target as HTMLElement;
     if (target.classList.contains(`${this.className}__scrollbar-thumb`)) return;
+    this.shiftY = 0;
     this.moveThumb(event.clientY - this.thumbHeight / 2);
   }
 
@@ -266,10 +285,7 @@ class Tags {
   }
 
   private moveThumb(coordinateY: number) {
-    console.log(coordinateY);
-
     if (!this.track) return false;
-
     const pointerTopPosition = coordinateY
       - this.track.getBoundingClientRect().top - this.shiftY;
     if (pointerTopPosition < 0) {
@@ -311,7 +327,9 @@ class Tags {
 
     if (!isLimitReached) {
       this.tagsTranslateY = shift <= 0 ? shift : 0;
+
       this.thumbTop = shift <= 0 ? pointerTopPosition : 0;
+
       this.setStyle();
       return;
     }
@@ -327,6 +345,7 @@ class Tags {
 
     this.thumb.style.top = `${this.thumbTop}px`;
     this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
+    // if (this.frame) { console.log(this.frame.getBoundingClientRect().top); }
 
     return true;
   }
