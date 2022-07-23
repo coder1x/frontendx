@@ -134,13 +134,15 @@ class Tags {
   @boundMethod
   // eslint-disable-next-line no-unused-vars
   private handleTagsFocusin(event: FocusEvent) {
-    event.preventDefault();
-    if (!this.tags || !this.frame) return;
-    if (this.tags.getBoundingClientRect().top !== this.frame.getBoundingClientRect().top) {
-      this.tagsTranslateY = this.tagsScrollLimit * -1;
-      this.thumbTop = this.trackAreaHeight;
-      this.setStyle();
-    }
+  //  event.preventDefault();
+    console.log('handleTagsFocusin');
+
+    // if (!this.tags || !this.frame) return;
+    // if (this.tags.getBoundingClientRect().top !== this.frame.getBoundingClientRect().top) {
+    //   this.tagsTranslateY = this.tagsScrollLimit * -1;
+    //   this.thumbTop = this.trackAreaHeight;
+    //   this.setStyle();
+    // }
   }
 
   @boundMethod
@@ -302,7 +304,7 @@ class Tags {
       return true;
     }
 
-    const scrollDistanceFull = (pointerTopPosition * 100) / this.trackHeight; // длина прокрутки
+    const scrollDistanceFull = (pointerTopPosition * this.tagsScrollLimit) / this.trackAreaHeight; // длина прокрутки
 
     // проверим, что мы не прокрутили лишнего (не начало появляться пустое пространство под списком тегов)
     const scrollDistance = scrollDistanceFull > this.tagsScrollLimit
@@ -345,8 +347,6 @@ class Tags {
 
     this.thumb.style.top = `${this.thumbTop}px`;
     this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
-    // if (this.frame) { console.log(this.frame.getBoundingClientRect().top); }
-
     return true;
   }
 }
