@@ -11,7 +11,9 @@
 $barWidth: 8px;
 
 .tags {
+  border: 1px solid green;
   padding: 10px 10px 30px 10px;
+  position: relative;
 
   &__header {
     @include font-rem(19);
@@ -43,8 +45,8 @@ $barWidth: 8px;
     display: flex;
     flex-direction: column;
     width: $barWidth;
-    top: 0;
-    bottom: 0;
+    top: 42px;
+    bottom: 30px;
     right: 0;
     touch-action: none;
     &-track {
