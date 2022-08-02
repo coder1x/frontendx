@@ -134,15 +134,20 @@ class Tags {
   @boundMethod
   // eslint-disable-next-line no-unused-vars
   private handleTagsFocusin(event: FocusEvent) {
-  //  event.preventDefault();
-    console.log('handleTagsFocusin');
+    if (!this.tags || !this.frame) return;
 
-    // if (!this.tags || !this.frame) return;
-    // if (this.tags.getBoundingClientRect().top !== this.frame.getBoundingClientRect().top) {
-    //   this.tagsTranslateY = this.tagsScrollLimit * -1;
-    //   this.thumbTop = this.trackAreaHeight;
-    //   this.setStyle();
-    // }
+    console.log(this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top);
+
+    const delta = this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top;
+    const deltaPercent = (delta * 100) / this.tagsHeight;
+    const pointerTopPosition = Math.abs(((Math.abs(deltaPercent)) * this.trackAreaHeight)
+    / this.tagsScrollLimit);
+
+    this.tagsTranslateY = deltaPercent <= 0 ? deltaPercent : 0;
+    this.thumbTop = pointerTopPosition;
+
+    this.setStyle();
+    console.log(this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top);
   }
 
   @boundMethod

@@ -12,7 +12,7 @@ $barWidth: 8px;
 
 .tags {
   border: 1px solid green;
-  padding: 10px 10px 30px 10px;
+  padding: 10px 20px 30px 10px;
   position: relative;
 
   &__header {
@@ -22,7 +22,6 @@ $barWidth: 8px;
 
   &__frame {
     border: 1px solid red;
-    padding-right: calc($barWidth + 10px);
     margin-top: 10px;
     position: relative;
     max-height: 250px;
@@ -57,8 +56,8 @@ $barWidth: 8px;
     &-thumb {
       position: absolute;
       box-sizing: border-box;
-      height: 15px;
-      width: 15px;
+    //  height: 15px;
+      width: 8px;
       background-color: $color-grey-hover;
       cursor: pointer;
     }
