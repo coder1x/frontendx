@@ -104,6 +104,7 @@ class Tags {
       this.buttons.forEach((button) => {
         button.addEventListener('pointerdown', this.handleButtonPointerdown);
         window.addEventListener('pointerup', this.handleButtonPointerup);
+        button.addEventListener('mouseover', this.handleButtonMouseover);
       });
     }
     if (this.track) {
@@ -129,6 +130,11 @@ class Tags {
   @boundMethod
   private handleTagsKeydown(event: Event) {
     event.preventDefault();
+  }
+
+  @boundMethod
+  handleButtonMouseover(e: Event) {
+    console.log(e.target);
   }
 
   @boundMethod

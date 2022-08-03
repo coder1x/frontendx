@@ -11,7 +11,6 @@
 $barWidth: 8px;
 
 .tags {
- // border: 1px solid green;
   padding: 10px 20px 30px 10px;
   position: relative;
 
@@ -21,24 +20,22 @@ $barWidth: 8px;
   }
 
   &__frame {
- //   border: 1px solid red;
     margin-top: 10px;
     position: relative;
     max-height: 250px;
     overflow: hidden;
   }
+
   &__list {
     top: 0px;
     position: relative;
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-
     gap: 10px;
   }
 
   &__scrollbar {
-    border: 1px solid blue;
     cursor: pointer;
     z-index: 10;
     position: absolute;
@@ -49,18 +46,24 @@ $barWidth: 8px;
     bottom: 30px;
     right: 0;
     touch-action: none;
+
     &-track {
       background-color: $color-grey-light;
       flex-grow: 1;
       position: relative;
     }
+
     &-thumb {
       position: absolute;
       box-sizing: border-box;
-    //  height: 15px;
       width: 8px;
       background-color: $color-grey-hover;
       cursor: pointer;
+
+      &:hover{
+        background-color: $button-background;
+        transition: background-color ease-in-out 500ms;
+      }
     }
 
     &-button {
@@ -69,12 +72,22 @@ $barWidth: 8px;
       border: none;
       cursor: pointer;
       position: relative;
+      z-index: 10;
+
+      &:hover {
+        &::before{
+          color: $button-background;
+          transition: background-color ease-in-out 500ms;
+        }
+      }
+
       &_up {
         background-color: $color-grey-light;
         &::before {
           @include marker("▲");
-        }
+          }
       }
+
       &_down {
         background-color: $color-grey-light;
         &::before {
@@ -85,13 +98,14 @@ $barWidth: 8px;
   }
 
   &__item-link {
-    font-weight: normal;
-
-    cursor: pointer;
     @include font-rem(16);
+    font-weight: normal;
+    cursor: pointer;
+
     &:focus {
       outline-offset: 5px;
     }
+
     &:hover {
       color: $color-grey-hover;
     }
