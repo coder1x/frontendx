@@ -132,11 +132,8 @@ class Tags {
   }
 
   @boundMethod
-  // eslint-disable-next-line no-unused-vars
-  private handleTagsFocusin(event: FocusEvent) {
+  private handleTagsFocusin() {
     if (!this.tags || !this.frame) return;
-
-    console.log(this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top);
 
     const delta = this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top;
     const deltaPercent = (delta * 100) / this.tagsHeight;
@@ -145,9 +142,9 @@ class Tags {
 
     this.tagsTranslateY = deltaPercent <= 0 ? deltaPercent : 0;
     this.thumbTop = pointerTopPosition;
+    this.tags.style.top = `${delta * -1}px`; // корректируем положение списка тегов, смещенных фокусом
 
     this.setStyle();
-    console.log(this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top);
   }
 
   @boundMethod

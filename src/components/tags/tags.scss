@@ -11,7 +11,7 @@
 $barWidth: 8px;
 
 .tags {
-  border: 1px solid green;
+ // border: 1px solid green;
   padding: 10px 20px 30px 10px;
   position: relative;
 
@@ -21,13 +21,14 @@ $barWidth: 8px;
   }
 
   &__frame {
-    border: 1px solid red;
+ //   border: 1px solid red;
     margin-top: 10px;
     position: relative;
     max-height: 250px;
     overflow: hidden;
   }
   &__list {
+    top: 0px;
     position: relative;
     z-index: 1;
     display: flex;
