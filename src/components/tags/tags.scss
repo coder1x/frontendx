@@ -11,15 +11,28 @@
 $barWidth: 8px;
 
 .tags {
-  padding: 10px 20px 30px 10px;
+  padding: 10px 0 30px 10px;
+  margin-right: 10px;
   position: relative;
+  user-select: none;
 
   &__header {
-    @include font-rem(19);
     font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__label{
+    @include font-rem(19);
+  }
+
+  &__amount{
+    @include font-rem(16);
   }
 
   &__frame {
+  //  border: 1px solid $color-grey-light;
     margin-top: 10px;
     position: relative;
     max-height: 250px;

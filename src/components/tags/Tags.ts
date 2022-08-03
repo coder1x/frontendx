@@ -4,7 +4,7 @@ import { boundMethod } from 'autobind-decorator';
 class Tags {
   private className: string;
 
-  private wrapper: HTMLElement | null;
+  private wrapper: HTMLElement;
 
   private track: HTMLElement | null = null;
 
@@ -100,11 +100,12 @@ class Tags {
   }
 
   private bindEvent() {
+    this.wrapper.addEventListener('dragstart', this.handleWrapperDragstart);
+
     if (this.buttons) {
       this.buttons.forEach((button) => {
         button.addEventListener('pointerdown', this.handleButtonPointerdown);
         window.addEventListener('pointerup', this.handleButtonPointerup);
-        button.addEventListener('mouseover', this.handleButtonMouseover);
       });
     }
     if (this.track) {
@@ -116,7 +117,6 @@ class Tags {
     }
 
     if (this.tags) {
-      this.tags.addEventListener('keyup', this.handleTagsKeydown);
       this.tags.addEventListener('focusin', this.handleTagsFocusin);
       this.tags.addEventListener('wheel', this.handleTagsWheel);
       this.tags.addEventListener('touchstart', this.handleTagsTouchStart);
@@ -128,13 +128,8 @@ class Tags {
   }
 
   @boundMethod
-  private handleTagsKeydown(event: Event) {
+  private handleWrapperDragstart(event: Event) {
     event.preventDefault();
-  }
-
-  @boundMethod
-  handleButtonMouseover(e: Event) {
-    console.log(e.target);
   }
 
   @boundMethod

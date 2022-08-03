@@ -3,7 +3,9 @@ mixin tags(options = {})
 
     const className = 'tags'
   div(class = `${className}`)
-    span(class = `${className}__header`) Теги
+    span(class = `${className}__header`)
+      span(class = `${className}__label`) Теги
+      span(class = `${className}__amount`) 100
     div(class = `${className}__frame`) 
       ul(class = `${className}__list` style = 'transform: translateY(0%)') 
         -let n = 1
