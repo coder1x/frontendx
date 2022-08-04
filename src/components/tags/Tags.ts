@@ -143,9 +143,10 @@ class Tags {
 
     this.tagsTranslateY = deltaPercent <= 0 ? deltaPercent : 0;
     this.thumbTop = pointerTopPosition;
-    this.tags.style.top = `${delta * -1}px`; // корректируем положение списка тегов, смещенных фокусом
+    // this.tags.style.top = `${delta * -1}px`; // корректируем положение списка тегов, смещенных фокусом
 
-    this.setStyle();
+    if (this.thumb) this.thumb.style.top = `${this.thumbTop}px`;
+    // this.setStyle();
   }
 
   @boundMethod
@@ -290,9 +291,15 @@ class Tags {
   }
 
   private moveThumb(coordinateY: number) {
-    if (!this.track) return false;
+    if (!this.track || !this.tags || !this.frame) return false;
     const pointerTopPosition = coordinateY
       - this.track.getBoundingClientRect().top - this.shiftY;
+
+    if (this.isShiftByFocus()) {
+      console.log('!');
+      return true;
+    }
+
     if (pointerTopPosition < 0) {
       this.tagsTranslateY = 0;
       this.thumbTop = 0;
@@ -320,6 +327,11 @@ class Tags {
 
   private moveTagsList(delta: number, isMovingUp = true) {
     if (!this.thumb || !this.tags) return;
+
+    if (this.isShiftByFocus()) {
+      console.log('!');
+      return;
+    }
 
     const shift = this.tagsTranslateY - delta;
 
@@ -351,6 +363,14 @@ class Tags {
     this.thumb.style.top = `${this.thumbTop}px`;
     this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
     return true;
+  }
+
+  private isShiftByFocus() {
+    if (this.tags && this.frame) {
+      return this.tags.style.transform === 'translateY(0%)'
+    && this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top !== 0;
+    }
+    return false;
   }
 }
 
