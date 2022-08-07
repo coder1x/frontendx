@@ -1,4 +1,5 @@
 
+include ../search-form/search-form.pug
 include ../archive/archive.pug
 include ../categories/categories.pug
 include ../tags/tags.pug
@@ -9,13 +10,15 @@ mixin search-panel()
 
   div(class = `${className}-wrapper`)
     div(class = className)
+      div(class = `${className}__search-form-wrapper`)
+        +search-form()
       div(class = `${className}__categories-wrapper`)
         +categories({years: {
           'Категория #1': {
             'total': '9999', 
-            'Подкатегория #1': '9999',
-            'Подкатегория #2': '11',
-            'Подкатегория #3': '7',
+            'Подкатегория Подкатегория Подкатегория #1': '9999',
+            'Подкатегория Подкатегория Подкатегория #2': '11',
+            'Подкатегория Подкатегория Подкатегория #3': '7',
             'Подкатегория #4': '1',
             'Подкатегория #5': '111',
           },

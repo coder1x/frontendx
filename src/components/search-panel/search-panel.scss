@@ -1,9 +1,17 @@
 .search-panel {
+  display: flex;
+  flex-direction: column;
   width: 300px;
   box-shadow: $section-shadow;
   background-color: $background-section;
+  
   &-wrapper {
     height: 100%;
     position: relative;
+  }
+
+  &__search-form-wrapper{
+    margin-top: 10px;
+    margin-left: 10px;
   }
 }

@@ -1,0 +1,43 @@
+.search-form {
+  box-shadow: $section-shadow;
+  position: relative;
+  box-sizing: border-box;
+  width: 250px;
+  &:hover{
+    outline: none;
+  }
+  &__input{
+    border: none;
+    width: 200px;
+    height: 35px;
+    box-sizing: border-box;
+    &:hover{
+      outline: none;
+      border: none;
+    }
+  }
+
+  &__button{
+    background: none;
+    border: none;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    position:absolute;
+    right: 0;
+
+
+  }
+  &__button:hover &__icon{
+    filter: drop-shadow(3px 0 3px rgba(11, 11, 26, .7));
+   transition: .2s ease-in-out;
+   cursor: pointer;
+ }
+
+  &__icon{
+    width: 25px;
+    fill: #e1e1e1;
+    filter: drop-shadow(0px 0px 1px rgba(11, 11, 26, .7));
+    transition: .2s ease-in-out;
+  }
+}

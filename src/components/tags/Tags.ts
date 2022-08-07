@@ -86,6 +86,16 @@ class Tags {
     if (!this.tags || !this.thumb) return false;
     this.tagsHeight = this.tags.offsetHeight;
 
+    if (this.tagsHeight <= this.frameHeight) {
+      this.track.style.display = 'none';
+      if (this.buttons) {
+        this.buttons.forEach((button) => {
+          // eslint-disable-next-line no-param-reassign
+          button.style.display = 'none';
+        });
+      }
+    }
+
     //  this.tagsScrollLimit - значение, до которого можно прокручивать теги без появления пустого пространства (максимальный процент )
     this.tagsScrollLimit = 100 - (this.frameHeight * 100) / this.tagsHeight;
 
