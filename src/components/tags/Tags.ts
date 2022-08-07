@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { boundMethod } from 'autobind-decorator';
 
 class Tags {
@@ -39,6 +38,8 @@ class Tags {
   private tagsTranslateY: number = 0;
 
   private thumbTop: number = 0;
+
+  private b: number = 0;
 
   // eslint-disable-next-line no-undef
   private movementOnMouseHold: NodeJS.Timer | null = null;
@@ -100,7 +101,7 @@ class Tags {
   }
 
   private bindEvent() {
-    this.wrapper.addEventListener('dragstart', this.handleWrapperDragstart);
+    this.wrapper.addEventListener('dragstart', Tags.handleWrapperDragstart);
 
     if (this.buttons) {
       this.buttons.forEach((button) => {
@@ -128,7 +129,7 @@ class Tags {
   }
 
   @boundMethod
-  private handleWrapperDragstart(event: Event) {
+  static handleWrapperDragstart(event: Event) {
     event.preventDefault();
   }
 
@@ -143,10 +144,10 @@ class Tags {
 
     this.tagsTranslateY = deltaPercent <= 0 ? deltaPercent : 0;
     this.thumbTop = pointerTopPosition;
-    // this.tags.style.top = `${delta * -1}px`; // корректируем положение списка тегов, смещенных фокусом
+    this.tags.style.top = `${delta * -1}px`; // корректируем положение списка тегов, смещенных фокусом
 
     if (this.thumb) this.thumb.style.top = `${this.thumbTop}px`;
-    // this.setStyle();
+    this.setStyle();
   }
 
   @boundMethod
@@ -267,7 +268,7 @@ class Tags {
 
   @boundMethod
   private handleThumbPointerDown(event: PointerEvent) {
-    if (!this.thumb || !this.track) return false;
+    if (!this.thumb || !this.track || !this.tags || !this.frame) return false;
     this.thumb.setPointerCapture(event.pointerId);
     this.shiftY = event.clientY - this.thumb.getBoundingClientRect().top;
     this.track.addEventListener('pointermove', this.handleThumbPointerMove);
@@ -294,11 +295,6 @@ class Tags {
     if (!this.track || !this.tags || !this.frame) return false;
     const pointerTopPosition = coordinateY
       - this.track.getBoundingClientRect().top - this.shiftY;
-
-    if (this.isShiftByFocus()) {
-      console.log('!');
-      return true;
-    }
 
     if (pointerTopPosition < 0) {
       this.tagsTranslateY = 0;
@@ -327,11 +323,6 @@ class Tags {
 
   private moveTagsList(delta: number, isMovingUp = true) {
     if (!this.thumb || !this.tags) return;
-
-    if (this.isShiftByFocus()) {
-      console.log('!');
-      return;
-    }
 
     const shift = this.tagsTranslateY - delta;
 
@@ -363,14 +354,6 @@ class Tags {
     this.thumb.style.top = `${this.thumbTop}px`;
     this.tags.style.transform = `translateY(${this.tagsTranslateY}%)`;
     return true;
-  }
-
-  private isShiftByFocus() {
-    if (this.tags && this.frame) {
-      return this.tags.style.transform === 'translateY(0%)'
-    && this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top !== 0;
-    }
-    return false;
   }
 }
 
