@@ -33,6 +33,7 @@ class BreadCrumbs {
   private makeMarkers() {
     if (!this.items || !this.markers) return;
     this.maxHeight = this.items.offsetHeight;
+    console.log('this.maxHeight>>>', this.maxHeight);
 
     const marks = this.markers.querySelectorAll(`.${this.className}__marker`);
     marks.forEach((mark) => mark.remove());

@@ -1,3 +1,6 @@
+$indent: 10px;
+
+
 .bread-crumbs {
   box-shadow: $section-shadow;
   background-color: $background-section;
@@ -9,17 +12,19 @@
     padding-inline: 0;
     padding-right: 5px;
     list-style: none;
-  
     float: left;
     font-size: 0.8rem;
+    width: $indent;
     }
   &__items {
+    margin-left: auto;
     margin-block: 0;
     padding-inline: 0;
     height: auto;
     font-size: 0.8rem;
     font-weight: normal;
     word-break: break-all;
+    width: calc(100% - $indent)
     }
 
   &__item {
