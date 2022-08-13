@@ -43,6 +43,7 @@ class BreadCrumbs {
     marks.forEach((mark) => mark.remove());
 
     const maxHeight = this.items.offsetHeight;
+    console.log('maxHeight>>>', maxHeight);
     const count = Math.round(maxHeight / this.lineHeight);
     const fragment = document.createDocumentFragment();
 
