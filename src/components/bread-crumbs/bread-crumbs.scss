@@ -1,21 +1,20 @@
 $indent: 10px;
 
-
 .bread-crumbs {
   box-shadow: $section-shadow;
   background-color: $background-section;
   padding: 2px 5px 5px;
   font-weight: bolder;
-    
+
   &__markers {
     margin-block: 0;
     padding-inline: 0;
-    padding-right: 5px;
     list-style: none;
     float: left;
     font-size: 0.8rem;
     width: $indent;
     }
+
   &__items {
     margin-left: auto;
     margin-block: 0;
@@ -33,11 +32,14 @@ $indent: 10px;
     display: inline;
     word-break: break-all;
   }
+
   &__link {
     color: $color-grey-hover;
+
     &:hover {
       color: $color-grey;
     }
+
     &_last:hover {
       color: $color-grey-hover;
     }
