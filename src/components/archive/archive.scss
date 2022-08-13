@@ -12,7 +12,6 @@
 $item-padding: 5px 0 5px 10px;
 
 .archive {
-  border-bottom: 2px solid $color-grey-light;
   @include font-rem(19);
   padding: 10px 10px 30px 10px;
   font-weight: bolder;

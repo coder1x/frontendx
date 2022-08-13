@@ -3,13 +3,15 @@ mixin bread-crumbs()
   -
     const className = 'bread-crumbs'
 
-  ul(class = className) >
-    -let n = 0
-      while n < 7
-        li(class = `${className}__item`)
-          a(class = `${className}__link` href = 'http://www.frontendx.ru')= `длинное имя ссылки ${n++}/`
-    li(class = `${className}__item`)
-      span(class = `${className}__link ${className}__link_last`)= `последняя ссылка`
+  div(class = className)
+    ol(class = `${className}__markers`)
+    ol(class = `${className}__items`)
+      -let n = 0
+        while n < 17
+          li(class = `${className}__item`)
+            a(class = `${className}__link` href = 'http://www.frontendx.ru')= `длинное имя ссылки ${n++}/`
+      li(class = `${className}__item`)
+        span(class = `${className}__link ${className}__link_last`)= `последняя ссылка`
 
 
 

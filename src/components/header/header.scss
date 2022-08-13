@@ -82,7 +82,8 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
     }
   }
 
-  &__toggle-menu {
+  &__toggle-menu,
+  &__toggle-search-panel {
     display: none;
     width: 57px;
     background-color: transparent;

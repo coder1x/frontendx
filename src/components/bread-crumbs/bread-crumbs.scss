@@ -3,14 +3,30 @@
   background-color: $background-section;
   padding: 2px 5px 5px;
   font-weight: bolder;
+    
+  &__markers {
+    margin-block: 0;
+    padding-inline: 0;
+    padding-right: 5px;
+    list-style: none;
+  
+    float: left;
+    font-size: 0.8rem;
+    }
+  &__items {
+    margin-block: 0;
+    padding-inline: 0;
+    height: auto;
+    font-size: 0.8rem;
+    font-weight: normal;
+    word-break: break-all;
+    }
 
   &__item {
     font-size: 0.8rem;
     font-weight: normal;
     display: inline;
-    &:first-child {
-      margin-left: 5px;
-    }
+    word-break: break-all;
   }
   &__link {
     color: $color-grey-hover;

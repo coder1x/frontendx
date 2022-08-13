@@ -1,12 +1,14 @@
-mixin tags(options = {})
+mixin tags({hasHeader = true, hasBorder = true} = {})
   -
 
     const className = 'tags'
+    const borderModifier = hasBorder? `${className}__frame_has-border`: ''
   div(class = `${className}`)
-    span(class = `${className}__header`)
-      span(class = `${className}__label`) Теги
-      span(class = `${className}__amount`) 100
-    div(class = `${className}__frame`) 
+    if hasHeader
+      span(class = `${className}__header`)
+        span(class = `${className}__label`) Теги
+        span(class = `${className}__amount`) 100
+    div(class = `${className}__frame ${borderModifier}`) 
       ul(class = `${className}__list` style = 'transform: translateY(0%)') 
         -let n = 1
         while n <= 100

@@ -1,6 +1,4 @@
 .search-panel {
-  display: flex;
-  flex-direction: column;
   width: 300px;
   box-shadow: $section-shadow;
   background-color: $background-section;
@@ -8,10 +6,16 @@
   &-wrapper {
     height: 100%;
     position: relative;
+    padding: 10px;
+  }
+
+  &__search-form-wrapper,
+  &__categories-wrapper,
+  &__archive-wrapper {
+    border-bottom: 2px solid $color-grey-light;
   }
 
   &__search-form-wrapper{
-    margin-top: 10px;
-    margin-left: 10px;
+    padding: 20px 10px;
   }
 }
