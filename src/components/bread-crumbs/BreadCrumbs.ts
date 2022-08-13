@@ -5,7 +5,7 @@ class BreadCrumbs {
 
   private breadCrumbs: HTMLElement;
 
-  private items: HTMLElement | null = null;
+  private items: HTMLUListElement| null = null;
 
   private markers: HTMLElement | null = null;
 
@@ -43,7 +43,6 @@ class BreadCrumbs {
     marks.forEach((mark) => mark.remove());
 
     const maxHeight = this.items.offsetHeight;
-    console.log('maxHeight>>>', maxHeight);
     const count = Math.round(maxHeight / this.lineHeight);
     const fragment = document.createDocumentFragment();
 
