@@ -2,6 +2,7 @@ extends ../layout/layout.pug
 include ../../components/article-card/article-card.pug
 include ../../components/search-panel/search-panel.pug
 include ../../components/bread-crumbs/bread-crumbs.pug
+include ../../components/pagination/pagination.pug
 
 block title 
   title Записи
@@ -87,4 +88,5 @@ block content
     })
     aside(class = 'blog__search-panel-wrapper')
       +search-panel()
-    aside(class = 'blog__pagination-wrapper') Пагинация
+    aside(class = 'blog__pagination-wrapper')
+      +pagination()

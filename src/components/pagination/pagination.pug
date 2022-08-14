@@ -1,0 +1,15 @@
+mixin pagination()
+  -
+    const elementName = 'pagination'
+
+  div(class = elementName aria-label = "pagination")
+    div(class = `${elementName}__pages`)
+      a(class = `${elementName}__element ${elementName}__element-previous` href = "https://test/test")
+      a(class = `${elementName}__element ${elementName}__element-page` href = "https://test/test") 1
+      span(class = `${elementName}__element ${elementName}__hidden-page`) ...
+      a(class = `${elementName}__element ${elementName}__element-page` href = "https://test/test") 9
+      a(class = `${elementName}__element ${elementName}__element-page` href = "https://test/test") 10
+      a(class = `${elementName}__element ${elementName}__element-page` href = "https://test/test") 11
+      span(class = `${elementName}__element ${elementName}__hidden-page`) ...
+      a(class = `${elementName}__element ${elementName}__element-page` href = "https://test/test") 15
+      a(class = `${elementName}__element ${elementName}__element-next` href = "https://test/test")
