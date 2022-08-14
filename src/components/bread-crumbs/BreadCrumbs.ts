@@ -1,5 +1,7 @@
 import { boundMethod } from 'autobind-decorator';
 
+import Throttle from '../throttle/Throttle';
+
 class BreadCrumbs {
   private className: string = '';
 
@@ -29,9 +31,8 @@ class BreadCrumbs {
     this.bindEvent();
   }
 
-  // здесь нужен кастомный ресайз
   private bindEvent() {
-    window.addEventListener('resize', this.makeMarkers);
+    new Throttle('resize', this.makeMarkers, 10); // подписываемся на событие ресайза
   }
 
   @boundMethod
