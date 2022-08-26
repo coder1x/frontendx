@@ -11,13 +11,6 @@ $gap: 12px;
     padding: $size-padding $min-size-padding;
   }
 
-  &__bread-crumbs-wrapper {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  }
-
   &__articles-wrapper {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -38,22 +31,6 @@ $gap: 12px;
     }
     @include media-breakpoint-down($xs2) {
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-  }
-
-  &__search-panel-wrapper {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
-
-    @include media-breakpoint-down($lg2) {
-      //visually-hidden
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
     }
   }
 

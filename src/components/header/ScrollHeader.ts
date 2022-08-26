@@ -1,4 +1,5 @@
 import { boundMethod } from 'autobind-decorator';
+import Observer from '../observer/Observer';
 
 import Throttle from '../throttle/Throttle';
 
@@ -7,7 +8,7 @@ interface Props {
   nameAnimation: string
 }
 
-class ScrollHeader {
+class ScrollHeader extends Observer {
   private prevY = 0;
 
   private direction = 'bottom';
@@ -37,6 +38,7 @@ class ScrollHeader {
   private menuVisible = '';
 
   constructor(props: Props) {
+    super();
     this.init(props);
   }
 
@@ -186,6 +188,7 @@ class ScrollHeader {
     if (target.closest(`.${this.className}__toggle-search-panel`)) {
       if (!this.search) return false;
       this.search.classList.toggle(this.buttonActive);
+      this.notify('toggle');
       // здесь вызываем метод панели, отвечающий за ее отображение / скрытие
       return true;
     }
@@ -206,6 +209,7 @@ class ScrollHeader {
     }
     if (target.closest(`.${this.className}__toggle-search-panel`)) {
       if (!this.search) return false;
+      this.notify('toggle');
       // здесь вызываем метод панели, отвечающий за ее скрытие
       return true;
     }

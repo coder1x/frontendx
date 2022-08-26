@@ -1,0 +1,14 @@
+extends ../layout/layout.pug
+include ../../components/search-panel/search-panel.pug
+include ../../components/bread-crumbs/bread-crumbs.pug
+
+block title 
+  title Записи
+block content
+  div(class = 'layout-with-panel')
+    aside(class = 'layout-with-panel__bread-crumbs-wrapper')
+      +bread-crumbs()
+    block main
+    aside(class = 'layout-with-panel__search-panel-wrapper layout-with-panel__search-panel-wrapper_hidden')
+      +search-panel()
+    block pagination

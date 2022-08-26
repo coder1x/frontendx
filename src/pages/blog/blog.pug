@@ -1,92 +1,86 @@
-extends ../layout/layout.pug
+extends ../layout-with-panel/layout-with-panel.pug
 include ../../components/article-card/article-card.pug
-include ../../components/search-panel/search-panel.pug
-include ../../components/bread-crumbs/bread-crumbs.pug
 include ../../components/pagination/pagination.pug
 
 block title 
   title Записи
-block content
-  div(class = 'blog')
-    aside(class = 'blog__bread-crumbs-wrapper')
-      +bread-crumbs()
-    main(class = 'blog__articles-wrapper')
-      +article-card({
-        header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки ',
-        text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-        'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем ',
+block main
+  main(class = 'blog__articles-wrapper')
+    +article-card({
+      header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки ',
       text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-        'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработкин астраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработки',
-      text: ['Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем ',
-      text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack ']
-      })
-      +article-card({
-      header: 'Настраиваем webpack для frontend разработки',
-      text: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium ab magnam est, temporibus officia, porro expedita id illum, voluptatibus cumque in atque exercitationem mollitia labore sit maxime at nostrum? Repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ab veritatis necessitatibus eius, libero et perferendis nesciunt molestias provident ea enim minima aperiam, fuga voluptates hic quia natus sit. Ad?']
+      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
     })
-      +article-card({
-        header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки ',
-        text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-        'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем ',
+    +article-card({
+    header: 'Настраиваем ',
+    text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
+    })
+    +article-card({
+    header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработкин астраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработки',
+    text: ['Настраиваем webpack для frontend разработки']
+    })
+    +article-card({
+    header: 'Настраиваем ',
+    text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack ']
+    })
+    +article-card({
+    header: 'Настраиваем webpack для frontend разработки',
+    text: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium ab magnam est, temporibus officia, porro expedita id illum, voluptatibus cumque in atque exercitationem mollitia labore sit maxime at nostrum? Repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ab veritatis necessitatibus eius, libero et perferendis nesciunt molestias provident ea enim minima aperiam, fuga voluptates hic quia natus sit. Ad?']
+  })
+    +article-card({
+      header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки ',
       text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-        'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработкин астраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработки',
-      text: ['Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем ',
-      text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack ']
-      })
-      +article-card({
-      header: 'Настраиваем webpack для frontend разработки',
-      text: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium ab magnam est, temporibus officia, porro expedita id illum, voluptatibus cumque in atque exercitationem mollitia labore sit maxime at nostrum? Repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ab veritatis necessitatibus eius, libero et perferendis nesciunt molestias provident ea enim minima aperiam, fuga voluptates hic quia natus sit. Ad?']
+      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
     })
-      +article-card({
-        header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки ',
-        text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-        'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем ',
+    +article-card({
+    header: 'Настраиваем ',
+    text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
+    })
+    +article-card({
+    header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработкин астраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработки',
+    text: ['Настраиваем webpack для frontend разработки']
+    })
+    +article-card({
+    header: 'Настраиваем ',
+    text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack ']
+    })
+    +article-card({
+    header: 'Настраиваем webpack для frontend разработки',
+    text: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium ab magnam est, temporibus officia, porro expedita id illum, voluptatibus cumque in atque exercitationem mollitia labore sit maxime at nostrum? Repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ab veritatis necessitatibus eius, libero et perferendis nesciunt molestias provident ea enim minima aperiam, fuga voluptates hic quia natus sit. Ad?']
+  })
+    +article-card({
+      header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки настраиваем webpack для frontend разработки ',
       text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-        'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработкин астраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработки',
-      text: ['Настраиваем webpack для frontend разработки']
-      })
-      +article-card({
-      header: 'Настраиваем ',
-      text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
-      'Настраиваем webpack ']
-      })
-      +article-card({
-      header: 'Настраиваем webpack для frontend разработки',
-      text: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium ab magnam est, temporibus officia, porro expedita id illum, voluptatibus cumque in atque exercitationem mollitia labore sit maxime at nostrum? Repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ab veritatis necessitatibus eius, libero et perferendis nesciunt molestias provident ea enim minima aperiam, fuga voluptates hic quia natus sit. Ad?']
+      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
     })
-    aside(class = 'blog__search-panel-wrapper')
-      +search-panel()
-    aside(class = 'blog__pagination-wrapper')
-      +pagination()
+    +article-card({
+    header: 'Настраиваем ',
+    text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+      'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки']
+    })
+    +article-card({
+    header: 'Настраиваем webpack для frontend разработки в настраиваем webpack для frontend разработкин астраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработкинастраиваем webpack для frontend разработки',
+    text: ['Настраиваем webpack для frontend разработки']
+    })
+    +article-card({
+    header: 'Настраиваем ',
+    text: ['Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack для frontend разработки Настраиваем webpack для frontend разработки',
+    'Настраиваем webpack ']
+    })
+    +article-card({
+    header: 'Настраиваем webpack для frontend разработки',
+    text: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium ab magnam est, temporibus officia, porro expedita id illum, voluptatibus cumque in atque exercitationem mollitia labore sit maxime at nostrum? Repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ab veritatis necessitatibus eius, libero et perferendis nesciunt molestias provident ea enim minima aperiam, fuga voluptates hic quia natus sit. Ad?']
+  })
+block pagination
+  aside(class = 'blog__pagination-wrapper')
+    +pagination()
