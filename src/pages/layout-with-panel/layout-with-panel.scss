@@ -24,6 +24,11 @@ $gap: 12px;
     grid-row-start: 2;
     grid-row-end: 3;
 
+    animation-name: HeaderMenuAnimation;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+
     &_hidden {
       @include media-breakpoint-down($lg2) {
         //visually-hidden
@@ -32,7 +37,19 @@ $gap: 12px;
         height: 1px;
         overflow: hidden;
         clip: rect(0 0 0 0);
+
+        animation-name: HeaderMenuAnimation;
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
       }
     }
+  }
+}
+
+@keyframes HeaderMenuAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-45%);
   }
 }

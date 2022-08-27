@@ -176,6 +176,8 @@ class ScrollHeader extends Observer {
 
   @boundMethod
   private handleClickButton(event: Event) {
+    console.log(event);
+
     const target = event.target as HTMLElement;
 
     if (target.closest(`.${this.className}__toggle-menu`)) {
@@ -209,7 +211,7 @@ class ScrollHeader extends Observer {
     }
     if (target.closest(`.${this.className}__toggle-search-panel`)) {
       if (!this.search) return false;
-      this.notify('toggle');
+      if (event.key === 'Escape' || event.key === 'Space') { this.notify('toggle'); }
       // здесь вызываем метод панели, отвечающий за ее скрытие
       return true;
     }

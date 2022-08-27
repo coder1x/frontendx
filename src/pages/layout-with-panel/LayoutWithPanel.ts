@@ -21,13 +21,11 @@ class LayoutWithPanel extends Observer {
 
   private createComponents() {
     this.searchPanelElement = document.querySelector('.layout-with-panel__search-panel-wrapper');
-    console.log('this.searchPanelElement>>>', this.searchPanelElement);
 
     this.header = new ScrollHeader({
       selector: '.header',
       nameAnimation: 'fixedHeaderAnimation',
     });
-    // this.searchPanel = new SearchPanel(this.searchPanelElement);
   }
 
   private createListeners() {
@@ -39,8 +37,9 @@ class LayoutWithPanel extends Observer {
 
   @boundMethod
   private handleCloseSearchPanel(key: string) {
-    console.log('!');
     if (key !== 'close') return;
+
+    console.log('&');
     this.closeSearchPanel();
   }
 
