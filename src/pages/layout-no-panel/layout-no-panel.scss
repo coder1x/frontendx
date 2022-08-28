@@ -1,0 +1,55 @@
+$gap: 12px;
+.layout-with-panel {
+  max-width: $max-wraper;
+  margin: 0 auto;
+  padding: $size-padding;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-template-rows: repeat(3, auto);
+  gap: $gap;
+  @include media-breakpoint-down($md) {
+    padding: $size-padding $min-size-padding;
+  }
+
+  &__bread-crumbs-wrapper {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  &__search-panel-wrapper {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    animation-name: HeaderMenuAnimation;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+    &_hidden {
+      @include media-breakpoint-down($lg2) {
+        //visually-hidden
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+
+        animation-name: HeaderMenuAnimation;
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+      }
+    }
+  }
+}
+
+@keyframes HeaderMenuAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-45%);
+  }
+}

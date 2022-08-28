@@ -31,8 +31,6 @@ class ScrollHeader extends Observer {
 
   private menu: HTMLElement | null = null;
 
-  private searchPanel: HTMLElement | null = null;
-
   private buttonActive = '';
 
   private menuVisible = '';
@@ -69,7 +67,6 @@ class ScrollHeader extends Observer {
     this.menu = this.header.querySelector(`${className}__menu-wrap`);
     this.button = this.header.querySelector(`${className}__toggle-menu`);
     this.search = this.header.querySelector(`${className}__toggle-search-panel`);
-    this.searchPanel = document.querySelector('.blog__search-panel-wrapper');
 
     return true;
   }
@@ -159,7 +156,7 @@ class ScrollHeader extends Observer {
   }
 
   private bindEvent() {
-    if (!this.button || !this.search) return false;
+    if (!this.button) return false;
     new Throttle('scroll', this.doSomething, 10); // подписываемся на событие скролла
 
     this.buttonActive = `${this.className}__toggle-menu_active`;
@@ -168,6 +165,7 @@ class ScrollHeader extends Observer {
     this.button.addEventListener('keydown', this.handleKeydownButton);
     this.button.addEventListener('click', this.handleClickButton);
 
+    if (!this.search) return false;
     this.search.addEventListener('keydown', this.handleKeydownButton);
     this.search.addEventListener('click', this.handleClickButton);
 
@@ -176,8 +174,6 @@ class ScrollHeader extends Observer {
 
   @boundMethod
   private handleClickButton(event: Event) {
-    console.log(event);
-
     const target = event.target as HTMLElement;
 
     if (target.closest(`.${this.className}__toggle-menu`)) {
@@ -191,7 +187,6 @@ class ScrollHeader extends Observer {
       if (!this.search) return false;
       this.search.classList.toggle(this.buttonActive);
       this.notify('toggle');
-      // здесь вызываем метод панели, отвечающий за ее отображение / скрытие
       return true;
     }
     return true;
@@ -209,10 +204,10 @@ class ScrollHeader extends Observer {
       }
       return true;
     }
+
     if (target.closest(`.${this.className}__toggle-search-panel`)) {
       if (!this.search) return false;
-      if (event.key === 'Escape' || event.key === 'Space') { this.notify('toggle'); }
-      // здесь вызываем метод панели, отвечающий за ее скрытие
+      if (event.key === 'Escape' || event.key === 'Space') { this.notify('close'); }
       return true;
     }
     return true;
