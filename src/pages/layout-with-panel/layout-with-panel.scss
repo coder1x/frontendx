@@ -47,17 +47,21 @@ $gap: 12px;
 
     @include media-breakpoint-down($lg2) {
       transform: translateX(150%);
+      overflow: hidden;
     }
 
     &_hidden {
       @include media-breakpoint-down($lg2) {
         @include animation(SearchPanelHide, 150%);
+        overflow: hidden;
       }
     }
 
     &_visible {
       @include media-breakpoint-down($lg2) {
         @include animation(SearchPanelShow, 0);
+        height: initial;
+        overflow: initial;
       }
     }
   }
