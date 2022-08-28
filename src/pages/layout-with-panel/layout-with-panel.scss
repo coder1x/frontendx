@@ -1,5 +1,26 @@
 $gap: 12px;
+
+@mixin animation($name, $transform) {
+  transform: translateX($transform);
+  animation-name: $name;
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+  @keyframes SearchPanelShow {
+    from {
+      transform: translateX(150%);
+    }
+  }
+
+  @keyframes SearchPanelHide {
+    from {
+      transform: translateX(0);
+    }
+  }
+}
+
 .layout-with-panel {
+  overflow: hidden;
   max-width: $max-wraper;
   margin: 0 auto;
   padding: $size-padding;
@@ -24,32 +45,20 @@ $gap: 12px;
     grid-row-start: 2;
     grid-row-end: 3;
 
-    animation-name: HeaderMenuAnimation;
-    animation-duration: 0.3s;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+    @include media-breakpoint-down($lg2) {
+      transform: translateX(150%);
+    }
 
     &_hidden {
       @include media-breakpoint-down($lg2) {
-        //visually-hidden
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-
-        animation-name: HeaderMenuAnimation;
-        animation-duration: 0.3s;
-        animation-fill-mode: both;
-        animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+        @include animation(SearchPanelHide, 150%);
       }
     }
-  }
-}
 
-@keyframes HeaderMenuAnimation {
-  from {
-    opacity: 0;
-    transform: translateY(-45%);
+    &_visible {
+      @include media-breakpoint-down($lg2) {
+        @include animation(SearchPanelShow, 0);
+      }
+    }
   }
 }

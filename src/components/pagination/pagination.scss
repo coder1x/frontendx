@@ -37,6 +37,12 @@
     width: 30px;
     margin: 10px;
 
+    @include media-breakpoint-down($xs) {
+      width: 20px;
+      margin: 5px;
+      @include font-rem(10);
+    }
+
     &-page,
     &-next,
     &-previous {

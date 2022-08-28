@@ -9,8 +9,11 @@ class LayoutWithPanel extends Observer {
 
   private header: ScrollHeader | null = null;
 
+  private isStarted: boolean;
+
   constructor() {
     super();
+    this.isStarted = true;
     this.className = 'layout-with-panel__search-panel-wrapper';
     this.createComponents();
     this.createListeners();
@@ -47,11 +50,20 @@ class LayoutWithPanel extends Observer {
   private closeSearchPanel() {
     if (!this.searchPanelElement) return;
     this.searchPanelElement.classList.add(`${this.className}_hidden`);
+    this.searchPanelElement.classList.remove(`${this.className}_visible`);
   }
 
   private toggleSearchPanel() {
     if (!this.searchPanelElement) return;
+
+    if (this.isStarted) {
+      this.searchPanelElement.classList.add(`${this.className}_visible`);
+      this.isStarted = false;
+      return;
+    }
+
     this.searchPanelElement.classList.toggle(`${this.className}_hidden`);
+    this.searchPanelElement.classList.toggle(`${this.className}_visible`);
   }
 }
 
