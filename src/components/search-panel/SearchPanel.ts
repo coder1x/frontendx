@@ -77,7 +77,8 @@ class SearchPanel {
     if (!this.panelWrapper || !this.panel) return false;
 
     if (window.pageYOffset > this.scroll) { // крутим вниз
-      if (this.panel.style.position === 'sticky') {
+      if (this.panel.style.position === 'fixed'
+        || this.panel.style.position === 'absolute') {
         const top = `${this.panel.getBoundingClientRect().top
           + window.pageYOffset - this.panelTop}px`;
         setStyle('absolute', top);
@@ -87,7 +88,8 @@ class SearchPanel {
       const spaceToPageBottom = documentHeight
         - this.panelWrapper.getBoundingClientRect().bottom;
 
-      if (this.panel.getBoundingClientRect().bottom < 0) { // панель еще не видна (первая прокрутка вниз)
+      if (this.panel.getBoundingClientRect().bottom < 0
+        && this.panel.style.position !== 'fixed') { // панель еще не видна (первая прокрутка вниз)
         const delta = documentHeight - spaceToPageBottom;
         const bottom = delta >= 0 ? `${delta}px` : '0px';
         setStyle('absolute', 'auto', bottom); // панель появилась из-под шапки
@@ -96,7 +98,11 @@ class SearchPanel {
 
       if (this.panel.getBoundingClientRect().top > this.headerHeight
         && this.panel.style.position === 'absolute') { // панель продолжает выезжать из-под шапки
-        setStyle('sticky', `${this.headerHeight}px`);
+        setStyle('fixed', `${this.headerHeight}px`);
+      }
+
+      if (window.pageYOffset < this.panelTop) {
+        setStyle('static');
       }
     }
     this.scroll = window.pageYOffset;
