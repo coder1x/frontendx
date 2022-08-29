@@ -36,8 +36,8 @@ class LayoutWithPanel extends Observer {
 
   private createComponents() {
     this.searchPanelElement = this.wrapper.querySelector(`.${this.className}`) as HTMLElement;
-
-    this.setPanelHeight();
+    const isAuto = window.innerWidth > 1099;
+    this.setPanelHeight(isAuto);
 
     this.header = new ScrollHeader({
       selector: '.header',
