@@ -5,34 +5,39 @@ import ScrollHeader from '../../components/header/ScrollHeader';
 class LayoutWithPanel extends Observer {
   private className: string;
 
+  private wrapper: HTMLElement;
+
   private searchPanelElement: HTMLElement | null = null;
 
   private header: ScrollHeader | null = null;
 
   private isStarted: boolean;
 
-  private wrapper: Element;
-
   private panelHeight: string = 'auto';
 
-  constructor(element: Element) {
+  constructor(element: Element, className: string) {
     super();
-    this.wrapper = element;
+    this.wrapper = element as HTMLElement;
     this.isStarted = true;
-    this.className = 'layout-with-panel__search-panel-wrapper';
+    this.className = `${className.replace(/^./, '')}__search-panel-wrapper`;
     this.createComponents();
     this.createListeners();
   }
 
-  private createComponents() {
-    this.searchPanelElement = document.querySelector(`.${this.className}`) as HTMLElement;
-
-    let { top } = this.searchPanelElement.getBoundingClientRect();
-    if (top < 0) top = 0;
-    const panelHeight = window.innerHeight - top;
-    console.log('panelHeight>>>', panelHeight);
-    this.panelHeight = `${panelHeight}px`;
+  private setPanelHeight(isAutoHeight = false) {
+    if (!this.searchPanelElement) return;
+    if (!isAutoHeight) {
+      let { top } = this.searchPanelElement.getBoundingClientRect();
+      if (top < 0) top = 0;
+      this.panelHeight = `${window.innerHeight - top}px`;
+    } else { this.panelHeight = 'auto'; }
     this.searchPanelElement.style.height = this.panelHeight;
+  }
+
+  private createComponents() {
+    this.searchPanelElement = this.wrapper.querySelector(`.${this.className}`) as HTMLElement;
+
+    this.setPanelHeight();
 
     this.header = new ScrollHeader({
       selector: '.header',
@@ -61,15 +66,7 @@ class LayoutWithPanel extends Observer {
 
   private closeSearchPanel() {
     if (!this.searchPanelElement) return;
-
-    let { top } = this.searchPanelElement.getBoundingClientRect();
-    if (top < 0) top = 0;
-    let panelHeight = window.innerHeight - top;
-    console.log('panelHeight>>>', panelHeight);
-
-    panelHeight = window.innerHeight - top;
-    this.panelHeight = `${panelHeight}px`;
-    this.searchPanelElement.style.height = this.panelHeight;
+    this.setPanelHeight();
 
     this.searchPanelElement.classList.add(`${this.className}_hidden`);
     this.searchPanelElement.classList.remove(`${this.className}_visible`);
@@ -78,32 +75,18 @@ class LayoutWithPanel extends Observer {
   private toggleSearchPanel() {
     if (!this.searchPanelElement) return;
 
-    let { top } = this.searchPanelElement.getBoundingClientRect();
-    if (top < 0) top = 0;
-    let panelHeight = window.innerHeight - top;
-    console.log('panelHeight>>>', panelHeight);
-
-    if (this.isStarted) {
-      this.searchPanelElement.classList.add(`${this.className}_visible`);
+    if (this.isStarted) { // открываем панель первый раз
+      this.setPanelHeight(true);
       this.isStarted = false;
-      this.panelHeight = 'auto';
-      this.searchPanelElement.style.height = this.panelHeight; // auto
+      this.searchPanelElement.classList.add(`${this.className}_visible`);
       return;
     }
 
     if (this.panelHeight === 'auto') { // закрываем панель
-      panelHeight = window.innerHeight - top;
-      this.panelHeight = `${panelHeight}px`;
-      this.searchPanelElement.style.height = this.panelHeight;
-
-      this.searchPanelElement.classList.toggle(`${this.className}_hidden`);
-      this.searchPanelElement.classList.toggle(`${this.className}_visible`);
-      return;
+      this.setPanelHeight();
+    } else {
+      this.setPanelHeight(true); // открываем панель
     }
-
-    // открываем панель
-    this.panelHeight = 'auto';
-    this.searchPanelElement.style.height = this.panelHeight;
 
     this.searchPanelElement.classList.toggle(`${this.className}_hidden`);
     this.searchPanelElement.classList.toggle(`${this.className}_visible`);
