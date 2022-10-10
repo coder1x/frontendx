@@ -1,0 +1,46 @@
+.post {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  padding: 20px;
+  background-color: $background-section;
+  box-sizing: border-box;
+
+  @include media-breakpoint-down($lg2) {
+    grid-column-end: 3;
+  }
+
+  &__title {
+    margin: 20px 0;
+  }
+
+  &__text {
+    text-indent: 15px;
+  }
+
+  pre {
+    box-sizing: border-box;
+    padding: 20px;
+    margin: auto;
+    max-width: 808px;
+    overflow-x: scroll;
+    background-color: $color-background;
+
+    @include media-breakpoint-down($xl2) {
+      max-width: 795px;
+    }
+
+    @include media-breakpoint-down($lg) {
+      max-width: 700px;
+    }
+
+    @include media-breakpoint-down($lg2) {
+      max-width: 100%;
+    }
+  }
+
+  code {
+    box-sizing: border-box;
+  }
+}
