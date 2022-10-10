@@ -1,0 +1,14 @@
+.date {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  font-family: Consolas;
+  color: $color-grey-hover;
+  font-size: 0.9rem;
+
+  svg {
+    box-sizing: border-box;
+    height: 20px;
+    padding: 0 5px;
+  }
+}

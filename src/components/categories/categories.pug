@@ -1,0 +1,23 @@
+mixin categories(options = {})
+  -
+    const {
+      years
+    } = options
+
+    const link = 'http://www.frontendx.ru'
+
+    const className = 'categories'
+  ul(class = className) Категории
+    each year, index in years
+      li(class = `${className}__year`)
+        a(class = `${className}__articles-link` href = link tabindex = '0')
+          span(class = `${className}__text-name`)= index
+          span(class = `${className}__text-amount`)= year.total
+        ul(class = `${className}__months`)
+          each month, index in year
+            if index !='total'
+              li(class = `${className}__month`)
+                a(class = `${className}__articles-link` href = link tabindex = '0')
+                  span(class = `${className}__text-name`)= index
+                  span(class = `${className}__text-amount`)= month
+

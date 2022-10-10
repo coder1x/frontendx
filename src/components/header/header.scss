@@ -51,9 +51,12 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
     color: $color-item-link;
     font-size: 22px;
+
+    @include media-breakpoint-down($lg2) {
+      margin: auto;
+    }
 
     @include media-breakpoint-down($xs2) {
       max-width: 56px;
@@ -82,7 +85,8 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
     }
   }
 
-  &__toggle-menu {
+  &__toggle-menu,
+  &__toggle-search-panel {
     display: none;
     width: 57px;
     background-color: transparent;

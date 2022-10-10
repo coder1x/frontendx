@@ -1,6 +1,6 @@
-import ScrollHeader from './ScrollHeader';
+// import ScrollHeader from './ScrollHeader';
 
-new ScrollHeader({
-  selector: '.header',
-  nameAnimation: 'fixedHeaderAnimation',
-});
+// new ScrollHeader({
+//   selector: '.header',
+//   nameAnimation: 'fixedHeaderAnimation',
+// });

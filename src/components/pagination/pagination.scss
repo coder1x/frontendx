@@ -1,0 +1,94 @@
+@mixin arrow-tip-style($color) {
+  cursor: pointer;
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  border-left: 2px solid $color;
+  border-bottom: 2px solid $color;
+  transform: rotate(-135deg);
+}
+
+@mixin arrow-basis-style($color) {
+  cursor: pointer;
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 14px;
+  background-color: $color;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__pages {
+    display: flex;
+  }
+
+  &__element {
+    @include font-rem(18);
+    color: $color-grey;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    margin: 10px;
+
+    @include media-breakpoint-down($xs) {
+      width: 20px;
+      margin: 5px;
+      @include font-rem(10);
+    }
+
+    &-page,
+    &-next,
+    &-previous {
+      font-weight: bolder;
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        color: $color-grey-hover;
+      }
+      &:focus {
+        outline-offset: 5px;
+      }
+    }
+
+    &-next,
+    &-previous {
+      &::before {
+        @include arrow-basis-style($button-background);
+        align-self: center;
+      }
+      &::after {
+        @include arrow-tip-style($button-background);
+        align-self: center;
+      }
+    }
+
+    &-previous {
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+
+    &-next,
+    &-previous {
+      &:hover,
+      &:focus {
+        &::before {
+          background-color: $color-grey-hover;
+        }
+        &::after {
+          border-color: $color-grey-hover;
+        }
+      }
+      &:focus {
+        outline-offset: 5px;
+      }
+    }
+  }
+}

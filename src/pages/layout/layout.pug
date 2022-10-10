@@ -8,7 +8,8 @@ html(lang='ru')
     block title
       title 🦊 Fearless coder
   body(class='page')
-    +header({})
+    block header
+      +header({})
     .page__wrap
       block content
     +footer({})

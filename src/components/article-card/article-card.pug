@@ -1,0 +1,21 @@
+include ../button/button.pug
+include ../date/date.pug
+
+mixin article-card(options = {})
+  -
+    const {
+      header = '',
+      text = '',
+      link = 'http://www.frontendx.ru',
+    } = options
+
+    const className = 'article-card'
+
+  article(class = className)
+    h2(class = `${className}__header` tabindex = 0)
+      a(class = `${className}__header-link` href = link tabindex = -1)= header
+    p(class = `${className}__text`)= text
+    div(class = `${className}__footer`)
+      +date({date:'24.05.2022' })
+      +button()
+

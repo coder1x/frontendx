@@ -1,4 +1,5 @@
 import { boundMethod } from 'autobind-decorator';
+import Observer from '../observer/Observer';
 
 import Throttle from '../throttle/Throttle';
 
@@ -7,7 +8,7 @@ interface Props {
   nameAnimation: string
 }
 
-class ScrollHeader {
+class ScrollHeader extends Observer {
   private prevY = 0;
 
   private direction = 'bottom';
@@ -26,6 +27,8 @@ class ScrollHeader {
 
   private button: HTMLButtonElement | null = null;
 
+  private search: HTMLButtonElement | null = null;
+
   private menu: HTMLElement | null = null;
 
   private buttonActive = '';
@@ -33,6 +36,7 @@ class ScrollHeader {
   private menuVisible = '';
 
   constructor(props: Props) {
+    super();
     this.init(props);
   }
 
@@ -62,6 +66,7 @@ class ScrollHeader {
 
     this.menu = this.header.querySelector(`${className}__menu-wrap`);
     this.button = this.header.querySelector(`${className}__toggle-menu`);
+    this.search = this.header.querySelector(`${className}__toggle-search-panel`);
 
     return true;
   }
@@ -160,23 +165,50 @@ class ScrollHeader {
     this.button.addEventListener('keydown', this.handleKeydownButton);
     this.button.addEventListener('click', this.handleClickButton);
 
+    if (!this.search) return false;
+    this.search.addEventListener('keydown', this.handleKeydownButton);
+    this.search.addEventListener('click', this.handleClickButton);
+
     return true;
   }
 
   @boundMethod
-  private handleClickButton() {
-    if (!this.button || !this.menu) return false;
-    this.button.classList.toggle(this.buttonActive);
-    this.menu.classList.toggle(this.menuVisible);
+  private handleClickButton(event: Event) {
+    const target = event.target as HTMLElement;
+
+    if (target.closest(`.${this.className}__toggle-menu`)) {
+      if (!this.button || !this.menu) return false;
+      this.button.classList.toggle(this.buttonActive);
+      this.menu.classList.toggle(this.menuVisible);
+      return true;
+    }
+
+    if (target.closest(`.${this.className}__toggle-search-panel`)) {
+      if (!this.search) return false;
+      this.search.classList.toggle(this.buttonActive);
+      this.notify('toggle');
+      return true;
+    }
     return true;
   }
 
   @boundMethod
   private handleKeydownButton(event: KeyboardEvent) {
-    if (!this.button || !this.menu) return false;
-    if (event.key === 'Escape' || event.key === 'Space') {
-      this.button.classList.remove(this.buttonActive);
-      this.menu.classList.remove(this.menuVisible);
+    const target = event.target as HTMLElement;
+
+    if (target.closest(`.${this.className}__toggle-menu`)) {
+      if (!this.button || !this.menu) return false;
+      if (event.key === 'Escape' || event.key === 'Space') {
+        this.button.classList.remove(this.buttonActive);
+        this.menu.classList.remove(this.menuVisible);
+      }
+      return true;
+    }
+
+    if (target.closest(`.${this.className}__toggle-search-panel`)) {
+      if (!this.search) return false;
+      if (event.key === 'Escape' || event.key === 'Space') { this.notify('close'); }
+      return true;
     }
     return true;
   }

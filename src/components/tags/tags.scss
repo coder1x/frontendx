@@ -1,0 +1,124 @@
+@mixin marker($symbol) {
+  content: $symbol;
+  position: absolute;
+  color: $color-grey-hover;
+  font-size: 9px;
+}
+
+$barWidth: 8px;
+
+.tags {
+  padding: 10px 0 30px 10px;
+  margin-right: 10px;
+  position: relative;
+  user-select: none;
+
+  &__header {
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__label{
+    @include font-rem(19);
+  }
+
+  &__amount{
+    @include font-rem(16);
+  }
+
+  &__frame {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+    position: relative;
+    max-height: 250px;
+    overflow: hidden;
+    &_has-border{
+      outline: 1px solid $color-grey-light;
+    }
+  }
+
+  &__list {
+    padding: 10px;
+    top: 0px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__scrollbar {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: $barWidth;
+    top: 42px;
+    bottom: 30px;
+    right: 0;
+    touch-action: none;
+
+    &-track {
+      background-color: $color-grey-light;
+      flex-grow: 1;
+      position: relative;
+    }
+
+    &-thumb {
+      position: absolute;
+      box-sizing: border-box;
+      width: 8px;
+      background-color: $color-grey-hover;
+      cursor: pointer;
+
+      &:hover{
+        background-color: $button-background;
+        transition: background-color ease-in-out 500ms;
+      }
+    }
+
+    &-button {
+      height: 15px;
+      background-color: $color-grey-light;
+      cursor: pointer;
+      position: relative;
+
+      &:hover {
+        &::before{
+          color: $button-background;
+          transition: background-color ease-in-out 500ms;
+        }
+      }
+
+      &_up {
+        &::before {
+          @include marker("▲");
+          bottom: 4px;
+          }
+      }
+
+      &_down {
+        &::before {
+          @include marker("▼");
+          top: 4px;
+        }
+      }
+    }
+  }
+
+  &__item-link {
+    @include font-rem(16);
+    font-weight: normal;
+    cursor: pointer;
+
+    &:focus {
+      outline-offset: 5px;
+    }
+
+    &:hover {
+      color: $color-grey-hover;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+extends ../layout/layout.pug
+include ../../components/header/header.pug
+include ../../components/bread-crumbs/bread-crumbs.pug
+
+block title 
+  title Записи
+block header
+  +header()
+block content
+  div(class = 'layout-no-panel')
+    block main
+
