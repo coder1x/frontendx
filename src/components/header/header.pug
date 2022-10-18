@@ -7,14 +7,14 @@ mixin header(options = {})
     } = options
 
     let classComponent = 'header'
-    let className = classComponent
+    let BASE_CLASS = classComponent
 
     if(modifier){
-    className += ' '+classComponent+'_'+modifier}
+    BASE_CLASS += ' '+classComponent+'_'+modifier}
     if(addClass){
-    className += ' '+addClass}
+    BASE_CLASS += ' '+addClass}
 
-  header(class=className)
+  header(class=BASE_CLASS)
     div(class=classComponent+'__wrapper')
 
       button(class=classComponent+'__toggle-menu' type="button" aria-haspopup="" aria-expanded="true" aria-label="меню гамбургер")

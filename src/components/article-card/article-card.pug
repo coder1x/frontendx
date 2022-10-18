@@ -9,13 +9,13 @@ mixin article-card(options = {})
       link = '/single.html',
     } = options
 
-    const className = 'article-card'
+    const BASE_CLASS = 'article-card'
 
-  article(class = className)
-    h2(class = `${className}__header` tabindex = 0)
-      a(class = `${className}__header-link` href = link tabindex = -1)= header
-    p(class = `${className}__text`)= text
-    div(class = `${className}__footer`)
+  article(class = BASE_CLASS)
+    h2(class = `${BASE_CLASS}__title` tabindex = 0)
+      a(class = `${BASE_CLASS}__title-link` href = link tabindex = -1)= header
+    p(class = `${BASE_CLASS}__text`)= text
+    div(class = `${BASE_CLASS}__footer`)
       +date({date:'24.05.2022' })
-      +button()
+      +button({link:'/single.html'})
 

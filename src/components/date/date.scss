@@ -3,12 +3,13 @@
   flex-direction: row-reverse;
   align-items: flex-end;
   font-family: Consolas;
-  color: $color-grey-hover;
-  font-size: 0.9rem;
+  color: $color-grey;
+  font-size: 14.4px;
 
-  svg {
-    box-sizing: border-box;
+  &__icon {
+    width: 20px;
     height: 20px;
-    padding: 0 5px;
+    padding-right: 5px;
+    fill: $color-grey;
   }
 }

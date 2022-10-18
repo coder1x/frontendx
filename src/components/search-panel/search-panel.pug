@@ -6,13 +6,13 @@ include ../tags/tags.pug
 
 mixin search-panel()
   -
-    const className = 'search-panel'
+    const BASE_CLASS = 'search-panel'
 
-  div(class = `${className}-wrapper`)
-    div(class = className)
-      div(class = `${className}__search-form-wrapper`)
+  div(class = `${BASE_CLASS}-wrapper`)
+    div(class = BASE_CLASS)
+      div(class = `${BASE_CLASS}__search-form-wrapper`)
         +search-form()
-      div(class = `${className}__categories-wrapper`)
+      div(class = `${BASE_CLASS}__categories-wrapper`)
         +categories({years: {
           'Категория #1': {
             'total': '9999', 
@@ -45,7 +45,7 @@ mixin search-panel()
             'Подкатегория #1': '5',
             'Подкатегория #2': '1144',
           }}})
-      div(class = `${className}__archive-wrapper`)
+      div(class = `${BASE_CLASS}__archive-wrapper`)
         +archive({years: {
           '2019': {
             'total': '9999', 
@@ -78,6 +78,6 @@ mixin search-panel()
             'январь': '5',
             'март': '1144',
           }}})
-      div(class = `${className}__tags-wrapper`)
+      div(class = `${BASE_CLASS}__tags-wrapper`)
         +tags()
 

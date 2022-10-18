@@ -1,6 +1,9 @@
 $min-wrapper: 319px;
 $max-wrapper: 1160px;
 
+$size-padding: 20px;
+$min-size-padding: 10px;
+
 $xxs: 320px;
 $xs2: 419px;
 $xs: 575px;
@@ -21,6 +24,7 @@ $button-background: rgb(83, 83, 83);
 $button-background-hover: rgb(116, 116, 116);
 $color-grey-hover: #808080;
 $color-dark-grey: #252525;
+$color-dark-grey-hover: #545454;
 $color-grey: #555;
 $color-grey-light: #e1e1e1;
 $color-background: #edeef0;
@@ -28,9 +32,7 @@ $color-background: #edeef0;
 //------------- FONT ------------
 
 $font: Verdana, Arial, sans-serif;
+$font-title: "arial black", "britannic bold", "impact";
 
-$size-padding: 20px;
-$min-size-padding: 10px;
-
-//-------------------------------
 $font-size: 16;
+//-------------------------------

@@ -11,28 +11,28 @@ mixin category-tile(options = {})
 
 
     let classComponent = 'category-tile'
-    let className = classComponent
+    let BASE_CLASS = classComponent
     if(modifier){
       for(let item of modifier)
-    className += ' '+classComponent+'_'+item
+    BASE_CLASS += ' '+classComponent+'_'+item
     }
     if(addClass){
-    className += ' '+addClass}
+    BASE_CLASS += ' '+addClass}
 
-  article(class=className)
-    div(class=className+'__blind-wrap')
-      div(class=className+'__blind')
-        div(class=className+'__blind-text')
+  article(class=BASE_CLASS)
+    div(class=BASE_CLASS+'__blind-wrap')
+      div(class=BASE_CLASS+'__blind')
+        div(class=BASE_CLASS+'__blind-text')
           span records 
           span='['+number+']'
-        div(class=className+'__window')
-          div(class=className+'__window-disk')
-            div(class=className+'__disk')
-    div(class=className+'__cover')
-      h3(class=className+'__header')
-        a(class=className+'__link' href=link)=header
-      p(class=className+'__text')
+        div(class=BASE_CLASS+'__window')
+          div(class=BASE_CLASS+'__window-disk')
+            div(class=BASE_CLASS+'__disk')
+    div(class=BASE_CLASS+'__cover')
+      h3(class=BASE_CLASS+'__header')
+        a(class=BASE_CLASS+'__link' href=link)=header
+      p(class=BASE_CLASS+'__text')
         em=text 
-    div(class=className+'__cub-left')
-    div(class=className+'__cub-right')
+    div(class=BASE_CLASS+'__cub-left')
+    div(class=BASE_CLASS+'__cub-right')
 
