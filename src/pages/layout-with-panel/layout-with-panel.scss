@@ -21,7 +21,7 @@ $gap: 12px;
 
 .layout-with-panel {
   overflow: hidden;
-  max-width: $max-wraper;
+  max-width: $max-wrapper;
   margin: 0 auto;
   padding: $size-padding;
   display: grid;
@@ -39,7 +39,7 @@ $gap: 12px;
     grid-row-end: 2;
   }
 
-  &__search-panel-wrapper {
+  &__side-panel-wrapper {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;

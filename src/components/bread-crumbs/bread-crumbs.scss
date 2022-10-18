@@ -12,10 +12,8 @@ $indent: 10px;
     padding-inline: 0;
     list-style: none;
     padding-right: 5px;
-   // float: left;
     font-size: 0.8rem;
-   // width: $indent;
-    }
+  }
 
   &__items {
     margin-left: auto;
@@ -25,8 +23,7 @@ $indent: 10px;
     font-size: 0.8rem;
     font-weight: normal;
     word-break: break-all;
-   // width: calc(100% - $indent)
-    }
+  }
 
   &__item {
     font-size: 0.8rem;
@@ -39,7 +36,7 @@ $indent: 10px;
     color: $color-grey-hover;
 
     &:hover {
-      color: $color-grey;
+      color: $color-dark-grey;
     }
 
     &_last:hover {

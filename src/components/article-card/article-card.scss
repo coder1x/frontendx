@@ -3,7 +3,7 @@
   box-shadow: $section-shadow;
   box-sizing: border-box;
   width: 100%;
-  min-width: calc($min-wraper - ($min-size-padding * 2));
+  min-width: calc($min-wrapper - ($min-size-padding * 2));
   display: flex;
   flex-direction: column;
   padding: 0 10px;

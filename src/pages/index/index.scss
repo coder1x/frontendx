@@ -19,7 +19,7 @@ $color-header-text: rgb(37, 37, 37);
   &__wrap {
     margin: 0 auto;
     width: 100%;
-    max-width: $max-wraper;
+    max-width: $max-wrapper;
   }
 
   &__header {
@@ -46,7 +46,7 @@ $color-header-text: rgb(37, 37, 37);
   min-height: 100px;
   background-color: $background-section;
 
-  &__header{
+  &__header {
     text-align: center;
     color: $color-header-h1;
   }
@@ -54,7 +54,7 @@ $color-header-text: rgb(37, 37, 37);
   &__wrap {
     margin: 30px auto 0px auto;
     width: 100%;
-    max-width: $max-wraper;
+    max-width: $max-wrapper;
   }
 }
 

@@ -25,7 +25,7 @@ class LayoutWithPanel extends Observer {
     this.isStarted = true;
     this.limit = 1099;
 
-    this.className = `${className.replace(/^./, '')}__search-panel-wrapper`;
+    this.className = `${className.replace(/^./, '')}__side-panel-wrapper`;
     this.createComponents();
     this.createListeners();
     this.bindEvent();
