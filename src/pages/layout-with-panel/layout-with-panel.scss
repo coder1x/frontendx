@@ -75,6 +75,7 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+    position: relative;
 
     @include media-breakpoint-down($lg2) {
       transform: translateX(150%);

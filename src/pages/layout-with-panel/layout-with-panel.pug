@@ -1,6 +1,6 @@
 extends ../layout/layout.pug
 include ../../components/header/header.pug
-include ../../components/search-panel/search-panel.pug
+include ../../components/side-panel/side-panel.pug
 include ../../components/bread-crumbs/bread-crumbs.pug
 
 block title 
@@ -13,5 +13,5 @@ block content
       +bread-crumbs()
     block main
     section(class = 'layout-with-panel__side-panel-wrapper')
-      +search-panel()
+      +side-panel()
     block pagination

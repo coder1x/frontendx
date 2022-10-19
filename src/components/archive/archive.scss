@@ -14,7 +14,7 @@ $item-padding: 5px 0 5px 10px;
 .archive {
   @include font-rem(19);
   padding: 10px 10px 30px 10px;
-  font-weight: bolder;
+  font-weight: bold;
   &__year {
     &:first-child {
       margin-top: 10px;

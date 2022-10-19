@@ -1,6 +1,6 @@
 import { boundMethod } from 'autobind-decorator';
 
-class SearchPanel {
+class SidePanel {
   private header: HTMLElement | null = null;
 
   private panelWrapper: HTMLElement | null = null;
@@ -25,7 +25,7 @@ class SearchPanel {
 
     if (!this.panelWrapper || !this.header) return false;
 
-    this.panel = this.panelWrapper.querySelector('.search-panel') as HTMLElement;
+    this.panel = this.panelWrapper.querySelector('.side-panel') as HTMLElement;
     this.headerHeight = this.header.offsetHeight;
     this.panelTop = this.panel.getBoundingClientRect().top + window.pageYOffset;
     this.bindEvent();
@@ -118,4 +118,4 @@ class SearchPanel {
   }
 }
 
-export default SearchPanel;
+export default SidePanel;

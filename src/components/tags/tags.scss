@@ -14,17 +14,17 @@ $barWidth: 8px;
   user-select: none;
 
   &__header {
-    font-weight: bolder;
+    font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
   }
 
-  &__label{
+  &__label {
     @include font-rem(19);
   }
 
-  &__amount{
+  &__amount {
     @include font-rem(16);
   }
 
@@ -35,7 +35,7 @@ $barWidth: 8px;
     position: relative;
     max-height: 250px;
     overflow: hidden;
-    &_has-border{
+    &_has-border {
       outline: 1px solid $color-grey-light;
     }
   }
@@ -73,7 +73,7 @@ $barWidth: 8px;
       background-color: $color-grey-hover;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         background-color: $button-background;
         transition: background-color ease-in-out 500ms;
       }
@@ -86,7 +86,7 @@ $barWidth: 8px;
       position: relative;
 
       &:hover {
-        &::before{
+        &::before {
           color: $button-background;
           transition: background-color ease-in-out 500ms;
         }
@@ -96,7 +96,7 @@ $barWidth: 8px;
         &::before {
           @include marker("▲");
           bottom: 4px;
-          }
+        }
       }
 
       &_down {

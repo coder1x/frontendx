@@ -12,17 +12,25 @@
 $item-padding: 5px 0 5px 10px;
 
 .categories {
-  @include font-rem(19);
-  padding: 10px 10px 30px 10px;
-  font-weight: bolder;
-  &__year {
+  font-size: 19px;
+
+  margin: 0px;
+  font-weight: bold;
+
+  &__articles-link {
+    color: $color-grey;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 5px;
+    @include list-item-style;
+
     &:first-child {
       margin-top: 10px;
     }
-    margin-left: 5px;
-    cursor: pointer;
-    @include font-rem(16);
-    @include list-item-style;
+
     &::before {
       @include marker("●", 10px);
     }
@@ -31,16 +39,15 @@ $item-padding: 5px 0 5px 10px;
     }
   }
 
-  &__months {
-    margin-left: 5px;
-  }
-
-  &__month {
-    font-weight: normal;
+  &__item {
     border-bottom: 1px solid $color-grey-light;
     display: flex;
-    @include font-rem(16);
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: normal;
+
     @include list-item-style;
+
     &::before {
       @include marker("○", 10px);
     }
@@ -54,16 +61,11 @@ $item-padding: 5px 0 5px 10px;
       color: $color-grey-hover;
     }
   }
-  &__text {
-    &-wrapper {
-      display: flex;
-      justify-content: space-between;
-    }
-    &-name {
-      width: 80%;
-    }
-    &-amount {
-      flex-grow: 1;
-    }
+
+  &__name {
+    width: 80%;
+  }
+  &__amount {
+    flex-grow: 1;
   }
 }

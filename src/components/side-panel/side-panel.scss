@@ -1,17 +1,16 @@
-.search-panel {
+.side-panel {
   width: 300px;
   box-shadow: -5px 0px 20px 0px #d7d8db;
   background-color: $background-section;
-
-  &-wrapper {
-    height: 100%;
-    position: relative;
-  }
 
   &__search-form-wrapper,
   &__categories-wrapper,
   &__archive-wrapper {
     border-bottom: 2px solid $color-grey-light;
+  }
+
+  &__categories-wrapper {
+    padding: 10px 10px 30px 10px;
   }
 
   &__search-form-wrapper {

@@ -7,17 +7,16 @@ mixin categories(options = {})
     const link = 'http://www.frontendx.ru'
 
     const BASE_CLASS = 'categories'
-  ul(class = BASE_CLASS) Категории
+  dl(class = BASE_CLASS) Категории
     each year, index in years
-      li(class = `${BASE_CLASS}__year`)
+      dt(class = `${BASE_CLASS}__title`)
         a(class = `${BASE_CLASS}__articles-link` href = link tabindex = '0')
-          span(class = `${BASE_CLASS}__text-name`)= index
-          span(class = `${BASE_CLASS}__text-amount`)= year.total
-        ul(class = `${BASE_CLASS}__months`)
-          each month, index in year
+          span(class = `${BASE_CLASS}__name`)= index
+          span(class = `${BASE_CLASS}__amount`)= year.total
+          each item, index in year
             if index !='total'
-              li(class = `${BASE_CLASS}__month`)
+              dd(class = `${BASE_CLASS}__item`)
                 a(class = `${BASE_CLASS}__articles-link` href = link tabindex = '0')
-                  span(class = `${BASE_CLASS}__text-name`)= index
-                  span(class = `${BASE_CLASS}__text-amount`)= month
+                  span(class = `${BASE_CLASS}__name`)= index
+                  span(class = `${BASE_CLASS}__amount`)= item
 

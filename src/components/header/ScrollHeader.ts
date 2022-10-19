@@ -66,7 +66,7 @@ class ScrollHeader extends Observer {
 
     this.menu = this.header.querySelector(`${className}__menu-wrap`);
     this.button = this.header.querySelector(`${className}__toggle-menu`);
-    this.search = this.header.querySelector(`${className}__toggle-search-panel`);
+    this.search = this.header.querySelector(`${className}__toggle-side-panel`);
 
     return true;
   }
@@ -183,7 +183,7 @@ class ScrollHeader extends Observer {
       return true;
     }
 
-    if (target.closest(`.${this.className}__toggle-search-panel`)) {
+    if (target.closest(`.${this.className}__toggle-side-panel`)) {
       if (!this.search) return false;
       this.search.classList.toggle(this.buttonActive);
       this.notify('toggle');
@@ -205,7 +205,7 @@ class ScrollHeader extends Observer {
       return true;
     }
 
-    if (target.closest(`.${this.className}__toggle-search-panel`)) {
+    if (target.closest(`.${this.className}__toggle-side-panel`)) {
       if (!this.search) return false;
       if (event.key === 'Escape' || event.key === 'Space') { this.notify('close'); }
       return true;
