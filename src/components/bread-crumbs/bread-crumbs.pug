@@ -3,8 +3,8 @@ mixin bread-crumbs()
   -
     const BASE_CLASS = 'bread-crumbs'
 
-  div(class = BASE_CLASS)
-    ol(class = `${BASE_CLASS}__markers`) 
+  aside(class = BASE_CLASS)
+    ul(class = `${BASE_CLASS}__markers`) 
     ol(class = `${BASE_CLASS}__items`)
       -let n = 0
         while n < 17

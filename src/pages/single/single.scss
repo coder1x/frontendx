@@ -4,8 +4,9 @@
   grid-row-start: 2;
   grid-row-end: 3;
   padding: 20px;
-  background-color: $background-section;
   box-sizing: border-box;
+  box-shadow: $section-shadow;
+  background-color: $background-section;
 
   @include media-breakpoint-down($lg2) {
     grid-column-end: 3;
@@ -17,15 +18,18 @@
 
   &__text {
     text-indent: 15px;
+    font-size: 16px;
+    color: $color-dark-grey;
   }
 
   pre {
     box-sizing: border-box;
     padding: 20px;
-    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     max-width: 808px;
     overflow-x: scroll;
-    background-color: $color-background;
+    background-color: #f3f3f3;
 
     @include media-breakpoint-down($xl2) {
       max-width: 795px;
