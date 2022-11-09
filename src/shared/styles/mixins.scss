@@ -41,3 +41,14 @@
   margin: auto;
   position: absolute;
 }
+
+@mixin marker($symbol, $size) {
+  content: $symbol;
+  position: absolute;
+  left: calc($size / 2 * -1);
+}
+
+@mixin list-item-style {
+  padding: 5px 0 5px 10px;
+  position: relative;
+}

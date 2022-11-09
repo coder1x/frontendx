@@ -26,8 +26,11 @@
     "noEmit": false,
     "noImplicitAny": true,
     "paths": {
-      "@com/*": [
+      "@components/*": [
         "src/components/*"
+      ],
+      "@shared/*": [
+        "src/shared/*"
       ],
     },
   }

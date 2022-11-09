@@ -1,18 +1,15 @@
 {
-  "name": "coder1",
-  "version": "1.0.4",
-  "description": "",
+  "name": "frontendx",
+  "version": "1.0.0",
   "private": "true",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
-    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
     "start": "cross-env NODE_ENV=development webpack serve --mode development",
-    "test": "jest",
-    "plugin": "cross-env NODE_ENV=plugin webpack --mode production"
+    "test": "jest"
   },
   "author": "coder1 <c.o.d.e.r.1@mail.ru>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/jquery": "^3.5.14",
@@ -39,22 +36,22 @@
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1",
-    "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {
+    "webpack-merge": "^5.8.0",
     "@types/webpack-env": "^1.16.4",
-    "autobind-decorator": "^2.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "focus-visible": "^5.2.0",
-    "fox-favicon": "file:npm_plugins/fox-favicon",
     "fox-url-convertor": "file:npm_plugins/fox-url-convertor",
-    "jquery": "^3.6.0",
-    "normalize.css": "^8.0.1",
     "pug": "^3.0.2",
     "sass": "^1.51.0",
     "sass-resources-loader": "^2.2.5",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "ajv": "^8.11.0",
+    "autobind-decorator": "^2.4.0",
+    "focus-visible": "^5.2.0",
+    "fox-favicon": "file:npm_plugins/fox-favicon",
+    "normalize.css": "^8.0.1"
   }
 }

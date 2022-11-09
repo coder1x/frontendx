@@ -7,16 +7,16 @@ mixin archive(options = {})
     const link = 'http://www.frontendx.ru'
 
     const BASE_CLASS = 'archive'
-  ul(class = BASE_CLASS) Архивы
+  ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) Архивы
     each year, index in years
-      li(class = `${BASE_CLASS}__year` tabindex = -1)
-        span(class = `${BASE_CLASS}__text-wrapper` tabindex = 0)
-          span(class = `${BASE_CLASS}__text-name`)= index
-          span(class = `${BASE_CLASS}__text-amount`)= year.total
-        ul(class = `${BASE_CLASS}__months ${BASE_CLASS}__months_visually-hidden`)
+      li(class = `${BASE_CLASS}__year js-${BASE_CLASS}__year` tabindex = 0)
+        div(class = `${BASE_CLASS}__text-wrapper`)
+          span(class = `${BASE_CLASS}__name`)= index
+          span(class = `${BASE_CLASS}__amount`)= year.total
+        ol(class = `${BASE_CLASS}__months`)
           each month, index in year
             if index !='total'
               li(class = `${BASE_CLASS}__month`)
-                a(class = `${BASE_CLASS}__articles-link` href = link tabindex = -1)
-                  span(class = `${BASE_CLASS}__text-name`)= index
-                  span(class = `${BASE_CLASS}__text-amount`)= month
+                a(class = `${BASE_CLASS}__articles-link` href = link)
+                  span(class = `${BASE_CLASS}__name`)= index
+                  span(class = `${BASE_CLASS}__amount`)= month

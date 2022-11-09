@@ -8,38 +8,22 @@ const optimization = require('./optimization');
 
 const devServer = require('./webpack.devServer.js');
 
-let config = null;
-
-const pluginM = ['@plugins/java-import.ts'];
 const points = [];
-
-if (env.isProd) {
-  points.push('./index.ts');
-} else {
+if (env.isDev) {
   points.push('webpack/hot/dev-server');
-  points.push('./index.ts');
 }
 
-if (env.isPlugin) {
-  config = {
-    plugin: pluginM,
-  };
-} else {
-  config = {
-    plugin: pluginM,
-    demo: points,
-  };
-}
+points.push('./index.ts');
 
 module.exports = merge(devServer, {
 
-  // target: DP.isDev ? 'web' : 'browserslist',
   target: 'web',
-  // devtool: DP.isDev ? 'eval-cheap-module-source-map' : 'source-map', //  (карта для браузеров)
-  devtool: false,
+  devtool: env.isDev ? 'source-map' : false,
 
-  entry: config,
-  context: paths.src, // корень исходников
+  entry: {
+    script: points,
+  },
+  context: paths.src,
   mode: env.isDev ? 'development' : 'production',
   output: {
     filename: FL.filename('js'),
@@ -50,12 +34,10 @@ module.exports = merge(devServer, {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
     alias: {
-      '@plugins': path.join(paths.src, 'plugins'),
-      '@styles': path.join(paths.src, paths.assets, 'styles'),
-      '@typescript': path.join(paths.src, paths.assets, 'ts'),
-      '@img': path.join(paths.src, 'images'),
-      '@pag': path.join(paths.src, 'pages'),
-      '@com': path.join(paths.src, 'components'),
+      '@styles': path.join(paths.src, 'shared', 'styles'),
+      '@pages': path.join(paths.src, 'pages'),
+      '@components': path.join(paths.src, 'components'),
+      '@shared': path.join(paths.src, 'shared'),
       '@': paths.src,
       comp: paths.components,
     },

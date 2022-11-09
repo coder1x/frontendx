@@ -17,9 +17,8 @@ const paths = require('./paths');
 
 const pagesDir = path.join(paths.src, '/pages/');
 
-const pages = [];
-fs.readdirSync(pagesDir).forEach((file) => {
-  pages.push(file.split('/', 2));
+const pages = fs.readdirSync(pagesDir).map((file) => {
+  return file.split('/', 2);
 });
 
 const description = 'Разбираем как использовать различные паттерны и подходы ' +
@@ -40,94 +39,80 @@ plugins.push(
   new CleanWebpackPlugin()
 );
 
-if (!env.isPlugin) {
-  plugins.push(
-    ...pages.map((fileName) => new HTMLWebpackPlugin({
-      filename: `./${fileName}.html`,
-      template: `./pages/${fileName}/${fileName}.pug`,
-      alwaysWriteToDisk: true,
-      inject: 'body',
-      hash: true,
-      meta: {
-        'Content-Type': {
-          'http-equiv': 'Content-Type',
-          'content': 'text/html'
-        },
-        'viewport': {
-          'name': 'viewport',
-          'content':
-            'width=device-width, initial-scale=1',
-        },
-        'compatible': {
-          'http-equiv': 'x-ua-compatible',
-          'content': 'ie=edge'
-        },
-        'description': {
-          'name': 'description',
-          'content': description
-        },
-        'keywords': {
-          'name': 'keywords',
-          'content': keywords
-        },
-        'twitter-card': {
-          'name': 'twitter:card',
-          'content': 'summary_large_image'
-        },
-        'twitter-title': {
-          'name': 'twitter:title',
-          'content': 'Frontend для прагматиков'
-        },
-        'twitter-description': {
-          'name': 'twitter:description',
-          'content': description
-        },
-        'twitter-site': {
-          'name': 'twitter:site',
-          'content': 'https://frontendx.ru/'
-        },
-        'twitter-image': {
-          'name': 'twitter:image',
-          'content': 'https://frontendx.ru/social.webp'
-        },
-        'og-type': {
-          'property': 'og:type',
-          'content': 'plugin'
-        },
-        'og-title': {
-          'property': 'og:title',
-          'content': 'Frontend для прагматиков'
-        },
-        'og-description': {
-          'property': 'og:description',
-          'content': description
-        },
-        'og-image': {
-          'property': 'og:image',
-          'content': 'https://frontendx.ru/social.webp'
-        }
+plugins.push(
+  ...pages.map((fileName) => new HTMLWebpackPlugin({
+    filename: `./${fileName}.html`,
+    template: `./pages/${fileName}/${fileName}.pug`,
+    alwaysWriteToDisk: true,
+    inject: 'body',
+    hash: true,
+    meta: {
+      viewport: {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1',
       },
-    })),
-  );
-}
+      description: {
+        name: 'description',
+        content: description,
+      },
+      keywords: {
+        name: 'keywords',
+        content: keywords,
+      },
+      'twitter-card': {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      'twitter-title': {
+        name: 'twitter:title',
+        content: 'Frontend для прагматиков',
+      },
+      'twitter-description': {
+        name: 'twitter:description',
+        content: description,
+      },
+      'twitter-site': {
+        name: 'twitter:site',
+        content: 'https://frontendx.ru/',
+      },
+      'twitter-image': {
+        name: 'twitter:image',
+        content: 'https://frontendx.ru/social.webp',
+      },
+      'og-type': {
+        property: 'og:type',
+        content: 'blog',
+      },
+      'og-title': {
+        property: 'og:title',
+        content: 'Frontend для прагматиков',
+      },
+      'og-description': {
+        property: 'og:description',
+        content: description,
+      },
+      'og-image': {
+        property: 'og:image',
+        content: 'https://frontendx.ru/social.webp',
+      },
+    },
+  })),
+);
 
-if (!env.isPlugin) {
-  plugins.push(
-    new FoxUrlConvertor({
-      URLchange: '%5C',
-      URLto: '/',
-    }),
-  );
-}
+plugins.push(
+  new FoxUrlConvertor({
+    URLchange: '%5C',
+    URLto: '/',
+  }),
+);
 
 plugins.push(
   new FoxFavicon({
     src: path.join(paths.src, paths.assets, 'images/icon/favicon.png'),
     path: 'assets/favicons/',
-    // pathManifest: '/assets/favicons/',
-    // 'https://plugins.su/
     urlIcon: 'assets/favicons/',
-    devMode: env.isPlugin ? true : env.isDev,
+    devMode: env.isDev,
     appName: 'Frontend для прагматиков',
     appShortName: 'Frontend для прагматиков',
     appDescription: 'Узнайте, как использовать Range Slider Fox'
@@ -155,9 +140,7 @@ plugins.push(
         'apple-touch-icon-precomposed.png',
         'apple-touch-icon.png',
       ],
-      appleStartup: [
-        'apple-touch-startup-image-640x1136.png',
-      ],
+      appleStartup: [],
       coast: true, // Create Opera Coast icon. `boolean`
       favicons: true, // Create regular favicons. `boolean`
       firefox: [
@@ -177,16 +160,6 @@ plugins.push(
     filename: FL.filename('css'),
   }),
 );
-
-// if (!env.isPlugin) {
-//   plugins.push(
-//     new webpack.ProvidePlugin({
-//       $: 'jquery',
-//       jQuery: 'jquery',
-//       'window.jQuery': 'jquery',
-//     }),
-//   );
-// }
 
 module.exports = {
   plugins: plugins,

@@ -1,81 +1,83 @@
-@mixin marker($symbol, $size) {
-  content: $symbol;
-  position: absolute;
-  left: calc($size / 2 * -1);
-}
-
-@mixin list-item-style {
-  padding: 5px 0 5px 10px;
-  position: relative;
-}
-
-$item-padding: 5px 0 5px 10px;
-
 .archive {
-  @include font-rem(19);
-  padding: 10px 10px 30px 10px;
+  font-family: $font;
+  font-size: 16px;
   font-weight: bold;
+  list-style: none;
+  color: $color-grey;
+  padding: 0px;
+  margin: 0px;
+
   &__year {
-    &:first-child {
-      margin-top: 10px;
-    }
     margin-left: 5px;
     cursor: pointer;
     @include font-rem(16);
     @include list-item-style;
+
+    &:first-child {
+      margin-top: 10px;
+    }
+
     &::before {
       @include marker("●", 10px);
     }
+  }
+
+  &__text-wrapper {
+    display: flex;
+    justify-content: space-between;
+
     &:focus {
       outline-offset: 5px;
     }
   }
 
+  &__name {
+    width: 80%;
+  }
+
+  &__amount {
+    flex-grow: 1;
+  }
+
   &__months {
-    margin-left: 5px;
-    &_visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      border: 0;
-      padding: 0;
-      white-space: nowrap;
-      clip-path: inset(100%);
-      clip: rect(0 0 0 0);
-      overflow: hidden;
-    }
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+
+    // &_variant_expandable {
+    //   margin-left: 5px;
+    //   list-style: none;
+    //   padding: 0px;
+    // }
   }
 
   &__month {
     font-weight: normal;
     border-bottom: 1px solid $color-grey-light;
     display: flex;
-    @include font-rem(16);
+    font-size: 16px;
     @include list-item-style;
+
     &::before {
       @include marker("○", 10px);
     }
   }
 
   &__articles-link {
+    color: $color-grey;
     width: 100%;
     display: flex;
     justify-content: space-between;
+
     &:hover {
       color: $color-grey-hover;
-    }
-  }
-  &__text {
-    &-wrapper {
-      display: flex;
-      justify-content: space-between;
-    }
-    &-name {
-      width: 80%;
-    }
-    &-amount {
-      flex-grow: 1;
     }
   }
 }

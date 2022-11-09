@@ -12,9 +12,15 @@
     "jest"
   ],
   "rules": {
-    "no-unused-vars": "warn",
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^data$|^value$|^id$|^object$|^options$"
+      }
+    ],
     "no-debugger": "off",
     "no-console": "off",
+    "no-param-reassign": "off",
     "no-var": 1,
     "camelcase": 1,
     "no-nested-ternary": 1,
@@ -25,6 +31,7 @@
     "import/no-extraneous-dependencies": "off",
     "no-new": "off",
     "no-loss-of-precision": "off",
+    "nonblock-statement-body-position": "error",
     "semi": [
       1
     ],
@@ -51,7 +58,6 @@
     "browser": true,
     "node": true,
     "commonjs": true,
-    "jquery": true,
     "jest/globals": true
   }
 }

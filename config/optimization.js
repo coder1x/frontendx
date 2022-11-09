@@ -4,13 +4,13 @@ const env = require('./isDev');
 module.exports = {
   optimization: () => {
     const config = {
-      runtimeChunk: env.isPlugin ? undefined : 'single',
+      runtimeChunk: 'single',
       splitChunks: {
         chunks: 'all',
       },
     };
 
-    if (env.isProd) {
+    if (!env.isDev) {
       config.minimizer = [
         new TerserPlugin({
           parallel: true,
