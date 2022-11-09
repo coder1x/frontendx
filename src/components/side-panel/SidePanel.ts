@@ -1,6 +1,6 @@
 import { boundMethod } from 'autobind-decorator';
 
-import Archive from '@components/archive/Archive';
+import { Archive } from '@components/index';
 
 class SidePanel {
   private header: HTMLElement | null = null;

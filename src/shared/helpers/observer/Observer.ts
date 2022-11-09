@@ -1,4 +1,4 @@
-export default abstract class PanelObserver {
+abstract class PanelObserver {
   observers: Function[];
 
   constructor() {
@@ -22,3 +22,5 @@ export default abstract class PanelObserver {
     this.observers.forEach((item) => item(key));
   }
 }
+
+export default PanelObserver;

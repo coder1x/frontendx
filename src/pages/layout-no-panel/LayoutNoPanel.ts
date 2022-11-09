@@ -1,4 +1,4 @@
-import ScrollHeader from '../../components/header/ScrollHeader';
+import { ScrollHeader } from '@components/index';
 
 class Layout {
   constructor() {

@@ -39,8 +39,6 @@ class Tags {
 
   private thumbTop: number = 0;
 
-  private b: number = 0;
-
   // eslint-disable-next-line no-undef
   private movementOnMouseHold: NodeJS.Timer | null = null;
 
@@ -150,7 +148,7 @@ class Tags {
     const delta = this.tags.getBoundingClientRect().top - this.frame.getBoundingClientRect().top;
     const deltaPercent = (delta * 100) / this.tagsHeight;
     const pointerTopPosition = Math.abs(((Math.abs(deltaPercent)) * this.trackAreaHeight)
-    / this.tagsScrollLimit);
+      / this.tagsScrollLimit);
 
     this.tagsTranslateY = deltaPercent <= 0 ? deltaPercent : 0;
     this.thumbTop = pointerTopPosition;

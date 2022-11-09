@@ -1,8 +1,9 @@
 import { boundMethod } from 'autobind-decorator';
-import Observer from '../../components/observer/Observer';
-import ScrollHeader from '../../components/header/ScrollHeader';
 
-class LayoutWithPanel extends Observer {
+import { PanelObserver } from '@helpers/index';
+import { ScrollHeader } from '@components/index';
+
+class LayoutWithPanel extends PanelObserver {
   private className: string;
 
   private wrapper: HTMLElement;

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { boundMethod } from 'autobind-decorator';
 
 class ArticleCard {

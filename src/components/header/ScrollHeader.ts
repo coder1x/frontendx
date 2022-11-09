@@ -1,14 +1,13 @@
 import { boundMethod } from 'autobind-decorator';
-import Observer from '../observer/Observer';
 
-import Throttle from '../throttle/Throttle';
+import { PanelObserver, Throttle } from '@helpers/index';
 
 interface Props {
   selector: string,
   nameAnimation: string
 }
 
-class ScrollHeader extends Observer {
+class ScrollHeader extends PanelObserver {
   private prevY = 0;
 
   private direction = 'bottom';

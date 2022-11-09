@@ -1,13 +1,13 @@
 import { boundMethod } from 'autobind-decorator';
 
-import Throttle from '../throttle/Throttle';
+import { Throttle } from '@helpers/index';
 
 class BreadCrumbs {
   private className: string = '';
 
   private breadCrumbs: HTMLElement;
 
-  private items: HTMLUListElement| null = null;
+  private items: HTMLUListElement | null = null;
 
   private markers: HTMLElement | null = null;
 

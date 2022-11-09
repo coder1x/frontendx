@@ -32,6 +32,9 @@
       "@shared/*": [
         "src/shared/*"
       ],
+      "@helpers/*": [
+        "src/shared/helpers/*"
+      ],
     },
   },
   "include": [
