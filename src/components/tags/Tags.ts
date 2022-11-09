@@ -48,9 +48,9 @@ class Tags {
   // eslint-disable-next-line no-undef
   private buttons: NodeListOf<HTMLElement> | null = null;
 
-  constructor(className: string, element: Element) {
+  constructor(element: Element) {
     this.wrapper = element as HTMLElement;
-    this.className = className.replace(/^./, '');
+    this.className = 'tags';
     this.init();
   }
 

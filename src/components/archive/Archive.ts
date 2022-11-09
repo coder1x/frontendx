@@ -16,8 +16,6 @@ class Archive {
   private init() {
     this.setDomElement();
     this.bindEvent();
-
-    console.log('Archive');
   }
 
   private setDomElement() {
@@ -33,11 +31,16 @@ class Archive {
   }
 
   @boundMethod
-  private handleYearClick() {
+  private handleYearClick(event: any) {
     if (!this.element) {
       return false;
     }
-    console.log('fdfd');
+
+    const element = event.currentTarget as HTMLElement;
+
+    const months = element.querySelector('.archive__months') as HTMLElement;
+
+    months.classList.toggle('archive__months_variant_expandable');
 
     return true;
   }

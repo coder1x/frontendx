@@ -1,7 +1,7 @@
 import { boundMethod } from 'autobind-decorator';
 
 import { PanelObserver } from '@helpers/index';
-import { ScrollHeader } from '@components/index';
+import { ScrollHeader, SidePanel } from '@components/index';
 
 class LayoutWithPanel extends PanelObserver {
   private className: string;
@@ -73,6 +73,9 @@ class LayoutWithPanel extends PanelObserver {
 
   private createComponents() {
     this.searchPanelElement = this.wrapper.querySelector(`.${this.className}`) as HTMLElement;
+
+    new SidePanel(this.searchPanelElement);
+
     this.isPanelShown = window.innerWidth > this.limit;
     this.setPanelHeight(this.isPanelShown);
 
@@ -122,12 +125,14 @@ class LayoutWithPanel extends PanelObserver {
 
   private close() {
     if (!this.searchPanelElement) return;
+
     this.searchPanelElement.classList.add(`${this.className}_hidden`);
     this.searchPanelElement.classList.remove(`${this.className}_visible`);
   }
 
   private open() {
     if (!this.searchPanelElement) return;
+
     this.searchPanelElement.classList.remove(`${this.className}_hidden`);
     this.searchPanelElement.classList.add(`${this.className}_visible`);
   }

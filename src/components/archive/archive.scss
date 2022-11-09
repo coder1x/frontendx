@@ -26,6 +26,11 @@
     display: flex;
     justify-content: space-between;
 
+    &:focus,
+    &:hover {
+      color: $color-grey-hover;
+    }
+
     &:focus {
       outline-offset: 5px;
     }
@@ -40,22 +45,13 @@
   }
 
   &__months {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+    display: none;
+    margin-top: 10px;
+    padding: 0px;
 
-    // &_variant_expandable {
-    //   margin-left: 5px;
-    //   list-style: none;
-    //   padding: 0px;
-    // }
+    &_variant_expandable {
+      display: block;
+    }
   }
 
   &__month {

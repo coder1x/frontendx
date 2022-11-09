@@ -1,6 +1,6 @@
 import { boundMethod } from 'autobind-decorator';
 
-import { Archive } from '@components/index';
+import { Archive, Tags } from '@components/index';
 
 class SidePanel {
   private header: HTMLElement | null = null;
@@ -14,6 +14,8 @@ class SidePanel {
   private headerHeight: number = 0;
 
   private panelTop: number = 0;
+
+  private tags: HTMLElement | null = null;
 
   private archive = 'archive'
 
@@ -29,7 +31,11 @@ class SidePanel {
 
     this.panel = this.panelWrapper.querySelector('.side-panel') as HTMLElement;
 
+    this.tags = this.panel.querySelector('.side-panel__tags-wrapper') as HTMLElement;
+
     new Archive(this.panel.querySelector('.archive') as Element);
+
+    new Tags(this.tags);
 
     this.headerHeight = this.header.offsetHeight;
     this.panelTop = this.panel.getBoundingClientRect().top + window.pageYOffset;
