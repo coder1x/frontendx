@@ -21,6 +21,7 @@
     &::before {
       @include marker("●", 10px);
     }
+
     &:focus {
       outline-offset: 5px;
     }
@@ -44,6 +45,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+
     &:hover {
       color: $color-grey-hover;
     }

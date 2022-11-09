@@ -3,17 +3,20 @@ mixin tags({hasHeader = true, hasBorder = true} = {})
 
     const BASE_CLASS = 'tags'
     const borderModifier = hasBorder? `${BASE_CLASS}__frame_has-border`: ''
+
   div(class = `${BASE_CLASS}`)
     if hasHeader
       span(class = `${BASE_CLASS}__header`)
         span(class = `${BASE_CLASS}__label`) Теги
         span(class = `${BASE_CLASS}__amount`) 100
+
     div(class = `${BASE_CLASS}__frame ${borderModifier}`) 
       ul(class = `${BASE_CLASS}__list` style = 'transform: translateY(0%)') 
         -let n = 1
         while n <= 100
           li(class = `${BASE_CLASS}__item`)
             a(class = `${BASE_CLASS}__item-link` href = 'http://www.frontendx.ru')= `Тег#${n++}`
+            
     div(class = `${BASE_CLASS}__scrollbar`)
       div(class = `${BASE_CLASS}__scrollbar-button ${BASE_CLASS}__scrollbar-button_up`)
       div(class = `${BASE_CLASS}__scrollbar-track`)

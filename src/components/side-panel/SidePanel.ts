@@ -41,6 +41,7 @@ class SidePanel {
   private handleSearchPanelClick(event: MouseEvent) {
     const month = event.target as HTMLElement;
     const year = month.closest(`.${this.archive}__year`);
+
     if (!year || !month) return false;
 
     const monthList = (year.querySelector(`.${this.archive}__months`) as HTMLElement);
@@ -49,6 +50,7 @@ class SidePanel {
     const dataHeightAttribute = parseFloat(monthList.getAttribute('data-height') ?? '');
 
     if (!this.panel) return false;
+
     const { style } = this.panel;
     const distanceToBottom = parseFloat(style.bottom);
 
@@ -58,6 +60,7 @@ class SidePanel {
         : `${distanceToBottom - dataHeightAttribute}px`;
       return true;
     }
+
     // первый клик по этому месяцу => на нем еще нет атрибута с высотой => берем высоту из listHeight и вешаем атрибут с высотой
     style.bottom = `${distanceToBottom - monthListHeight}px`;
     monthList.setAttribute('data-height', String(monthListHeight));
@@ -117,8 +120,10 @@ class SidePanel {
 
   private bindEvent() {
     if (!this.panel) return false;
+
     window.addEventListener('scroll', this.handleWindowScroll);
     this.panel.addEventListener('click', this.handleSearchPanelClick);
+
     return true;
   }
 }

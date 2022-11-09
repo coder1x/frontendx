@@ -16,6 +16,7 @@ class BreadCrumbs {
   constructor(className: string, elem: Element) {
     this.breadCrumbs = elem as HTMLElement;
     this.className = className.replace('.bread-crumbs', 'bread-crumbs');
+
     this.init();
   }
 
@@ -49,6 +50,7 @@ class BreadCrumbs {
 
     for (let i = 0; i < count; i += 1) {
       const element = document.createElement('li');
+
       element.innerText = '>';
       element.className = `${this.className}__marker`;
       fragment.append(element);

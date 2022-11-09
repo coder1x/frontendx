@@ -1,22 +1,23 @@
 mixin categories(options = {})
   -
     const {
-      years
+      categories
     } = options
 
     const link = 'http://www.frontendx.ru'
 
     const BASE_CLASS = 'categories'
   dl(class = BASE_CLASS) Категории
-    each year, index in years
+    each item in categories
       dt(class = `${BASE_CLASS}__title`)
         a(class = `${BASE_CLASS}__articles-link` href = link tabindex = '0')
-          span(class = `${BASE_CLASS}__name`)= index
-          span(class = `${BASE_CLASS}__amount`)= year.total
-          each item, index in year
+          span(class = `${BASE_CLASS}__name`)= item.category
+          span(class = `${BASE_CLASS}__amount`)= item.total
+          
+          each subitem in item.subcategories
             if index !='total'
               dd(class = `${BASE_CLASS}__item`)
                 a(class = `${BASE_CLASS}__articles-link` href = link tabindex = '0')
-                  span(class = `${BASE_CLASS}__name`)= index
-                  span(class = `${BASE_CLASS}__amount`)= item
+                  span(class = `${BASE_CLASS}__name`)= subitem.category
+                  span(class = `${BASE_CLASS}__amount`)= subitem.total
 

@@ -1,0 +1,112 @@
+{
+  "categories": [
+    {
+      "category": "Type Script",
+      "total": "99",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "12"
+        }
+      ]
+    },
+    {
+      "category": "React",
+      "total": "12",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "5"
+        }
+      ]
+    },
+    {
+      "category": "Redux",
+      "total": "34",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "23"
+        }
+      ]
+    },
+    {
+      "category": "NextJs",
+      "total": "99",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "56"
+        }
+      ]
+    },
+    {
+      "category": "Git",
+      "total": "23",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "10"
+        }
+      ]
+    },
+    {
+      "category": "Saga",
+      "total": "60",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "12"
+        }
+      ]
+    },
+    {
+      "category": "Testing",
+      "total": "45",
+      "subcategories": [
+        {
+          "category": "подкатегория #1",
+          "total": "12"
+        }
+      ]
+    },
+    {
+      "category": "Вёрстка",
+      "total": "45",
+      "subcategories": [
+        {
+          "category": "scss",
+          "total": "12"
+        }
+      ]
+    }
+  ],
+  "archive": [
+    {
+      "year": "2019",
+      "total": "99",
+      "months": [
+        {
+          "month": "январь",
+          "total": "99"
+        },
+        {
+          "month": "март",
+          "total": "11"
+        },
+        {
+          "month": "апрель",
+          "total": "7"
+        },
+        {
+          "month": "октябрь",
+          "total": "1"
+        },
+        {
+          "month": "декабрь",
+          "total": "12"
+        }
+      ]
+    }
+  ]
+}

@@ -31,22 +31,22 @@ $github-fill-outline: 2px solid #333;
     display: flex;
   }
 
-  &__github {
-    display: flex;
-    align-items: center;
-  }
-
   &__github svg {
     fill: $github-fill;
   }
 
-  &__github:hover svg,
-  &__github:focus svg {
-    fill: $color-grey-hover;
-  }
+  &__github {
+    display: flex;
+    align-items: center;
 
-  &__github:focus {
-    outline: $github-fill-outline;
-    outline-offset: 2px;
+    &:focus {
+      outline: $github-fill-outline;
+      outline-offset: 2px;
+    }
+
+    &:hover svg,
+    &:focus svg {
+      fill: $color-grey-hover;
+    }
   }
 }

@@ -17,12 +17,14 @@
     &:focus {
       outline-offset: 5px;
     }
+
     &-link:hover {
       color: $color-dark-grey-hover;
     }
 
     @include max-row(2);
   }
+
   &__text {
     padding-top: 10px;
     font-size: 16px;
@@ -32,6 +34,7 @@
     text-indent: 15px;
     justify-self: flex-start;
   }
+
   &__footer {
     display: flex;
     align-items: flex-end;

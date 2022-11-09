@@ -19,9 +19,12 @@ class ArticleCard {
 
   init() {
     if (!this.card) return false;
+
     this.header = this.card.querySelector(`${this.className}__header`);
     this.link = this.card.querySelector(`${this.className}__header-link`);
+
     if (!this.link) return false;
+
     this.href = this.link.getAttribute('href');
     this.bindEvent();
 
@@ -32,6 +35,7 @@ class ArticleCard {
   handleHeaderKeyDown(e: KeyboardEvent) {
     if (e.code === 'Space' || e.code === 'Enter') {
       e.preventDefault();
+
       if (this.href) {
         document.location.href = this.href;
       }
@@ -40,7 +44,9 @@ class ArticleCard {
 
   bindEvent() {
     if (!this.header) return false;
+
     this.header.addEventListener('keydown', this.handleHeaderKeyDown);
+
     return true;
   }
 }

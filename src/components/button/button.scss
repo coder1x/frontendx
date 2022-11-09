@@ -10,9 +10,11 @@
   background-color: $button-background;
   color: $background-section;
   font-weight: bold;
+
   &:hover {
     background-color: $color-grey-hover;
   }
+
   &:focus {
     outline-offset: 5px;
   }

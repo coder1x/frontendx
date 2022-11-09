@@ -30,7 +30,9 @@ class Diskette {
 
   openBlind(isOpen = false) {
     const name = this.className.replace('.', '');
+
     if (!this.blind || !this.window) return false;
+
     if (isOpen) {
       this.blind.classList.add(`${name}__blind_open`);
       this.window.classList.add(`${name}__window-disk_open`);
@@ -38,6 +40,7 @@ class Diskette {
       this.blind.classList.remove(`${name}__blind_open`);
       this.window.classList.remove(`${name}__window-disk_open`);
     }
+
     return true;
   }
 
@@ -53,6 +56,7 @@ class Diskette {
 
   bindEvent() {
     if (!this.link) return false;
+
     this.link.addEventListener('mouseover', this.blindOpen);
     this.link.addEventListener('focus', this.blindOpen);
     this.link.addEventListener('blur', this.blindClose);

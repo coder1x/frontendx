@@ -14,8 +14,10 @@ mixin article-card(options = {})
   article(class = BASE_CLASS)
     h2(class = `${BASE_CLASS}__title` tabindex = 0)
       a(class = `${BASE_CLASS}__title-link` href = link tabindex = -1)= header
+
     p(class = `${BASE_CLASS}__text`)= text
+    
     div(class = `${BASE_CLASS}__footer`)
-      +date({date:'24.05.2022' })
-      +button({link:'/single.html'})
+      +date({ date:'24.05.2022' })
+      +button({ link:'/single.html' })
 

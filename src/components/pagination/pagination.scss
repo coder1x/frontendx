@@ -27,10 +27,12 @@
   &__next,
   &__previous {
     cursor: pointer;
+
     &:hover,
     &:focus {
       color: $color-grey-hover;
     }
+
     &:focus {
       outline-offset: 5px;
     }
@@ -41,9 +43,11 @@
     &:hover,
     &:focus {
       outline-offset: 5px;
+
       &::before {
         background-color: $color-grey-hover;
       }
+
       &::after {
         border-color: $color-grey-hover;
       }

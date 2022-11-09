@@ -1,22 +1,23 @@
 mixin archive(options = {})
   -
     const {
-      years
+      archive
     } = options
 
     const link = 'http://www.frontendx.ru'
 
     const BASE_CLASS = 'archive'
   ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) Архивы
-    each year, index in years
+  
+    each item in archive
       li(class = `${BASE_CLASS}__year js-${BASE_CLASS}__year` tabindex = 0)
         div(class = `${BASE_CLASS}__text-wrapper`)
-          span(class = `${BASE_CLASS}__name`)= index
-          span(class = `${BASE_CLASS}__amount`)= year.total
+          span(class = `${BASE_CLASS}__name`)= item.year
+          span(class = `${BASE_CLASS}__amount`)= item.total
+
         ol(class = `${BASE_CLASS}__months`)
-          each month, index in year
-            if index !='total'
+          each subitem in item.months
               li(class = `${BASE_CLASS}__month`)
                 a(class = `${BASE_CLASS}__articles-link` href = link)
-                  span(class = `${BASE_CLASS}__name`)= index
-                  span(class = `${BASE_CLASS}__amount`)= month
+                  span(class = `${BASE_CLASS}__name`)= subitem.month
+                  span(class = `${BASE_CLASS}__amount`)= subitem.total

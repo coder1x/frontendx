@@ -75,6 +75,7 @@ class ScrollHeader extends PanelObserver {
     if (!this.header) return false;
 
     const { classList } = this.header;
+
     this.header.addEventListener('animationend', (event: AnimationEvent) => {
       if (event.animationName !== this.nameAnimation) return;
 
@@ -177,15 +178,19 @@ class ScrollHeader extends PanelObserver {
 
     if (target.closest(`.${this.className}__toggle-menu`)) {
       if (!this.button || !this.menu) return false;
+
       this.button.classList.toggle(this.buttonActive);
       this.menu.classList.toggle(this.menuVisible);
+
       return true;
     }
 
     if (target.closest(`.${this.className}__toggle-side-panel`)) {
       if (!this.search) return false;
+
       this.search.classList.toggle(this.buttonActive);
       this.notify('toggle');
+
       return true;
     }
     return true;
@@ -197,6 +202,7 @@ class ScrollHeader extends PanelObserver {
 
     if (target.closest(`.${this.className}__toggle-menu`)) {
       if (!this.button || !this.menu) return false;
+
       if (event.key === 'Escape' || event.key === 'Space') {
         this.button.classList.remove(this.buttonActive);
         this.menu.classList.remove(this.menuVisible);
@@ -206,7 +212,10 @@ class ScrollHeader extends PanelObserver {
 
     if (target.closest(`.${this.className}__toggle-side-panel`)) {
       if (!this.search) return false;
-      if (event.key === 'Escape' || event.key === 'Space') { this.notify('close'); }
+
+      if (event.key === 'Escape' || event.key === 'Space') {
+        this.notify('close');
+      }
       return true;
     }
     return true;

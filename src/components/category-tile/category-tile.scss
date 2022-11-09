@@ -205,25 +205,25 @@ $disk-background: #2c2c2c;
 
   &__link {
     color: $link-color;
-  }
 
-  &__link::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
 
-  &__link:hover,
-  &__link:focus {
-    color: $link-focus-color;
-  }
+    &:hover,
+    &:focus {
+      color: $link-focus-color;
+    }
 
-  &__link:focus {
-    outline: $link-outline;
-    outline-offset: 2px;
+    &:focus {
+      outline: $link-outline;
+      outline-offset: 2px;
+    }
   }
 
   &__text {
