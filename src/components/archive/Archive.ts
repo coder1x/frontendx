@@ -10,6 +10,7 @@ class Archive {
   constructor(element: Element) {
     this.element = element;
     this.className = 'js-archive';
+
     this.init();
   }
 
@@ -30,24 +31,60 @@ class Archive {
     return true;
   }
 
-  @boundMethod
-  private handleYearClick(event: any) {
-    if (!this.element) {
+  private toggle(target: EventTarget | null, currentTarget: EventTarget | null, isClosed = false) {
+    const element = target as HTMLElement;
+    const elementYear = currentTarget as HTMLElement;
+
+    if (!element || !elementYear) {
       return false;
     }
 
-    const element = event.currentTarget as HTMLElement;
+    if (element.closest(`.${this.className}__text-wrapper`)) {
+      const months = elementYear.querySelector(`.${this.className}__months`) as HTMLElement;
 
-    const months = element.querySelector('.archive__months') as HTMLElement;
+      if (months) {
+        const variantExpandable = 'archive__months_variant_expandable';
 
-    months.classList.toggle('archive__months_variant_expandable');
+        const { classList } = months;
+
+        if (isClosed) {
+          classList.remove(variantExpandable);
+        } else {
+          classList.toggle(variantExpandable);
+        }
+      }
+    }
 
     return true;
   }
 
+  @boundMethod
+  private handleYearClick(event: Event) {
+    this.toggle(event.target, event.currentTarget);
+  }
+
+  @boundMethod
+  private handleYearKeyDown(event: KeyboardEvent) {
+    const isEnter = event.key === 'Enter';
+    const isSpace = event.key === ' ';
+
+    if (isEnter || isSpace) {
+      event.preventDefault();
+      this.toggle(event.target, event.currentTarget);
+    }
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.toggle(event.target, event.currentTarget, true);
+    }
+  }
+
   private bindEvent() {
     this.elementsYears?.forEach((element) => {
-      element.addEventListener('click', this.handleYearClick);
+      const elementYear = element as HTMLElement;
+
+      elementYear.addEventListener('click', this.handleYearClick);
+      elementYear.addEventListener('keydown', this.handleYearKeyDown);
     });
   }
 }

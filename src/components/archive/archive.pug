@@ -10,12 +10,12 @@ mixin archive(options = {})
   ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) Архивы
   
     each item in archive
-      li(class = `${BASE_CLASS}__year js-${BASE_CLASS}__year` tabindex = 0)
-        div(class = `${BASE_CLASS}__text-wrapper`)
+      li(class = `${BASE_CLASS}__year js-${BASE_CLASS}__year`)
+        div(class = `${BASE_CLASS}__text-wrapper js-${BASE_CLASS}__text-wrapper` tabindex = 0)
           span(class = `${BASE_CLASS}__name`)= item.year
           span(class = `${BASE_CLASS}__amount`)= item.total
 
-        ol(class = `${BASE_CLASS}__months`)
+        ol(class = `${BASE_CLASS}__months js-${BASE_CLASS}__months`)
           each subitem in item.months
               li(class = `${BASE_CLASS}__month`)
                 a(class = `${BASE_CLASS}__articles-link` href = link)
