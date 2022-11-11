@@ -15,12 +15,12 @@ class Throttle {
 
   private timeout: boolean = false;
 
-  private currentTime: Date = new Date();
+  private currentTime: number = Date.now();
 
-  constructor(action: string, onChange: Function, sleep: number) {
-    this.action = action ?? 'resize';
+  constructor(onChange: Function, action = 'resize', sleep = 200) {
+    this.action = action;
     this.customEvent = 'EventThrottleCustom';
-    this.sleep = sleep ?? 200;
+    this.sleep = sleep;
     this.onChange = onChange ?? (() => { });
     this.optimized();
   }
@@ -38,7 +38,7 @@ class Throttle {
 
   @boundMethod
   private optimizedEnd() {
-    if (Number(new Date()) - Number(this.currentTime) < this.sleep) {
+    if (Date.now() - this.currentTime < this.sleep) {
       setTimeout(this.optimizedEnd, this.sleep);
     } else {
       this.timeout = false;
@@ -48,7 +48,8 @@ class Throttle {
 
   @boundMethod
   private handleOptimizedResize() {
-    this.currentTime = new Date();
+    this.currentTime = Date.now();
+
     if (this.timeout === false) {
       this.timeout = true;
       setTimeout(this.optimizedEnd, this.sleep);
@@ -57,12 +58,16 @@ class Throttle {
 
   @boundMethod
   private handleThrottle() {
-    if (this.running) { return false; }
+    if (this.running) {
+      return false;
+    }
     this.running = true;
+
     requestAnimationFrame(() => {
       this.objectThrottle.dispatchEvent(new CustomEvent(this.customEvent));
       this.running = false;
     });
+
     return true;
   }
 }

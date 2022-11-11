@@ -43,7 +43,7 @@ class BreadCrumbs {
   }
 
   private bindEvent() {
-    new Throttle('resize', this.makeMarkers, 10); // подписываемся на событие ресайза
+    new Throttle(this.makeMarkers, 'resize', 20); // подписываемся на событие ресайза
   }
 
   private deleteMarkers() {

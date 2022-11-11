@@ -157,7 +157,7 @@ class ScrollHeader extends PanelObserver {
 
   private bindEvent() {
     if (!this.button) return false;
-    new Throttle('scroll', this.doSomething, 10); // подписываемся на событие скролла
+    new Throttle(this.doSomething, 'scroll', 10); // подписываемся на событие скролла
 
     this.buttonActive = `${this.className}__toggle-menu_active`;
     this.menuVisible = `${this.className}__menu-wrapper_visible`;
