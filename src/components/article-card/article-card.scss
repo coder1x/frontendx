@@ -1,17 +1,38 @@
+$background-card: $background-section;
+$shadow-card: $section-shadow;
+$color-link: $color-dark-grey;
+$color-link-hover: $color-dark-grey-hover;
+$color-text: $color-dark-grey;
+$color-icon: $color-grey;
+
 .article-card {
-  background-color: $background-section;
-  box-shadow: $section-shadow;
+  background-color: $background-card;
+  box-shadow: $shadow-card;
   box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: column;
   padding: 10px;
+  position: relative;
+
+  &:hover {
+    box-shadow: none;
+  }
 
   &__title {
     height: 50px;
 
     &-link {
-      color: $color-dark-grey;
+      color: $color-link;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
     }
 
     &:focus {
@@ -19,7 +40,7 @@
     }
 
     &-link:hover {
-      color: $color-dark-grey-hover;
+      color: $color-link-hover;
     }
 
     @include max-row(2);
@@ -28,7 +49,7 @@
   &__text {
     padding-top: 10px;
     font-size: 16px;
-    color: $color-dark-grey;
+    color: $color-text;
 
     @include max-row(10);
     text-indent: 15px;
@@ -40,5 +61,13 @@
     align-items: flex-end;
     justify-content: space-between;
     flex-grow: 1;
+  }
+
+  &__icon {
+    width: 20px;
+
+    svg {
+      fill: $color-icon;
+    }
   }
 }

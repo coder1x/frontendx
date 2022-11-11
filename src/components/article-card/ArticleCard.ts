@@ -3,30 +3,32 @@ import { boundMethod } from 'autobind-decorator';
 class ArticleCard {
   className: string = '';
 
-  card: HTMLElement | null = null;
+  element: HTMLElement | null = null;
 
-  header: HTMLElement | null = null;
+  title: HTMLHeadingElement | null = null;
 
-  link: HTMLElement | null = null;
+  link: HTMLAnchorElement | null = null;
 
   href: string | null = '';
 
-  constructor(className: string, elem: Element) {
-    this.card = elem as HTMLElement;
-    this.className = className;
+  constructor(element: Element) {
+    this.element = element as HTMLElement;
+    this.className = '.js-article-card';
     this.init();
   }
 
   init() {
-    if (!this.card) return false;
+    if (!this.element) {
+      return false;
+    }
 
-    this.header = this.card.querySelector(`${this.className}__header`);
-    this.link = this.card.querySelector(`${this.className}__header-link`);
+    this.title = this.element.querySelector(`${this.className}__title`);
+    this.link = this.element.querySelector(`${this.className}__title-link`);
 
-    if (!this.link) return false;
-
-    this.href = this.link.getAttribute('href');
-    this.bindEvent();
+    if (this.link) {
+      this.href = this.link.getAttribute('href');
+      this.bindEvent();
+    }
 
     return true;
   }
@@ -43,9 +45,11 @@ class ArticleCard {
   }
 
   bindEvent() {
-    if (!this.header) return false;
+    if (!this.title) {
+      return false;
+    }
 
-    this.header.addEventListener('keydown', this.handleHeaderKeyDown);
+    this.title.addEventListener('keydown', this.handleHeaderKeyDown);
 
     return true;
   }
