@@ -4,8 +4,6 @@ mixin archive(options = {})
       archive
     } = options
 
-    const link = 'http://www.frontendx.ru'
-
     const BASE_CLASS = 'archive'
   ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) Архивы
   
@@ -18,6 +16,6 @@ mixin archive(options = {})
         ol(class = `${BASE_CLASS}__months js-${BASE_CLASS}__months`)
           each subitem in item.months
               li(class = `${BASE_CLASS}__month`)
-                a(class = `${BASE_CLASS}__articles-link` href = link)
+                a(class = `${BASE_CLASS}__articles-link` href = "https://change-me")
                   span(class = `${BASE_CLASS}__name`)= subitem.month
                   span(class = `${BASE_CLASS}__amount`)= subitem.total

@@ -2,17 +2,17 @@
 mixin bread-crumbs()
   -
     const BASE_CLASS = 'bread-crumbs'
+    let length = 0
 
   aside(class = BASE_CLASS)
     ul(class = `${BASE_CLASS}__markers`)
     
     ol(class = `${BASE_CLASS}__items`)
-      -let n = 0
-        while n < 4
-          li(class = `${BASE_CLASS}__item`)
-            a(class = `${BASE_CLASS}__link` href = 'http://www.frontendx.ru')= `длинное имя ссылки ${n++}/`
-      li(class = `${BASE_CLASS}__item`)
-        span(class = `${BASE_CLASS}__link ${BASE_CLASS}__link_last`)= 'последняя ссылка'
+      while length < 4
+        li(class = `${BASE_CLASS}__item`)
+          a(class = `${BASE_CLASS}__link` href = 'https://change-me')= `длинное имя ссылки ${length++}/`
+    li(class = `${BASE_CLASS}__item`)
+      span(class = `${BASE_CLASS}__link ${BASE_CLASS}__link_last`)= 'последняя ссылка'
 
 
 

@@ -5,8 +5,6 @@
   font-size: 9px;
 }
 
-$barWidth: 8px;
-
 .tags {
   padding: 10px 0 30px 10px;
   margin-right: 10px;
@@ -29,44 +27,47 @@ $barWidth: 8px;
   }
 
   &__frame {
+    position: relative;
     padding-left: 5px;
     padding-right: 5px;
     margin-top: 10px;
-    position: relative;
     max-height: 250px;
     overflow: hidden;
+
     &_has-border {
       outline: 1px solid $color-grey-light;
     }
   }
 
   &__list {
-    padding: 10px;
-    top: 0px;
-    position: relative;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+    top: 0px;
     gap: 10px;
+    padding: 10px;
+
+    transform: translateY(0%);
   }
 
   &__scrollbar {
-    cursor: pointer;
-    position: absolute;
     display: flex;
     flex-direction: column;
-    width: $barWidth;
+    position: absolute;
+    cursor: pointer;
+    width: 8px;
     top: 42px;
     bottom: 30px;
     right: 0;
     touch-action: none;
 
     &-track {
+      position: relative;
       background-color: $color-grey-light;
       flex-grow: 1;
-      position: relative;
     }
 
-    &-thumb {
+    &-slider {
       position: absolute;
       box-sizing: border-box;
       width: 8px;
@@ -80,26 +81,38 @@ $barWidth: 8px;
     }
 
     &-button {
-      height: 15px;
-      background-color: $color-grey-light;
-      cursor: pointer;
-      position: relative;
+      &-up {
+        height: 15px;
+        background-color: $color-grey-light;
+        cursor: pointer;
+        position: relative;
 
-      &:hover {
-        &::before {
-          color: $button-background;
-          transition: background-color ease-in-out 500ms;
+        &:hover {
+          &::before {
+            color: $button-background;
+            transition: background-color ease-in-out 500ms;
+          }
         }
-      }
 
-      &_up {
         &::before {
           @include marker("▲");
           bottom: 4px;
         }
       }
 
-      &_down {
+      &-down {
+        height: 15px;
+        background-color: $color-grey-light;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          &::before {
+            color: $button-background;
+            transition: background-color ease-in-out 500ms;
+          }
+        }
+
         &::before {
           @include marker("▼");
           top: 4px;
