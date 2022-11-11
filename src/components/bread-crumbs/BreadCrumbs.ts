@@ -5,7 +5,7 @@ import { Throttle } from '@helpers/index';
 class BreadCrumbs {
   private className: string = '';
 
-  private breadCrumbs: HTMLElement;
+  private element: HTMLElement;
 
   private items: HTMLUListElement | null = null;
 
@@ -13,36 +13,57 @@ class BreadCrumbs {
 
   private lineHeight: number = 0;
 
-  constructor(className: string, elem: Element) {
-    this.breadCrumbs = elem as HTMLElement;
-    this.className = className.replace('.bread-crumbs', 'bread-crumbs');
+  constructor(element: Element) {
+    this.element = element as HTMLElement;
+    this.className = 'js-bread-crumbs';
 
-    this.init();
+    if (this.element) {
+      this.init();
+    }
   }
 
   private init() {
-    this.items = this.breadCrumbs.querySelector(`.${this.className}__items`);
-    this.markers = this.breadCrumbs.querySelector(`.${this.className}__markers`);
+    this.setDomElem();
 
-    if (!this.items || !this.markers) return;
+    if (!this.items || !this.markers) {
+      return false;
+    }
 
     this.lineHeight = parseFloat(window.getComputedStyle(this.items).lineHeight);
 
     this.makeMarkers();
     this.bindEvent();
+
+    return true;
+  }
+
+  private setDomElem() {
+    this.items = this.element.querySelector(`.${this.className}__items`);
+    this.markers = this.element.querySelector(`.${this.className}__markers`);
   }
 
   private bindEvent() {
     new Throttle('resize', this.makeMarkers, 10); // подписываемся на событие ресайза
   }
 
-  @boundMethod
-  private makeMarkers() {
-    if (!this.markers || !this.items) return;
+  private deleteMarkers() {
+    if (!this.markers) {
+      return false;
+    }
 
-    // удаляем существующие галочки
     const marks = this.markers.querySelectorAll(`.${this.className}__marker`);
     marks.forEach((mark) => mark.remove());
+
+    return true;
+  }
+
+  @boundMethod
+  private makeMarkers() {
+    if (!this.markers || !this.items) {
+      return false;
+    }
+
+    this.deleteMarkers();
 
     const maxHeight = this.items.offsetHeight;
     const count = Math.round(maxHeight / this.lineHeight);
@@ -52,11 +73,13 @@ class BreadCrumbs {
       const element = document.createElement('li');
 
       element.innerText = '>';
-      element.className = `${this.className}__marker`;
+      element.className = `bread-crumbs__marker ${this.className}__marker`;
       fragment.append(element);
     }
 
     this.markers.append(fragment);
+
+    return true;
   }
 }
 

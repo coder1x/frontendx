@@ -1,11 +1,11 @@
 import BreadCrumbs from './BreadCrumbs';
 
-function renderCheckboxList(className: string) {
+function renderBreadCrumbs(className: string) {
   const components: BreadCrumbs[] = [];
-  document.querySelectorAll(className).forEach((elem) => {
-    components.push(new BreadCrumbs(className, elem));
+  document.querySelectorAll(className).forEach((element) => {
+    components.push(new BreadCrumbs(element));
   });
   return components;
 }
 
-renderCheckboxList('.bread-crumbs');
+renderBreadCrumbs('.js-bread-crumbs');

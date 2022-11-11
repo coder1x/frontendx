@@ -1,14 +1,18 @@
 
-mixin bread-crumbs()
+mixin bread-crumbs(options = {})
   -
+    const {
+      items = 4,
+    } = options;
+
     const BASE_CLASS = 'bread-crumbs';
     let length = 0;
 
-  aside(class = BASE_CLASS)
-    ul(class = `${BASE_CLASS}__markers`)
+  aside(class = `${BASE_CLASS} js-${BASE_CLASS}`)
+    ul(class = `${BASE_CLASS}__markers js-${BASE_CLASS}__markers`)
     
-    ol(class = `${BASE_CLASS}__items`)
-      while length < 4
+    ol(class = `${BASE_CLASS}__items js-${BASE_CLASS}__items`)
+      while length < items
         li(class = `${BASE_CLASS}__item`)
           a(class = `${BASE_CLASS}__link` href = "https://change-me")= `длинное имя ссылки ${length++}/`
       li(class = `${BASE_CLASS}__item`)

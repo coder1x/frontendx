@@ -1,6 +1,13 @@
+$shadow-bread-crumbs: $section-shadow;
+$background-bread-crumbs: $background-section;
+$color-link: $color-grey-hover;
+$color-link-hover: $color-dark-grey;
+$color-last-hover: $color-grey-hover;
+$font-size-item: 13px;
+
 .bread-crumbs {
-  box-shadow: $section-shadow;
-  background-color: $background-section;
+  box-shadow: $shadow-bread-crumbs;
+  background-color: $background-bread-crumbs;
   padding: 2px 5px 5px;
   font-weight: bold;
   display: flex;
@@ -10,34 +17,36 @@
     padding-inline: 0;
     list-style: none;
     padding-right: 5px;
-    font-size: 0.8rem;
+    font-size: $font-size-item;
+    box-sizing: border-box;
+    width: 17px;
   }
 
   &__items {
     margin-block: 0;
     padding-inline: 0;
     height: auto;
-    font-size: 0.8rem;
+    font-size: $font-size-item;
     font-weight: normal;
     word-break: break-all;
   }
 
   &__item {
-    font-size: 0.8rem;
+    font-size: $font-size-item;
     font-weight: normal;
     display: inline;
     word-break: break-all;
   }
 
   &__link {
-    color: $color-grey-hover;
+    color: $color-link;
 
     &:hover {
-      color: $color-dark-grey;
+      color: $color-link-hover;
     }
 
     &_last:hover {
-      color: $color-grey-hover;
+      color: $color-last-hover;
     }
   }
 }

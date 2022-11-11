@@ -11,7 +11,9 @@ class Archive {
     this.element = element;
     this.className = 'js-archive';
 
-    this.init();
+    if (this.element) {
+      this.init();
+    }
   }
 
   private init() {

@@ -1,11 +1,11 @@
 import ArticleCard from './ArticleCard';
 
-function renderCheckboxList(className: string) {
+function renderArticleCard(className: string) {
   const components: ArticleCard[] = [];
-  document.querySelectorAll(className).forEach((elem) => {
-    components.push(new ArticleCard(className, elem));
+  document.querySelectorAll(className).forEach((element) => {
+    components.push(new ArticleCard(className, element));
   });
   return components;
 }
 
-renderCheckboxList('.article-card');
+renderArticleCard('.article-card');
