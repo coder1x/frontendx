@@ -63,7 +63,7 @@ class ScrollHeader extends PanelObserver {
   private setDomElement(className: string) {
     if (!this.header) return false;
 
-    this.menu = this.header.querySelector(`${className}__menu-wrap`);
+    this.menu = this.header.querySelector(`${className}__menu-wrapper`);
     this.button = this.header.querySelector(`${className}__toggle-menu`);
     this.search = this.header.querySelector(`${className}__toggle-side-panel`);
 

@@ -5,28 +5,13 @@ mixin category-tile(options = {})
       text='',
       link = 'https://change-me',
       number = '',
-      modifier = [],
-      addClass = '',
-    } = options
+    } = options;
 
-
-    const classComponent = 'category-tile';
-    let BASE_CLASS = classComponent;
-
-    if(modifier){
-      for(let item of modifier)
-      {
-        BASE_CLASS += ` ${classComponent}_${item}`;
-      }
-    }
-
-    if(addClass){
-      BASE_CLASS += ` ${addClass}`;
-    }
+    const BASE_CLASS = 'category-tile';
 
   article(class=BASE_CLASS)
   
-    div(class=`${BASE_CLASS}__blind-wrap`)
+    div(class=`${BASE_CLASS}__blind-wrapper`)
       div(class=`${BASE_CLASS}__blind`)
         div(class=`${BASE_CLASS}__blind-text`)
           span records 

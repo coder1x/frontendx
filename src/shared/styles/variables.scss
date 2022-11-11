@@ -5,19 +5,19 @@ $size-padding: 20px;
 $min-size-padding: 10px;
 
 $xxs: 320px;
-$xs2: 419px;
+$xs_middle: 419px;
 $xs: 575px;
-$sm2: 612px;
+$sm_middle: 612px;
 $sm: 767px;
-$md2: 867px;
+$md_middle: 867px;
 $md: 991px;
-$lg2: 1099px;
+$lg_middle: 1099px;
 $lg: 1199px;
-$xl2: 1299px;
+$xl_middle: 1299px;
 $xl: 1440px;
 $xxl: 1920px;
 
-//----------- COLOR -------------
+//----------- COLORS -------------
 $background-section: #fcfcfc;
 $section-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 $button-background: rgb(83, 83, 83);
@@ -28,11 +28,13 @@ $color-dark-grey-hover: #545454;
 $color-grey: #555;
 $color-grey-light: #e1e1e1;
 $color-background: #edeef0;
+$color-black: #000;
 
-//------------- FONT ------------
+//------------- FONTS ------------
 
 $font: Verdana, Arial, sans-serif;
 $font-title: "arial black", "britannic bold", "impact";
+$font-code: consolas, monospace;
 
 $font-size: 16;
 //-------------------------------

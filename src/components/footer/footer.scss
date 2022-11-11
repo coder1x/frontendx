@@ -9,23 +9,23 @@ $github-fill-outline: 2px solid #333;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 
-  &__widget-wrap {
+  &__widget-wrapper {
     display: flex;
     padding-right: 50px;
   }
 
-  &__copyright-wrap {
+  &__contacts-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  &__copyright {
+  &__contacts {
     font-family: $font;
     @include font-rem(14);
   }
 
-  &__github-wrap {
+  &__github-wrapper {
     padding-left: 50px;
     padding-right: 20px;
     display: flex;

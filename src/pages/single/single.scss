@@ -8,7 +8,7 @@
   box-shadow: $section-shadow;
   background-color: $background-section;
 
-  @include media-breakpoint-down($lg2) {
+  @include media-breakpoint-down($lg_middle) {
     grid-column-end: 3;
   }
 
@@ -31,7 +31,7 @@
     overflow-x: scroll;
     background-color: #f3f3f3;
 
-    @include media-breakpoint-down($xl2) {
+    @include media-breakpoint-down($xl_middle) {
       max-width: 795px;
     }
 
@@ -39,7 +39,7 @@
       max-width: 700px;
     }
 
-    @include media-breakpoint-down($lg2) {
+    @include media-breakpoint-down($lg_middle) {
       max-width: 100%;
     }
   }

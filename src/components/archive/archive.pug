@@ -1,10 +1,11 @@
 mixin archive(options = {})
   -
     const {
-      archive
-    } = options
+      archive,
+    } = options;
 
-    const BASE_CLASS = 'archive'
+    const BASE_CLASS = 'archive';
+    
   ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) Архивы
   
     each item in archive

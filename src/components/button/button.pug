@@ -3,7 +3,8 @@ mixin button(options = {})
     const {
       text = 'Читать',
       link = 'https://change-me',
-    } = options
+    } = options;
 
-    const BASE_CLASS = 'button'
+    const BASE_CLASS = 'button';
+    
   a(class = BASE_CLASS href = link)= text
