@@ -9,20 +9,20 @@ mixin category-tile(options = {})
 
     const BASE_CLASS = 'category-tile';
 
-  article(class=BASE_CLASS)
+  article(class=`${BASE_CLASS} js-${BASE_CLASS}`)
   
     div(class=`${BASE_CLASS}__blind-wrapper`)
-      div(class=`${BASE_CLASS}__blind`)
+      div(class=`${BASE_CLASS}__blind js-${BASE_CLASS}__blind`)
         div(class=`${BASE_CLASS}__blind-text`)
           span records 
           span=`[${number}]`
         div(class=`${BASE_CLASS}__window`)
-          div(class=`${BASE_CLASS}__window-disk`)
+          div(class=`${BASE_CLASS}__window-disk js-${BASE_CLASS}__window-disk`)
             div(class=`${BASE_CLASS}__disk`)
 
     div(class=`${BASE_CLASS}__cover`)
       h3(class=`${BASE_CLASS}__header`)
-        a(class=`${BASE_CLASS}__link` href=link)=header
+        a(class=`${BASE_CLASS}__link js-${BASE_CLASS}__link` href=link)=header
       p(class=`${BASE_CLASS}__text`)
         em=text 
 

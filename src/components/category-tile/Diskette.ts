@@ -5,62 +5,71 @@ class Diskette {
 
   blind: HTMLElement | null = null;
 
-  categoryTile: HTMLElement | null = null;
+  element: HTMLElement | null = null;
 
-  link: HTMLElement | null = null;
+  link: HTMLAnchorElement | null = null;
 
   window: HTMLElement | null = null;
 
-  constructor(className: string, elem: Element) {
-    this.className = className;
-    this.categoryTile = elem as HTMLElement;
+  constructor(element: Element) {
+    this.className = 'js-category-tile';
+    this.element = element as HTMLElement;
     this.init();
   }
 
   init() {
-    if (!this.categoryTile) return false;
+    if (!this.element) {
+      return false;
+    }
 
-    this.blind = this.categoryTile.querySelector(`${this.className}__blind`);
-    this.link = this.categoryTile.querySelector(`${this.className}__link`);
-    this.window = this.categoryTile.querySelector(`${this.className}__window-disk`);
+    this.blind = this.element.querySelector(`.${this.className}__blind`);
+    this.link = this.element.querySelector(`.${this.className}__link`);
+    this.window = this.element.querySelector(`.${this.className}__window-disk`);
     this.bindEvent();
 
     return true;
   }
 
   openBlind(isOpen = false) {
-    const name = this.className.replace('.', '');
+    if (!this.blind || !this.window) {
+      return false;
+    }
 
-    if (!this.blind || !this.window) return false;
+    const name = this.className.replace('js-', '');
+
+    const blindOpen = `${name}__blind_open`;
+    const diskOpen = `${name}__window-disk_open`;
 
     if (isOpen) {
-      this.blind.classList.add(`${name}__blind_open`);
-      this.window.classList.add(`${name}__window-disk_open`);
+      this.blind.classList.add(blindOpen);
+      this.window.classList.add(diskOpen);
     } else {
-      this.blind.classList.remove(`${name}__blind_open`);
-      this.window.classList.remove(`${name}__window-disk_open`);
+      this.blind.classList.remove(blindOpen);
+      this.window.classList.remove(diskOpen);
     }
 
     return true;
   }
 
   @boundMethod
-  blindOpen() {
+  handleBlindOpen() {
     this.openBlind(true);
   }
 
   @boundMethod
-  blindClose() {
+  handleBlindClose() {
     this.openBlind();
   }
 
   bindEvent() {
-    if (!this.link) return false;
+    if (!this.link) {
+      return false;
+    }
 
-    this.link.addEventListener('mouseover', this.blindOpen);
-    this.link.addEventListener('focus', this.blindOpen);
-    this.link.addEventListener('blur', this.blindClose);
-    this.link.addEventListener('mouseout', this.blindClose);
+    this.link.addEventListener('mouseover', this.handleBlindOpen);
+    this.link.addEventListener('focus', this.handleBlindOpen);
+    this.link.addEventListener('blur', this.handleBlindClose);
+    this.link.addEventListener('mouseout', this.handleBlindClose);
 
     return true;
   }
