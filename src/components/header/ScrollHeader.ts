@@ -160,7 +160,7 @@ class ScrollHeader extends PanelObserver {
     new Throttle('scroll', this.doSomething, 10); // подписываемся на событие скролла
 
     this.buttonActive = `${this.className}__toggle-menu_active`;
-    this.menuVisible = `${this.className}__menu-wrap_visible`;
+    this.menuVisible = `${this.className}__menu-wrapper_visible`;
 
     this.button.addEventListener('keydown', this.handleKeydownButton);
     this.button.addEventListener('click', this.handleClickButton);

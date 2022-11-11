@@ -19,8 +19,6 @@ class Tags {
 
   private tagsHeight: number = 0;
 
-  private frameHeight: number = 0;
-
   private trackAreaHeight: number = 0;
 
   private tagsScrollLimit: number = 0;
@@ -87,7 +85,7 @@ class Tags {
 
     this.tagsHeight = this.tags.offsetHeight;
 
-    if (this.tagsHeight <= this.frameHeight) {
+    if (this.tagsHeight <= frameHeight) {
       this.track.style.display = 'none';
 
       if (this.buttonsUp && this.buttonsDown) {
@@ -335,7 +333,7 @@ class Tags {
   private handleTrackPointerDown(event: PointerEvent) {
     const target = event.target as HTMLElement;
 
-    if (target.classList.contains(`${this.className}__scrollbar-thumb`)) {
+    if (target.classList.contains(`${this.className}__scrollbar-slider`)) {
       return false;
     }
 
