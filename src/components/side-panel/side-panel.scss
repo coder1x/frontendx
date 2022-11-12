@@ -1,12 +1,16 @@
+$shadow-side-panel: -5px 0px 20px 0px #d7d8db;
+$background-side-panel: $background-section;
+$border-hr: 2px solid $color-grey-light;
+
 .side-panel {
   width: 300px;
-  box-shadow: -5px 0px 20px 0px #d7d8db;
-  background-color: $background-section;
+  box-shadow: $shadow-side-panel;
+  background-color: $background-side-panel;
 
   &__search-form-wrapper,
   &__categories-wrapper,
   &__archive-wrapper {
-    border-bottom: 2px solid $color-grey-light;
+    border-bottom: $border-hr;
   }
 
   &__categories-wrapper,

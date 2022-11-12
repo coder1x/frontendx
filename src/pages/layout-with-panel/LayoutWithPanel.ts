@@ -1,16 +1,13 @@
 import { boundMethod } from 'autobind-decorator';
 
-import { PanelObserver } from '@helpers/index';
-import { ScrollHeader, SidePanel } from '@components/index';
+import { Header, SidePanel } from '@components/index';
 
-class LayoutWithPanel extends PanelObserver {
+class LayoutWithPanel {
   private className: string;
 
   private wrapper: HTMLElement;
 
   private searchPanelElement: HTMLElement | null = null;
-
-  private header: ScrollHeader | null = null;
 
   private isStarted: boolean;
 
@@ -21,14 +18,13 @@ class LayoutWithPanel extends PanelObserver {
   private limit: number;
 
   constructor(element: Element, className: string) {
-    super();
     this.wrapper = element as HTMLElement;
     this.isStarted = true;
     this.limit = 1099;
 
     this.className = `${className.replace(/^./, '')}__side-panel-wrapper`;
     this.createComponents();
-    this.createListeners();
+    // this.createListeners();
     this.bindEvent();
   }
 
@@ -79,18 +75,19 @@ class LayoutWithPanel extends PanelObserver {
     this.isPanelShown = window.innerWidth > this.limit;
     this.setPanelHeight(this.isPanelShown);
 
-    this.header = new ScrollHeader({
-      selector: '.header',
-      nameAnimation: 'fixedHeaderAnimation',
-    });
-  }
+    const header = document.querySelector('.js-header');
 
-  private createListeners() {
-    if (this.header) {
-      this.header.subscribe(this.handleCloseSearchPanel);
-      this.header.subscribe(this.handleToggleSearchPanel);
+    if (header) {
+      new Header(header);
     }
   }
+
+  // private createListeners() {
+  //   if (this.header) {
+  //     this.header.subscribe(this.handleCloseSearchPanel);
+  //     this.header.subscribe(this.handleToggleSearchPanel);
+  //   }
+  // }
 
   private closeSearchPanel() {
     if (!this.searchPanelElement) return;

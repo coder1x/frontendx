@@ -9,16 +9,16 @@ mixin side-panel()
     const BASE_CLASS = 'side-panel';
     const { categories, archive } = require('./side-panel.json');
 
-  aside(class = BASE_CLASS)
+  aside(class = `${BASE_CLASS} js-${BASE_CLASS}`)
     div(class = `${BASE_CLASS}__search-form-wrapper`)
       +search-form()
       
     div(class = `${BASE_CLASS}__categories-wrapper`)
       +categories({ categories })
 
-    div(class = `${BASE_CLASS}__archive-wrapper`)
+    div(class = `${BASE_CLASS}__archive-wrapper js-${BASE_CLASS}__archive-wrapper`)
       +archive({ archive })
       
-    div(class = `${BASE_CLASS}__tags-wrapper`)
+    div(class = `${BASE_CLASS}__tags-wrapper js-${BASE_CLASS}__tags-wrapper`)
       +tags()
 

@@ -1,7 +1,6 @@
-import PanelObserver from '@helpers/observer/Observer';
 import Throttle from '@helpers/throttle/Throttle';
 
 export {
-  PanelObserver,
+  // eslint-disable-next-line import/prefer-default-export
   Throttle,
 };
