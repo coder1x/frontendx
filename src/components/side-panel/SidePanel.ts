@@ -28,6 +28,23 @@ class SidePanel {
     }
   }
 
+  toggleSidePanel(isActive = true) {
+    if (!this.element) {
+      return false;
+    }
+
+    if (isActive) {
+      // открыть закрыть
+
+      console.log('открыть закрыть');
+    } else {
+      // закрыть
+      console.log('закрыть');
+    }
+
+    return true;
+  }
+
   private init() {
     this.setDomElement();
 

@@ -25,40 +25,37 @@ class Header {
 
   private menu: HTMLElement | null = null;
 
-  private callbackAnimationEnd = () => { };
-
-  private buttonActive = '';
+  private toggleMenuActive = '';
 
   private menuVisible = '';
 
-  constructor(element: Element) {
-    this.element = element as HTMLElement;
+  private callbackAnimationEnd = () => { };
+
+  onClickSidePanel = (data?: boolean) => { };
+
+  constructor() {
     this.className = 'js-header';
     this.classHeader = 'header';
-
-    if (this.element) {
-      this.init();
-    }
-  }
-
-  private isFixed() {
-    if (this.element) {
-      return this.element.classList.contains(`.${this.classHeader}_fixed`);
-    }
-
-    return false;
+    this.init();
   }
 
   private init() {
     this.headerShow = true;
-    this.buttonActive = `${this.classHeader}__toggle-menu_active`;
+    this.toggleMenuActive = `${this.classHeader}__toggle-menu_active`;
     this.menuVisible = `${this.classHeader}__menu-wrapper_visible`;
 
-    this.setDomElement();
-    this.bindEvent();
+    if (this.setDomElement()) {
+      this.bindEvent();
+    }
   }
 
   private setDomElement() {
+    const header = document.querySelectorAll(`.${this.className}`);
+
+    if (header.length === 1) {
+      this.element = header[0] as HTMLElement;
+    }
+
     if (!this.element) {
       return false;
     }
@@ -70,7 +67,14 @@ class Header {
     return true;
   }
 
-  // показать или отключить анимацию появления шапки
+  private isFixed() {
+    if (this.element) {
+      return this.element.classList.contains(`.${this.classHeader}_fixed`);
+    }
+
+    return false;
+  }
+
   private toggleHeader() {
     if (!this.element) {
       return false;
@@ -104,7 +108,6 @@ class Header {
     return true;
   }
 
-  // направление скролла вверх или в низ.
   private moveHeader() {
     const { body } = document;
     if (!this.element || !body) {
@@ -206,8 +209,8 @@ class Header {
       return false;
     }
 
-    this.sidePanel.classList.toggle(this.buttonActive);
-    // this.notify('toggle');
+    this.sidePanel.classList.toggle(this.toggleMenuActive);
+    this.onClickSidePanel();
 
     return true;
   }
@@ -218,20 +221,22 @@ class Header {
       return false;
     }
 
-    this.button.classList.toggle(this.buttonActive);
+    this.button.classList.toggle(this.toggleMenuActive);
     this.menu.classList.toggle(this.menuVisible);
 
     return true;
   }
 
-  private handleSidePanelKeyDown() {
+  @boundMethod
+  private handleSidePanelKeyDown(event: KeyboardEvent) {
     if (!this.sidePanel) {
       return false;
     }
 
-    // if (event.key === 'Escape') {
-    //   // this.notify('close');
-    // }
+    if (event.key === 'Escape') {
+      this.sidePanel.classList.remove(this.toggleMenuActive);
+      this.onClickSidePanel(false);
+    }
     return true;
   }
 
@@ -242,7 +247,7 @@ class Header {
     }
 
     if (event.key === 'Escape') {
-      this.button.classList.remove(this.buttonActive);
+      this.button.classList.remove(this.toggleMenuActive);
       this.menu.classList.remove(this.menuVisible);
     }
 

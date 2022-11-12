@@ -1,137 +1,51 @@
-import { boundMethod } from 'autobind-decorator';
+// import { boundMethod } from 'autobind-decorator';
 
 import { Header, SidePanel } from '@components/index';
 
 class LayoutWithPanel {
-  private className: string;
+  private element: HTMLElement | null = null;
 
-  private wrapper: HTMLElement;
+  private header: Header | null = null;;
 
-  private searchPanelElement: HTMLElement | null = null;
+  private sidePanel: SidePanel | null = null;
 
-  private isStarted: boolean;
+  private sidePanelWrapper: HTMLElement | null = null;
 
-  private panelHeight: string = 'auto';
+  private className: string = '';
 
-  private isPanelShown: boolean | null = false;
+  constructor(element: Element) {
+    this.element = element as HTMLElement;
+    this.className = 'js-layout-with-panel';
 
-  private limit: number;
-
-  constructor(element: Element, className: string) {
-    this.wrapper = element as HTMLElement;
-    this.isStarted = true;
-    this.limit = 1099;
-
-    this.className = `${className.replace(/^./, '')}__side-panel-wrapper`;
-    this.createComponents();
-    // this.createListeners();
-    this.bindEvent();
-  }
-
-  private bindEvent() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  @boundMethod
-  private handleResize() {
-    if (window.innerWidth > this.limit && !this.isPanelShown) {
-      this.isPanelShown = true;
-      this.open();
-      return;
-    }
-    if (window.innerWidth <= this.limit && this.isPanelShown) {
-      this.isPanelShown = false;
-      this.close();
+    if (this.element) {
+      this.init();
     }
   }
 
-  @boundMethod
-  private handleCloseSearchPanel(key: string) {
-    if (key !== 'close') return;
-    this.closeSearchPanel();
-  }
+  private init() {
+    this.setDomElement();
 
-  @boundMethod
-  private handleToggleSearchPanel(key: string) {
-    if (key !== 'toggle') return;
-    this.toggleSearchPanel();
-  }
+    this.header = new Header();
 
-  private setPanelHeight(isAutoHeight = false) {
-    if (!this.searchPanelElement) return;
-    if (!isAutoHeight) {
-      let { top } = this.searchPanelElement.getBoundingClientRect();
-      if (top < 0) top = 0;
-      this.panelHeight = `${window.innerHeight - top}px`;
-    } else { this.panelHeight = 'auto'; }
-    this.searchPanelElement.style.height = this.panelHeight;
-  }
-
-  private createComponents() {
-    this.searchPanelElement = this.wrapper.querySelector(`.${this.className}`) as HTMLElement;
-
-    new SidePanel(this.searchPanelElement);
-
-    this.isPanelShown = window.innerWidth > this.limit;
-    this.setPanelHeight(this.isPanelShown);
-
-    const header = document.querySelector('.js-header');
-
-    if (header) {
-      new Header(header);
-    }
-  }
-
-  // private createListeners() {
-  //   if (this.header) {
-  //     this.header.subscribe(this.handleCloseSearchPanel);
-  //     this.header.subscribe(this.handleToggleSearchPanel);
-  //   }
-  // }
-
-  private closeSearchPanel() {
-    if (!this.searchPanelElement) return;
-    this.setPanelHeight();
-    this.isPanelShown = false;
-
-    this.close();
-  }
-
-  private toggleSearchPanel() {
-    if (!this.searchPanelElement) return;
-
-    if (this.isStarted) { // открываем панель первый раз
-      this.setPanelHeight(true);
-      this.isPanelShown = true;
-      this.isStarted = false;
-      this.searchPanelElement.classList.add(`${this.className}_visible`);
-      return;
+    if (this.sidePanelWrapper) {
+      this.sidePanel = new SidePanel(this.sidePanelWrapper);
     }
 
-    if (this.panelHeight === 'auto') { // закрываем панель
-      this.setPanelHeight();
-      this.isPanelShown = true;
-    } else {
-      this.setPanelHeight(true); // открываем панель
-      this.isPanelShown = true;
+    this.header.onClickSidePanel = (isActive = true) => {
+      this.sidePanel?.toggleSidePanel(isActive);
+    };
+  }
+
+  private setDomElement() {
+    if (!this.element) {
+      return false;
     }
 
-    this.searchPanelElement.classList.toggle(`${this.className}_hidden`);
-    this.searchPanelElement.classList.toggle(`${this.className}_visible`);
-  }
+    this.sidePanelWrapper = this.element.querySelector(
+      `.${this.className}__side-panel-wrapper`,
+    );
 
-  private close() {
-    if (!this.searchPanelElement) return;
-
-    this.searchPanelElement.classList.add(`${this.className}_hidden`);
-    this.searchPanelElement.classList.remove(`${this.className}_visible`);
-  }
-
-  private open() {
-    if (!this.searchPanelElement) return;
-
-    this.searchPanelElement.classList.remove(`${this.className}_hidden`);
-    this.searchPanelElement.classList.add(`${this.className}_visible`);
+    return true;
   }
 }
 
