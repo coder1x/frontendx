@@ -35,6 +35,11 @@
     padding: $size-padding $min-size-padding;
   }
 
+  @include media-breakpoint-down($sm_middle) {
+    row-gap: 12px;
+    column-gap: 0;
+  }
+
   // вынести в стили блога.
   &__articles-wrapper {
     grid-column-start: 1;
@@ -82,6 +87,12 @@
     grid-row-end: 3;
     position: relative;
 
+    @include media-breakpoint-down($sm_middle) {
+      grid-column-start: 1;
+      grid-column-end: 1;
+      justify-self: end;
+    }
+
     @include media-breakpoint-down($lg_middle) {
       transform: translateX(150%);
       overflow: hidden;
@@ -99,6 +110,7 @@
         @include animation(SearchPanelShow, none);
         height: initial;
         overflow: initial;
+        width: 300px;
       }
     }
   }
