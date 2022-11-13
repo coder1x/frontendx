@@ -1,7 +1,11 @@
-// import { Header } from '@components/index';
+import { Header } from '@components/index';
 
-// const header = document.querySelector('.js-header');
+function initialization(className: string) {
+  const layout = document.querySelectorAll(className);
 
-// if (header) {
-//   new Header(header);
-// }
+  if (layout.length === 1) {
+    new Header();
+  }
+}
+
+initialization('.js-layout-no-panel');

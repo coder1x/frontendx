@@ -1,11 +1,12 @@
 import LayoutWithPanel from './LayoutWithPanel';
 
 function renderLayoutWithPanel(className: string) {
-  const components: LayoutWithPanel[] = [];
-  document.querySelectorAll(className).forEach((component) => {
-    components.push(new LayoutWithPanel(component));
-  });
-  return components;
+  const layout = document.querySelectorAll(className);
+
+  if (layout.length === 1) {
+    return new LayoutWithPanel(layout[0]);
+  }
+  return null;
 }
 
 renderLayoutWithPanel('.js-layout-with-panel');

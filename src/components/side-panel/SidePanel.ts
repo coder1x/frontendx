@@ -1,10 +1,9 @@
 import { boundMethod } from 'autobind-decorator';
 
+import { Throttle } from '@helpers/index';
 import { Archive, Tags } from '@components/index';
 
 class SidePanel {
-  private header: HTMLElement | null = null;
-
   private element: HTMLElement | null = null;
 
   private className: string;
@@ -13,11 +12,9 @@ class SidePanel {
 
   private scroll: number = 0;
 
-  private headerHeight: number = 0;
+  headerHeight: number = 0;
 
   private panelTop: number = 0;
-
-  private archive = 'archive'
 
   constructor(element: Element) {
     this.element = element as HTMLElement;
@@ -28,31 +25,13 @@ class SidePanel {
     }
   }
 
-  toggleSidePanel(isActive = true) {
-    if (!this.element) {
-      return false;
-    }
-
-    if (isActive) {
-      // открыть закрыть
-
-    } else {
-      // закрыть
-
-    }
-
-    return true;
-  }
-
   private init() {
     this.setDomElement();
 
-    if (!this.panel || !this.header) {
+    if (!this.panel) {
       return false;
     }
 
-    // нужно просто запросить высоту хедера.
-    this.headerHeight = this.header.offsetHeight;
     this.panelTop = this.panel.getBoundingClientRect().top + window.pageYOffset;
     this.bindEvent();
     return true;
@@ -63,7 +42,6 @@ class SidePanel {
       return false;
     }
 
-    this.header = document.querySelector('.header') as HTMLElement;
     this.panel = this.element.querySelector(`.${this.className}`) as HTMLElement;
     const tags = this.panel.querySelector(`.${this.className}__tags-wrapper`) as HTMLElement;
     const archive = this.panel.querySelector(`.${this.className}__archive-wrapper`) as Element;
@@ -73,45 +51,6 @@ class SidePanel {
 
     return true;
   }
-
-  // =============================================
-
-  // @boundMethod
-  // private handleSearchPanelClick(event: MouseEvent) {
-  //   const month = event.target as HTMLElement;
-  //   const year = month.closest(`.${this.archive}__year`);
-
-  //   if (!year || !month) {
-  //     return false;
-  //   }
-
-  //   const monthList = year.querySelector(`.${this.archive}__months`) as HTMLElement;
-  //   const monthListHeight = monthList.offsetHeight;
-  //   const isListHidden = monthList.classList.contains(`${this.archive}__months_visually-hidden`);
-  //   const dataHeightAttribute = parseFloat(monthList.getAttribute('data-height') ?? '');
-
-  //   if (!this.panel) {
-  //     return false;
-  //   }
-
-  //   const { style } = this.panel;
-  //   const distanceToBottom = parseFloat(style.bottom);
-
-  //   // НЕ первый клик по этому месяцу => на нем уже есть атрибут с высотой => берем высоту из атрибута
-  //   if (dataHeightAttribute) {
-  //     style.bottom = isListHidden ? `${distanceToBottom + dataHeightAttribute}px`
-  //       : `${distanceToBottom - dataHeightAttribute}px`;
-  //     return true;
-  //   }
-
-  //   // первый клик по этому месяцу => на нем еще нет атрибута с высотой => берем высоту из listHeight и вешаем атрибут с высотой
-  //   style.bottom = `${distanceToBottom - monthListHeight}px`;
-  //   monthList.setAttribute('data-height', String(monthListHeight));
-
-  //   return true;
-  // }
-
-  // =============================================
 
   private setStyle(position = 'static', top = 'auto', bottom = 'auto') {
     if (!this.panel) {
@@ -158,14 +97,16 @@ class SidePanel {
         return true;
       }
 
-      // const panelTop = this.panel.getBoundingClientRect().top;
-      // const isAbsolute = position === 'absolute';
+      const panelTop = this.panel.getBoundingClientRect().top;
+      const isAbsolute = position === 'absolute';
 
-      // if (panelTop > this.headerHeight && isAbsolute) { // панель продолжает выезжать из-под шапки
-      //   setStyle('fixed', `${this.headerHeight}px`);
-      // }
+      if (panelTop > this.headerHeight && isAbsolute) { // панель продолжает выезжать из-под шапки
+        this.setStyle('fixed', `${this.headerHeight}px`);
+      }
 
-      if (window.pageYOffset < this.panelTop) {
+      const indent = this.panelTop - 68;
+
+      if (window.pageYOffset < indent) {
         this.setStyle('static');
       }
     }
@@ -180,8 +121,7 @@ class SidePanel {
       return false;
     }
 
-    window.addEventListener('scroll', this.handleWindowScroll);
-    // this.panel.addEventListener('click', this.handleSearchPanelClick);
+    new Throttle(this.handleWindowScroll, 'scroll', 10);
 
     return true;
   }

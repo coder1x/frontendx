@@ -33,12 +33,16 @@ class Header {
 
   private callbackAnimationEnd: Function | null = null;
 
-  onClickSidePanel = (data?: boolean) => { };
+  onClickSidePanel = (data: boolean) => { };
 
   constructor() {
     this.className = 'js-header';
     this.classHeader = 'header';
     this.init();
+  }
+
+  getHeaderHeight() {
+    return this.element?.offsetHeight ?? 0;
   }
 
   private init() {
@@ -195,7 +199,7 @@ class Header {
   }
 
   private bindEvent() {
-    new Throttle(this.doSomething, 'scroll', 10); // подписываемся на событие скролла
+    new Throttle(this.doSomething, 'scroll', 10);
 
     if (!this.button) {
       return false;
@@ -220,7 +224,7 @@ class Header {
     }
 
     this.sidePanel.classList.toggle(this.toggleMenuActive);
-    this.onClickSidePanel();
+    this.onClickSidePanel(true);
 
     return true;
   }
