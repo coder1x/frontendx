@@ -19,6 +19,8 @@ class Header {
 
   private headerShow: boolean | null = null;
 
+  private isFixed = false;
+
   private button: HTMLButtonElement | null = null;
 
   private sidePanel: HTMLButtonElement | null = null;
@@ -29,7 +31,7 @@ class Header {
 
   private menuVisible = '';
 
-  private callbackAnimationEnd = () => { };
+  private callbackAnimationEnd: Function | null = null;
 
   onClickSidePanel = (data?: boolean) => { };
 
@@ -67,14 +69,6 @@ class Header {
     return true;
   }
 
-  private isFixed() {
-    if (this.element) {
-      return this.element.classList.contains(`.${this.classHeader}_fixed`);
-    }
-
-    return false;
-  }
-
   private toggleHeader() {
     if (!this.element) {
       return false;
@@ -96,12 +90,13 @@ class Header {
       return false;
     }
 
-    const { classList } = this.element;
-
     if (!this.headerShow) {
-      classList.remove(...this.classes);
+      this.element.classList.remove(...this.classes);
 
-      this.callbackAnimationEnd();
+      if (typeof this.callbackAnimationEnd === 'function') {
+        this.callbackAnimationEnd();
+        this.callbackAnimationEnd = null;
+      }
       this.headerShow = true;
     }
 
@@ -121,11 +116,12 @@ class Header {
     const isTop = this.direction === 'top';
     const modifierAnimating = `${this.classHeader}_animating`;
 
-    if (isTop && !this.isFixed()) {
-      const height = this.element.offsetHeight;
+    if (isTop && !this.isFixed) {
+      const { offsetHeight } = this.element;
 
-      body.style.paddingTop = `${height}px`;
+      body.style.paddingTop = `${offsetHeight}px`;
       classList.add(modifierFixed);
+      this.isFixed = true;
 
       this.classes = [
         modifierAnimating,
@@ -136,7 +132,7 @@ class Header {
       return true;
     }
 
-    if (isBottom && this.isFixed()) {
+    if (isBottom && this.isFixed) {
       this.classes = [
         modifierAnimating,
         `${this.classHeader}_fixed-hide`,
@@ -145,6 +141,7 @@ class Header {
       this.callbackAnimationEnd = () => {
         body.style.paddingTop = '0px';
         classList.remove(modifierFixed);
+        this.isFixed = false;
       };
 
       this.toggleHeader();
@@ -154,7 +151,16 @@ class Header {
     return true;
   }
 
-  // функция вызывается при скролле получая координаты Y
+  private closeMenu() {
+    if (!this.button || !this.menu) {
+      return false;
+    }
+    this.button.classList.remove(this.toggleMenuActive);
+    this.menu.classList.remove(this.menuVisible);
+
+    return true;
+  }
+
   @boundMethod
   private doSomething() {
     const { body } = document;
@@ -167,8 +173,8 @@ class Header {
 
     if (scrollY === 0) {
       this.element.classList.remove(`${this.classHeader}_fixed`);
+      this.isFixed = false;
       body.style.paddingTop = '0px';
-
       return true;
     }
 
@@ -180,6 +186,10 @@ class Header {
     }
 
     this.prevDirection = this.direction;
+
+    if (this.direction === 'bottom') {
+      this.closeMenu();
+    }
 
     return true;
   }
@@ -247,8 +257,7 @@ class Header {
     }
 
     if (event.key === 'Escape') {
-      this.button.classList.remove(this.toggleMenuActive);
-      this.menu.classList.remove(this.menuVisible);
+      this.closeMenu();
     }
 
     return true;

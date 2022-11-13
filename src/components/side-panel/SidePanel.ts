@@ -36,10 +36,9 @@ class SidePanel {
     if (isActive) {
       // открыть закрыть
 
-      console.log('открыть закрыть');
     } else {
       // закрыть
-      console.log('закрыть');
+
     }
 
     return true;
