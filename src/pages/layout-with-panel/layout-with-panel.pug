@@ -10,9 +10,9 @@ block header
 block content
   - const BASE_CLASS = 'layout-with-panel';
   div(class = `${BASE_CLASS} js-${BASE_CLASS}`)
-    section(class = `${BASE_CLASS}__bread-crumbs-wrapper`)
+    div(class = `${BASE_CLASS}__bread-crumbs-wrapper`)
       +bread-crumbs()
     block main
-    section(class = `${BASE_CLASS}__side-panel-wrapper js-${BASE_CLASS}__side-panel-wrapper`)
+    div(class = `${BASE_CLASS}__side-panel-wrapper js-${BASE_CLASS}__side-panel-wrapper`)
       +side-panel()
     block pagination

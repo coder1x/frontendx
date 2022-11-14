@@ -11,7 +11,7 @@ mixin tags(options = {})
     const BASE_CLASS = 'tags';
     const borderModifier = hasBorder? `${BASE_CLASS}__frame_has-border`: '';
 
-  article(class = `${BASE_CLASS} js-${BASE_CLASS}`)
+  div(class = `${BASE_CLASS} js-${BASE_CLASS}`)
     if hasHeader
       span(class = `${BASE_CLASS}__header`)
         span(class = `${BASE_CLASS}__label`) Теги

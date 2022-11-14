@@ -11,14 +11,14 @@ mixin categories(options = {})
     dt(class = `${BASE_CLASS}__header`) Категории
     each item in categories
       dt(class = `${BASE_CLASS}__title`)
-        a(class = `${BASE_CLASS}__articles-link` href = link tabindex = "0")
+        a(class = `${BASE_CLASS}__articles-link` href = link)
           span(class = `${BASE_CLASS}__name`)= item.category
           span(class = `${BASE_CLASS}__amount`)= item.total
           
           each subitem in item.subcategories
             if index !='total'
               dd(class = `${BASE_CLASS}__item`)
-                a(class = `${BASE_CLASS}__articles-link` href = link tabindex = "0")
+                a(class = `${BASE_CLASS}__articles-link` href = link)
                   span(class = `${BASE_CLASS}__name`)= subitem.category
                   span(class = `${BASE_CLASS}__amount`)= subitem.total
 
