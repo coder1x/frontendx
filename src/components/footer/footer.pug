@@ -5,7 +5,9 @@ mixin footer()
   footer(class=BASE_CLASS)
     div(class=`${BASE_CLASS}__widget-wrapper`)
     div(class=`${BASE_CLASS}__contacts-wrapper`)
-      p(class=`${BASE_CLASS}__contacts`) coder@frontendx.ru 
+      a(class=`${BASE_CLASS}__contacts` href="mailto:coder@frontendx.ru") coder@
+        wbr 
+        |frontendx.ru
       
     div(class=`${BASE_CLASS}__github-wrapper`)
       a(class=`${BASE_CLASS}__github` href="https://github.com/coder1x" target="_blank" rel="noopener noreferrer")

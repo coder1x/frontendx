@@ -7,7 +7,8 @@ mixin categories(options = {})
     const link = 'https://change-me';
     const BASE_CLASS = 'categories';
 
-  dl(class = BASE_CLASS) Категории
+  dl(class = BASE_CLASS) 
+    dt(class = `${BASE_CLASS}__header`) Категории
     each item in categories
       dt(class = `${BASE_CLASS}__title`)
         a(class = `${BASE_CLASS}__articles-link` href = link tabindex = "0")

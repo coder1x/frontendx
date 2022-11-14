@@ -22,6 +22,27 @@
     color: $color-dark-grey;
   }
 
+  blockquote {
+    margin: 0;
+    padding: 20px 10px 20px 6px;
+    border-left: 8px solid #6d7072;
+    position: relative;
+    background: #f3f3f3;
+    font-family: Lato, sans-serif;
+    font-weight: 300;
+  }
+
+  p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  hr {
+    height: 1px;
+    background-color: #6d7072;
+  }
+
   pre {
     box-sizing: border-box;
     padding: 20px;

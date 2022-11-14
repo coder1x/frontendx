@@ -29,6 +29,8 @@ class Header {
 
   private toggleMenuActive = '';
 
+  private toggleSidePanelActive = '';
+
   private menuVisible = '';
 
   private callbackAnimationEnd: Function | null = null;
@@ -48,10 +50,12 @@ class Header {
   private init() {
     this.headerShow = true;
     this.toggleMenuActive = `${this.classHeader}__toggle-menu_active`;
+    this.toggleSidePanelActive = `${this.classHeader}__toggle-side-panel_active`;
     this.menuVisible = `${this.classHeader}__menu-wrapper_visible`;
 
     if (this.setDomElement()) {
       this.bindEvent();
+      this.setAriaExpanded();
     }
   }
 
@@ -84,6 +88,30 @@ class Header {
       this.element.classList.add(...this.classes);
       this.headerShow = false;
     }
+
+    return true;
+  }
+
+  private setAriaExpanded() {
+    if (!this.button || !this.sidePanel) {
+      return false;
+    }
+
+    const observerButton = new MutationObserver((mutation) => {
+      mutation.forEach((item) => {
+        const element = item.target as HTMLButtonElement;
+        let isOpen = !!element.classList.contains('header__toggle-menu_active');
+
+        if (!isOpen) {
+          isOpen = !!element.classList.contains('header__toggle-side-panel_active');
+        }
+
+        element.setAttribute('aria-expanded', `${isOpen}`);
+      });
+    });
+
+    observerButton.observe(this.button, { attributeFilter: ['class'] });
+    observerButton.observe(this.sidePanel, { attributeFilter: ['class'] });
 
     return true;
   }
@@ -223,7 +251,7 @@ class Header {
       return false;
     }
 
-    this.sidePanel.classList.toggle(this.toggleMenuActive);
+    this.sidePanel.classList.toggle(this.toggleSidePanelActive);
     this.onClickSidePanel(true);
 
     return true;
@@ -248,7 +276,7 @@ class Header {
     }
 
     if (event.key === 'Escape') {
-      this.sidePanel.classList.remove(this.toggleMenuActive);
+      this.sidePanel.classList.remove(this.toggleSidePanelActive);
       this.onClickSidePanel(false);
     }
     return true;

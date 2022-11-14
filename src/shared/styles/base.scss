@@ -19,8 +19,6 @@ body {
   text-rendering: optimizeSpeed;
 }
 
-//----------------------------------
-
 h1,
 h2,
 h3 {
@@ -66,13 +64,9 @@ p {
   margin: 0;
 }
 
-//-----------------------------------
-
 .js-focus-visible :focus:not(.focus-visible) {
   outline: none;
 }
-
-//------------ стиль скроулинга браузера
 
 ::-webkit-scrollbar-button {
   background-repeat: no-repeat;
@@ -85,14 +79,13 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  // цвет полосы
   -webkit-border-radius: 0;
   border-radius: 0;
   background-color: #a6a8b6;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(113, 113, 113);
+  background-color: #717171;
 }
 
 ::-webkit-resizer {
@@ -104,5 +97,3 @@ p {
 ::-webkit-scrollbar {
   width: 8px;
 }
-
-//--------------------------------
