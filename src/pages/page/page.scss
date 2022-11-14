@@ -1,0 +1,52 @@
+.page-content {
+  max-width: $max-wrapper;
+  width: 100%;
+  min-width: $min-wrapper;
+  margin: 0 auto;
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: $size-padding;
+  padding-right: $size-padding;
+  box-sizing: border-box;
+
+  @include media-breakpoint-down($xs) {
+    padding-left: $min-size-padding;
+    padding-right: $min-size-padding;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    box-sizing: border-box;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    background-color: #fcfcfc;
+    padding: 20px;
+    width: 100%;
+  }
+
+  &__title {
+    margin: 20px 0;
+  }
+
+  &__text {
+    text-indent: 15px;
+    font-size: 16px;
+    color: $color-dark-grey;
+  }
+
+  pre {
+    box-sizing: border-box;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    overflow-x: scroll;
+    background-color: #f3f3f3;
+  }
+
+  code {
+    box-sizing: border-box;
+  }
+}
