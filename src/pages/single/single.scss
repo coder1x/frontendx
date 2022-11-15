@@ -1,3 +1,7 @@
+$color-tags-title: #252525;
+$background-tag-link: #ebebeb;
+$background-tag-link-hover: #f2f2f2;
+
 .post {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -12,46 +16,47 @@
     grid-column-end: 3;
   }
 
+  &__header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tags {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    &-title {
+      color: $color-tags-title;
+    }
+
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__tag-item {
+    margin-left: 10px;
+  }
+
+  &__tag-link {
+    background-color: $background-tag-link;
+    border-radius: 3px;
+    padding: 5px;
+
+    &:hover,
+    &:focus {
+      background-color: $background-tag-link-hover;
+    }
+  }
+
   &__title {
     margin: 20px 0;
   }
 
-  &__text {
-    text-indent: 15px;
-    font-size: 16px;
-    color: $color-dark-grey;
-  }
-
-  blockquote {
-    margin: 0;
-    padding: 20px 10px 20px 6px;
-    border-left: 8px solid #6d7072;
-    position: relative;
-    background: #f3f3f3;
-    font-family: Lato, sans-serif;
-    font-weight: 300;
-  }
-
-  p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
-
-  hr {
-    height: 1px;
-    background-color: #6d7072;
-  }
-
   pre {
-    box-sizing: border-box;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    max-width: 808px;
-    overflow-x: scroll;
-    background-color: #f3f3f3;
-
     @include media-breakpoint-down($xl_middle) {
       max-width: 795px;
     }
@@ -64,8 +69,8 @@
       max-width: 100%;
     }
   }
+}
 
-  code {
-    box-sizing: border-box;
-  }
+.post .post__tags-list {
+  list-style: none;
 }

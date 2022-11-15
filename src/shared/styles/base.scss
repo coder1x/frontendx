@@ -46,7 +46,9 @@ img {
   height: auto;
 }
 
-ul {
+ul,
+ol {
+  text-indent: 0;
   list-style: none;
   padding: 0;
   margin: 0;

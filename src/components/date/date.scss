@@ -1,6 +1,7 @@
 .date {
   display: inline-flex;
   flex-direction: row-reverse;
+  justify-content: flex-end;
   align-items: flex-end;
   font-family: Consolas;
   color: $color-grey;

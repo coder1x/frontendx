@@ -1,0 +1,113 @@
+$border-blockquote: #6d7072;
+$background-blockquote: #f3f3f3;
+$border-table: #e3e3e3;
+$shadow-img: 0 1px 3px 0 #cfcfcf, 0 0 0 1px #ffffff;
+$background-code: #f3f3f3;
+
+.content {
+  text-indent: 15px;
+  font-size: 16px;
+  color: $color-dark-grey;
+
+  blockquote {
+    margin: 0;
+    padding: 10px 10px 10px 6px;
+    border-left: 8px solid $border-blockquote;
+    position: relative;
+    background-color: $background-blockquote;
+    font-family: $font-quote;
+    font-weight: 300;
+  }
+
+  p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  hr {
+    margin: 0;
+    padding-block-start: 20px;
+    padding-block-end: 20px;
+    border: 0;
+    color: inherit;
+    text-align: center;
+
+    &::before {
+      content: "*  *  *";
+      font-size: 24px;
+      line-height: 1;
+    }
+  }
+
+  ul,
+  ol {
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: max-content;
+    list-style: revert;
+  }
+
+  .wp-block-image {
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wp-block-table {
+    margin: 20px 0px 20px 0px;
+    overflow-x: scroll;
+    overflow: auto;
+
+    table {
+      min-width: 500px;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    caption {
+      padding: 14px 14px 14px 0;
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 5px;
+      text-align: left;
+      border: 2px solid $border-table;
+    }
+
+    thead,
+    tbody,
+    tr {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  }
+
+  img {
+    max-width: 800px;
+    width: 100%;
+    box-shadow: $shadow-img;
+  }
+
+  pre {
+    box-sizing: border-box;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    overflow-x: scroll;
+    background-color: $background-code;
+    overflow: auto;
+  }
+
+  code {
+    box-sizing: border-box;
+  }
+}
