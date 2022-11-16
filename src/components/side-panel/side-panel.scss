@@ -18,12 +18,14 @@ $border-hr: 2px solid $color-grey-light;
     padding: 10px 10px 30px 10px;
   }
 
-  &__archive-title {
+  &__archive-title,
+  &__categories-title {
     font-size: 19px;
     font-weight: bold;
   }
 
-  &__archive-desc {
+  &__archive-desc,
+  &__categories-desc {
     margin: 0;
   }
 

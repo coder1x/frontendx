@@ -24,10 +24,10 @@
   }
 
   &__frame {
-    position: relative;
     padding-left: 5px;
     padding-right: 5px;
     margin-top: 10px;
+    margin-left: 0px;
     max-height: 250px;
     overflow: hidden;
 
@@ -77,42 +77,37 @@
       }
     }
 
+    &-button-up,
+    &-button-down {
+      height: 15px;
+      background-color: $color-grey-light;
+      cursor: pointer;
+      position: relative;
+      border: 0;
+      padding: 0;
+
+      &:hover {
+        &::before {
+          color: $button-background;
+          transition: background-color ease-in-out 500ms;
+        }
+      }
+    }
+
     &-button {
       &-up {
-        height: 15px;
-        background-color: $color-grey-light;
-        cursor: pointer;
-        position: relative;
-
-        &:hover {
-          &::before {
-            color: $button-background;
-            transition: background-color ease-in-out 500ms;
-          }
-        }
-
         &::before {
           @include marker("▲");
           bottom: 4px;
+          left: 0;
         }
       }
 
       &-down {
-        height: 15px;
-        background-color: $color-grey-light;
-        cursor: pointer;
-        position: relative;
-
-        &:hover {
-          &::before {
-            color: $button-background;
-            transition: background-color ease-in-out 500ms;
-          }
-        }
-
         &::before {
           @include marker("▼");
           top: 4px;
+          left: 0;
         }
       }
     }

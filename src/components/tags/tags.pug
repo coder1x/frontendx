@@ -11,22 +11,22 @@ mixin tags(options = {})
     const BASE_CLASS = 'tags';
     const borderModifier = hasBorder? `${BASE_CLASS}__frame_has-border`: '';
 
-  div(class = `${BASE_CLASS} js-${BASE_CLASS}`)
+  dl(class = `${BASE_CLASS} js-${BASE_CLASS}`)
     if hasHeader
-      span(class = `${BASE_CLASS}__header`)
+      dt(class = `${BASE_CLASS}__header`)
         span(class = `${BASE_CLASS}__label`) Теги
         span(class = `${BASE_CLASS}__amount`)= items
 
-    div(class = `${BASE_CLASS}__frame js-${BASE_CLASS}__frame ${borderModifier}`) 
+    dd(class = `${BASE_CLASS}__frame js-${BASE_CLASS}__frame ${borderModifier}`) 
       ul(class = `${BASE_CLASS}__list js-${BASE_CLASS}__list`) 
         while length <= items
           li(class = `${BASE_CLASS}__item`)
             a(class = `${BASE_CLASS}__item-link` href = "https://change-me")= `Тег#${length++}`
             
-    div(class = `${BASE_CLASS}__scrollbar`)
-      div(class = `${BASE_CLASS}__scrollbar-button-up js-${BASE_CLASS}__scrollbar-button-up`)
-      div(class = `${BASE_CLASS}__scrollbar-track js-${BASE_CLASS}__scrollbar-track`)
-        div(class = `${BASE_CLASS}__scrollbar-slider js-${BASE_CLASS}__scrollbar-slider`)
-      div(class = `${BASE_CLASS}__scrollbar-button-down js-${BASE_CLASS}__scrollbar-button-down`)
+      div(class = `${BASE_CLASS}__scrollbar`)
+        button(class = `${BASE_CLASS}__scrollbar-button-up js-${BASE_CLASS}__scrollbar-button-up` tabindex = -1)
+        div(class = `${BASE_CLASS}__scrollbar-track js-${BASE_CLASS}__scrollbar-track`)
+          div(class = `${BASE_CLASS}__scrollbar-slider js-${BASE_CLASS}__scrollbar-slider`)
+        button(class = `${BASE_CLASS}__scrollbar-button-down js-${BASE_CLASS}__scrollbar-button-down` tabindex = -1)
 
 

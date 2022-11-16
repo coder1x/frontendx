@@ -13,8 +13,10 @@ mixin side-panel()
     div(class = `${BASE_CLASS}__search-form-wrapper`)
       +search-form()
       
-    div(class = `${BASE_CLASS}__categories-wrapper`)
-      +categories({ categories })
+    dl(class = `${BASE_CLASS}__categories-wrapper`)
+      dt(class = `${BASE_CLASS}__categories-title`) Категории
+      dd(class = `${BASE_CLASS}__categories-desc`)
+        +categories({ categories })
 
     dl(class = `${BASE_CLASS}__archive-wrapper js-${BASE_CLASS}__archive-wrapper`)
       dt(class = `${BASE_CLASS}__archive-title`) Архивы

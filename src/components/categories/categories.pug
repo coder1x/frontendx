@@ -7,18 +7,17 @@ mixin categories(options = {})
     const link = 'https://change-me';
     const BASE_CLASS = 'categories';
 
-  dl(class = BASE_CLASS) 
-    dt(class = `${BASE_CLASS}__header`) Категории
+  ul(class = BASE_CLASS) 
     each item in categories
-      dt(class = `${BASE_CLASS}__title`)
+      li(class = `${BASE_CLASS}__category`)
         a(class = `${BASE_CLASS}__articles-link` href = link)
           span(class = `${BASE_CLASS}__name`)= item.category
           span(class = `${BASE_CLASS}__amount`)= item.total
           
-          each subitem in item.subcategories
-            if index !='total'
-              dd(class = `${BASE_CLASS}__item`)
-                a(class = `${BASE_CLASS}__articles-link` href = link)
-                  span(class = `${BASE_CLASS}__name`)= subitem.category
-                  span(class = `${BASE_CLASS}__amount`)= subitem.total
+        each subitem in item.subcategories
+          ul(class = `${BASE_CLASS}__subcategories`)
+            li(class = `${BASE_CLASS}__item`)
+              a(class = `${BASE_CLASS}__articles-link` href = link)
+                span(class = `${BASE_CLASS}__name`)= subitem.category
+                span(class = `${BASE_CLASS}__amount`)= subitem.total
 

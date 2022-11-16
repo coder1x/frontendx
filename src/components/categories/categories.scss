@@ -8,12 +8,7 @@
     color: $color-grey;
   }
 
-  &__header {
-    margin-bottom: 10px;
-    font-size: 19px;
-  }
-
-  &__title {
+  &__category {
     font-weight: bold;
     margin-left: 5px;
     @include list-item-style;
@@ -31,10 +26,14 @@
     }
   }
 
+  &__subcategories {
+    margin-top: 10px;
+  }
+
   &__item {
     border-bottom: 1px solid $color-grey-light;
     display: flex;
-    margin-left: 20px;
+    margin-left: 5px;
     font-weight: normal;
 
     @include list-item-style;
