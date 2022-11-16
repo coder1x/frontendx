@@ -1,6 +1,6 @@
 .archive {
   font-family: $font;
-  font-size: 16px;
+  font-size: #{$font-size}px;
   font-weight: bold;
   list-style: none;
   color: $color-grey;
@@ -10,7 +10,6 @@
   &__year {
     margin-left: 5px;
     cursor: pointer;
-    @include font-rem(16);
     @include list-item-style;
 
     &:first-child {
@@ -57,7 +56,6 @@
     font-weight: normal;
     border-bottom: 1px solid $color-grey-light;
     display: flex;
-    font-size: 16px;
     @include list-item-style;
 
     &::before {

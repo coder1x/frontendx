@@ -1,22 +1,22 @@
 .layout-with-panel {
   &__articles-wrapper {
+    display: grid;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-auto-rows: $min-wrapper;
     gap: 12px;
+
     @include media-breakpoint-down($lg_middle) {
       grid-column-start: 1;
       grid-column-end: 3;
       grid-row-start: 2;
       grid-row-end: 3;
-
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     }
+
     @include media-breakpoint-down($xs_middle) {
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
@@ -27,7 +27,6 @@
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 4;
-
     margin: 40px 0 30px;
   }
 }

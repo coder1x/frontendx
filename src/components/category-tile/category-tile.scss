@@ -44,6 +44,7 @@ $disk-background: #2c2c2c;
   display: flex;
   flex-direction: column;
   position: relative;
+  font-size: #{$font-size}px;
 
   border-top-right-radius: 12px;
   border-top-left-radius: 3px;
@@ -121,7 +122,6 @@ $disk-background: #2c2c2c;
     padding: 5px;
     color: $blind-text-color;
     height: 100%;
-    @include font-rem(16);
     box-sizing: border-box;
     text-transform: uppercase;
     font-family: $font-code;
@@ -225,5 +225,9 @@ $disk-background: #2c2c2c;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
+
+    @include media-breakpoint-down($xs) {
+      line-height: 1.8;
+    }
   }
 }

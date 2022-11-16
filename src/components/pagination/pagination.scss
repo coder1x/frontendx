@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  font-size: #{$font-size}px;
 
   &__link,
   &__next,
   &__previous,
   &__hidden-link {
-    font-size: 18px;
+    @include font-rem(18);
     font-weight: bold;
     font-family: $font;
     color: $color-grey;

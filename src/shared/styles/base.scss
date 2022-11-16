@@ -5,6 +5,10 @@ html {
   font-family: $font;
   font-weight: normal;
   min-width: $min-wrapper;
+
+  @include media-breakpoint-down($xs) {
+    font-size: 13px;
+  }
 }
 
 body {

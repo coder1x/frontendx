@@ -16,7 +16,7 @@ $color-header-text: rgb(37, 37, 37);
   min-height: 100px;
   background-color: $background-section;
 
-  &__wrap {
+  &__wrapper {
     margin: 0 auto;
     width: 100%;
     max-width: $max-wrapper;
@@ -29,7 +29,7 @@ $color-header-text: rgb(37, 37, 37);
 
   &__text {
     line-height: 1.5;
-    font-size: 16px;
+    @include font-rem(16);
     font-family: $font;
     color: $color-header-text;
     text-align: center;
@@ -51,7 +51,7 @@ $color-header-text: rgb(37, 37, 37);
     color: $color-header-h1;
   }
 
-  &__wrap {
+  &__wrapper {
     margin: 30px auto 0px auto;
     width: 100%;
     max-width: $max-wrapper;
@@ -70,18 +70,4 @@ $color-header-text: rgb(37, 37, 37);
     display: flex;
     justify-content: center;
   }
-}
-.visually-hidden:not(:focus):not(:active),
-input[type="checkbox"].visually-hidden,
-input[type="radio"].visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
 }

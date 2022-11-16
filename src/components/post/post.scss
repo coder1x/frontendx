@@ -6,7 +6,7 @@ $background-code: #f3f3f3;
 
 .content {
   text-indent: 15px;
-  font-size: 16px;
+  @include font-rem(16);
   color: $color-dark-grey;
 
   blockquote {
@@ -35,7 +35,7 @@ $background-code: #f3f3f3;
 
     &::before {
       content: "*  *  *";
-      font-size: 24px;
+      @include font-rem(24);
       line-height: 1;
     }
   }

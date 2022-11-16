@@ -10,6 +10,7 @@
   margin-right: 10px;
   position: relative;
   user-select: none;
+  font-size: #{$font-size}px;
 
   &__header {
     font-weight: bold;
@@ -19,11 +20,7 @@
   }
 
   &__label {
-    @include font-rem(19);
-  }
-
-  &__amount {
-    @include font-rem(16);
+    font-size: 19px;
   }
 
   &__frame {
@@ -122,7 +119,6 @@
   }
 
   &__item-link {
-    @include font-rem(16);
     font-weight: normal;
     cursor: pointer;
 

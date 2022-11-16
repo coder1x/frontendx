@@ -30,6 +30,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
   box-sizing: border-box;
   z-index: 3;
   position: relative;
+  font-size: #{$font-size}px;
 
   background-image: $background-header;
   background-size: 8px 8px, 100%;

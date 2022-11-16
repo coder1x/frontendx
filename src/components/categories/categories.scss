@@ -1,5 +1,5 @@
 .categories {
-  font-size: 19px;
+  font-size: #{$font-size}px;
 
   margin: 0px;
   font-weight: bold;
@@ -10,11 +10,11 @@
 
   &__header {
     margin-bottom: 10px;
+    font-size: 19px;
   }
 
   &__title {
     font-weight: bold;
-    font-size: 16px;
     margin-left: 5px;
     @include list-item-style;
 
@@ -35,7 +35,6 @@
     border-bottom: 1px solid $color-grey-light;
     display: flex;
     margin-left: 20px;
-    font-size: 16px;
     font-weight: normal;
 
     @include list-item-style;

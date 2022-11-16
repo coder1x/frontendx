@@ -3,7 +3,6 @@ $background-bread-crumbs: $background-section;
 $color-link: $color-grey-hover;
 $color-link-hover: $color-dark-grey;
 $color-last-hover: $color-grey-hover;
-$font-size-item: 13px;
 
 .bread-crumbs {
   box-shadow: $shadow-bread-crumbs;
@@ -11,13 +10,13 @@ $font-size-item: 13px;
   padding: 2px 5px 5px;
   font-weight: bold;
   display: flex;
+  font-size: 13px;
 
   &__markers {
     margin-block: 0;
     padding-inline: 0;
     list-style: none;
     padding-right: 5px;
-    font-size: $font-size-item;
     box-sizing: border-box;
     width: 17px;
   }
@@ -26,13 +25,11 @@ $font-size-item: 13px;
     margin-block: 0;
     padding-inline: 0;
     height: auto;
-    font-size: $font-size-item;
     font-weight: normal;
     word-break: break-all;
   }
 
   &__item {
-    font-size: $font-size-item;
     font-weight: normal;
     display: inline;
     word-break: break-all;

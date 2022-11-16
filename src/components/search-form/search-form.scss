@@ -12,11 +12,11 @@ $fill-icon: #e1e1e1;
 .search-form {
   position: relative;
   width: 100%;
+  font-size: #{$font-size}px;
 
   &__input {
     font-family: $font;
     color: $color-grey;
-    font-size: 16px;
     box-shadow: $section-shadow;
     border: none;
     width: 100%;

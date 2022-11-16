@@ -7,6 +7,7 @@ block title
 block main
   - const { cards } = require('./blog.json');
   main(class = 'layout-with-panel__articles-wrapper')
+    h1(class = 'visually-hidden') Статьи
     each card in cards
       +article-card(card)
 
