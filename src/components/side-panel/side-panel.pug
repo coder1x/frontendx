@@ -16,8 +16,10 @@ mixin side-panel()
     div(class = `${BASE_CLASS}__categories-wrapper`)
       +categories({ categories })
 
-    div(class = `${BASE_CLASS}__archive-wrapper js-${BASE_CLASS}__archive-wrapper`)
-      +archive({ archive })
+    dl(class = `${BASE_CLASS}__archive-wrapper js-${BASE_CLASS}__archive-wrapper`)
+      dt(class = `${BASE_CLASS}__archive-title`) Архивы
+      dd(class = `${BASE_CLASS}__archive-desc`)
+        +archive({ archive })
       
     div(class = `${BASE_CLASS}__tags-wrapper js-${BASE_CLASS}__tags-wrapper`)
       +tags()

@@ -6,8 +6,7 @@ mixin archive(options = {})
 
     const BASE_CLASS = 'archive';
     
-  ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) Архивы
-  
+  ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) 
     each item in archive
       li(class = `${BASE_CLASS}__year js-${BASE_CLASS}__year`)
         div(class = `${BASE_CLASS}__text-wrapper js-${BASE_CLASS}__text-wrapper` tabindex = 0)

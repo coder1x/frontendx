@@ -18,6 +18,15 @@ $border-hr: 2px solid $color-grey-light;
     padding: 10px 10px 30px 10px;
   }
 
+  &__archive-title {
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  &__archive-desc {
+    margin: 0;
+  }
+
   &__search-form-wrapper {
     padding: 20px 10px;
   }
