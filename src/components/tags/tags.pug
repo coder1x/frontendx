@@ -23,7 +23,7 @@ mixin tags(options = {})
           li(class = `${BASE_CLASS}__item`)
             a(class = `${BASE_CLASS}__item-link` href = "https://change-me")= `Тег#${length++}`
             
-      div(class = `${BASE_CLASS}__scrollbar`)
+      div(class = `${BASE_CLASS}__scrollbar js-${BASE_CLASS}__scrollbar`)
         button(class = `${BASE_CLASS}__scrollbar-button-up js-${BASE_CLASS}__scrollbar-button-up` tabindex = -1)
         div(class = `${BASE_CLASS}__scrollbar-track js-${BASE_CLASS}__scrollbar-track`)
           div(class = `${BASE_CLASS}__scrollbar-slider js-${BASE_CLASS}__scrollbar-slider`)

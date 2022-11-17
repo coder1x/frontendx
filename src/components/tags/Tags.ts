@@ -13,6 +13,8 @@ class Tags {
 
   private slider: HTMLElement | null = null;
 
+  private scrollbar: HTMLElement | null = null;
+
   private shiftY: number = 0;
 
   private sliderHeight: number = 0;
@@ -53,18 +55,19 @@ class Tags {
   }
 
   private init() {
-    this.setDomElem();
+    this.setDomElement();
     this.bindEvent();
     this.setDimensions();
   }
 
-  private setDomElem() {
+  private setDomElement() {
     this.track = this.getElement('scrollbar-track') as HTMLElement;
     this.tags = this.getElement('list') as HTMLUListElement;
     this.frame = this.getElement('frame') as HTMLElement;
     this.slider = this.getElement('scrollbar-slider') as HTMLElement;
     this.buttonsUp = this.getElement('scrollbar-button-up') as HTMLElement;
     this.buttonsDown = this.getElement('scrollbar-button-down') as HTMLElement;
+    this.scrollbar = this.getElement('scrollbar') as HTMLElement;
   }
 
   private getElement(nameElement: string, parentElement?: Element) {
@@ -198,7 +201,7 @@ class Tags {
 
   @boundMethod
   private handleTagsFocusin() {
-    if (!this.tags || !this.frame) {
+    if (!this.tags || !this.frame || !this.scrollbar) {
       return false;
     }
 
@@ -210,6 +213,7 @@ class Tags {
     this.tagsTranslateY = deltaPercent <= 0 ? deltaPercent : 0;
     this.sliderTop = pointerTopPosition;
     this.tags.style.top = `${delta * -1}px`; // корректируем положение списка тегов, смещенных фокусом
+    this.scrollbar.style.top = `${delta * -1}px`;
 
     if (this.slider) {
       this.slider.style.top = `${this.sliderTop}px`;
@@ -240,9 +244,6 @@ class Tags {
     const deltaCurrentPercent = (deltaCurrent * 100) / this.tagsHeight;
     this.deltaPrevious = deltaY;
 
-    /* При изменении направления движения (вверх / вниз) значение deltaCurrent может стать очень большим
-    (в зависимости от того, насколько далеко провели пальцем при последнем скролле),
-     что ведет к неправильному расчету. Поэтому делаем return при первом срабатывании после изменения направления */
     if (this.isDraggingUp !== isUp) {
       this.isDraggingUp = isUp;
 

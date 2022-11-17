@@ -7,6 +7,10 @@ $border-hr: 2px solid $color-grey-light;
   box-shadow: $shadow-side-panel;
   background-color: $background-side-panel;
 
+  &__search-form-wrapper {
+    padding: 20px 10px;
+  }
+
   &__search-form-wrapper,
   &__categories-wrapper,
   &__archive-wrapper {
@@ -31,7 +35,10 @@ $border-hr: 2px solid $color-grey-light;
     margin: 0;
   }
 
-  &__search-form-wrapper {
-    padding: 20px 10px;
+  &__tags-wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }

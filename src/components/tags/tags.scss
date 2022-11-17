@@ -6,17 +6,17 @@
 }
 
 .tags {
-  padding: 10px 0 30px 10px;
-  margin-right: 10px;
-  position: relative;
   user-select: none;
   font-size: #{$font-size}px;
+  margin: 0px;
+  padding-bottom: 20px;
 
   &__header {
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin-bottom: 20px;
   }
 
   &__label {
@@ -24,10 +24,8 @@
   }
 
   &__frame {
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-top: 10px;
-    margin-left: 0px;
+    margin: 0px;
+    position: relative;
     max-height: 250px;
     overflow: hidden;
 
@@ -43,7 +41,6 @@
     top: 0px;
     gap: 10px;
     padding: 10px;
-
     transform: translateY(0%);
   }
 
@@ -53,10 +50,11 @@
     position: absolute;
     cursor: pointer;
     width: 8px;
-    top: 42px;
+    top: 0px;
     bottom: 30px;
     right: 0;
     touch-action: none;
+    height: 100%;
 
     &-track {
       position: relative;
