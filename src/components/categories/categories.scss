@@ -1,7 +1,6 @@
 .categories {
   font-size: #{$font-size}px;
-
-  margin: 0px;
+  list-style: revert;
   font-weight: bold;
 
   &__articles-link {
@@ -10,16 +9,8 @@
 
   &__category {
     font-weight: bold;
-    margin-left: 5px;
-    @include list-item-style;
-
-    &:first-child {
-      margin-top: 10px;
-    }
-
-    &::before {
-      @include marker("●", 10px);
-    }
+    margin-left: 19px;
+    padding-bottom: 10px;
 
     &:focus {
       outline-offset: 5px;
@@ -27,20 +18,15 @@
   }
 
   &__subcategories {
-    margin-top: 10px;
+    list-style: revert;
   }
 
   &__item {
     border-bottom: 1px solid $color-grey-light;
-    display: flex;
     margin-left: 5px;
     font-weight: normal;
-
-    @include list-item-style;
-
-    &::before {
-      @include marker("○", 10px);
-    }
+    padding-bottom: 10px;
+    padding-top: 10px;
   }
 
   &__articles-link {
