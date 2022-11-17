@@ -3,7 +3,7 @@ import { boundMethod } from 'autobind-decorator';
 class Tags {
   className: string;
 
-  private element: HTMLElement;
+  element: HTMLElement;
 
   private track: HTMLElement | null = null;
 

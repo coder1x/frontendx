@@ -3,15 +3,15 @@ import { boundMethod } from 'autobind-decorator';
 import { Throttle } from '@helpers/index';
 
 class Header {
+  element: HTMLElement | null = null;
+
+  className: string = '';
+
   private prevY = 0;
 
   private direction = 'bottom';
 
   private prevDirection = 'top';
-
-  private element: HTMLElement | null = null;
-
-  private className: string = '';
 
   private classHeader: string = '';
 

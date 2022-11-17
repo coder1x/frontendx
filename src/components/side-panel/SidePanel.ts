@@ -4,15 +4,15 @@ import { Throttle } from '@helpers/index';
 import { Archive, Tags } from '@components/index';
 
 class SidePanel {
-  private element: HTMLElement | null = null;
+  headerHeight: number = 0;
 
-  private className: string;
+  element: HTMLElement | null = null;
+
+  className: string;
 
   private panel: HTMLElement | null = null;
 
   private scroll: number = 0;
-
-  headerHeight: number = 0;
 
   private panelTop: number = 0;
 

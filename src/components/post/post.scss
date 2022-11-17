@@ -72,6 +72,40 @@ $background-code: #f3f3f3;
     }
   }
 
+  .wp-block-code {
+    box-sizing: border-box;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    overflow-x: scroll;
+    background-color: $background-code;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+
+    .button-copy {
+      margin-bottom: 20px;
+      padding-left: 30px;
+      border: 0;
+      cursor: pointer;
+      background-color: #f3f3f3;
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMjcyIDQxNkMyNjMuMiA0MTYgMjU2IDQyMy4yIDI1NiA0MzJWNDQ4YzAgMTcuNjctMTQuMzMgMzItMzIgMzJINjRjLTE3LjY3IDAtMzItMTQuMzMtMzItMzJWMTkyYzAtMTcuNjcgMTQuMzMtMzIgMzItMzJoMTEyQzE4NC44IDE2MCAxOTIgMTUyLjggMTkyIDE0NEMxOTIgMTM1LjIgMTg0LjggMTI4IDE3NiAxMjhINjMuOTljLTM1LjM1IDAtNjQgMjguNjUtNjQgNjRsLjAwOTggMjU2QzAgNDgzLjMgMjguNjUgNTEyIDY0IDUxMmgxNjBjMzUuMzUgMCA2NC0yOC42NSA2NC02NHYtMTZDMjg4IDQyMy4yIDI4MC44IDQxNiAyNzIgNDE2ek01MDIuNiA4Ni42M2wtNzcuMjUtNzcuMjVDNDE5LjQgMy4zNzEgNDExLjIgMCA0MDIuNyAwSDI4OEMyNTIuNyAwIDIyNCAyOC42NSAyMjQgNjR2MjU2YzAgMzUuMzUgMjguNjUgNjQgNjQgNjRoMTYwYzM1LjM1IDAgNjQtMjguNjUgNjQtNjRWMTA5LjNDNTEyIDEwMC44IDUwOC42IDkyLjYzIDUwMi42IDg2LjYzek00MTYgNDUuMjVMNDY2LjcgOTZINDE2VjQ1LjI1ek00ODAgMzIwYzAgMTcuNjctMTQuMzMgMzItMzIgMzJoLTE2MGMtMTcuNjcgMC0zMi0xNC4zMy0zMi0zMlY2NGMwLTE3LjY3IDE0LjMzLTMyIDMyLTMyaDk2bC4wMDI2IDY0YzAgMTcuNjcgMTQuMzMgMzIgMzIgMzJINDgwVjMyMHoiLz48L3N2Zz4=");
+      background-repeat: no-repeat;
+
+      &:hover,
+      &:focus {
+        outline-offset: 5px;
+        color: $color-dark-grey-hover;
+      }
+    }
+
+    code {
+      box-sizing: border-box;
+    }
+  }
+
   blockquote {
     margin: 0;
     padding: 10px 10px 10px 6px;
@@ -116,20 +150,5 @@ $background-code: #f3f3f3;
     max-width: 800px;
     width: 100%;
     box-shadow: $shadow-img;
-  }
-
-  pre {
-    box-sizing: border-box;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    max-width: 100%;
-    overflow-x: scroll;
-    background-color: $background-code;
-    overflow: auto;
-  }
-
-  code {
-    box-sizing: border-box;
   }
 }

@@ -5,11 +5,11 @@ class ArticleCard {
 
   element: HTMLElement | null = null;
 
-  title: HTMLHeadingElement | null = null;
+  private title: HTMLHeadingElement | null = null;
 
-  link: HTMLAnchorElement | null = null;
+  private link: HTMLAnchorElement | null = null;
 
-  href: string | null = '';
+  private href: string | null = '';
 
   constructor(element: Element) {
     this.element = element as HTMLElement;
@@ -17,7 +17,7 @@ class ArticleCard {
     this.init();
   }
 
-  init() {
+  private init() {
     if (!this.element) {
       return false;
     }
@@ -34,7 +34,7 @@ class ArticleCard {
   }
 
   @boundMethod
-  handleHeaderKeyDown(e: KeyboardEvent) {
+  private handleHeaderKeyDown(e: KeyboardEvent) {
     if (e.code === 'Space' || e.code === 'Enter') {
       e.preventDefault();
 
@@ -44,7 +44,7 @@ class ArticleCard {
     }
   }
 
-  bindEvent() {
+  private bindEvent() {
     if (!this.title) {
       return false;
     }

@@ -1,9 +1,9 @@
 import { boundMethod } from 'autobind-decorator';
 
 class Archive {
-  private className: string = '';
+  className: string = '';
 
-  private element: Element | null = null;
+  element: Element | null = null;
 
   private elementsYears: Element[] | null = null;
 

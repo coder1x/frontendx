@@ -3,13 +3,13 @@ import { boundMethod } from 'autobind-decorator';
 class Diskette {
   className: string = '';
 
-  blind: HTMLElement | null = null;
-
   element: HTMLElement | null = null;
 
-  link: HTMLAnchorElement | null = null;
+  private blind: HTMLElement | null = null;
 
-  window: HTMLElement | null = null;
+  private link: HTMLAnchorElement | null = null;
+
+  private window: HTMLElement | null = null;
 
   constructor(element: Element) {
     this.className = 'js-category-tile';
@@ -17,7 +17,7 @@ class Diskette {
     this.init();
   }
 
-  init() {
+  private init() {
     if (!this.element) {
       return false;
     }
@@ -30,7 +30,7 @@ class Diskette {
     return true;
   }
 
-  openBlind(isOpen = false) {
+  private openBlind(isOpen = false) {
     if (!this.blind || !this.window) {
       return false;
     }
@@ -52,16 +52,16 @@ class Diskette {
   }
 
   @boundMethod
-  handleBlindOpen() {
+  private handleBlindOpen() {
     this.openBlind(true);
   }
 
   @boundMethod
-  handleBlindClose() {
+  private handleBlindClose() {
     this.openBlind();
   }
 
-  bindEvent() {
+  private bindEvent() {
     if (!this.link) {
       return false;
     }

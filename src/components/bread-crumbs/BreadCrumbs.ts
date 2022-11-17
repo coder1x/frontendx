@@ -3,9 +3,9 @@ import { boundMethod } from 'autobind-decorator';
 import { Throttle } from '@helpers/index';
 
 class BreadCrumbs {
-  private className: string = '';
+  className: string = '';
 
-  private element: HTMLElement;
+  element: HTMLElement;
 
   private items: HTMLUListElement | null = null;
 
