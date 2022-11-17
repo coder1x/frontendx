@@ -9,44 +9,26 @@ $background-code: #f3f3f3;
   @include font-rem(16);
   color: $color-dark-grey;
 
-  blockquote {
-    margin: 0;
-    padding: 10px 10px 10px 6px;
-    border-left: 8px solid $border-blockquote;
-    position: relative;
-    background-color: $background-blockquote;
-    font-family: $font-quote;
-    font-weight: 300;
-  }
+  .figure {
+    width: 100%;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
-
-  hr {
-    margin: 0;
-    padding-block-start: 20px;
-    padding-block-end: 20px;
-    border: 0;
-    color: inherit;
-    text-align: center;
-
-    &::before {
-      content: "*  *  *";
-      @include font-rem(24);
-      line-height: 1;
+    &__content {
+      width: 100%;
+      border: 0px;
+      box-shadow: $shadow-img;
     }
-  }
 
-  ul,
-  ol {
-    margin-left: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    max-width: max-content;
-    list-style: revert;
+    &__caption {
+      padding-top: 20px;
+
+      .link:hover {
+        color: $color-dark-grey-hover;
+      }
+    }
   }
 
   .wp-block-image {
@@ -88,6 +70,46 @@ $background-code: #f3f3f3;
       padding: 0;
       box-sizing: border-box;
     }
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 10px 10px 10px 6px;
+    border-left: 8px solid $border-blockquote;
+    position: relative;
+    background-color: $background-blockquote;
+    font-family: $font-quote;
+    font-weight: 300;
+  }
+
+  p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  hr {
+    margin: 0;
+    padding-block-start: 20px;
+    padding-block-end: 20px;
+    border: 0;
+    color: inherit;
+    text-align: center;
+
+    &::before {
+      content: "*  *  *";
+      @include font-rem(24);
+      line-height: 1;
+    }
+  }
+
+  ul,
+  ol {
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: max-content;
+    list-style: revert;
   }
 
   img {
