@@ -96,17 +96,17 @@ input[type="radio"].visually-hidden {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #000;
+  background-color: $color-dark-grey;
 }
 
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 0;
   border-radius: 0;
-  background-color: #a6a8b6;
+  background-color: $color-grey-light;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #717171;
+  background-color: #c4c4c4;
 }
 
 ::-webkit-resizer {
