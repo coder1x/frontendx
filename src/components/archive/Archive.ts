@@ -45,14 +45,14 @@ class Archive {
       const months = elementYear.querySelector(`.${this.className}__months`) as HTMLElement;
 
       if (months) {
-        const variantExpandable = 'archive__months_variant_expandable';
+        const VARIANT_EXPANDABLE = 'archive__months_variant_expandable';
 
         const { classList } = months;
 
         if (isClosed) {
-          classList.remove(variantExpandable);
+          classList.remove(VARIANT_EXPANDABLE);
         } else {
-          classList.toggle(variantExpandable);
+          classList.toggle(VARIANT_EXPANDABLE);
         }
       }
     }
@@ -61,7 +61,7 @@ class Archive {
   }
 
   @boundMethod
-  private handleYearClick(event: Event) {
+  private handleYearClick(event: MouseEvent) {
     this.toggle(event.target, event.currentTarget);
   }
 
@@ -83,7 +83,7 @@ class Archive {
 
   private bindEvent() {
     this.elementsYears?.forEach((element) => {
-      const elementYear = element as HTMLElement;
+      const elementYear = element as HTMLLIElement;
 
       elementYear.addEventListener('click', this.handleYearClick);
       elementYear.addEventListener('keydown', this.handleYearKeyDown);

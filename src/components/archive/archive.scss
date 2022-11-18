@@ -1,10 +1,10 @@
 $font-archive: $font;
 $font-size-archive: #{$font-size}px;
 $color-archive: $color-grey;
-$color-text-hover: $color-grey-hover;
+$color-hover-text: $color-grey-hover;
 $border-month: 1px solid $color-grey-light;
 $color-link: $color-grey;
-$color-link-hover: $color-grey-hover;
+$color-hover-link: $color-grey-hover;
 
 .archive {
   font-family: $font-archive;
@@ -30,7 +30,7 @@ $color-link-hover: $color-grey-hover;
     justify-content: space-between;
 
     &:hover {
-      color: $color-text-hover;
+      color: $color-hover-text;
     }
 
     &:focus {
@@ -73,7 +73,7 @@ $color-link-hover: $color-grey-hover;
     justify-content: space-between;
 
     &:hover {
-      color: $color-link-hover;
+      color: $color-hover-link;
     }
   }
 }

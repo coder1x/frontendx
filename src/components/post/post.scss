@@ -10,8 +10,8 @@ $color-background-button: #f3f3f3;
 $color-hover-button: $color-dark-grey-hover;
 
 .content {
-  text-indent: 15px;
   @include font-rem(16);
+  text-indent: 15px;
   color: $color-content;
 
   .figure {
@@ -136,8 +136,8 @@ $color-hover-button: $color-dark-grey-hover;
     text-align: center;
 
     &::before {
-      content: "*  *  *";
       @include font-rem(24);
+      content: "*  *  *";
       line-height: 1;
     }
   }

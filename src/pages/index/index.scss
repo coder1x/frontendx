@@ -28,8 +28,8 @@ $background-color-blog-description: $background-section;
   }
 
   &__text {
-    line-height: 1.5;
     @include font-rem(16);
+    line-height: 1.5;
     font-family: $font;
     color: $color-header-text;
     text-align: center;

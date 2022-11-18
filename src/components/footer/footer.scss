@@ -26,8 +26,8 @@ $color-hover-contacts: $color-grey-hover;
   }
 
   &__contacts {
-    font-family: $font-contacts;
     @include font-rem(14);
+    font-family: $font-contacts;
     color: $color-contacts;
 
     &:hover,

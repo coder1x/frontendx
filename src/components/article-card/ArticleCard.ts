@@ -34,9 +34,9 @@ class ArticleCard {
   }
 
   @boundMethod
-  private handleHeaderKeyDown(e: KeyboardEvent) {
-    if (e.code === 'Space' || e.code === 'Enter') {
-      e.preventDefault();
+  private handleHeaderKeyDown(event: KeyboardEvent) {
+    if (event.code === 'Space' || event.code === 'Enter') {
+      event.preventDefault();
 
       if (this.href) {
         document.location.href = this.href;

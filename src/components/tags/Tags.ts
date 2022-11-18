@@ -54,6 +54,10 @@ class Tags {
     }
   }
 
+  private static handleWrapperDragStart(event: MouseEvent) {
+    event.preventDefault();
+  }
+
   private init() {
     this.setDomElement();
     this.bindEvent();
@@ -261,7 +265,7 @@ class Tags {
   }
 
   @boundMethod
-  private handleWindowWheel(event: Event) {
+  private handleWindowWheel(event: WheelEvent) {
     if (this.isMouseOnFrame) {
       event.preventDefault();
     }
@@ -378,10 +382,6 @@ class Tags {
     );
 
     return true;
-  }
-
-  static handleWrapperDragStart(event: Event) {
-    event.preventDefault();
   }
 
   private bindEvent() {

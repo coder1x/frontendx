@@ -13,6 +13,27 @@ class CopyCodeButton {
     this.init();
   }
 
+  @boundMethod
+  private static handleButtonClick(event: MouseEvent) {
+    const element = event.currentTarget as HTMLButtonElement;
+    const sibling = element.previousElementSibling;
+
+    if (sibling) {
+      const code = sibling.innerHTML;
+
+      navigator.clipboard.writeText(code)
+        .then(() => {
+        })
+        .catch((err) => {
+          console.log('Something went wrong', err);
+        });
+    }
+  }
+
+  private static bindEvent(button: HTMLButtonElement) {
+    button.addEventListener('click', CopyCodeButton.handleButtonClick);
+  }
+
   private init() {
     if (!this.element) {
       return false;
@@ -46,27 +67,6 @@ class CopyCodeButton {
     this.createButtons();
 
     return true;
-  }
-
-  @boundMethod
-  private static handleButtonClick(event: Event) {
-    const element = event.currentTarget as HTMLButtonElement;
-    const sibling = element.previousElementSibling;
-
-    if (sibling) {
-      const code = sibling.innerHTML;
-
-      navigator.clipboard.writeText(code)
-        .then(() => {
-        })
-        .catch((err) => {
-          console.log('Something went wrong', err);
-        });
-    }
-  }
-
-  private static bindEvent(button: HTMLButtonElement) {
-    button.addEventListener('click', CopyCodeButton.handleButtonClick);
   }
 }
 

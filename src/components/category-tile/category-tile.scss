@@ -218,13 +218,10 @@ $background-disk: #2c2c2c;
 
   &__text {
     @include font-rem(15);
+    @include max-row(5);
     color: $color-text;
     line-height: 1.4;
     font-family: $font;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 
     @include media-breakpoint-down($xs) {
       line-height: 1.8;
