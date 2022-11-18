@@ -1,11 +1,11 @@
 $shadow-hover-icon: 1px 0 2px rgba(11, 11, 26, 0.7);
 $shadow-icon: 0px 0px 1px rgba(11, 11, 26, 0.7);
 $shadow-input: 0 0 0 1px #797979;
-$fill-icon: #e1e1e1;
+$fill-icon: $color-grey-light;
 $font-size-search-form: #{$font-size}px;
 $font-input: $font;
 $color-input: $color-grey;
-$outline-button: 2px solid $color-grey;
+$outline-button: $color-outline;
 
 @mixin icon-hover {
   filter: drop-shadow($shadow-hover-icon);

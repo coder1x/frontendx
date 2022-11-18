@@ -73,7 +73,7 @@ $color-background-odd: rgba(84, 87, 92, 0.239);
 
     &:focus {
       outline: 2px solid $color-focus-link-logo;
-      outline-offset: 5px;
+      outline-offset: 4px;
     }
 
     &:hover svg,
@@ -118,7 +118,7 @@ $color-background-odd: rgba(84, 87, 92, 0.239);
 
   &__toggle-menu:focus {
     outline: 2px solid $focus-button-menu;
-    outline-offset: 5px;
+    outline-offset: 4px;
   }
 
   &__menu-wrapper {
@@ -193,7 +193,7 @@ $color-background-odd: rgba(84, 87, 92, 0.239);
 
     &:focus {
       outline: 2px solid $color-focus-link;
-      outline-offset: 5px;
+      outline-offset: 4px;
     }
   }
 

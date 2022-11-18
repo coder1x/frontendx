@@ -5,6 +5,8 @@ $color-hover-text: $color-grey-hover;
 $border-month: 1px solid $color-grey-light;
 $color-link: $color-grey;
 $color-hover-link: $color-grey-hover;
+$color-outline-year: $color-outline;
+$outline-link: $color-outline;
 
 .archive {
   font-family: $font-archive;
@@ -29,12 +31,14 @@ $color-hover-link: $color-grey-hover;
     display: flex;
     justify-content: space-between;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-hover-text;
     }
 
     &:focus {
-      outline-offset: 5px;
+      outline: $color-outline-year;
+      outline-offset: 4px;
     }
   }
 
@@ -72,8 +76,14 @@ $color-hover-link: $color-grey-hover;
     display: flex;
     justify-content: space-between;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-hover-link;
+    }
+
+    &:focus {
+      outline: $outline-link;
+      outline-offset: 4px;
     }
   }
 }

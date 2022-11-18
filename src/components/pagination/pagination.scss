@@ -2,11 +2,12 @@ $font-size-pagination: #{$font-size}px;
 $color-link: $color-grey;
 $font-link: $font;
 $color-hover-link: $color-grey-hover;
+$outline-link: $color-outline;
 $background-color-hover-before: $color-grey-hover;
 $background-color-hover-after: $color-grey-hover;
-$background-color-before: $background-button;
-$border-left-after: 2px solid $background-button;
-$border-bottom-after: 2px solid $background-button;
+$background-color-before: $color-grey;
+$border-left-after: 2px solid $color-grey;
+$border-bottom-after: 2px solid $color-grey;
 
 .pagination {
   display: flex;
@@ -45,7 +46,8 @@ $border-bottom-after: 2px solid $background-button;
     }
 
     &:focus {
-      outline-offset: 5px;
+      outline: $outline-link;
+      outline-offset: 4px;
     }
   }
 
@@ -53,8 +55,6 @@ $border-bottom-after: 2px solid $background-button;
   &__previous {
     &:hover,
     &:focus {
-      outline-offset: 5px;
-
       &::before {
         background-color: $background-color-hover-before;
       }

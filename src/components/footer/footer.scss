@@ -1,11 +1,12 @@
-$fill-github: #333;
-$fill-focus-github: rgb(114, 114, 114);
-$fill-outline-github: 2px solid #333;
+$fill-github: $color-grey;
+$fill-focus-github: $color-outline;
+$fill-outline-github: $color-outline;
 $fill-hover-svg: $color-grey-hover;
 $font-size-footer: #{$font-size}px;
 $font-contacts: $font;
 $color-contacts: $color-grey;
 $color-hover-contacts: $color-grey-hover;
+$outline-contacts: $color-outline;
 
 .footer {
   width: 100%;
@@ -33,6 +34,11 @@ $color-hover-contacts: $color-grey-hover;
     &:hover,
     &:focus {
       color: $color-hover-contacts;
+    }
+
+    &:focus {
+      outline: $outline-contacts;
+      outline-offset: 4px;
     }
   }
 

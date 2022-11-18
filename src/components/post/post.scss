@@ -1,13 +1,14 @@
 $border-blockquote: #6d7072;
 $background-blockquote: #f3f3f3;
-$border-table: #e3e3e3;
-$shadow-img: 0 1px 3px 0 #cfcfcf, 0 0 0 1px #ffffff;
+$border-table: $color-grey-light;
+$shadow-img: 0 1px 3px 0 #ececec, 0 0 0 1px #ffffff;
 $background-code: #f3f3f3;
 $color-content: $color-dark-grey;
-$shadow-content: $shadow-img;
+$shadow-content: 0 1px 3px 0 #e3e3e3, 0 0 0 1px #ffffff;
 $color-hover-content: $color-dark-grey-hover;
 $color-background-button: #f3f3f3;
 $color-hover-button: $color-dark-grey-hover;
+$outline-code: $color-outline;
 
 .content {
   @include font-rem(16);
@@ -83,12 +84,20 @@ $color-hover-button: $color-dark-grey-hover;
     margin-top: 20px;
     margin-bottom: 20px;
     max-width: 100%;
-    overflow-x: scroll;
     background-color: $background-code;
     overflow: auto;
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-start;
+
+    @include media-breakpoint-down($sm_middle) {
+      max-width: 100%;
+    }
+
+    &:focus {
+      outline: $outline-code;
+      outline-offset: 4px;
+    }
 
     .button-copy {
       margin-bottom: 20px;
@@ -101,7 +110,7 @@ $color-hover-button: $color-dark-grey-hover;
 
       &:hover,
       &:focus {
-        outline-offset: 5px;
+        outline-offset: 4px;
         color: $color-hover-button;
       }
     }

@@ -2,6 +2,7 @@ $font-size-categories: #{$font-size}px;
 $color-link: $color-grey;
 $color-link-hover: $color-grey-hover;
 $border-item: 1px solid $color-grey-light;
+$outline-link: $color-outline;
 
 .categories {
   font-size: $font-size-categories;
@@ -12,10 +13,6 @@ $border-item: 1px solid $color-grey-light;
     font-weight: bold;
     margin-left: 19px;
     padding-bottom: 10px;
-
-    &:focus {
-      outline-offset: 5px;
-    }
   }
 
   &__subcategories {
@@ -36,8 +33,14 @@ $border-item: 1px solid $color-grey-light;
     justify-content: space-between;
     color: $color-link;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-link-hover;
+    }
+
+    &:focus {
+      outline: $outline-link;
+      outline-offset: 4px;
     }
   }
 

@@ -5,6 +5,7 @@ $color-link-hover: $color-dark-grey-hover;
 $color-text: $color-dark-grey;
 $color-icon: $color-grey;
 $font-size-card: #{$font-size}px;
+$outline-link: $color-outline;
 
 .article-card {
   background-color: $background-card;
@@ -39,7 +40,8 @@ $font-size-card: #{$font-size}px;
     }
 
     &:focus {
-      outline-offset: 5px;
+      outline: $outline-link;
+      outline-offset: 4px;
     }
 
     &-link:hover {

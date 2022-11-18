@@ -2,10 +2,12 @@ $font-size-tags: #{$font-size}px;
 $outline-has-border: 1px solid $color-grey-light;
 $background-color-track: $color-grey-light;
 $background-color-slider: $color-grey-hover;
-$background-color-hover-slider: $background-button;
+$background-color-hover-slider: $color-grey;
 $background-color-button: $color-grey-light;
-$color-hover-button: $background-button;
+$color-hover-button: $color-grey;
 $color-hover-item-link: $color-grey-hover;
+$color-item-link: $color-grey;
+$outline-item-link: $color-outline;
 
 @mixin marker($symbol) {
   content: $symbol;
@@ -123,12 +125,15 @@ $color-hover-item-link: $color-grey-hover;
   &__item-link {
     font-weight: normal;
     cursor: pointer;
+    color: $color-item-link;
 
     &:focus {
-      outline-offset: 5px;
+      outline: $outline-item-link;
+      outline-offset: 4px;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-hover-item-link;
     }
   }

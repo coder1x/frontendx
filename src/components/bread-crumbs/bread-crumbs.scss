@@ -4,6 +4,7 @@ $color-link: $color-grey-hover;
 $color-link-hover: $color-dark-grey;
 $color-last-hover: $color-grey-hover;
 $font-size-bread-crumbs: 13px;
+$outline-link: $color-outline;
 
 .bread-crumbs {
   box-shadow: $shadow-bread-crumbs;
@@ -39,8 +40,14 @@ $font-size-bread-crumbs: 13px;
   &__link {
     color: $color-link;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-link-hover;
+    }
+
+    &:focus {
+      outline: $outline-link;
+      outline-offset: 2px;
     }
 
     &_last:hover {
