@@ -3,11 +3,16 @@ $background-blockquote: #f3f3f3;
 $border-table: #e3e3e3;
 $shadow-img: 0 1px 3px 0 #cfcfcf, 0 0 0 1px #ffffff;
 $background-code: #f3f3f3;
+$color-content: $color-dark-grey;
+$shadow-content: $shadow-img;
+$color-hover-content: $color-dark-grey-hover;
+$color-background-button: #f3f3f3;
+$color-hover-button: $color-dark-grey-hover;
 
 .content {
   text-indent: 15px;
   @include font-rem(16);
-  color: $color-dark-grey;
+  color: $color-content;
 
   .figure {
     width: 100%;
@@ -19,14 +24,14 @@ $background-code: #f3f3f3;
     &__content {
       width: 100%;
       border: 0px;
-      box-shadow: $shadow-img;
+      box-shadow: $shadow-content;
     }
 
     &__caption {
       padding-top: 20px;
 
       .link:hover {
-        color: $color-dark-grey-hover;
+        color: $color-hover-content;
       }
     }
   }
@@ -90,14 +95,14 @@ $background-code: #f3f3f3;
       padding-left: 30px;
       border: 0;
       cursor: pointer;
-      background-color: #f3f3f3;
+      background-color: $color-background-button;
       background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMjcyIDQxNkMyNjMuMiA0MTYgMjU2IDQyMy4yIDI1NiA0MzJWNDQ4YzAgMTcuNjctMTQuMzMgMzItMzIgMzJINjRjLTE3LjY3IDAtMzItMTQuMzMtMzItMzJWMTkyYzAtMTcuNjcgMTQuMzMtMzIgMzItMzJoMTEyQzE4NC44IDE2MCAxOTIgMTUyLjggMTkyIDE0NEMxOTIgMTM1LjIgMTg0LjggMTI4IDE3NiAxMjhINjMuOTljLTM1LjM1IDAtNjQgMjguNjUtNjQgNjRsLjAwOTggMjU2QzAgNDgzLjMgMjguNjUgNTEyIDY0IDUxMmgxNjBjMzUuMzUgMCA2NC0yOC42NSA2NC02NHYtMTZDMjg4IDQyMy4yIDI4MC44IDQxNiAyNzIgNDE2ek01MDIuNiA4Ni42M2wtNzcuMjUtNzcuMjVDNDE5LjQgMy4zNzEgNDExLjIgMCA0MDIuNyAwSDI4OEMyNTIuNyAwIDIyNCAyOC42NSAyMjQgNjR2MjU2YzAgMzUuMzUgMjguNjUgNjQgNjQgNjRoMTYwYzM1LjM1IDAgNjQtMjguNjUgNjQtNjRWMTA5LjNDNTEyIDEwMC44IDUwOC42IDkyLjYzIDUwMi42IDg2LjYzek00MTYgNDUuMjVMNDY2LjcgOTZINDE2VjQ1LjI1ek00ODAgMzIwYzAgMTcuNjctMTQuMzMgMzItMzIgMzJoLTE2MGMtMTcuNjcgMC0zMi0xNC4zMy0zMi0zMlY2NGMwLTE3LjY3IDE0LjMzLTMyIDMyLTMyaDk2bC4wMDI2IDY0YzAgMTcuNjcgMTQuMzMgMzIgMzIgMzJINDgwVjMyMHoiLz48L3N2Zz4=");
       background-repeat: no-repeat;
 
       &:hover,
       &:focus {
         outline-offset: 5px;
-        color: $color-dark-grey-hover;
+        color: $color-hover-button;
       }
     }
 

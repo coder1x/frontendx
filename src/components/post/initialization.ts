@@ -8,4 +8,4 @@ function initialization(className: string) {
   }
 }
 
-initialization('.content');
+initialization('.js-content');

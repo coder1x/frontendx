@@ -1,46 +1,46 @@
-$tile-background: #adadad;
-$tile-background-gradient: linear-gradient(
+$background-tile: #adadad;
+$background-gradient-tile: linear-gradient(
   165deg,
   rgba(173, 173, 173, 1) 7%,
   rgba(63, 63, 63, 1) 44%,
   rgba(57, 57, 57, 1) 99%
 );
-$tile-border: #2a2a2a;
-$tile-border-top: #c3c3c3;
-$cub-left-background: #3a3a3a;
-$cub-left-border: $color-black;
-$cub-left-shadow: #222222;
-$cub-right-background: $color-background;
-$cub-right-border: $color-black;
-$cub-right-shadow: #222222;
-$blind-border: $color-black;
-$blind-shadow: #222222;
-$blind-background: #adadad;
-$blind-background-gradient: linear-gradient(
+$border-tile: #2a2a2a;
+$border-top-tile: #c3c3c3;
+$background-left-cub: #3a3a3a;
+$border-left-cub: $color-black;
+$shadow-left-cub: #222222;
+$background-right-cub: $color-background;
+$border-right-cub: $color-black;
+$shadow-right-cub: #222222;
+$border-blind: $color-black;
+$shadow-blind: #222222;
+$background-blind: #adadad;
+$background-gradient-blind: linear-gradient(
   165deg,
   rgba(173, 173, 173, 1) 0%,
   rgba(230, 230, 230, 1) 41%,
   rgba(106, 106, 106, 1) 100%
 );
-$blind-text-color: #363636;
-$blind-text-shadow: 1px 1px 2px #fff, 0 0 1em #fff;
-$cover-border: #353535;
-$cover-background: $color-background;
-$cover-background-gradient: linear-gradient(to top, #b9b9b9 1px, transparent 0px);
-$cover-shadow: #222222;
-$window-background: #656565;
-$link-color: $color-dark-grey;
-$link-focus-color: #6d6d6d;
-$link-outline: 4px solid $color-dark-grey;
-$text-color: $color-dark-grey;
-$window-disk-background: #fcfcfc;
-$disk-background: #2c2c2c;
+$color-text-blind: #363636;
+$shadow-text-blind: 1px 1px 2px #fff, 0 0 1em #fff;
+$border-cover: #353535;
+$background-cover: $color-background;
+$background-gradient-cover: linear-gradient(to top, #b9b9b9 1px, transparent 0px);
+$shadow-cover: #222222;
+$background-window: #656565;
+$color-link: $color-dark-grey;
+$color-focus-link: #6d6d6d;
+$outline-link: 4px solid $color-dark-grey;
+$color-text: $color-dark-grey;
+$background-window-disk: #fcfcfc;
+$background-disk: #2c2c2c;
 
 .category-tile {
   width: 285px;
   height: 295px;
-  background: $tile-background;
-  background: $tile-background-gradient;
+  background: $background-tile;
+  background: $background-gradient-tile;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -51,42 +51,42 @@ $disk-background: #2c2c2c;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 
-  border-bottom: 2px solid $tile-border;
-  border-left: 2px solid $tile-border;
-  border-right: 1px solid $tile-border;
-  border-top: 1px solid $tile-border-top;
+  border-bottom: 2px solid $border-tile;
+  border-left: 2px solid $border-tile;
+  border-right: 1px solid $border-tile;
+  border-top: 1px solid $border-top-tile;
   box-sizing: border-box;
 
   &__cub-left {
     position: absolute;
     width: 14px;
     height: 12px;
-    background-color: $cub-left-background;
+    background-color: $background-left-cub;
     bottom: 10px;
     left: 5px;
-    border: 1px solid $cub-left-border;
-    box-shadow: inset 1px 1px 2px 0px $cub-left-shadow;
+    border: 1px solid $border-left-cub;
+    box-shadow: inset 1px 1px 2px 0px $shadow-left-cub;
   }
 
   &__cub-right {
     position: absolute;
     width: 14px;
     height: 12px;
-    background-color: $cub-right-background;
-    border: 1px solid $cub-right-border;
+    background-color: $background-right-cub;
+    border: 1px solid $border-right-cub;
     bottom: 10px;
     right: 5px;
-    box-shadow: inset 1px 1px 2px 0px $cub-right-shadow;
+    box-shadow: inset 1px 1px 2px 0px $shadow-right-cub;
   }
 
   &__blind-wrapper {
     position: relative;
     width: 195px;
     height: 98px;
-    border-left: 1px solid $blind-border;
-    border-right: 1px solid $blind-border;
-    border-bottom: 1px solid $blind-border;
-    box-shadow: inset 1px -1px 3px 0px $blind-shadow;
+    border-left: 1px solid $border-blind;
+    border-right: 1px solid $border-blind;
+    border-bottom: 1px solid $border-blind;
+    box-shadow: inset 1px -1px 3px 0px $shadow-blind;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     margin-left: 27px;
@@ -96,8 +96,8 @@ $disk-background: #2c2c2c;
     position: absolute;
     width: 150px;
     height: 98px;
-    background: $blind-background;
-    background: $blind-background-gradient;
+    background: $background-blind;
+    background: $background-gradient-blind;
     right: 0;
     top: -3px;
     display: flex;
@@ -120,17 +120,17 @@ $disk-background: #2c2c2c;
     flex-direction: column;
     align-items: center;
     padding: 5px;
-    color: $blind-text-color;
+    color: $color-text-blind;
     height: 100%;
     box-sizing: border-box;
     text-transform: uppercase;
     font-family: $font-code;
-    text-shadow: $blind-text-shadow;
+    text-shadow: $shadow-text-blind;
   }
 
   &__window {
     border-radius: 2px;
-    background: $window-background;
+    background: $background-window;
     width: 40px;
     height: 78px;
     margin-right: 23px;
@@ -138,7 +138,7 @@ $disk-background: #2c2c2c;
   }
 
   &__window-disk {
-    background: $window-disk-background;
+    background: $background-window-disk;
     width: 40px;
     height: 78px;
     position: relative;
@@ -159,7 +159,7 @@ $disk-background: #2c2c2c;
     left: -59px;
     width: 157px;
     height: 71px;
-    background-color: $disk-background;
+    background-color: $background-disk;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
   }
@@ -169,17 +169,17 @@ $disk-background: #2c2c2c;
     margin-left: 27px;
     width: 230px;
     height: 170px;
-    border-top: 2px solid $cover-border;
-    border-left: 2px solid $cover-border;
-    border-right: 2px solid $cover-border;
-    border-bottom: 6px solid $cover-border;
+    border-top: 2px solid $border-cover;
+    border-left: 2px solid $border-cover;
+    border-right: 2px solid $border-cover;
+    border-bottom: 6px solid $border-cover;
     padding: 5px;
     box-sizing: border-box;
-    background-color: $cover-background;
-    background-image: $cover-background-gradient;
+    background-color: $background-cover;
+    background-image: $background-gradient-cover;
     background-position: 0 28px;
     background-size: 100% 22px;
-    box-shadow: inset 0px 2px 7px -1px $cover-shadow;
+    box-shadow: inset 0px 2px 7px -1px $shadow-cover;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
@@ -194,7 +194,7 @@ $disk-background: #2c2c2c;
   }
 
   &__link {
-    color: $link-color;
+    color: $color-link;
 
     &::before {
       content: "";
@@ -207,18 +207,18 @@ $disk-background: #2c2c2c;
 
     &:hover,
     &:focus {
-      color: $link-focus-color;
+      color: $color-focus-link;
     }
 
     &:focus {
-      outline: $link-outline;
+      outline: $outline-link;
       outline-offset: 2px;
     }
   }
 
   &__text {
     @include font-rem(15);
-    color: $text-color;
+    color: $color-text;
     line-height: 1.4;
     font-family: $font;
     display: -webkit-box;

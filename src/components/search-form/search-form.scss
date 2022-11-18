@@ -1,10 +1,14 @@
-$shadow-icon-hover: 1px 0 2px rgba(11, 11, 26, 0.7);
+$shadow-hover-icon: 1px 0 2px rgba(11, 11, 26, 0.7);
 $shadow-icon: 0px 0px 1px rgba(11, 11, 26, 0.7);
 $shadow-input: 0 0 0 1px #797979;
 $fill-icon: #e1e1e1;
+$font-size-search-form: #{$font-size}px;
+$font-input: $font;
+$color-input: $color-grey;
+$outline-button: 2px solid $color-grey;
 
 @mixin icon-hover {
-  filter: drop-shadow($shadow-icon-hover);
+  filter: drop-shadow($shadow-hover-icon);
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -12,12 +16,12 @@ $fill-icon: #e1e1e1;
 .search-form {
   position: relative;
   width: 100%;
-  font-size: #{$font-size}px;
+  font-size: $font-size-search-form;
 
   &__input {
-    font-family: $font;
-    color: $color-grey;
-    box-shadow: $section-shadow;
+    font-family: $font-input;
+    color: $color-input;
+    box-shadow: $shadow-section;
     border: none;
     width: 100%;
     height: 35px;
@@ -44,7 +48,7 @@ $fill-icon: #e1e1e1;
 
     &:focus {
       outline-offset: 2px;
-      outline: 2px solid $color-grey;
+      outline: $outline-button;
     }
   }
 

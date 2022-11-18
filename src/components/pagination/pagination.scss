@@ -1,8 +1,18 @@
+$font-size-pagination: #{$font-size}px;
+$color-link: $color-grey;
+$font-link: $font;
+$color-hover-link: $color-grey-hover;
+$background-color-hover-before: $color-grey-hover;
+$background-color-hover-after: $color-grey-hover;
+$background-color-before: $background-button;
+$border-left-after: 2px solid $background-button;
+$border-bottom-after: 2px solid $background-button;
+
 .pagination {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-size: #{$font-size}px;
+  font-size: $font-size-pagination;
 
   &__link,
   &__next,
@@ -10,8 +20,8 @@
   &__hidden-link {
     @include font-rem(18);
     font-weight: bold;
-    font-family: $font;
-    color: $color-grey;
+    font-family: $font-link;
+    color: $color-link;
     text-decoration: none;
     display: flex;
     justify-content: center;
@@ -31,7 +41,7 @@
 
     &:hover,
     &:focus {
-      color: $color-grey-hover;
+      color: $color-hover-link;
     }
 
     &:focus {
@@ -46,11 +56,11 @@
       outline-offset: 5px;
 
       &::before {
-        background-color: $color-grey-hover;
+        background-color: $background-color-hover-before;
       }
 
       &::after {
-        border-color: $color-grey-hover;
+        border-color: $background-color-hover-after;
       }
     }
 
@@ -60,7 +70,7 @@
       content: "";
       height: 2px;
       width: 14px;
-      background-color: $button-background;
+      background-color: $background-color-before;
       align-self: center;
     }
 
@@ -70,8 +80,8 @@
       content: "";
       height: 10px;
       width: 10px;
-      border-left: 2px solid $button-background;
-      border-bottom: 2px solid $button-background;
+      border-left: $border-left-after;
+      border-bottom: $border-bottom-after;
       transform: rotate(-135deg);
       align-self: center;
     }

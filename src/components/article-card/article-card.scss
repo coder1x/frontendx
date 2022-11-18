@@ -1,9 +1,10 @@
 $background-card: $background-section;
-$shadow-card: $section-shadow;
+$shadow-card: $shadow-section;
 $color-link: $color-dark-grey;
 $color-link-hover: $color-dark-grey-hover;
 $color-text: $color-dark-grey;
 $color-icon: $color-grey;
+$font-size-card: #{$font-size}px;
 
 .article-card {
   background-color: $background-card;
@@ -14,7 +15,7 @@ $color-icon: $color-grey;
   flex-direction: column;
   padding: 10px;
   position: relative;
-  font-size: #{$font-size}px;
+  font-size: $font-size-card;
 
   &:hover {
     box-shadow: none;

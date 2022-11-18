@@ -1,3 +1,12 @@
+$font-size-tags: #{$font-size}px;
+$outline-has-border: 1px solid $color-grey-light;
+$background-color-track: $color-grey-light;
+$background-color-slider: $color-grey-hover;
+$background-color-hover-slider: $background-button;
+$background-color-button: $color-grey-light;
+$color-hover-button: $background-button;
+$color-hover-item-link: $color-grey-hover;
+
 @mixin marker($symbol) {
   content: $symbol;
   position: absolute;
@@ -7,7 +16,7 @@
 
 .tags {
   user-select: none;
-  font-size: #{$font-size}px;
+  font-size: $font-size-tags;
   margin: 0px;
   padding-bottom: 20px;
 
@@ -30,7 +39,7 @@
     overflow: hidden;
 
     &_has-border {
-      outline: 1px solid $color-grey-light;
+      outline: $outline-has-border;
     }
   }
 
@@ -58,7 +67,7 @@
 
     &-track {
       position: relative;
-      background-color: $color-grey-light;
+      background-color: $background-color-track;
       flex-grow: 1;
     }
 
@@ -66,11 +75,11 @@
       position: absolute;
       box-sizing: border-box;
       width: 8px;
-      background-color: $color-grey-hover;
+      background-color: $background-color-slider;
       cursor: pointer;
 
       &:hover {
-        background-color: $button-background;
+        background-color: $background-color-hover-slider;
         transition: background-color ease-in-out 500ms;
       }
     }
@@ -78,7 +87,7 @@
     &-button-up,
     &-button-down {
       height: 15px;
-      background-color: $color-grey-light;
+      background-color: $background-color-button;
       cursor: pointer;
       position: relative;
       border: 0;
@@ -86,7 +95,7 @@
 
       &:hover {
         &::before {
-          color: $button-background;
+          color: $color-hover-button;
           transition: background-color ease-in-out 500ms;
         }
       }
@@ -120,7 +129,7 @@
     }
 
     &:hover {
-      color: $color-grey-hover;
+      color: $color-hover-item-link;
     }
   }
 }

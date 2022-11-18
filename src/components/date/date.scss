@@ -1,16 +1,21 @@
+$font-date: $font-code;
+$font-size-date: 14.4px;
+$color-date: $color-grey;
+$fill-icon: $color-grey;
+
 .date {
   display: inline-flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
   align-items: flex-end;
-  font-family: Consolas;
-  color: $color-grey;
-  font-size: 14.4px;
+  font-family: $font-date;
+  color: $color-date;
+  font-size: $font-size-date;
 
   &__icon {
     width: 20px;
     height: 20px;
     padding-right: 5px;
-    fill: $color-grey;
+    fill: $fill-icon;
   }
 }

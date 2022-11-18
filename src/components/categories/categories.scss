@@ -1,11 +1,12 @@
+$font-size-categories: #{$font-size}px;
+$color-link: $color-grey;
+$color-link-hover: $color-grey-hover;
+$border-item: 1px solid $color-grey-light;
+
 .categories {
-  font-size: #{$font-size}px;
+  font-size: $font-size-categories;
   list-style: revert;
   font-weight: bold;
-
-  &__articles-link {
-    color: $color-grey;
-  }
 
   &__category {
     font-weight: bold;
@@ -22,7 +23,7 @@
   }
 
   &__item {
-    border-bottom: 1px solid $color-grey-light;
+    border-bottom: $border-item;
     margin-left: 5px;
     font-weight: normal;
     padding-bottom: 10px;
@@ -33,9 +34,10 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    color: $color-link;
 
     &:hover {
-      color: $color-grey-hover;
+      color: $color-link-hover;
     }
   }
 

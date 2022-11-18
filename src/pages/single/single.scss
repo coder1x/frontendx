@@ -1,6 +1,9 @@
 $color-tags-title: #252525;
 $background-tag-link: #ebebeb;
 $background-tag-link-hover: #f2f2f2;
+$shadow-post: $shadow-section;
+$background-color-post: $background-section;
+$font-size-tags: 14.4px;
 
 .post {
   grid-column-start: 1;
@@ -9,8 +12,8 @@ $background-tag-link-hover: #f2f2f2;
   grid-row-end: 3;
   padding: 20px;
   box-sizing: border-box;
-  box-shadow: $section-shadow;
-  background-color: $background-section;
+  box-shadow: $shadow-post;
+  background-color: $background-color-post;
 
   @include media-breakpoint-down($lg_middle) {
     grid-column-end: 3;
@@ -26,7 +29,7 @@ $background-tag-link-hover: #f2f2f2;
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    font-size: 14.4px;
+    font-size: $font-size-tags;
 
     &-title {
       color: $color-tags-title;
@@ -38,18 +41,20 @@ $background-tag-link-hover: #f2f2f2;
     }
   }
 
-  &__tag-item {
-    margin-left: 10px;
-  }
+  &__tag {
+    &-item {
+      margin-left: 10px;
+    }
 
-  &__tag-link {
-    background-color: $background-tag-link;
-    border-radius: 3px;
-    padding: 5px;
+    &-link {
+      background-color: $background-tag-link;
+      border-radius: 3px;
+      padding: 5px;
 
-    &:hover,
-    &:focus {
-      background-color: $background-tag-link-hover;
+      &:hover,
+      &:focus {
+        background-color: $background-tag-link-hover;
+      }
     }
   }
 

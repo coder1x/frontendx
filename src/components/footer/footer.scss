@@ -1,14 +1,18 @@
-$github-fill: #333;
-$github-fill-focus: rgb(114, 114, 114);
-$github-fill-outline: 2px solid #333;
-//--------------------------------------------
+$fill-github: #333;
+$fill-focus-github: rgb(114, 114, 114);
+$fill-outline-github: 2px solid #333;
+$fill-hover-svg: $color-grey-hover;
+$font-size-footer: #{$font-size}px;
+$font-contacts: $font;
+$color-contacts: $color-grey;
+$color-hover-contacts: $color-grey-hover;
 
 .footer {
   width: 100%;
   min-height: 40px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  font-size: #{$font-size}px;
+  font-size: $font-size-footer;
 
   &__widget-wrapper {
     display: flex;
@@ -22,13 +26,13 @@ $github-fill-outline: 2px solid #333;
   }
 
   &__contacts {
-    font-family: $font;
+    font-family: $font-contacts;
     @include font-rem(14);
-    color: $color-grey;
+    color: $color-contacts;
 
     &:hover,
     &:focus {
-      color: $color-grey-hover;
+      color: $color-hover-contacts;
     }
   }
 
@@ -43,17 +47,17 @@ $github-fill-outline: 2px solid #333;
     align-items: center;
 
     svg {
-      fill: $github-fill;
+      fill: $fill-github;
     }
 
     &:focus {
-      outline: $github-fill-outline;
+      outline: $fill-outline-github;
       outline-offset: 2px;
     }
 
     &:hover svg,
     &:focus svg {
-      fill: $color-grey-hover;
+      fill: $fill-hover-svg;
     }
   }
 }

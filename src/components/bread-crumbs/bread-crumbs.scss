@@ -1,8 +1,9 @@
-$shadow-bread-crumbs: $section-shadow;
+$shadow-bread-crumbs: $shadow-section;
 $background-bread-crumbs: $background-section;
 $color-link: $color-grey-hover;
 $color-link-hover: $color-dark-grey;
 $color-last-hover: $color-grey-hover;
+$font-size-bread-crumbs: 13px;
 
 .bread-crumbs {
   box-shadow: $shadow-bread-crumbs;
@@ -10,7 +11,7 @@ $color-last-hover: $color-grey-hover;
   padding: 2px 5px 5px;
   font-weight: bold;
   display: flex;
-  font-size: 13px;
+  font-size: $font-size-bread-crumbs;
 
   &__markers {
     margin-block: 0;

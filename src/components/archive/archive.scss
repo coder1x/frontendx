@@ -1,8 +1,16 @@
+$font-archive: $font;
+$font-size-archive: #{$font-size}px;
+$color-archive: $color-grey;
+$color-text-hover: $color-grey-hover;
+$border-month: 1px solid $color-grey-light;
+$color-link: $color-grey;
+$color-link-hover: $color-grey-hover;
+
 .archive {
-  font-family: $font;
-  font-size: #{$font-size}px;
+  font-family: $font-archive;
+  font-size: $font-size-archive;
   font-weight: bold;
-  color: $color-grey;
+  color: $color-archive;
   padding: 0px;
   margin: 0px;
   list-style: none;
@@ -22,7 +30,7 @@
     justify-content: space-between;
 
     &:hover {
-      color: $color-grey-hover;
+      color: $color-text-hover;
     }
 
     &:focus {
@@ -52,20 +60,20 @@
 
   &__month {
     font-weight: normal;
-    border-bottom: 1px solid $color-grey-light;
+    border-bottom: $border-month;
     display: flex;
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
   &__articles-link {
-    color: $color-grey;
+    color: $color-link;
     width: 100%;
     display: flex;
     justify-content: space-between;
 
     &:hover {
-      color: $color-grey-hover;
+      color: $color-link-hover;
     }
   }
 }

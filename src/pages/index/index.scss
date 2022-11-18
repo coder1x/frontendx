@@ -1,7 +1,7 @@
-$color-header-h1: rgb(37, 37, 37);
-$color-header-text: rgb(37, 37, 37);
-
-//--------------------------------------------
+$color-header-h1: #252525;
+$color-header-text: #252525;
+$shadow-blog-description: $shadow-section;
+$background-color-blog-description: $background-section;
 
 .index-content {
   width: 100%;
@@ -12,9 +12,9 @@ $color-header-text: rgb(37, 37, 37);
   width: 100%;
   padding: 40px 20px 40px 20px;
   box-sizing: border-box;
-  box-shadow: $section-shadow;
+  box-shadow: $shadow-blog-description;
   min-height: 100px;
-  background-color: $background-section;
+  background-color: $background-color-blog-description;
 
   &__wrapper {
     margin: 0 auto;
@@ -42,7 +42,7 @@ $color-header-text: rgb(37, 37, 37);
   width: 100%;
   padding: 40px 20px 40px 20px;
   box-sizing: border-box;
-  box-shadow: $section-shadow;
+  box-shadow: $shadow-section;
   min-height: 100px;
   background-color: $background-section;
 

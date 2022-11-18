@@ -1,9 +1,9 @@
 $color-focus-link: #fff;
 $color-icon-link: #276d64;
 $color-item-link: #ddd;
-$color-link-logo: rgb(70, 70, 70);
-$color-link-logo-focus: rgba(255, 255, 255, 0.5);
-$color-background-header: rgb(25, 25, 25);
+$color-link-logo: #464646;
+$color-focus-link-logo: rgba(255, 255, 255, 0.5);
+$color-background-header: #191919;
 $background-header: linear-gradient(
     135deg,
     rgba(0, 0, 0, 0.2) 0%,
@@ -13,14 +13,15 @@ $background-header: linear-gradient(
     rgba(0, 0, 0, 0.2) 100%
   ),
   linear-gradient(90deg, #222222, #383838, #222222);
-$button-menu-fill: #242424;
-$button-menu-filter: drop-shadow(0 0 1px #888);
-$button-menu-active-fill: #276d64;
-$button-menu-active-filter: drop-shadow(0 0 1px #111);
-$button-menu-focus: rgba(255, 255, 255, 0.5);
-$menu-visible-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
-$menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
-//--------------------------------------------
+$fill-button-menu: #242424;
+$filter-button-menu: drop-shadow(0 0 1px #888);
+$fill-button-menu-active: #276d64;
+$filter-button-menu-active: drop-shadow(0 0 1px #111);
+$focus-button-menu: rgba(255, 255, 255, 0.5);
+$shadow-menu-visible: 0px 15px 13px rgba(3, 3, 3, 0.19);
+$shadow-menu-fixed: 0px 15px 13px rgba(3, 3, 3, 0.19);
+$font-size-header: #{$font-size}px;
+$color-background-odd: rgba(84, 87, 92, 0.239);
 
 .header {
   width: 100%;
@@ -30,7 +31,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
   box-sizing: border-box;
   z-index: 3;
   position: relative;
-  font-size: #{$font-size}px;
+  font-size: $font-size-header;
 
   background-image: $background-header;
   background-size: 8px 8px, 100%;
@@ -71,7 +72,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
     }
 
     &:focus {
-      outline: 2px solid $color-link-logo-focus;
+      outline: 2px solid $color-focus-link-logo;
       outline-offset: 5px;
     }
 
@@ -98,15 +99,15 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
 
     svg {
       transition: 0.3s ease-in-out;
-      fill: $button-menu-fill;
-      filter: $button-menu-filter;
+      fill: $fill-button-menu;
+      filter: $filter-button-menu;
     }
 
     &_active {
       svg {
         transition: 0.3s ease-in-out;
-        fill: $button-menu-active-fill;
-        filter: $button-menu-active-filter;
+        fill: $fill-button-menu-active;
+        filter: $filter-button-menu-active;
       }
     }
 
@@ -116,7 +117,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
   }
 
   &__toggle-menu:focus {
-    outline: 2px solid $button-menu-focus;
+    outline: 2px solid $focus-button-menu;
     outline-offset: 5px;
   }
 
@@ -133,7 +134,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
         width: 100%;
         background-image: $background-header;
         background-size: 8px 8px, 100%;
-        box-shadow: $menu-visible-shadow;
+        box-shadow: $shadow-menu-visible;
 
         animation-name: HeaderMenuAnimation;
         animation-duration: 0.3s;
@@ -162,7 +163,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
       margin-right: 30px;
 
       &:nth-child(odd) {
-        background-color: #54575c3d;
+        background-color: $color-background-odd;
       }
     }
   }
@@ -210,7 +211,7 @@ $menu-fixed-shadow: 0px 15px 13px rgba(3, 3, 3, 0.19);
     top: 0;
     left: 0;
     right: 0;
-    box-shadow: $menu-fixed-shadow;
+    box-shadow: $shadow-menu-fixed;
     transition: box-shadow 0.2s ease-in-out;
   }
 
