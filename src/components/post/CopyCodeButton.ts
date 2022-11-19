@@ -16,10 +16,10 @@ class CopyCodeButton {
   @boundMethod
   private static handleButtonClick(event: MouseEvent) {
     const element = event.currentTarget as HTMLButtonElement;
-    const sibling = element.previousElementSibling;
+    const sibling = element.previousElementSibling as HTMLElement;
 
     if (sibling) {
-      const code = sibling.innerHTML;
+      const code = sibling.innerText;
 
       navigator.clipboard.writeText(code)
         .then(() => {
