@@ -27,6 +27,10 @@ $background-wrapper: #fcfcfc;
     background-color: $background-wrapper;
     padding: 20px;
     width: 100%;
+
+    @include media-breakpoint-down($xs) {
+      padding: 10px;
+    }
   }
 
   &__title {

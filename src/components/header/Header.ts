@@ -210,8 +210,21 @@ class Header {
       return true;
     }
 
-    this.direction = this.prevY < scrollY ? 'bottom' : 'top';
+    let shift = 0;
+
+    if (this.prevY < scrollY) {
+      shift = scrollY - this.prevY;
+      this.direction = 'bottom';
+    } else {
+      shift = this.prevY - scrollY;
+      this.direction = 'top';
+    }
+
     this.prevY = scrollY;
+
+    if (shift < 5) {
+      return false;
+    }
 
     if (this.direction !== this.prevDirection) {
       this.moveHeader();
