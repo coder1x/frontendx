@@ -7,11 +7,15 @@ $background-wrapper: #fcfcfc;
   min-width: $min-wrapper;
   margin: 0 auto;
   display: flex;
-  padding-top: 12px;
-  padding-bottom: 40px;
-  padding-left: $size-padding;
-  padding-right: $size-padding;
+  flex-grow: 1;
+  padding-top: 53px;
+  padding-bottom: 20px;
   box-sizing: border-box;
+
+  @include media-breakpoint-down($xl_middle) {
+    padding-left: $size-padding;
+    padding-right: $size-padding;
+  }
 
   @include media-breakpoint-down($xs) {
     padding-left: $min-size-padding;

@@ -8,4 +8,4 @@ function initialization(className: string) {
   }
 }
 
-initialization('.js-layout-no-panel');
+initialization('.js-index-content');

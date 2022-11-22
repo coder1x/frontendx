@@ -47,6 +47,10 @@ class Header {
     return this.element?.offsetHeight ?? 0;
   }
 
+  removeSidePanel() {
+    this.sidePanel?.remove();
+  }
+
   private init() {
     this.headerShow = true;
     this.toggleMenuActive = `${this.classHeader}__toggle-menu_active`;

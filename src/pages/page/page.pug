@@ -1,11 +1,11 @@
-extends ../layout-no-panel/layout-no-panel.pug
+extends ../layout/layout.pug
 include ../../components/post/post.pug
 
 block title 
   title Обычная страница сайта без панели
-block main
+block content
   - const BASE_CLASS = 'page-content';
-  main(class = BASE_CLASS)
+  main(class = `${BASE_CLASS} js-${BASE_CLASS}`)
     article(class = `${BASE_CLASS}__wrapper`)
       h1(class = `${BASE_CLASS}__title`) Настраиваем webpack для frontend разработки для frontend разработки
       +post()

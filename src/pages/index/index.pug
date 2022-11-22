@@ -1,9 +1,9 @@
-extends ../layout-no-panel/layout-no-panel.pug
+extends ../layout/layout.pug
 include ../../components/category-tile/category-tile.pug
 
 block title 
   title 🦊 Fearless coder
-block main
+block content
 
   -
     const {
@@ -11,7 +11,7 @@ block main
       tiles
     } = require('./index.json');
 
-  main.index-content
+  main(class="index-content js-index-content")
 
     section.blog-description 
       div(class="blog-description__wrapper")
