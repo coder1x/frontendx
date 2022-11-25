@@ -8,6 +8,7 @@ $background-color-hover-after: $color-grey-hover;
 $background-color-before: $color-grey;
 $border-left-after: 2px solid $color-grey;
 $border-bottom-after: 2px solid $color-grey;
+$color-current: $color-grey-hover;
 
 .pagination {
   display: flex;
@@ -18,7 +19,8 @@ $border-bottom-after: 2px solid $color-grey;
   &__link,
   &__next,
   &__previous,
-  &__hidden-link {
+  &__dot,
+  &__current {
     @include font-rem(18);
     font-weight: bold;
     font-family: $font-link;
@@ -35,9 +37,14 @@ $border-bottom-after: 2px solid $color-grey;
     }
   }
 
+  &__current {
+    color: $color-current;
+  }
+
   &__link,
   &__next,
-  &__previous {
+  &__previous,
+  &__current {
     cursor: pointer;
 
     &:hover,
@@ -53,6 +60,9 @@ $border-bottom-after: 2px solid $color-grey;
 
   &__next,
   &__previous {
+    width: auto;
+    margin: 0;
+
     &:hover,
     &:focus {
       &::before {
@@ -64,26 +74,31 @@ $border-bottom-after: 2px solid $color-grey;
       }
     }
 
-    &::before {
-      cursor: pointer;
-      position: absolute;
-      content: "";
-      height: 2px;
-      width: 14px;
-      background-color: $background-color-before;
-      align-self: center;
-    }
+    @include media-breakpoint-up($xs) {
+      width: 30px;
+      margin: 5px;
 
-    &::after {
-      cursor: pointer;
-      position: absolute;
-      content: "";
-      height: 10px;
-      width: 10px;
-      border-left: $border-left-after;
-      border-bottom: $border-bottom-after;
-      transform: rotate(-135deg);
-      align-self: center;
+      &::before {
+        cursor: pointer;
+        position: absolute;
+        content: "";
+        height: 2px;
+        width: 14px;
+        background-color: $background-color-before;
+        align-self: center;
+      }
+
+      &::after {
+        cursor: pointer;
+        position: absolute;
+        content: "";
+        height: 10px;
+        width: 10px;
+        border-left: $border-left-after;
+        border-bottom: $border-bottom-after;
+        transform: rotate(-135deg);
+        align-self: center;
+      }
     }
   }
 

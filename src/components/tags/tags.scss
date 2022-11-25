@@ -28,10 +28,17 @@ $outline-item-link: $color-outline;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 20px;
+    padding-left: 10px;
+    box-sizing: border-box;
   }
 
   &__label {
     font-size: 19px;
+    width: 80%;
+  }
+
+  &__amount {
+    flex-grow: 1;
   }
 
   &__frame {
