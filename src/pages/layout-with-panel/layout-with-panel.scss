@@ -24,13 +24,26 @@
 .layout-with-panel {
   overflow: hidden;
   max-width: $max-wrapper;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: $size-padding;
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: grid;
   grid-template-columns: minmax(1px, 1fr) 300px;
   grid-template-rows: auto 1fr auto;
   flex-grow: 1;
   gap: 12px;
+
+  @include media-breakpoint-down($xl_middle) {
+    padding-left: $size-padding;
+    padding-right: $size-padding;
+  }
+
+  @include media-breakpoint-down($xs) {
+    padding-left: $min-size-padding;
+    padding-right: $min-size-padding;
+  }
 
   @include media-breakpoint-down($md) {
     padding: $size-padding $min-size-padding;
