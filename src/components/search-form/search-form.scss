@@ -39,12 +39,12 @@ $outline-button: $color-outline;
   &__button {
     background: none;
     border: none;
-    padding: 0;
+    padding: 3px 0 0 0;
     width: 35px;
     height: 35px;
     position: absolute;
     right: 0;
-    padding-top: 3px;
+    top: 0;
 
     &:focus {
       outline-offset: 2px;
