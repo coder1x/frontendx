@@ -299,7 +299,7 @@ class Tags {
 
     this.slider.setPointerCapture(event.pointerId);
     this.shiftY = event.clientY - this.slider.getBoundingClientRect().top;
-    this.track.addEventListener('pointermove', this.handleSliderPointerMove);
+    this.track.addEventListener('pointermove', this.handleSliderPointerMove, { passive: true });
     this.track.addEventListener('pointerup', this.handleSliderPointerUp);
 
     return true;
@@ -403,9 +403,9 @@ class Tags {
 
     if (this.tags) {
       this.tags.addEventListener('focusin', this.handleTagsFocusin);
-      this.tags.addEventListener('wheel', this.handleTagsWheel);
-      this.tags.addEventListener('touchstart', this.handleTagsTouchStart);
-      this.tags.addEventListener('touchmove', this.handleTagsTouchMove);
+      this.tags.addEventListener('wheel', this.handleTagsWheel, { passive: true });
+      this.tags.addEventListener('touchstart', this.handleTagsTouchStart, { passive: false });
+      this.tags.addEventListener('touchmove', this.handleTagsTouchMove, { passive: false });
     }
 
     window.addEventListener('mouseover', this.handleWindowMouseOver);
