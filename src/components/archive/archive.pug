@@ -9,7 +9,7 @@ mixin archive(options = {})
   ol(class = `${BASE_CLASS} js-${BASE_CLASS}`) 
     each item in archive
       li(class = `${BASE_CLASS}__year js-${BASE_CLASS}__year`)
-        div(class = `${BASE_CLASS}__text-wrapper js-${BASE_CLASS}__text-wrapper` tabindex = 0 aria-label="Раскрывающийся список")
+        button(class = `${BASE_CLASS}__text-wrapper js-${BASE_CLASS}__text-wrapper` aria-label="Раскрывающийся список")
           span(class = `${BASE_CLASS}__name`)= item.year
           span(class = `${BASE_CLASS}__amount`)= item.total
 

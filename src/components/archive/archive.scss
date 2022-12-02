@@ -30,6 +30,16 @@ $outline-link: $color-outline;
   &__text-wrapper {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
 
     &:hover,
     &:focus {
@@ -39,6 +49,13 @@ $outline-link: $color-outline;
     &:focus {
       outline: $color-outline-year;
       outline-offset: 4px;
+    }
+
+    .archive__name {
+      text-align: start;
+    }
+    .archive__amount {
+      text-align: start;
     }
   }
 
