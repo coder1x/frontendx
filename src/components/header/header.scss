@@ -36,6 +36,27 @@ $color-background-odd: rgba(84, 87, 92, 0.239);
   background-image: $background-header;
   background-size: 8px 8px, 100%;
 
+  &__top-button {
+    position: absolute;
+    left: 10px;
+    top: 85px;
+    width: 30px;
+    height: auto;
+    border: 0px;
+    background-color: rgba(85, 85, 85, 0.107);
+    cursor: pointer;
+
+    &:focus {
+      outline: $color-outline;
+      outline-offset: 4px;
+    }
+  }
+
+  &__top-button-icon {
+    fill: rgba(255, 255, 255, 0.81);
+    filter: drop-shadow(1px 0 2px rgb(25, 25, 25));
+  }
+
   &__wrapper {
     min-height: 70px;
     max-width: $max-wrapper;

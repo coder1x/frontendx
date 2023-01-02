@@ -23,6 +23,8 @@ class Header {
 
   private button: HTMLButtonElement | null = null;
 
+  private topButton: HTMLButtonElement | null = null;
+
   private sidePanel: HTMLButtonElement | null = null;
 
   private menu: HTMLElement | null = null;
@@ -77,6 +79,7 @@ class Header {
     this.menu = this.element.querySelector(`.${this.className}__menu-wrapper`);
     this.button = this.element.querySelector(`.${this.className}__toggle-menu`);
     this.sidePanel = this.element.querySelector(`.${this.className}__toggle-side-panel`);
+    this.topButton = this.element.querySelector(`.${this.className}__top-button`);
 
     return true;
   }
@@ -258,6 +261,27 @@ class Header {
     }
     this.sidePanel.addEventListener('keydown', this.handleSidePanelKeyDown);
     this.sidePanel.addEventListener('click', this.handleSidePanelClick);
+
+    if (this.topButton) {
+      this.topButton.addEventListener('click', Header.handleTopButtonClick);
+    }
+
+    window.addEventListener('scroll', this.handleWindowScroll);
+
+    return true;
+  }
+
+  private static handleTopButtonClick() {
+    window.scrollTo(window.pageXOffset, 0);
+  }
+
+  @boundMethod
+  private handleWindowScroll() {
+    if (!this.topButton) {
+      return false;
+    }
+
+    this.topButton.hidden = (window.pageYOffset < document.documentElement.clientHeight);
 
     return true;
   }

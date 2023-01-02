@@ -307,7 +307,6 @@ class Tags {
 
   @boundMethod
   private handleSliderPointerMove(event: PointerEvent) {
-    event.preventDefault();
     this.moveSlider(event.clientY);
   }
 
